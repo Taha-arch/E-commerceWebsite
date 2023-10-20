@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const generator = require('generate-password');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
@@ -40,14 +41,25 @@ const generateUsername = ((firstname, lastname) => {
     return username;
 });
 
+const generertePassword = () => {
+    const password = generator.generateMultiple(1,{
+        length: 10,
+        uppercase: true,
+        lowercase: true,
+        symbols: true,
+        numbers: true,
+    });
+return password;
+}
+
 const addUser = (req, res) => {
-    let {first_name, last_name, email, password} = req.body;
-    if (!first_name|| !last_name|| !email || !password) {
+    let {first_name, last_name, email} = req.body;
+    if (!first_name|| !last_name|| !email) {
         res.status(400)
         throw new Error('all Field are required');
     }
+    let password = generertePassword();
 
-    // let hash_password = bcrypt.hashSync(password, 10);
     let hash_password = md5(password);
     
     const newUser = new User({
@@ -103,25 +115,32 @@ const getUser = async (req, res) => {
     });
 }
 
+
 const searchUser = async (req, res) => {
+    try {
     const queryObject = req.query;
-    
+
     if (!queryObject.first_name) {
         res.status(400).json('Missing first_name parameter');
         return;
     }
     const users = await User.find({first_name: { $regex: new RegExp(queryObject.first_name , 'i')}})
-        .sort({ first_name: -1 })
-        .limit(10)
-        .exec()
-        .then((users) => {
-            res.status(200).json({status:200, data : users});
-        })
-        .catch((err) => {
-            res.status(401).json('Invalid username');
-        });
-}
+    .sort({ first_name: -1 })
+    .limit(10)
+    .exec()
+    
 
+    if (users.length === 0) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    
+    res.status(200).json({status:200, data : users});
+    
+    } catch (error) {
+        console.error('Error searching for a user by first_name:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+        }
+};
 
 
 const updateUser = async (req, res) => {
