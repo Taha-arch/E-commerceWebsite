@@ -17,13 +17,8 @@ const logUser = async (req, res) =>{
     const userFound = await User.findOne({user_name});
     if(!userFound.active) res.status(401).json('your account desactivated');
     if(userFound && userFound.password){
-        let access_Token = accessToken(userFound._id, userFound.role, rememberMe);
-        if (typeof sessionStorage !== 'undefined') {
-            sessionStorage.setItem('token', access_Token);
-        } else {
-            console.log('localStorage is not available in this environment.');
-        }
-        let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe);
+        let access_Token = accessToken(userFound._id, userFound.role, rememberMe, 3);
+        let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe, 12);
 
         res.status(200).json({ message: "Logged in successfully" , status:200, data: userFound,access_Token,refresh_Token});
     }else {
@@ -31,12 +26,13 @@ const logUser = async (req, res) =>{
     }
 }
 
-const accessToken = ((id, role, rememberMe) => {
-    return jwt.sign({id, role, rememberMe}, SECRET_KEY, {expiresIn: rememberMe ? '10d' : '1d'});
+const accessToken = ((id, role, rememberMe, time) => {
+    return jwt.sign({id, role, rememberMe}, SECRET_KEY, {expiresIn: rememberMe ? time+'d' : '1d'});
 });
 
-const refreshToken = (id, role, rememberMe)=>{
-    return jwt.sign({id, role, rememberMe},process.env.REFREFRESH_TOKEN_SECRET,{expiresIn : '10d'})
+
+const refreshToken = (id, role, rememberMe, time)=>{
+    return jwt.sign({id, role, rememberMe},process.env.REFREFRESH_TOKEN_SECRET,{expiresIn : time+'d'})
 };
 
 const generateUsername = ((firstname, lastname) => {
@@ -114,7 +110,6 @@ const searchUser = async (req, res) => {
         res.status(400).json('Missing first_name parameter');
         return;
     }
-    
     const users = await User.find({first_name: { $regex: new RegExp(queryObject.first_name , 'i')}})
         .sort({ first_name: -1 })
         .limit(10)
@@ -161,3 +156,4 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser};
+
