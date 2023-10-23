@@ -143,11 +143,18 @@ const searchUser = async (req, res) => {
 
 
 const updateUser = async (req, res) => {
-    try {
+    
         const idUser = req.params.id;
         const userUpdate = req.body;
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
+        const exist = await User.findOne({
+                $or: [
+                    {last_name:userUpdate.last_name},
+                    {email:userUpdate.email}
+                ]});
+
+        if(exist) return res.status(400).json({message : `already exist`});
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate);
         if (doc) {
@@ -155,10 +162,7 @@ const updateUser = async (req, res) => {
         } else {
             res.status(404).json("User not found");
         }
-    }catch (error) {
-        console.log(error);
-        res.status(500).json({message : error.message});
-    }
+    
 };
 
 

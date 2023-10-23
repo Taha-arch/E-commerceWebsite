@@ -19,11 +19,12 @@ const UserSchema = new mongoose.Schema({
             type: String,
             required: true,
             minlength: 3,
-            max: 50
+            max: 50,
+            unique: true
         },
         email: {
             type: String,
-            required: 'Email address is required',
+            required: [true,'Email address is required'],
             trim: true,
             lowercase: true,
             max: 50,
@@ -39,7 +40,7 @@ const UserSchema = new mongoose.Schema({
             required: true,
             minlength: 4,
             max: 20,
-            unique: [true, 'unique']
+            unique: [true, 'username must be unique']
         },
         password: {
             type: String,
