@@ -11,7 +11,9 @@ app.use(express.json());
 
 
 const userRouter = require('./routes/userRoutes.js');
+const productRouter = require('./routes/productRoutes.js');
 app.use(userRouter);
+app.use(productRouter);
 
 app.listen(PORT, () => {
     console.log('Server started port: ', PORT);

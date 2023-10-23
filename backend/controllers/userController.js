@@ -4,16 +4,16 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 const nodemailer = require('nodemailer');
-const axios = require('axios');
 const SECRET_KEY = process.env.JWT_SECRET;
 
-const logUser = async (req, res) =>{
 
+const logUser = async (req, res) =>{
     const {user_name, password, rememberMe } = req.body;
     
-    if (!user_name || !password) {
+    if (!user_name || !password){
         res.status(400)
         throw new Error('all Field are required');
+
     }
     const userFound = await User.findOne({user_name});
     if(!userFound.active) res.status(401).json('your account desactivated');
@@ -88,7 +88,7 @@ const addUser = (req, res) => {
         };
         
         if(transporter.sendMail(mailOptions)){
-            res.status(200).json("Add User successfully 😊 👌");
+            res.status(200).json({status:200, message:"Add User successfully 😊 👌"});
         }else {
             res.status(400).json("Error sending email");
         }
@@ -129,7 +129,6 @@ const searchUser = async (req, res) => {
     .limit(10)
     .exec()
     
-
     if (users.length === 0) {
         return res.status(404).json({ message: 'User not found' });
     }
@@ -151,14 +150,14 @@ const updateUser = async (req, res) => {
         userUpdate.last_update = timeInMss;
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate);
-
         if (doc) {
             res.status(200).json({status:200, message:"user updated successfully"});
         } else {
             res.status(404).json("User not found");
         }
-    } catch (error) {
-        res.status(500).json("User not found");
+    }catch (error) {
+        console.log(error);
+        res.status(500).json({message : error.message});
     }
 };
 
