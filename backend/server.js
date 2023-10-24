@@ -13,6 +13,12 @@ app.use(express.json());
 const userRouter = require('./routes/userRoutes.js');
 app.use(userRouter);
 
+const categoryRouter = require('./routes/categoryRoutes.js');
+app.use('/categories', categoryRouter)
+
+const subcategoryRouter = require('./routes/SubcategoryRoutes.js');
+app.use('/subcategories', subcategoryRouter);
+
 app.listen(PORT, () => {
     console.log('Server started port: ', PORT);
 });
