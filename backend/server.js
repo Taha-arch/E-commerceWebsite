@@ -15,6 +15,12 @@ const productRouter = require('./routes/productRoutes.js');
 app.use(userRouter);
 app.use(productRouter);
 
+const categoryRouter = require('./routes/categoryRoutes.js');
+app.use('/categories', categoryRouter)
+
+const subcategoryRouter = require('./routes/SubcategoryRoutes.js');
+app.use('/subcategories', subcategoryRouter);
+
 app.listen(PORT, () => {
     console.log('Server started port: ', PORT);
 });
