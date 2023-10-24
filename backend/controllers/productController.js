@@ -1,21 +1,12 @@
 const Product = require('../models/Product');
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb){
-        cb(null, "public/assets");
-    },
-    filename: function (req, file, cb){
-        cb(null, file.originalname);
-    }
-});
-const upload = multer({ storage });
 
 const addProduct = (req, res) => {
     let {sku, product_image, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
     if(!sku || !product_image || !product_name|| !subcategory_id|| !price){
         return res.status(400).json({status: 400, message:"sku, product image, product name, subCategory Id and the price are required!!"});
     }
+
     let newProduct = new Product({
         sku: sku,
         product_image: product_image,
@@ -111,5 +102,5 @@ const deleteProduct = async (req, res) => {
     })
 }
 
-module.exports = {addProduct, getAllProducts, searchProducts, getProduct, updateProduct, deleteProduct,upload};
+module.exports = {addProduct, getAllProducts, searchProducts, getProduct, updateProduct, deleteProduct};
 

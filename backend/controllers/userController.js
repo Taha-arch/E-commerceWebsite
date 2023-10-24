@@ -6,7 +6,6 @@ const dotenv = require('dotenv').config();
 const nodemailer = require('nodemailer');
 const SECRET_KEY = process.env.JWT_SECRET;
 
-
 const logUser = async (req, res) =>{
     const {user_name, password, rememberMe } = req.body;
     
@@ -83,7 +82,7 @@ const addUser = (req, res) => {
         let mailOptions = {
             from: 'Prestigious',
             to: email,
-            subject: 'Your information',
+            subject: 'WELCOME TO OUR TEAM',
             text: 'Your username : ' + generateUsername(first_name, last_name) + ' , ' + 'Your password : '+ password
         };
         
@@ -141,20 +140,21 @@ const searchUser = async (req, res) => {
         }
 };
 
-
 const updateUser = async (req, res) => {
     
         const idUser = req.params.id;
         const userUpdate = req.body;
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
-        const exist = await User.findOne({
-                $or: [
-                    {last_name:userUpdate.last_name},
-                    {email:userUpdate.email}
-                ]});
 
-        if(exist) return res.status(400).json({message : `already exist`});
+        const emailExist = await User.findOne({email:userUpdate.email});
+        if(emailExist) return res.status(400).json({message : `Email already exist`});
+
+        const firstnameExist = await User.findOne({first_name:userUpdate.first_name});
+        if(firstnameExist) return res.status(400).json({message : `first name already exist`});
+
+        const lastnameExist = await User.findOne({last_name:userUpdate.last_name});
+        if(lastnameExist) return res.status(400).json({message : `last name already exist`});
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate);
         if (doc) {
