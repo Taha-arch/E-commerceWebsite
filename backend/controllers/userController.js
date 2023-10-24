@@ -36,7 +36,8 @@ const refreshToken = (id, role, rememberMe, time)=>{
 };
 
 const generateUsername = ((firstname, lastname) => {
-    let username = firstname.slice(0, 3) + lastname.slice(0, 3);
+    let randomNumber = Math.floor(Math.random() * 1000);
+    let username = firstname.slice(0, 3) + lastname.slice(0, 3) + "_" + randomNumber;
     return username;
 });
 
@@ -149,12 +150,9 @@ const updateUser = async (req, res) => {
 
         const emailExist = await User.findOne({email:userUpdate.email});
         if(emailExist) return res.status(400).json({message : `Email already exist`});
-
-        const firstnameExist = await User.findOne({first_name:userUpdate.first_name});
-        if(firstnameExist) return res.status(400).json({message : `first name already exist`});
-
-        const lastnameExist = await User.findOne({last_name:userUpdate.last_name});
-        if(lastnameExist) return res.status(400).json({message : `last name already exist`});
+        
+        const usernameExist = await User.findOne({user_name :userUpdate.user_name});
+        if(usernameExist) return res.status(400).json({message : `username already exist`});
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate);
         if (doc) {
