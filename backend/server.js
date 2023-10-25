@@ -8,7 +8,7 @@ const connectDb = require('./config/database.js')
 connectDb();
 
 app.use(express.json());
-
+app.use(costumerRoutes);
 
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes.js');
