@@ -9,7 +9,6 @@ connectDb();
 
 app.use(express.json());
 
-
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes.js');
 app.use(userRouter);

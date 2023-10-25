@@ -3,7 +3,7 @@ var uuid = require('node-uuid');
 
 const SubcategorySchema = new mongoose.Schema({
     id: {
-         type: String, default: () => uuid.v4() 
+        type: String, default: () => uuid.v4() 
         },
         subcategory_name: {
             type: String,

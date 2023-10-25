@@ -9,8 +9,7 @@ const ProductSchema = new mongoose.Schema({
         sku: {
             type: String,
             require: true,
-            unique: true,
-            minlength:12
+            unique: true
         },
         product_image: {
             type: String,
@@ -22,10 +21,8 @@ const ProductSchema = new mongoose.Schema({
             unique:true
         },
         subcategory_id: {
-            customer_id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Subcategory',
-            },
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Subcategory'
         },
         short_description : {
             type: String,
@@ -41,13 +38,14 @@ const ProductSchema = new mongoose.Schema({
         },
         discount_price :{
             type: Number,
+            default: null
         },
         quantity: {
             type: Number,
             default:0
         },
         options :{
-            type: Array,
+            type: Array
         },
         active: {
             type: Boolean,

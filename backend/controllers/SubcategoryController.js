@@ -57,8 +57,8 @@ const Pagination = (req) => {
     const getAllSubcategories = async (req, res) => {
         
         try {
-           const{ limitPerPage, skipVal} =  Pagination(req);
-           const data = [];
+        const{ limitPerPage, skipVal} =  Pagination(req);
+        const data = [];
             // Find subcategories, populate the 'category' field to get category_name
             const subcategories = await Subcategory.find()
             .sort({subcategory_name:-1})

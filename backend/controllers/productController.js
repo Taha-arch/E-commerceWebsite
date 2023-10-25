@@ -1,15 +1,16 @@
 const Product = require('../models/Product');
-
+const Subcategory = require('../models/Category');
 
 const addProduct = (req, res) => {
-    let {sku, product_image, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
-    if(!sku || !product_image || !product_name|| !subcategory_id|| !price){
-        return res.status(400).json({status: 400, message:"sku, product image, product name, subCategory Id and the price are required!!"});
+    let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
+    
+    if(!sku|| !product_name|| !subcategory_id|| !price){
+        return res.status(400).json({status: 400, message:"sku, product name, subCategory Id and the price are required!!"});
     }
-
+    let urlProductImage = `../images/`;
     let newProduct = new Product({
         sku: sku,
-        product_image: product_image,
+        product_image: urlProductImage,
         product_name: product_name,
         subcategory_id: subcategory_id,
         short_description: short_description,
@@ -30,13 +31,37 @@ const addProduct = (req, res) => {
 }
 
 const getAllProducts = async (req, res) => {
-    const products = await Product.find().limit(10);
-    if(products) {
-        res.status(200).json({status:200, data:products});
-    }else{
-        res.status(200).json({status:200, message:"there's no product"});
+    try {
+        const products = await Product.find()
+            .limit(10)
+            .populate({ path: 'subcategory_id', select: 'subcategory_name' })
+            .exec();
+
+        if (products) {
+            
+            const formattedProducts = products.map((product) => ({
+                "_id": product._id,
+                "sku": product.sku,
+                "productImage": product.product_image,
+                "productName": product.product_name,
+                "subcategoryID": product.subcategory_id ? product.subcategory_id._id : null,
+                "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
+                "shortDescription": product.short_description,
+                "price": product.price,
+                "quantity": product.quantity,
+                "discountPrice": product.discount_price,
+                "active": product.active
+            }));
+
+            res.status(200).json({ status: 200, data: formattedProducts });
+        } else {
+            res.status(400).json({ status: 400, message: "There are no products" });
+        }
+    } catch (error) {
+        res.status(500).json(error.message);
     }
 }
+
 
 const searchProducts = async (req, res) => {
     try {
@@ -62,31 +87,39 @@ const searchProducts = async (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
             }
 }
+
 const getProduct = async (req, res) => {
-    let idProduct = req.params.id;
-    await Product.findById(idProduct)
-    .then((product) => {
-        res.status(200).json({status:203, data : product});
-    })
-    .catch((error) => {
+    try{
+        let idProduct = req.params.id;
+        const product = await Product.findById(idProduct)
+        if(product){
+            res.status(200).json({status:200, data : product});
+        }else{
+            res.status(400).json("product not found");
+        }
+
+    }catch(error){
         res.status(404).json('Invalid product ID');
-    });
+    };
 }
 
 const updateProduct = async (req, res) => {
-    
     try {
         const idProduct = req.params.id;
         const productUpdate = req.body;
+        
+        const productName = await Product.findOne({product_name :productUpdate.user_name});
+        if(productName) return res.status(400).json({message : `product name already exist`});
+
         const doc = await Product.findByIdAndUpdate(idProduct, productUpdate);
         if (doc) {
             res.status(200).json({status:200, message:"product updated successfully"});
         } else {
             res.status(404).json("Product not found");
         }
-    } catch (error) {
+        }catch (error) {
         
-        res.status(500).json("Error");
+        res.status(500).json(error.message);
     }
 };
 

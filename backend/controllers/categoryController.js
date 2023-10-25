@@ -34,8 +34,6 @@ const addCategory = async (req, res) => {
 };
 
 
-
-
     const Pagination = (req) => {
         const pageNumber = !isNaN(req.query.page) ? parseInt(req.query.page) : 1;
     
@@ -64,7 +62,7 @@ const addCategory = async (req, res) => {
 
 
     const searchCategory = async (req, res) => {
-         try {
+        try {
             const { limitPerPage, skipVal } = Pagination(req);
             const queryObject = req.query.category_name;
 
@@ -73,16 +71,16 @@ const addCategory = async (req, res) => {
                 .limit(limitPerPage)
                 .skip(skipVal);
                 
-                   if (!categories) {
+                if (!categories) {
                     res.status(404).json({ message: 'No Categories found.' });
                     
-                  }
-                 res.status(200).json(categories);
+                }
+                res.status(200).json(categories);
             
             
-         } catch (error) {
-             res.status(500).json({ message: 'An error occurred while searching for categories.' });
-         }
+        } catch (error) {
+            res.status(500).json({ message: 'An error occurred while searching for categories.' });
+        }
     };
     
 
