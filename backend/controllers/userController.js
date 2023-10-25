@@ -12,7 +12,7 @@ const logUser = async (req, res) =>{
     if (!user_name || !password){
         res.status(400)
         throw new Error('all Field are required');
-
+        
     }
     const userFound = await User.findOne({user_name});
     if(!userFound.active) res.status(401).json('your account desactivated');
