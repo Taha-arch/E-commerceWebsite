@@ -8,7 +8,7 @@ const CustomerSchema = new mongoose.Schema({
     id: { type: String, default: uuid.v1 },
     first_name: { type: String, minlength: 3, required: true },
     last_name: { type: String, minlength: 3, required: true },
-    email: { type: String, required: 'Email address is required', trim: true, lowercase: true, unique: true, validate: [isEmail, 'invalid email']},
+    email: { type: String, required: [true, 'email is required'], trim: true, lowercase: true, unique: true, validate: [isEmail, 'invalid email']},
     password: { type: String, required: true , min: 8},
     creation_date: { type: Date, default: Date.now, },
     last_login: { type: Date, default: Date.now, },
