@@ -37,13 +37,13 @@ function checkRole(role) {
       if (req.userId && req.role === role) {
         next();
       } else {
-        res.status(403).json({ message: `You do not have permission for this action as ${role}` });
+        res.status(403).json({ message: `You do not have permission for this action as ${req.role}` });
       }
     });
   };
 }
 
-const checkAdminOrManager = checkRole(`${"Manager" || "Admin"}`);
+const checkAdminOrManager = checkRole("Manager" , "Admin");
 const checkAdmin = checkRole('Admin');
 
 module.exports = { authorization, checkAdminOrManager, checkAdmin };
