@@ -3,16 +3,20 @@ var uuid = require('node-uuid');
 
 
 const OrderSchema = new mongoose.Schema({
-    order_id: { type: String, default: uuid.v1 },
-    customer_id: {
+  order_id: { type: String, default: uuid.v1 },
+  customer_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Customer',
-    },
-    order_items: { type: Array },
-    order_date: { type: Date, default: Date.now},
-    cart_total_price: { type: mongoose.Types.Decimal128},
-    status: { type: String ,default: 'Open'}
-  });
+  },
+  order_items: {
+      type: Object,
+      default: {},
+  },
+  order_date: { type: Date, default: Date.now },
+  cart_total_price: { type: mongoose.Types.Decimal128 },
+  status: { type: String, default: 'Open' },
+});
+
 
 
   module.exports = mongoose.model("Order", OrderSchema);

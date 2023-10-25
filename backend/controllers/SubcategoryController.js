@@ -155,11 +155,11 @@ const Pagination = (req) => {
             const idSub = req.params.id;
             
             //check the existance of Products
-            // const ProductCount = await Product.countDocuments({ subcategory_id : idSub });
+             const ProductCount = await Product.countDocuments({ subcategory_id : idSub });
 
-            // if (ProductCount >  0){
-            //     return res.status(400).send(`This Subcategory has ${ProductCount} associated Products and cannot be deleted.`);
-            // }
+             if (ProductCount >  0){
+                 return res.status(400).json({ message :`This Subcategory has ${ProductCount} associated Products and cannot be deleted.`});
+             }
             await Subcategory.findByIdAndDelete(idSub);
             res.status(200).json("Subcategory deleted successfully");
         } catch (error) {

@@ -1,5 +1,6 @@
 const Customer = require('../models/Customer');
 const Order = require('../models/Order');
+const Product = require('../models/Product');
 const dotenv = require('dotenv').config();
 
 
@@ -40,7 +41,16 @@ const getAllOrders = async (req, res) => {
         if (orders.length === 0) {
             res.json({ orders: [], count: 0 });
         } else {
-            res.json({ orders, "Number of Orders": totalOrdersCount });
+            // Process order_items to convert it into an array of objects
+            const processedOrders = orders.map(order => {
+                const processedOrder = { ...order.toObject() };
+                processedOrder.order_items = Object.entries(order.order_items).map(([product_id, quantity]) => ({
+                    product_id,
+                    quantity
+                }));
+                return processedOrder;
+            });
+            res.status(200).json({ orders: processedOrders, "Number of Orders": totalOrdersCount});
         }
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
@@ -54,15 +64,25 @@ const getOrder = async (req,res) => {
         .populate({path: 'customer_id', select: 'first_name last_name'})
         .exec();
 
-        if (order.length === 0) {
+        if (!order) {
             res.status(404).json("No order found with the provided ID");
         } else {
-            res.json({ order});
+            
+                const processedOrder = { ...order.toObject() };
+                processedOrder.order_items = Object.entries(order.order_items).map(([product_id, quantity]) => ({
+                    product_id,
+                    quantity
+                }));
+                
+                res.json({ order: processedOrder});
+            };
+            
         }
-    }catch(error){
-
+    catch (error) {
+        res.status(500).json({ error: error.message });
     }
-};
+}
+
 
 
 const UpdateOrder = async (req, res) => {
