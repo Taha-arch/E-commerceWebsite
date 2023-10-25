@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser} = require('../controllers/userController.js');
+const { authorization, checkAdminOrManager, checkAdmin } = require('../middleware/authMiddleware.js')
 
 router.post('/login', logUser);
 router.post('/user', checkAdmin, addUser);
