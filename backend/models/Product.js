@@ -24,6 +24,10 @@ const ProductSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Subcategory'
         },
+        category_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category'
+        },
         short_description : {
             type: String,
             min: 25
@@ -54,5 +58,5 @@ const ProductSchema = new mongoose.Schema({
             default:'false'
         }
 
-});
+}, { strictPopulate: false });
 module.exports = mongoose.model('Product', ProductSchema);

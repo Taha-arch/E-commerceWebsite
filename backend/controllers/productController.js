@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Subcategory = require('../models/Category');
+const Category = require('../models/Category')
 
 const addProduct = (req, res) => {
     let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
@@ -34,7 +35,11 @@ const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find()
             .limit(10)
-            .populate({ path: 'subcategory_id', select: 'subcategory_name' })
+            .populate({ path: 'subcategory_id', select: 'subcategory_name', 
+            populate: {
+                path: 'category_id',
+                select: 'category_name'
+            } })
             .exec();
 
         if (products) {
@@ -44,7 +49,7 @@ const getAllProducts = async (req, res) => {
                 "sku": product.sku,
                 "productImage": product.product_image,
                 "productName": product.product_name,
-                "subcategoryID": product.subcategory_id ? product.subcategory_id._id : null,
+                "categoryName": product.subcategory_id ? product.subcategory_id.category_id.category_name : null,
                 "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
                 "shortDescription": product.short_description,
                 "price": product.price,
