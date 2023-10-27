@@ -1,12 +1,18 @@
-import React from 'react';
+  import './styles/main.css'; // Include your CSS file here
+  import React from 'react';
+ 
 
 
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
-}
 
-export default App;
+
+  function App() {
+    return (
+      <div className="App">
+        <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+      </div>
+    );
+  }
+
+  export default App;
