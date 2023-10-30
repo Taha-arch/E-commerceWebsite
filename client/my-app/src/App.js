@@ -1,17 +1,24 @@
-  import './styles/main.css'; // Include your CSS file here
+  import './styles/main.css';
   import React from 'react';
- 
+  import { BrowserRouter, Route, Routes } from 'react-router-dom';
+  import AdminLogin from './components/AdminLogin';
 
 
 
 
   function App() {
     return (
-      <div className="App">
-        <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      
+      <div>
+        <BrowserRouter>
+        <Routes>
+          <Route path='/Login' element={<AdminLogin />}></Route>
+        </Routes>
+        </BrowserRouter>
+        
       </div>
+        
+
     );
   }
 
