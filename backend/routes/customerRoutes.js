@@ -15,8 +15,9 @@ router.get('/customers',checkAdminOrManager, (req, res, next) => {
 
 router.get('/customers/:id',checkAdminOrManager, getCustomer);
 router.delete('/customers/delete/:id', deleteCustomer);
-router.put('/customers/:id', updateCustomer);
-router.put('/customers/validate/:id', validateCustomerEmail);
+router.put('/customers/validate',authorization, validateCustomerEmail);
+router.put('/customers/:id',checkAdminOrManager, updateCustomer);
+
 //router.get('/customers/profile', getCustomerProfile);
 //router.patch('/customers/profile/update', updateCustomerProfile);
 
