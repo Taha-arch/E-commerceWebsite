@@ -7,7 +7,7 @@ const { authorization, checkAdminOrManager, checkAdmin } = require('../middlewar
 router.post('/login', logUser);
 router.post('/user', addUser);
 
-router.get('/users',authorization, (req, res, next) => {
+router.get('/users', (req, res, next) => {
     if (Object.keys(req.query).length > 0) {
         return searchUser(req, res, next); 
     }
