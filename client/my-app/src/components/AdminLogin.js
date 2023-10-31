@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Axios from 'axios'; 
+import axios from 'axios'; 
 
 import '../styles/main.css'
 
@@ -12,7 +12,7 @@ const AdminLogin = () => {
 
   const handleLogin = async () => {
     
-        await Axios.post('http://localhost:3001/login', {
+        await axios.post('http://localhost:3001/login', {
         user_name: user_name,
         password: password})
       
@@ -26,7 +26,9 @@ const AdminLogin = () => {
   };
 
     return (
-        <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('/bgimage.jpg')" }}>
+        <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-cover bg-center" style={{ backgroundImage: "url('/bgimage.jpg') " }}>
+                  <div className="mt-4 font-bold text-3xl font-playfair"><span className='text-customGray'>PREST</span><span className='text-green'>IGIOUS</span></div>
+
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-playfair Display leading-9 tracking-tight text-white">
             Admin Login
@@ -78,7 +80,7 @@ const AdminLogin = () => {
                 
                 <div className="flex items-center justify-end">
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-gray-600 hover:text-indigo-500">
+                  <a href="link.com" className="font-semibold text-gray-600 hover:text-indigo-500">
                     Forgot password ?
                   </a>
                 </div>

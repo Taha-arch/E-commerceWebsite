@@ -12,6 +12,9 @@ module.exports = {
     extend: {
       colors: {
         'whitesmoke': '#f5f5f5',
+        'black':'#141415',
+        'green' : '#2F5951',
+        customGray: '#F3F3F3',
       },
       fontFamily: {
         'playfair': ['playfair Display', 'serif'],
