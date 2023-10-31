@@ -31,8 +31,8 @@ function RegisterForm ()  {
         <div className="flex min-h-full flex-1 flex-col justify-center px-6  pb-12 lg:px-8">
             
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="mt-4 pt-8 text-center font-bold text-3xl font-playfair"><span className='text-black'>PREST</span><span className='text-green'>IGIOUS</span></div>
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 font-playfair">
+          {/* <div className="mt-5 pt-8 text-center font-bold text-4xl font-playfair"><span className='text-black'>PREST</span><span className='text-green'>IGIOUS</span></div> */}
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 title-form">
             Create account
           </h2>
         </div>
@@ -146,7 +146,7 @@ function RegisterForm ()  {
           
       </div>
       <div className='hidden md:block '>
-        <div className='z-10 absolute mt-12 font-playfair pl-4 font-bold text-2xl'>Welcome to Prestigious: Your Access to </div>
+        <div className='z-10 absolute mt-12 font-playfair pl-4 font-bold text-2xl '>Welcome to Prestigious: Your Access to </div>
         <div className='z-10 absolute mt-16 font-playfair pl-4 pt-4 text-xl'>
           <div className='absolute w-4/5 pr-2 h-px bg-green mt-4'></div>
           <div className='relative ml-80 pl-4 text-green font-bold '>Luxury</div>

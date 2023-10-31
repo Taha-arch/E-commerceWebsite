@@ -2,4 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;1,100;1,300&family=Young+Serif&display=swap');
+.title-form{
+    font-family:Montserrat;
+    font-weight: bold;
+}
+.paragraph{
+    font-family:Montserrat;
+}
