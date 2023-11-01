@@ -4,7 +4,9 @@
   import Dashboard from './components/Dashboard';
   import Layout from './components/shared/Layout';
 import Customers from './components/Customers';
- 
+import Products from './components/Products';
+import Users from './components/Users';
+
   function App() {
     return (
       <Router>
@@ -12,6 +14,8 @@ import Customers from './components/Customers';
         <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
+        <Route path='products' element={<Products/>} />
+        <Route path='Users' element={<Users/>} />
         </Route>
         <Route path='login' element={<div>this is the login page</div>} />
       </Routes>
