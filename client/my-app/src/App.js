@@ -15,7 +15,7 @@ import Users from './components/Users';
         <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
-        <Route path='/Users' element={<Users />}></Route>
+        <Route path='/users' element={<Users />} />
         </Route>
         <Route path='login' element={<div>this is the login page</div>} />
       </Routes>

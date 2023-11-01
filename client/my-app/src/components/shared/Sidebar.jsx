@@ -10,22 +10,22 @@ const linkClasses = 'flex items-center  gap-2 font-light px-3 py-2 hover:bg-neut
 
 export default function Sidebar() {
   return (
-    <div className='bg-neutral-900 w-60 p-3 flex flex-col text-white'>
+    
+    <div className='bg-neutral-900 w-full md:w-72 lg:w-80 p-3 flex flex-col text-white'>
         <div className='flex items-center gap-2 px-1 py-3'>
-        <FcComboChart fontSize={27} />
-        <span className='text-neutral-100 text-lg '>PRESTI<span className='text-blue-600'>GIOUS</span></span>
+            <div className="mt-4 font-bold justify-center text-3xl font-playfair "><span className='text-white'>PREST</span><span className='text-green'>IGIOUS</span></div>
         </div>
         
         <div className='flex-1 py-8 flex flex-col gap-0.7'>
             {DASHBOARD_SIDEBAR_LINKS.map((item) => (
-             <SidebarLink key={item.key}  item={item} />
+            <SidebarLink key={item.key} item={item} />
             ))}
         </div>
         <div className='flex flex-col gap-0.5 pt-2 border-t border-neutral-700'>
             {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map(item => (
-                <SidebarLink key={item.key}  item={item} />
+            <SidebarLink key={item.key}  item={item} />
             ))}
-            <div  className={classNames('text-red-500 cursor-pointer',linkClasses)}>
+        <div  className={classNames('text-red-500 cursor-pointer',linkClasses)}>
         <span className='text-xl'><HiOutlineLogout /></span>
         Logout
         </div>

@@ -8,7 +8,7 @@ const AdminLogin = () => {
 
   const [user_name, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
 
   const handleLogin = async () => {
     
@@ -36,6 +36,8 @@ const AdminLogin = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm rounded-3xl" style={{backgroundColor: 'white'}}>
+          
+          
           <form className="space-y-6 m-8" action="#" method="POST">
           <label htmlFor="email" className="block text-sm font-small leading-6 text-gray-500">
           Please fill in your unique admin login details below
@@ -49,7 +51,6 @@ const AdminLogin = () => {
                 <input
                   type="text"
                   placeholder="Username"
-                  //value={user_name}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="text"
                   required
@@ -71,7 +72,6 @@ const AdminLogin = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  //value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   required
