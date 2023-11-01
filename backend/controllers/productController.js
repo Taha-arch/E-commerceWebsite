@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 const Subcategory = require('../models/Category');
-const Category = require('../models/Category')
+const Category = require('../models/Category');
 
 const addProduct = (req, res) => {
     let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
@@ -8,7 +8,7 @@ const addProduct = (req, res) => {
     if(!sku|| !product_name|| !subcategory_id|| !price){
         return res.status(400).json({status: 400, message:"sku, product name, subCategory Id and the price are required!!"});
     }
-    let urlProductImage = `../images/`;
+    const urlProductImage = req.file ? req.file.path : null;
     let newProduct = new Product({
         sku: sku,
         product_image: urlProductImage,

@@ -6,15 +6,15 @@ const { authorization, checkAdminOrManager, checkAdmin } = require('../middlewar
 
 router.post('/login', logUser);
 router.post('/user', addUser);
-
-router.get('/users',authorization, (req, res, next) => {
+// ,authorization
+router.get('/users', (req, res, next) => {
     if (Object.keys(req.query).length > 0) {
         return searchUser(req, res, next); 
     }
     getUsers(req, res, next); 
 });
-
-router.get('/users/:id',checkAdminOrManager , getUser);
+// ,checkAdminOrManager 
+router.get('/users/:id', getUser);
 router.put('/users/:id', updateUser);
 router.delete('/users/:id', deleteUser);
 

@@ -2,6 +2,7 @@ const User = require('../models/User');
 const generator = require('generate-password');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary').v2;
 const dotenv = require('dotenv').config();
 const nodemailer = require('nodemailer');
 const SECRET_KEY = process.env.JWT_SECRET;
@@ -73,20 +74,85 @@ const addUser = (req, res) => {
     newUser.save()    
     .then((newUser) => {
         let transporter = nodemailer.createTransport({
+            host : 'smtp.gmail.com',
             service: 'gmail',
+            port: 587,
+            secure: false,
             auth: {
             user: process.env.user,
             pass: process.env.password
             }
         });
         
+        const cloudinaryImageURL = "https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837";
+        const link = "http://localhost:3000/SignIn";
+        
         let mailOptions = {
-            from: 'Prestigious',
+            from: `"PRESTIGIOUS" <${process.env.user}>`,
             to: email,
             subject: 'WELCOME TO OUR TEAM',
-            text: 'Your username : ' + generateUsername(first_name, last_name) + ' , ' + 'Your password : '+ password
+            html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+            <html lang="en">
+              <head></head>
+              <body style="background-color:#fff;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,Oxygen-Sans,Ubuntu,Cantarell,&quot;Helvetica Neue&quot;,sans-serif">
+                <table align="center" role="presentation" cellSpacing="0" cellPadding="0" border="0" width="100%" style="max-width:37.5em">
+                  <tr style="width:100%">
+                    <td>
+                      <table style="padding:30px 20px" align="center" border="0" cellPadding="0" cellSpacing="0" role="presentation" width="100%"></table>
+                      <table style="border:1px solid rgba(0,0,0,0.1);border-radius:3px;overflow:hidden" align="center" border="0" cellPadding="0" cellSpacing="0" role="presentation" width="100%">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img src="https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837" width="620" style="display:block;outline:none;border:none;text-decoration:none" />
+                              <table width="100%" style="padding:20px 40px;padding-bottom:0" align="center" role="presentation" cellSpacing="0" cellPadding="0" border="0">
+                                <tbody style="width:100%">
+                                  <tr style="width:100%">
+                                    <td>
+                                      <h1 style="font-size:32px;font-weight:bold;text-align:center; color:#2F5951;">Hi ${first_name},</h1>
+                                      <h2 style="font-size:26px;font-weight:bold;text-align:center">Welcome to our TEAM</h2>
+                                      <p style="font-size:16px;line-height:24px;margin:16px 0">
+                                        Thank you for registering with <b><span style="color:#000000;">PRESTIGIOUS</span></b>.
+                                        We're excited to have you join our Team as a Manager!
+                                      </p>
+                                      <p style="font-size:16px;line-height:24px;margin:16px 0">
+                                        Your username: <b>${generateUsername(first_name, last_name)}</b>,
+                                      </p>
+                                      <p style="font-size:16px;line-height:24px;margin:16px 0;margin-top:-5px">
+                                        Your password: <b>${password}</b>
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!-- Add a div to center-align the button -->
+                              <div style="text-align: center;">
+                                <table width="100%" style="padding:20px 40px;padding-top:0" align="center" role="presentation" cellSpacing="0" cellPadding="0" border="0">
+                                  <tbody style="width:100%">
+                                    <tr style="width:100%">
+                                      <td colSpan="3" style="display:flex;justify-content:center;width:100%">
+                                        <a target="_blank" href="http://localhost:3000/login" style="background-color:#e00707;padding:0px 0px;border-radius:5px; color:#FFF;font-weight:bold;border:0.5px solid #EBE0DB;cursor:pointer;line-height:100%;text-decoration:none;display:inline-block;max-width:100%">
+                                          <span></span><span style="background-color:#EBE0DB;padding:12px 30px;border-radius:3px;color:#2F5951;font-weight:bold;border:1px solid #EBE0DB;cursor:pointer;max-width:100%;display:inline-block;line-height:120%;text-decoration:none;text-transform:none;mso-padding-alt:0px;mso-text-raise:0">
+                                            Go Back to website
+                                          </span><span></span>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </body>
+            </html>            
+            `
         };
         
+
         if(transporter.sendMail(mailOptions)){
             res.status(200).json({status:200, message:"Add User successfully 😊 👌"});
         }else {
