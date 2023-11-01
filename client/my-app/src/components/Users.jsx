@@ -32,7 +32,7 @@ export default function Users() {
         }, []);
     return (
     
-    <div className="overflow-scroll overflow-x-auto " style={{ width: "100%"}}>
+    <div className="  overflow-scroll overflow-x-auto " style={{ width: "100%"}}>
       <div className="flex justify-center p-3 bg-white  py-8" >
       <FaUsersLine className='m-1  text-4xl'/>
   <h1 className='text-4xl font-bold'>Users</h1>
@@ -52,10 +52,10 @@ export default function Users() {
   Add User
 </button>
 </div>
-       <div className="">  
-        <table className="table-auto overflow-scroll w-full h-full">
-    <thead className='overflow-scroll' >
-      <tr >
+    <div className="  h-80 overflow-auto ">  
+      <table className="table-auto   w-full ">
+          <thead className='sticky top-0'>
+          <tr >
         <th className="text-center py-3 bg-gray-100 text-left text-xs leading-4 font-semibold text-gray-600 uppercase tracking-wider">
           First Name
         </th>
@@ -83,7 +83,7 @@ export default function Users() {
         
       </tr>
     </thead>
-    <tbody className=" bg-white divide-y divide-gray-200 ">
+    <tbody className=" overflow-auto bg-white divide-y divide-gray-200 ">
       {users.map((user) => (
         <tr key={user._id}>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5  text-gray-700">{user.first_name}</td>
