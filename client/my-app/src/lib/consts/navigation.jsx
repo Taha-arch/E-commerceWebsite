@@ -10,6 +10,7 @@ import {
 } from 'react-icons/hi'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
+   
     {
         key: 'dashboard',
         label: 'Dashboard',
@@ -41,6 +42,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         path: '/users',
         icon: <HiOutlineUsers />
     }
+    
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

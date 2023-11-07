@@ -1,22 +1,51 @@
-import React, { useState } from 'react';
-import axios from 'axios'; 
-import {AiOutlineUserAdd} from 'react-icons/ai'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function AddUser(props ) {
-  const {setAddUser} = props;
+export default function EditUser(  user, onSubmit ) {
+  
+  const { userId } = useParams();
+  const token = localStorage.getItem('accessToken');
 
+  useEffect(() => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}`}
+        }
+    axios.get(`http://localhost:3001/users/${userId}`, config)
+        .then((response) => {
+        setUserInfo(response.data);
+        })
+        .catch((error) => {
+        console.error('Error fetching user data:', error);
+        });
+    }, [userId]);
 
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
-    email: '',
-  });
+    email: ''
+});
+  const [isEditing, setIsEditing] = useState(false);
+
+  
+  useEffect(() => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}`}
+        }
+    axios.get(`http://localhost:3001/users/${userId}`, config)
+        .then((response) => {
+        setUserInfo(response.data);
+        })
+        .catch((error) => {
+        console.error('Error fetching user data:', error);
+        });
+    }, [userId]);
 
 
-  const notify = () => {toast.success('User Added Successfully!', {
+  const notify = () => {toast.success('User Updated Successfully!', {
     position: "bottom-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -28,32 +57,42 @@ export default function AddUser(props ) {
     });
 };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    await axios.post('http://localhost:3001/user', {
-        first_name: userInfo.firstName,
-        last_name: userInfo.lastName,
-        email: userInfo.email}).then(
-            notify,
-            setAddUser(false)
-        );
-    
+const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
   };
 
 
-  
+const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Use the 'put' method to update the user data.
+    axios.put(`http://localhost:3001/users/${userId}`, {
+        first_name: userInfo.firstName,
+        last_name: userInfo.lastName,
+        email: userInfo.email,
+    }).then(() => {
+        notify();
+    });
+  };
+
+
+  if (!userInfo) {
+    return <div>Loading user data...</div>;
+  }
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl text-center font-semibold text-gray-800 mb-4">Add User</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Edit User</h2>
       <form >
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
             First Name
           </label>
           <input
-          placeholder="enter user's first name"
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="text"
             name="firstName"
@@ -68,7 +107,6 @@ export default function AddUser(props ) {
             Last Name
           </label>
           <input
-            placeholder="enter user's last name"
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="text"
             name="lastName"
@@ -83,7 +121,6 @@ export default function AddUser(props ) {
             Email
           </label>
           <input
-            placeholder="enter user's email"
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="email"
             name="email"
@@ -93,30 +130,18 @@ export default function AddUser(props ) {
             required
           />
         </div>
-        <div className='flex justify-end gap-4'>
-        
-            <button
-          className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg  hover:bg-red-500 focus:outline-none focus:ring focus:ring-blue-300"
-          type="submit"
-          onClick={() => setAddUser(false)}
-            >
-                
-                Cancel
-            </button>
-            <button
-          className="bg-emerald-400 text-white font-semibold py-2 px-4 rounded-lg  hover:bg-emerald-600 focus:outline-none focus:ring focus:ring-blue-300"
-          type="submit"
-          onClick={handleSubmit}
-            >
-                
-                Save
-            </button>
-      
+        <div className='flex justify-center'>
+          <button
+            className="bg-emerald-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring focus:ring-blue-300"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Update User
+          </button>
         </div>
       </form>
       <ToastContainer/>
     </div>
   );
 }
-
 

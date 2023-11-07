@@ -5,22 +5,30 @@ import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
 export default function Header() {
     const navigate =useNavigate()
-  return (<div className='bg-gray-100 h-16 px-4 flex flex-col md:flex-row justify-between items-center border-b border-gray-200'>
-    <div className='relative flex items-center'>
-    <HiOutlineSearch fontSize={20} className='text-gray-400 absolute top-1/2 -translate-y-1/2 left-3' />
-    <input
-      type="text"
-      placeholder='Search...'
-      className='text-sm focus:outline-none active:outline-none h-10 w-full md:w-[24rem] border border-gray-300 rounded-lg pl-11 pr-4'
-    />
+  return (
+    <div className=" bg-gray-100  px-4 flex flex-row p-3 bg-white  sm:flex-row md:flex-row justify-between items-center border-b border-gray-200">
+    <div className="relative  ">
+      <HiOutlineSearch
+        fontSize={20}
+        className="text-gray-400 absolute top-1/2 -translate-y-1/2 left-3"
+      />
+      <input
+        type="text"
+        placeholder="Search..."
+        className="text-sm focus:outline-none active:outline-none h-10 w-full sm:w-full md:w-96 border border-gray-300 rounded-lg pl-11 pr-4"
+      />
     </div>
-    <div className='flex items-center gap-2 mr-2'>
-    <Popover className="relative">
+    <div className="flex  gap-2 md:mr-2">
+      <Popover className="relative">
         {({ open }) => (
           <>
-            <Popover.Button className={classNames(open && 'bg-gray-100',
-            "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100" )}>
-              <HiOutlineChatAlt fontSize={24}/>
+            <Popover.Button
+              className={classNames(
+                open && 'bg-gray-100',
+                "p-1.5 rounded-sm inline-flex  text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
+              )}
+            >
+              <HiOutlineChatAlt fontSize={24} />
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -32,19 +40,24 @@ export default function Header() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute right-0 z-10 mt-2.5 w-80">
-                <div className='bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5'>
-                 <strong className='text-gray-700 font-medium'>Messages</strong>
-                <div className='mt-2 py-1 text-sm'>This is the messages panel.</div>
+                <div className="bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5">
+                  <strong className="text-gray-700 font-medium">Messages</strong>
+                  <div className="mt-2 py-1 text-sm">This is the messages panel.</div>
                 </div>
-                </Popover.Panel>
-              </Transition>
-            </> )}
-        </Popover>
-    <Popover className="relative">
+              </Popover.Panel>
+            </Transition>
+          </>
+        )}
+      </Popover>
+      <Popover className="relative">
         {({ open }) => (
           <>
-            <Popover.Button className={classNames(open && 'bg-gray-100',
-            "p-1.5 rounded-sm inline-flex items-center text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100" )}>
+            <Popover.Button
+              className={classNames(
+                open && 'bg-gray-100',
+                "p-1.5 rounded-sm inline-flex  text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
+              )}
+            >
               <HiOutlineBell fontSize={24} />
             </Popover.Button>
             <Transition
@@ -57,24 +70,30 @@ export default function Header() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute right-0 z-10 mt-2.5 w-80">
-                <div className='bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5'>
-                 <strong className='text-gray-700 font-medium'>Notifications</strong>
-                <div className='mt-2 py-1 text-sm'>This is the notification panel.</div>
+                <div className="bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5">
+                  <strong className="text-gray-700 font-medium">Notifications</strong>
+                  <div className="mt-2 py-1 text-sm">This is the notification panel.</div>
                 </div>
-                </Popover.Panel>
-              </Transition>
-            </> )}
-        </Popover>
-        <Menu as="div" className="relative">
+              </Popover.Panel>
+            </Transition>
+          </>
+        )}
+      </Popover>
+      <Menu as="div" className="relative">
         <div>
-          <Menu.Button className="ml-2 inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
-            <span className='sr-only'>Open user menu</span>
-            <div className='h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bd-center' style={{backgroundImage:'url("https://source.unsplash.com/80*80?face")'}}>
-                   <span className='sr-only'>Taha El atoui</span>  
+          <Menu.Button className="ml-2  rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
+            <span className="sr-only">Open user menu</span>
+            <div
+              className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
+              style={{
+                backgroundImage: 'url("https://source.unsplash.com/80*80?face")',
+              }}
+            >
+              <span className="sr-only">Taha El atoui</span>
             </div>
           </Menu.Button>
-          </div>
-          <Transition
+        </div>
+        <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
           enterFrom="transform opacity-0 scale-95"
@@ -84,28 +103,48 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <Menu.Item>
-                {({ active }) => ( <div
-                 className={classNames(active && 'bg-gray-100',
-                 'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2')}
-                  onClick={() => navigate('/profile')}>Your Profile </div>)}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => ( <div
-                 className={classNames(active && 'bg-gray-100',
-                 'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2')}
-                  onClick={() => navigate('/settings')}>Settings </div>)}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => ( <div
-                 className={classNames(active && 'bg-gray-100',
-                 'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2')}
-                  onClick={() => navigate('/logout')}>Logout </div>)}
-              </Menu.Item>
-              
-              </Menu.Items>
-              </Transition>
-        </Menu>
+            <Menu.Item>
+              {({ active }) => (
+                <div
+                  className={classNames(
+                    active && 'bg-gray-100',
+                    'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
+                  )}
+                  onClick={() => navigate('/profile')}
+                >
+                  Your Profile
+                </div>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <div
+                  className={classNames(
+                    active && 'bg-gray-100',
+                    'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
+                  )}
+                  onClick={() => navigate('/settings')}
+                >
+                  Settings
+                </div>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <div
+                  className={classNames(
+                    active && 'bg-gray-100',
+                    'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
+                  )}
+                  onClick={() => navigate('/logout')}
+                >
+                  Logout
+                </div>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Transition>
+      </Menu>
     </div>
-    </div>)
+  </div>)
 }

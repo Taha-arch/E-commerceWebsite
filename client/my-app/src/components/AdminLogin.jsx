@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import axios from 'axios'; 
 
 import '../styles/main.css'
@@ -15,12 +14,26 @@ const AdminLogin = () => {
         await axios.post('http://localhost:3001/login', {
         user_name: user_name,
         password: password})
-      
-
+        
 
       .then(res => {
+       try {
+       const accessToken = res.data.access_Token;
+        const refreshToken = res.data.refresh_Token;
+
         
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        if (accessToken && refreshToken){
+          window.location.href='/';
+        }else {
+          return alert('invalid credentials!!!');
+        }
         console.log('Data:', res.data);
+      } catch (error) {
+        console.err(error);
+      }
+        
       })
     
   };
@@ -75,7 +88,7 @@ const AdminLogin = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   required
-                  class="block w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 
                 <div className="flex items-center justify-end">
@@ -89,13 +102,17 @@ const AdminLogin = () => {
             </div>
 
             <div>
+              
+            
             <button
             type="button"
             onClick={handleLogin}
             className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
+             
                 Sign in
               </button>
+              
             </div>
           </form>
 
