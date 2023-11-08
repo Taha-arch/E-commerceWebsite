@@ -97,14 +97,35 @@ const getProduct = async (req, res) => {
     try{
         let idProduct = req.params.id;
         const product = await Product.findById(idProduct)
+        .populate({ path: 'subcategory_id', select: 'subcategory_name', 
+            populate: {
+                path: 'category_id',
+                select: 'category_name'
+            } })
+            .exec();
         if(product){
-            res.status(200).json({status:200, data : product});
+            const formattedProducts = {
+                "_id": product._id,
+                "sku": product.sku,
+                "productImage": product.product_image,
+                "productName": product.product_name,
+                "categoryName": product.subcategory_id ? product.subcategory_id.category_id.category_name : null,
+                "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
+                "shortDescription": product.short_description,
+                "longDescription": product.long_description,
+                "price": product.price,
+                "quantity": product.quantity,
+                "discountPrice": product.discount_price,
+                "active": product.active
+            };
+
+            res.status(200).json({ status: 200, data: formattedProducts });
         }else{
             res.status(400).json("product not found");
         }
 
     }catch(error){
-        res.status(404).json('Invalid product ID');
+        res.status(404).json(error);
     };
 }
 

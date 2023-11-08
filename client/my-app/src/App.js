@@ -6,6 +6,8 @@
 import Customers from './components/Customers';
 import Products from './components/Products';
 import Users from './components/Users';
+import Orders from './components/Orders';
+import AddProduct from './components/AddProduct';
 
   function App() {
     return (
@@ -15,7 +17,9 @@ import Users from './components/Users';
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
         <Route path='products' element={<Products/>} />
+        <Route path='orders' element={<Orders/>} />
         <Route path='Users' element={<Users/>} />
+        <Route path='addProduct' element={<AddProduct/>} />
         </Route>
         <Route path='login' element={<div>this is the login page</div>} />
       </Routes>

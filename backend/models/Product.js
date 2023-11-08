@@ -48,7 +48,7 @@ const ProductSchema = new mongoose.Schema({
             type: Number,
             default:0
         },
-        options :{
+        options: {
             type: Array
         },
         active: {

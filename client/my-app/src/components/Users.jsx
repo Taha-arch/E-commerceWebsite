@@ -6,7 +6,7 @@ import {LuListFilter} from 'react-icons/lu'
 import {AiOutlineUserAdd} from 'react-icons/ai'
 import {GrStatusGoodSmall} from 'react-icons/gr'
 import {FaUsersLine} from 'react-icons/fa6'
-import Stats from './shared/Stats'
+
 
 import axios from 'axios'; 
 
@@ -32,15 +32,13 @@ export default function Users() {
         }, []);
     return (
     
-    <div className="overflow-scroll overflow-x-auto" style={{ width: "100%"}}>
+    <div className="  overflow-scroll overflow-x-auto " style={{ width: "100%"}}>
       <div className="flex justify-center p-3 bg-white  py-8" >
       <FaUsersLine className='m-1  text-4xl'/>
   <h1 className='text-4xl font-bold'>Users</h1>
   
 </div>
-<div className='relative my-auto bg-white px-10  py-6'>
-      {<Stats />}
-    </div>
+
       <div className="flex justify-between p-3 bg-white">
   <button className="px-4 py-2 flex text-base text-white bg-gray-500 rounded-lg hover-text-white focus:outline-none">
     <LuListFilter className="w-4 h-6 mr-1" />
@@ -52,10 +50,10 @@ export default function Users() {
   Add User
 </button>
 </div>
-       <div className="">  
-        <table className="table-auto overflow-scroll w-full h-full">
-    <thead className='sticky top-0' >
-      <tr >
+    <div className="  h-80 overflow-auto ">  
+      <table className="table-auto   w-full ">
+          <thead className='sticky top-0'>
+          <tr >
         <th className="text-center py-3 bg-gray-100 text-left text-xs leading-4 font-semibold text-gray-600 uppercase tracking-wider">
           First Name
         </th>
@@ -83,14 +81,14 @@ export default function Users() {
         
       </tr>
     </thead>
-    <tbody className=" bg-white divide-y divide-gray-200 ">
+    <tbody className=" overflow-auto bg-white divide-y divide-gray-200 ">
       {users.map((user) => (
         <tr key={user._id}>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5  text-gray-700">{user.first_name}</td>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5  text-gray-700">{user.last_name}</td>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5  text-blue-500">{user.user_name}</td>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5  ">{user.email}</td>
-          <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5 ">{user.active?(<GrStatusGoodSmall className='inline-flex mr-2 text-lightgreen'/>):(<GrStatusGoodSmall className='inline-flex mr-2 text-red-500'/>)}{user.role}</td>
+          <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5 ">{user.active?(<GrStatusGoodSmall className='inline-flex mr-2 text-green-500'/>):(<GrStatusGoodSmall className='inline-flex mr-2 text-red-500'/>)}{user.role}</td>
           <td className=" text-center py-2 whitespace-no-wrap text-sm leading-5 ">{new Date(user.creation_date).toLocaleDateString('en-GB')}</td>
           <td className=" text-center py-4 whitespace-no-wrap text-sm leading-5 justify-center flex space-x-3">
             
