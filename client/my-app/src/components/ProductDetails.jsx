@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
 
-
 export default function ProductDetails(props) {
   const {setOpenDetail, selectedProduct, setSelectedProduct} = props;
 
@@ -49,7 +48,7 @@ export default function ProductDetails(props) {
 
         <div className="">
 
-        <div className="item"><img src={product && product.productImage} alt="product_image"></img> </div>
+        <div className="item "><img className="" src={product && product.productImage} alt="product_image"></img> </div>
         <div>
         
         <div className="item">Name : {product && product.productName}</div>
@@ -76,7 +75,6 @@ export default function ProductDetails(props) {
           onClick={() => {
             setOpenDetail(false);
             setSelectedProduct(null);
-            console.log(selectedProduct)
             }}>
           Close
         </button>

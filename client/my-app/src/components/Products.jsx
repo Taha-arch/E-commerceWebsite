@@ -11,6 +11,7 @@ import AddProduct from './AddProduct';
 import PopUp from './PopUp';
 import axios from 'axios';
 import ProductDetails from './ProductDetails';
+import ProductEdit from './ProductEdit';
 
 
 export default function Products() {
@@ -18,6 +19,7 @@ export default function Products() {
   const [openModal, setOpenModal] = useState(false);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openDetail, setOpenDetail] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
   const titre = "product";
@@ -149,8 +151,9 @@ export default function Products() {
                     Details
                   </button>
                   <button className="px-2 py-1 flex text-base justify-center text-white bg-blue-500 rounded-lg hover-text-white focus:outline-none"
-                  onClick={()=>{
-                    
+                  onClick={() => {
+                    setOpenEdit(true);
+                    setSelectedProduct(product);
                   }}
                   >
                     <FiEdit3 className="w-4 h-6 mr-1" />
@@ -162,7 +165,6 @@ export default function Products() {
                     onClick={() => {
                       setOpenModal(true);
                       setSelectedProduct(product);
-                      console.log(selectedProduct);
                     }}
                   >
                     <BsTrash className="w-4 h-6 mr-1" />
@@ -184,6 +186,11 @@ export default function Products() {
   {openDetail && (
   <PopUp >
     <ProductDetails  setOpenDetail={setOpenDetail} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}  />
+  </PopUp>
+  )}
+  {openEdit && (
+  <PopUp >
+    <ProductEdit  setOpenEdit={setOpenEdit} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />
   </PopUp>
   )}
     {openModal && <Modal closeModal={setOpenModal} onDelete={handleDeleteProduct} Title={titre}/>}

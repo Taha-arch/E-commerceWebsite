@@ -47,8 +47,8 @@
     display: flex;
     flex-direction: column;
     padding: 25px;
-    margin-left: 380px;
-    margin-top: 180px;
+    margin-left: 33%;
+    margin-top: 10%;
 }
 
 .modalContainer .title {
