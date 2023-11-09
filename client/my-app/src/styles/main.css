@@ -1,7 +1,7 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Borel&family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 /* Include Tailwind CSS directives */
 @tailwind base;
 @tailwind components;
@@ -24,9 +24,7 @@
     th {
         @apply bg-blue-700;
     }
-    a {
-        @apply text-sky-500 hover:underline;
-    }
+    
 
 }
 .modalBackground {

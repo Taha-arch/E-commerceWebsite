@@ -8,11 +8,11 @@ export default function Layout() {
    if (!token){
      window.location.href='/login'}else{
   return (
-    <div className='flex  w-full flex-col md:flex-row bg-neutral-100 h-screen w-screen '>
+    <div className='flex   flex-col md:flex-row bg-neutral-100 h-screen w-screen '>
   <Sidebar />
-  <div className='flex-1 w-full overflow-y-auto'>
+  <div className='flex-1   overflow-y-auto'>
     <Header />
-    <div className='relative w-full '>
+    <div className='p-5 pb-0 shadow-lg rounded-xl relative  '>
       {<Outlet />}
     </div>
   </div>

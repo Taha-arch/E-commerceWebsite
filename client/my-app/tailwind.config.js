@@ -21,8 +21,9 @@ module.exports = {
         lightgreen: '#46C716'
       },
       fontFamily: {
-        'playfair': ['playfair Display', 'serif'],
+        'VarelaRound': ['VarelaRound', 'sans-serif'],
       },
+      
       borderRadius: {
         '3xl': '1.5rem', // Adjust the radius size as needed
       },

@@ -7,42 +7,34 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditUser(  user, onSubmit ) {
   
-  const { userId } = useParams();
+  
+  
   const token = localStorage.getItem('accessToken');
 
-  useEffect(() => {
-    const config = {
-        headers: { Authorization: `Bearer ${token}`}
-        }
-    axios.get(`http://localhost:3001/users/${userId}`, config)
-        .then((response) => {
-        setUserInfo(response.data);
-        })
-        .catch((error) => {
-        console.error('Error fetching user data:', error);
-        });
-    }, [userId]);
+ 
 
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
     email: ''
 });
-  const [isEditing, setIsEditing] = useState(false);
 
-  
+
+const { id } = useParams();
   useEffect(() => {
     const config = {
         headers: { Authorization: `Bearer ${token}`}
         }
-    axios.get(`http://localhost:3001/users/${userId}`, config)
+        
+    axios.get(`http://localhost:3001/users/${id}`, config)
         .then((response) => {
-        setUserInfo(response.data);
+        setUserInfo(response.data.data);
+        
         })
         .catch((error) => {
         console.error('Error fetching user data:', error);
         });
-    }, [userId]);
+    }, [id]);
 
 
   const notify = () => {toast.success('User Updated Successfully!', {
@@ -57,20 +49,14 @@ export default function EditUser(  user, onSubmit ) {
     });
 };
 
-const handleEdit = () => {
-    setIsEditing(true);
-  };
 
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
 
 
 const handleSubmit = (e) => {
     e.preventDefault();
     
     // Use the 'put' method to update the user data.
-    axios.put(`http://localhost:3001/users/${userId}`, {
+    axios.put(`http://localhost:3001/users/${id}`, {
         first_name: userInfo.firstName,
         last_name: userInfo.lastName,
         email: userInfo.email,
@@ -100,6 +86,7 @@ const handleSubmit = (e) => {
             value={userInfo.firstName}
             onChange={(e) => setUserInfo({ ...userInfo, firstName: e.target.value })}
             required
+            placeholder={userInfo.first_name}
           />
         </div>
         <div className="mb-4">
@@ -114,6 +101,7 @@ const handleSubmit = (e) => {
             value={userInfo.lastName}
             onChange={(e) => setUserInfo({ ...userInfo, lastName: e.target.value })}
             required
+            placeholder={userInfo.last_name}
           />
         </div>
         <div className="mb-4">
@@ -125,9 +113,9 @@ const handleSubmit = (e) => {
             type="email"
             name="email"
             id="email"
-            value={userInfo.email}
             onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
             required
+            placeholder={userInfo.email}
           />
         </div>
         <div className='flex justify-center'>

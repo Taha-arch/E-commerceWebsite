@@ -1,9 +1,9 @@
 import { React, useState } from 'react'
-import { FcComboChart } from 'react-icons/fc'
 import { Link, useLocation } from 'react-router-dom'
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../../lib/consts/navigation'
 import classNames from 'classnames'
-import { HiOutlineLogout } from 'react-icons/hi'
+import { TbLogout } from 'react-icons/tb'
+import { RxHamburgerMenu } from 'react-icons/rx'
 const linkClasses = 'flex items-center  gap-2 font-light px-3 py-2 hover:bg-neutral-700 hover:no-underline active:bg-neutral-600 rounded-sm text-base'
 
 
@@ -19,11 +19,10 @@ export default function Sidebar() {
         const [isMenuOpen, setMenuOpen] = useState(false);
   return (
     
-    <div className="flex flex-row   md:flex-col  bg-neutral-900 md:w-60 lg:w-80 p-3   text-white">
-    <div className="flex  ">
-      <div className=" font-bold justify-center text-3xl font-playfair">
-        <span className="text-white">PREST</span>
-        <span className="text-green">IGIOUS</span>
+    <div className="flex flex-row   md:flex-col rounded-tr-3xl  bg-gradient-to-b from-black to-sky-800  md:w-60 lg:w-80 p-3   text-white">
+    <div className="flex justify-center py-2  ">
+      <div className=" text-cyan-500 justify-center text-3xl">
+        <span className="font-VarelaRound">PRESTIGIOUS</span>
       </div>
     </div>
 
@@ -33,12 +32,12 @@ export default function Sidebar() {
         onClick={() => setMenuOpen(!isMenuOpen)}
         className="text-white text-2xl cursor-pointer"
       >
-        ☰ {/* You can replace this with a hamburger menu icon */}
+        <RxHamburgerMenu />
       </button>
     </div>
 
     {/* Sidebar content for small screens (dropdown) */}
-    <div className={`md:hidden  flex flex-col  gap-0.5 ${isMenuOpen ? 'block' : 'hidden'}`}>
+    <div className={`md:hidden justify-center  flex flex-col  gap-0.5 ${isMenuOpen ? 'block' : 'hidden'}`}>
       {DASHBOARD_SIDEBAR_LINKS.map((item) => (
         <SidebarLink key={item.key} item={item} />
       ))}
@@ -47,8 +46,8 @@ export default function Sidebar() {
         <SidebarLink key={item.key} item={item} />
       ))}
 
-      <button onClick={handleLogout} className={classNames('text-red-500 cursor-pointer', linkClasses)}>
-        <span className='text-xl'><HiOutlineLogout /></span>
+      <button onClick={handleLogout} className={classNames(' cursor-pointer', linkClasses)}>
+        <span className='text-xl'><TbLogout className='text-red'/></span>
         Logout
       </button>
     </div>
@@ -60,13 +59,13 @@ export default function Sidebar() {
       ))}
     </div>
 
-    <div className={`hidden md:flex flex-col gap-0.5 pt-2 border-t border-neutral-700`}>
+    <div className={`hidden md:flex flex-col gap-0.5 pt-2 border-t border-white`}>
       {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map(item => (
         <SidebarLink key={item.key}  item={item} />
       ))}
 
-      <button onClick={handleLogout} className={classNames('text-red-500 cursor-pointer', linkClasses)}>
-        <span className='text-xl'><HiOutlineLogout /></span>
+      <button onClick={handleLogout} className={classNames(' cursor-pointer', linkClasses)}>
+        <span className='text-xl'><TbLogout className='text-red'/></span>
         Logout
       </button>
     </div>
@@ -80,7 +79,7 @@ const { pathname } = useLocation()
 
 
     return (
-        <Link to={item.path} className={classNames(pathname === item.path ? 'bg-neutral-700 text-white': 'text-neutral-400',linkClasses)}>
+        <Link to={item.path} className={classNames(pathname === item.path ? 'bg-yellow-400  text-white': 'text-white',linkClasses)}>
         <span className='text-xl'>{item.icon}</span>
         {item.label}
         </Link>

@@ -18,8 +18,7 @@ import EditUser from './components/EditUser';
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
         <Route path='/users' element={<Users />} />
-        {/* <Route path='/users/adduser' element={<AddUser />}/> */}
-        <Route path="/users/edit/:userId" element={<EditUser />} />
+        <Route path="/users/edit/:id" element={<EditUser />} />
         </Route>
         <Route path='login' element={<div>this is the login page</div>} />
 
