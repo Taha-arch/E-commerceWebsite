@@ -86,7 +86,7 @@ export default function Header() {
             <div
               className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
               style={{
-                backgroundImage: 'url("https://source.unsplash.com/80*80?face")',
+                backgroundImage: 'url("https://source.unsplash.com/150x150?face")',
               }}
             >
               <span className="sr-only">Taha El atoui</span>

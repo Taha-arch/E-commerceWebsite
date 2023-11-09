@@ -1,0 +1,41 @@
+.profile-img{
+    height: 10rem;
+    width: 10rem;
+    filter: blur(0);
+    transition: .1s ease-in-out;
+    border-radius: 100px;
+}
+
+.profile:hover .profile-img{
+    -webkit-filter: grayscale(100%) blur(5px);
+    filter:  blur(2px);
+    transition: .4s ease-in-out;
+}
+
+.profile{
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 100px;
+}
+
+.profile > .icon{
+    display :none;
+}
+
+.profile:hover > .icon{
+    position: absolute;
+    top: 4rem;
+    display: inline-flex;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 15rem;
+    font-weight: bold;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: .4s ease-in-out;
+    line-height:150px;
+    margin:0;
+}

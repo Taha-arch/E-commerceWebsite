@@ -26,7 +26,7 @@ module.exports = {
       
       borderRadius: {
         '3xl': '1.5rem', // Adjust the radius size as needed
-      },
+      }
     },
   },
   plugins: [
