@@ -1,30 +1,20 @@
 const express = require('express');
 const router = express.Router();
-
-const multer = require('multer');
+const upload = require('../middleware/upload');
 const {addProduct, getAllProducts, searchProducts, getProduct, updateProduct, deleteProduct} = require('../controllers/productController.js');
 const {authorization, checkAdminOrManager, checkAdmin} = require('../middleware/authMiddleware');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "images");
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
-});
-
-const upload = multer({ storage });
-
-router.post('/products', checkAdminOrManager, upload.single('image'), addProduct);
+//, checkAdminOrManager
+router.post('/products', upload.single('product_image'), addProduct);
 router.get('/products', (req, res, next) => {
     return (Object.keys(req.query).length > 0 ) ? (searchProducts(req, res, next)) : (getAllProducts(req, res, next));
 });
+// , checkAdminOrManager
 
+router.patch('/products/:id', updateProduct);
 router.get('/products/:id', getProduct);
-router.patch('/products/:id', checkAdminOrManager, updateProduct);
-router.get('/products/:id', getProduct);
-router.delete('/products/:id', checkAdminOrManager, deleteProduct);
+//, checkAdminOrManager
+router.delete('/products/:id', deleteProduct);
 
 
 module.exports = router;

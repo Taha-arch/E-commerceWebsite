@@ -14,6 +14,7 @@ connectDb();
 
 app.use(express.json());
 app.use(cors());
+app.use(cors());
 
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes.js');

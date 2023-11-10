@@ -8,16 +8,16 @@ const ProductSchema = new mongoose.Schema({
         },
         sku: {
             type: String,
-            require: true,
+            required: true,
             unique: true
         },
         product_image: {
             type: String,
-            require: true
+            required: true
         },
         product_name: {
             type: String,
-            require: true,
+            required: true,
             unique:true
         },
         subcategory_id: {
@@ -38,7 +38,7 @@ const ProductSchema = new mongoose.Schema({
         },
         price :{
             type: Number,
-            require: true
+            required: true
         },
         discount_price :{
             type: Number,
@@ -48,7 +48,7 @@ const ProductSchema = new mongoose.Schema({
             type: Number,
             default:0
         },
-        options :{
+        options: {
             type: Array
         },
         active: {

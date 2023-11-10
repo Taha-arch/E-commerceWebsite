@@ -17,6 +17,8 @@ export default function Sidebar() {
           
         };
         const [isMenuOpen, setMenuOpen] = useState(false);
+  
+    
   return (
     
     <div className="flex flex-row pl-0  md:flex-col rounded-tr-3xl  bg-gradient-to-b from-black to-gray-700   md:w-60 lg:w-80 p-3   text-white">
@@ -69,7 +71,9 @@ export default function Sidebar() {
         Logout
       </button>
     </div>
+      
     </div>
+    
   )
 }
 
