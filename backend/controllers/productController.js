@@ -5,9 +5,17 @@ const Category = require('../models/Category');
 const addProduct = (req, res) => {
     let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
     
-    if(!sku|| !product_name|| !subcategory_id|| !price){
-        return res.status(400).json({status: 400, message:"sku, product name, subCategory Id and the price are required!!"});
+    if(!sku){
+        return res.status(400).json({status: 400, message:"sku is required!!"});
+    }else if(!product_name){
+        return res.status(400).json({status: 400, message:"product name is required!!"});
     }
+    else if(!subcategory_id){
+        return res.status(400).json({status: 400, message:"subcategory is required!!"});
+    }else if(!price){
+        return res.status(400).json({status: 400, message:"price is required!!"});
+    }
+
     const urlProductImage = req.file ? req.file.path : null;
     let newProduct = new Product({
         sku: sku,
@@ -130,24 +138,25 @@ const getProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-    try {
-        const idProduct = req.params.id;
-        const productUpdate = req.body;
-        
-        const productName = await Product.findOne({product_name :productUpdate.user_name});
-        if(productName) return res.status(400).json({message : `product name already exist`});
+    
+    const idProduct = req.params.id;
+    const productUpdate = req.body;
 
-        const doc = await Product.findByIdAndUpdate(idProduct, productUpdate);
-        if (doc) {
-            res.status(200).json({status:200, message:"product updated successfully"});
-        } else {
-            res.status(404).json("Product not found");
-        }
-        }catch (error) {
-        
-        res.status(500).json(error.message);
+    const productExist = await Product.findOne({ _id: { $ne: idProduct},product_name:productUpdate.product_name});
+    if(productExist) return res.status(402).json({message : `Product already exist`});
+    
+    const skuExist = await Product.findOne({ _id: { $ne: idProduct}, sku :productUpdate.sku});
+    if(skuExist) return res.status(400).json({message : `sku already exist`});
+
+    const doc = await Product.findByIdAndUpdate(idProduct, productUpdate);
+    if (doc) {
+        res.status(200).json({status:200, message:"Product updated successfully"});
+    } else {
+        res.status(404).json("Product not found");
     }
+
 };
+
 
 
 const deleteProduct = async (req, res) => {

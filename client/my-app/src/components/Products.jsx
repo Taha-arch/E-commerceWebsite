@@ -10,19 +10,16 @@ import Modal from './Modal';
 import AddProduct from './AddProduct';
 import PopUp from './PopUp';
 import axios from 'axios';
-import ProductDetails from './ProductDetails';
-import ProductEdit from './ProductEdit';
+
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openPopUp, setOpenPopUp] = useState(false);
-  const [openDetail, setOpenDetail] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
-  const titre = "product";
 
   const fetchProductData = async () => {
     try {
@@ -66,6 +63,7 @@ export default function Products() {
   const handleSubmitAddProduct = async () => {
     
   }
+  const navigate = useNavigate();
 
   return (
     <div className="overflow-scroll overflow-x-auto" style={{ width: '100%' }}>
@@ -139,22 +137,13 @@ export default function Products() {
                 </td>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 justify-center flex space-x-3 mt-10">
                   <button className="px-2 py-1 flex text-base justify-center text-white bg-yellow-500 rounded-lg hover-text-white focus:outline-none"
-                  onClick={() => {
-                    
-                    setSelectedProduct(product);
-                    setOpenDetail(true);
-                    
-
-                  }}>
+                  onClick={() => navigate(`/product/details/${product._id}`)}>
 
                     <BsBoxArrowDownRight className="w-4 h-6 mr-1" />
                     Details
                   </button>
                   <button className="px-2 py-1 flex text-base justify-center text-white bg-blue-500 rounded-lg hover-text-white focus:outline-none"
-                  onClick={() => {
-                    setOpenEdit(true);
-                    setSelectedProduct(product);
-                  }}
+                    onClick={() => navigate(`/product/edit/${product._id}`)}
                   >
                     <FiEdit3 className="w-4 h-6 mr-1" />
                     Edit
@@ -183,17 +172,7 @@ export default function Products() {
   </PopUp>
   )}
   
-  {openDetail && (
-  <PopUp >
-    <ProductDetails  setOpenDetail={setOpenDetail} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}  />
-  </PopUp>
-  )}
-  {openEdit && (
-  <PopUp >
-    <ProductEdit  setOpenEdit={setOpenEdit} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />
-  </PopUp>
-  )}
-    {openModal && <Modal closeModal={setOpenModal} onDelete={handleDeleteProduct} Title={titre}/>}
+    {openModal && <Modal closeModal={setOpenModal} onDelete={handleDeleteProduct} />}
     
     </div>
   );

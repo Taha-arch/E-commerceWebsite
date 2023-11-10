@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import '../styles/main.css';
+import { useParams } from 'react-router-dom';
 
-
-export default function ProductDetails(props) {
-  const {setOpenDetail, selectedProduct, setSelectedProduct} = props;
+export default function ProductDetails() {
 
   const [product, setProduct] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    if (selectedProduct) {
       const fetchProductDetails = async () => {
         try {
-            const product_id = selectedProduct._id;
-            fetch(`http://localhost:3001/products/${product_id}`)
+            fetch(`http://localhost:3001/products/${id}`)
             .then(response => response.json())
             .then( res => setProduct(res.data));
         } catch (error) {
@@ -20,67 +19,80 @@ export default function ProductDetails(props) {
       };
 
       fetchProductDetails();
-    }
-  }, [selectedProduct])
+  }, [id]);
+
     return (
-        
-  <div className="max-w-4xl  mx-auto  p-4 bg-white shadow-md  h-full">
+
+  <div className="max-w-4xl  overflow-y-auto h-[500px] mx-auto px-4 py-2 bg-white shadow-md  mt-3 ">
     
-    <div className="headerPopup">
-    <div className="flex justify-start gap-2 pb-4 pr-20">
-        <button
-          className="bg-red-400 text-white py-1 px-2  hover:bg-red-600"
-          type="button"
-          onClick={() => {
-            setOpenDetail(false);
-            setSelectedProduct(null);
-            
-            }} >
-          X
-        </button>
+    <div className="  py-4">
+    <div className="flex  pb-4 mr-10 pr-20">
+        <h2 className='text-2xl ml-40 product-title-details'>Product Details</h2>
       </div>
     </div>
 
-     <div className="bodyPopup">
-     
-        <h2>Product Details</h2>
+    <div className="bodyPopup pt-2">
+  
+        <div className="container flex justify-center gap-8">
+
+        <div className='first-col'>
+        <table className='productDetails'>
+
+        <tr>
+            <td>Name</td>
+            <td>{product && product.productName}</td>
+        </tr>
+        <tr>
+            <td>Sku</td>
+            <td>{product && product.sku}</td>
+        </tr>
+        <tr>
+            <td>Category Name</td>
+            <td>{product && product.categoryName}</td>
+        </tr>
+        <tr>
+            <td>Subcategory Name</td>
+            <td>{product && product.subcategoryName}</td>
+        </tr>
         
-
-        <div className="">
-
-        <div className="item "><img className="" src={product && product.productImage} alt="product_image"></img> </div>
-        <div>
-        
-        <div className="item">Name : {product && product.productName}</div>
-        <div className="item">Sku: {product && product.sku}</div>
-        <div className="item">Category Name: {product && product.categoryName}</div>
-        <div className="item">subCategory Name : {product && product.subcategoryName}</div>
-        <div className="item">short description : {product && product.shortDescription}</div>
+        <tr>
+            <td>Price</td>
+            <td>{product && product.price}</td>
+        </tr>
+        <tr>
+            <td>Discount Price</td>
+            <td>{product && product.discountPrice}</td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td>{product && product.quantity}</td>
+        </tr>
+        <tr>
+            <td>Active</td>
+            <td>{product && product.active ? 'true' : 'false'}</td>
+        </tr>
+        <tr>
+            <td>Short Description</td>
+            <td>{product && product.shortDescription}</td>
+        </tr>
+        <tr>
+            <td>Long Description</td>
+            <td>{product && product.longDescription}</td>
+        </tr>
+    </table>
         </div>
-        <div>
-        <div className="item">Price : {product && product.price}</div>
-        <div className="item">discount price : {product && product.discount_price}</div>
-        <div className="item">Quantity : {product && product.quantity}</div>
-        <div className="item">Active : {product && product.active}</div>
-        <div className="item">Long description : {product && product.longDescription}</div>
-        </div>
-        </div>
-         
-     </div>
 
-      <div className="flex justify-end gap-2 py-4 pr-20">
-        <button
-          className="bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-green-300"
-          type="button"
-          onClick={() => {
-            setOpenDetail(false);
-            setSelectedProduct(null);
-            }}>
-          Close
-        </button>
-      </div>
+        <div className="second-col w-2/5 h-3/5">
+          <img className="" src={product && product.productImage} alt="product_image"></img>
+        </div>
+          
+        </div>
+
+
+    </div>
 
   </div>
+
 );
 }
 

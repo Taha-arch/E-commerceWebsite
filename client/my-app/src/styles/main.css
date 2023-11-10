@@ -26,6 +26,17 @@
         @apply text-sky-500 hover:underline;
     }
 
+    .productDetails {
+    border: none;
+    }
+    
+    .productDetails > th, td {
+        border-style: none;
+    }
+}
+
+.product-title-details{
+    margin-left: 40%;
 }
 
 .modalBackground {
@@ -102,3 +113,5 @@
 #cancelBtn {
     background-color: crimson;
 }
+
+

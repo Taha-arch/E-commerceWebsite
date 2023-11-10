@@ -9,9 +9,9 @@ router.post('/products', upload.single('product_image'), addProduct);
 router.get('/products', (req, res, next) => {
     return (Object.keys(req.query).length > 0 ) ? (searchProducts(req, res, next)) : (getAllProducts(req, res, next));
 });
+// , checkAdminOrManager
 
-
-router.patch('/products/:id', checkAdminOrManager, updateProduct);
+router.patch('/products/:id', updateProduct);
 router.get('/products/:id', getProduct);
 //, checkAdminOrManager
 router.delete('/products/:id', deleteProduct);
