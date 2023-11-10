@@ -84,7 +84,7 @@ const addUser = (req, res) => {
             from: 'Prestigious',
             to: email,
             subject: 'WELCOME TO OUR TEAM',
-            text: 'Your username : ' + generateUsername(first_name, last_name) + ' , ' + 'Your password : '+ password
+            text: 'Your username : ' + user_name + ' , ' + 'Your password : '+ password
         };
         
         if(transporter.sendMail(mailOptions)){
