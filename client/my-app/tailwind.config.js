@@ -6,7 +6,6 @@ module.exports = {
     "./src/**/*.jsx",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./src/App.js",
-    
     "./public/index.html",
     "./src/styles/*.{css,scss}", // Assuming your custom styles are in a 'styles' directory
   ],
