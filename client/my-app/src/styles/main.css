@@ -1,7 +1,7 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Borel&family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 /* Include Tailwind CSS directives */
 @tailwind base;
 @tailwind components;
@@ -24,8 +24,82 @@
     th {
         @apply bg-blue-700;
     }
-    a {
-        @apply text-sky-500 hover:underline;
-    }
+    
 
 }
+.modalBackground {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(169, 169, 169, 0.75); /* Equivalent to bg-gray-500 bg-opacity-75 */
+    transition: opacity 0.3s;
+}
+
+.modalContainer {
+    width: 500px;
+    height: 200px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-left: 33%;
+    margin-top: 10%;
+}
+
+.modalContainer .title {
+    display: inline-block;
+    text-align: center;
+    
+    font-weight: bold;
+}
+
+.titleCloseBtn {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+}
+
+.titleCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modalContainer .body {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.modalContainer .footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer .footer button {
+    width: 100px;
+    height: 25px;
+    margin: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#cancelBtn {
+    background-color: crimson;
+}
+
+

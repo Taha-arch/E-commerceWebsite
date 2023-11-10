@@ -96,7 +96,9 @@ const addUser = (req, res) => {
 }
 
 const getUsers = async (req, res) => {
-    const users = await User.find().sort({first_name:-1}).limit(10).skip(1);
+    const page = parseInt(req.query.page) || 1; 
+    const perPage = 10;
+    const users = await User.find({}).sort({ first_name: -1 }).skip((page - 1) * perPage);
     return (users) ? (res.status(200).json({
         status: 200,
         data: users})) : (res.status(403).json("error"));
@@ -119,7 +121,7 @@ const getUser = async (req, res) => {
 const searchUser = async (req, res) => {
     try {
     const queryObject = req.query;
-
+        console.log(queryObject);
     if (!queryObject.first_name) {
         res.status(400).json('Missing first_name parameter');
         return;
@@ -148,10 +150,17 @@ const updateUser = async (req, res) => {
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
 
-        const emailExist = await User.findOne({email:userUpdate.email});
+        const emailExist = await User.findOne({
+            _id: { $ne: idUser }, // Exclude the user being updated
+            email: userUpdate.email
+        });
+
         if(emailExist) return res.status(400).json({message : `Email already exist`});
         
-        const usernameExist = await User.findOne({user_name :userUpdate.user_name});
+        const usernameExist = await User.findOne({
+            _id: { $ne: idUser }, // Exclude the user being updated
+            user_name: userUpdate.user_name
+        });
         if(usernameExist) return res.status(400).json({message : `username already exist`});
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate);

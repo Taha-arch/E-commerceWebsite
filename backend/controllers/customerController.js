@@ -45,13 +45,13 @@ const addCustomer = async (req, res) => {
         newCustomer.save()
         .then((newCustomer) => {
 
-            const link = "www.youtube.com"
+            const link = "http://localhost:3001/customers/validate"
 
             let transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                user: 'p27895102@gmail.com',
-                pass: 'medw imoh xvzw lmol'
+                user: 'amineelbouzidi36@gmail.com',
+                pass: 'pyeo ktfq qefd qahk'
                 }
             });
 
@@ -59,8 +59,21 @@ const addCustomer = async (req, res) => {
                 from: 'Prestigious',
                 to: email,
                 subject: 'Account Verification',
-                text: 'Hi you can verify your account by clicking the button bellow',
-                html: `<button><a href="${link}">Click here to verify</a></button>`
+                html: `
+                <div style="background-image: url('https://www.canva.com/design/DAFyMVbE2wY/view')"></div>
+                <p>Dear ${newCustomer.first_name},
+
+                Thank you for registering with Prestigious. We're excited to have you join our community! To ensure the security and authenticity of our members, please click the link below to verify your email address.
+                <br>
+                <div style="text-align: center; background-color: light-green">
+                <button ><a href="${link}">Click here to verify</a></button>
+                </div>
+                <br>
+                If you have any issues or questions, don't hesitate to reach out to our support team.
+                
+                Warm regards,
+                
+                Prestigious Team</p> `
             };
 
             if(transporter.sendMail(mailOptions)){
@@ -132,7 +145,7 @@ const addCustomer = async (req, res) => {
         })
         .catch((error) => {
     
-            res.status(404).json('customer not Found');
+        res.status(404).json('customer not Found');
         });
     }
     
@@ -167,49 +180,66 @@ const addCustomer = async (req, res) => {
     
     
     const validateCustomerEmail = async (req, res) => {
+        const token = req.header('Authorization');
+            if (!token) {
+                res.status(404).json("Not Autorized");
+            }
+            //const tokenaccess = token.startsWith('Bearer ').slice(7) ;
+            if (token.startsWith('Bearer ')) {
+                return token.slice(7);
+              }
+        const data = jwt.verify(token, SECRET_KEY);
+        if (data && data.active === false){
+            const customerId = data.id;
+            await Customer.findOneAndUpdate({ id: customerId }, { active: true });
+            res.status(200).json("Email successfully verified!");
+        }else{
+            res.status(400).json("Error");
+        }
         
-        const link = "www.youtube.com"
 
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-            user: 'p27895102@gmail.com',
-            pass: 'medw imoh xvzw lmol'
-            }
-        });
+    //     const link = "http://localhost:3001/customers/validate"
 
-        var mailOptions = {
-            from: 'Prestigious',
-            to: req.body.email,
-            subject: 'Email Verification',
-            text: 'Hi you can verify your account by clicking the button bellow',
-            html: `<button><a href="${link}">Click here to verify</a></button>`
-        };
-        try {
-            const customer = await Customer.findOne({ _id: req.params.id });
+    //     let transporter = nodemailer.createTransport({
+    //         service: 'gmail',
+    //         auth: {
+    //         user: 'p27895102@gmail.com',
+    //         pass: 'medw imoh xvzw lmol'
+    //         }
+    //     });
 
-            if (!customer) {
-                return res.status(400).json("Customer not found");
-            }
+    //     var mailOptions = {
+    //         from: 'Prestigious',
+    //         to: req.body.email,
+    //         subject: 'Email Verification',
+    //         text: 'Hi you can verify your account by clicking the button bellow',
+    //         html: `<button><a href="${link}">Click here to verify</a></button>`
+    //     };
+    //     try {
+    //         const customer = await Customer.findOne({ _id: req.params.id });
 
-            if (customer.active) {
-                return res.status(400).json("Email Already verified");
-            }
+    //         if (!customer) {
+    //             return res.status(400).json("Customer not found");
+    //         }
+
+    //         if (customer.active) {
+    //             return res.status(400).json("Email Already verified");
+    //         }
 
         
-            if(transporter.sendMail(mailOptions)){
-                await Customer.findOneAndUpdate({ email: req.body.email }, { active: true });
+    //         if(transporter.sendMail(mailOptions)){
+    //             await Customer.findOneAndUpdate({ email: req.body.email }, { active: true });
 
-                return res.status(200).json("Email successfully verified!");
-            }else {
+    //             return res.status(200).json("Email successfully verified!");
+    //         }else {
 
-                res.status(400).json("Error sending verification");
-            }
+    //             res.status(400).json("Error sending verification");
+    //         }
         
-    } catch (error) {
-        console.error('Error validating customer email:', error);
-        return res.status(500).json("Internal Server Error");
-    }
+    // } catch (error) {
+    //     console.error('Error validating customer email:', error);
+    //     return res.status(500).json("Internal Server Error");
+    // }
     };
 
 // const getCustomerProfile = async (req, res) => {
