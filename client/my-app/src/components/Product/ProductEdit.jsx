@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 export default function ProductDetails() {
+  const navigate = useNavigate();
 
   const [productInfo, setProductInfo] = useState({
     productImage: '',
@@ -25,6 +27,7 @@ const { id } = useParams();
             fetch(`http://localhost:3001/products/${id}`)
             .then(response => response.json())
             .then( res => setProductInfo(res.data));
+            
         } catch (error) {
           console.log(error);
         }
@@ -32,7 +35,14 @@ const { id } = useParams();
       fetchProductDetails();
   }, [id]);
 
- 
+  const notify = () => swal(
+    {
+      title: 'Product edited successfully',
+      icon: 'success',
+      button: 'close',
+      className: 'alert',
+    }
+  );
 
   const handleSubmitEditProduct = async () => {
   
@@ -48,6 +58,7 @@ const { id } = useParams();
         quantity: productInfo.quantity,
         subcategory_id: productInfo.subcategory_id
       });
+      notify();
 
       console.log(response.data);
 
@@ -58,19 +69,21 @@ const { id } = useParams();
   
 return (
   
-  <div className="p-4 overflow-auto h-[500px]">
-  <p className="text-gray-900 mb-4">Please make sure all information is correct before submitting them.</p>
-  <table className="w-full">
+  <div className="p-4 ml-10 overflow-auto h-[500px] bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
+    
+  <p className="titleAdd-product text-cyan-500 mb-4 text-2xl font-bold">Edit Product</p>
+  <p className="sub-titleAdd-product text-gray-900 mb-4 ">Please make sure all information is correct before submitting them.</p>
+  <table className="w-4/4">
     <tbody>
       <tr>
         <td className="w-1/4">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="productName">
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="productName">
             Name
           </label>
         </td>
-        <td className="w-3/4">
-          <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
+        <td className="w-1/4">
+        <input
+            className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
             type="text"
             name="productName"
             id="productName"
@@ -80,16 +93,14 @@ return (
             required
           />
         </td>
-      </tr>
-      <tr>
-        <td>
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="sku">
+        <td className='w-1/4'>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="sku">
             SKU
           </label>
         </td>
-        <td>
-          <input
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
+        <td className=" ">
+        <input
+            className="w-full px-3 py-2  border rounded-lg focus:outline-none focus:border-green-300"
             type="text"
             name="sku"
             id="sku"
@@ -102,12 +113,12 @@ return (
       </tr>
       <tr>
         <td>
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="price">
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="price">
             Price
           </label>
         </td>
         <td>
-          <input
+        <input
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-200"
             type="text"
             name="price"
@@ -118,15 +129,13 @@ return (
             required
           />
         </td>
-      </tr>
-      <tr>
         <td>
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="discount_price">
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="discount_price">
             Discount
           </label>
         </td>
         <td>
-          <input
+        <input
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
             type="text"
             name="discount_price"
@@ -138,14 +147,15 @@ return (
           />
         </td>
       </tr>
+
       <tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="subcategory_id">
-      Subcategory Name
-    </label>
-  </td>
-  <td>
-    <input
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategory_id">
+            Subcategory Name
+          </label>
+        </td>
+        <td>
+        <input
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="text"
       name="subcategory_id"
@@ -155,16 +165,14 @@ return (
       onChange={(e) => setProductInfo({ ...productInfo, subcategoryName: e.target.value })}
       required
     />
-  </td>
-</tr>
-<tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="active">
-      Active
-    </label>
-  </td>
-  <td>
-    <input
+        </td>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="active">
+            Active
+          </label>
+        </td>
+        <td>
+        <input
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="text"
       name="active"
@@ -174,17 +182,17 @@ return (
       onChange={(e) => setProductInfo({ ...productInfo, active: e.target.value })}
       required
     />
-  </td>
-</tr>
+        </td>
+      </tr>
 
-<tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="short_description">
-      Short Description
-    </label>
-  </td>
-  <td>
-    <textarea
+      <tr>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="short_description">
+            Short Description
+          </label>
+        </td>
+        <td>
+        <textarea
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="textarea"
       name="short_description"
@@ -194,37 +202,14 @@ return (
       onChange={(e) => setProductInfo({ ...productInfo, shortDescription: e.target.value })}
       required
     />
-  </td>
-</tr>
-
-<tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="long_description">
-      Long Description
-    </label>
-  </td>
-  <td>
-    <textarea
-      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
-      type="text"
-      name="long_description"
-      id="long_description"
-      placeholder={productInfo.longDescription}
-      value={productInfo.longDescription}
-      onChange={(e) => setProductInfo({ ...productInfo, longDescription: e.target.value })}
-      required
-    />
-  </td>
-</tr>
-
-<tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="quantity">
-      Quantity
-    </label>
-  </td>
-  <td>
-    <input
+        </td>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="quantity">
+            Quantity
+          </label>
+        </td>
+        <td>
+        <input
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="text"
       name="quantity"
@@ -234,45 +219,71 @@ return (
       onChange={(e) => setProductInfo({ ...productInfo, quantity: e.target.value })}
       required
     />
-  </td>
-</tr>
+        </td>
+      </tr>
 
-<tr>
-  <td>
-    <label className="block text-gray-700 text-sm mb-2" htmlFor="productImage">
-      Image
-    </label>
-  </td>
-  <td>
+      <tr>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="long_description">
+            Long Description
+          </label>
+        </td>
+        <td colSpan="3">
+        <textarea
+      className="px-3 py-5 h-3/4 w-full border rounded-lg focus:border"
+      type="text"
+      name="long_description"
+      id="long_description"
+      placeholder={productInfo.longDescription}
+      value={productInfo.longDescription}
+      onChange={(e) => setProductInfo({ ...productInfo, longDescription: e.target.value })}
+      required
+    />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="productImage">
+            Image
+          </label>
+        </td>
+        <td colSpan={3}>
     <img alt="the-current-product_image" src={productInfo && productInfo.productImage} className='w-1/5'></img>
-  </td>
-</tr>
-<tr>
-  <td></td>
-<td>
-    <input
+     </td>
+        <td>
+          edit icon
+        {/* <input
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="file"
       name="productImage"
       id="productImage"
       onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
       required
-    />
-  </td>
-</tr>
+    /> */}
+        </td>
+      </tr>
+
     </tbody>
   </table>
   <div className="flex justify-end gap-2 mt-4">
+  <button
+          className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-green-300"
+          type="button"
+          onClick={() => navigate(`/products`)}
+        >
+          Cancel
+    </button>
+
     <button
-      className="bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-green-300"
+      className="bg-cyan-500 text-white py-2 px-4 mr-6 rounded-lg hover:bg-cyan-600 focus:outline-none focus:ring-green-300"
       type="button"
       onClick={() => handleSubmitEditProduct()}
     >
       Save
     </button>
   </div>
+
 </div>
   );
 }
-
-

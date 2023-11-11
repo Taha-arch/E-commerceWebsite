@@ -4,14 +4,12 @@
   import Dashboard from './components/Dashboard';
   import Layout from './components/shared/Layout';
   import Customers from './components/Customers';
-  import Products from './components/Products';
+  import Products from './components/Product/Products';
   import Users from './components/Users';
   import Orders from './components/Orders';
-  import AddProduct from './components/AddProduct';
-  import ProductEdit from './components/ProductEdit';
-  import ProductDetails from './components/ProductDetails';
+  import AddProduct from './components/Product/AddProduct';
+  import ProductEdit from './components/Product/ProductEdit';
 import AdminLogin from './components/AdminLogin';
-// import AddUser from './components/AddUser';
 import EditUser from './components/EditUser';
 
   function App() {
@@ -24,8 +22,8 @@ import EditUser from './components/EditUser';
         <Route path='customers' element={<Customers />} />
         <Route path='products' element={<Products/>} />
         <Route path='orders' element={<Orders/>} />
+        <Route path='/product/addProduct' element={<AddProduct />} />
         <Route path="/product/edit/:id" element={<ProductEdit />} />
-        <Route path="/product/details/:id" element={<ProductDetails />} />
         <Route path='addProduct' element={<AddProduct/>} />
         <Route path='/users' element={<Users />} />
         <Route path="/users/edit/:id" element={<EditUser />} />
