@@ -10,7 +10,7 @@ const {children} = props;
 
           <div className="popupBody">
             {children}
-            {notify}
+            
           </div>
           
         </div>
