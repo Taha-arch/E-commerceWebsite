@@ -33,9 +33,10 @@ export default function UserDetails(props) {
   <div className="flex flex-col rounded-xl max-w-xl h-[500px] mx-auto px-4 py-2 bg-white shadow-md  mt-10">
     
     <div className="py-4">
-    <div className="flex justify-start gap-2 ">
+    <div className="flex justify-end  gap-2 text-xl font-bold ">
+        <h2 className='mr-40'>User Details</h2>
         <button
-          className=" text-white py-1 px-2  "
+          className=" text-white px-2   "
           type="button"
           onClick={() => {
             setOpenDetail(false);
@@ -47,40 +48,29 @@ export default function UserDetails(props) {
       </div>
     </div>
     
-    <div className="flex justify-center text-xl font-bold  pb-6 ">
-    <h2>User Details</h2>
-      </div>
     
-<div className='flex justify-center'>
-<div className=" flex second-col w-20 h-20">
+    
+<div className='flex justify-center mt-5'>
+<div className=" flex second-col w-20 h-20 mr-10">
           <img className="flex rounded-full  " src={user && user.user_image} alt="#"></img>
         </div>
 <div className='first-row'>
 <table className='userDetails'>
-
+<tbody>
 <tr>
-    <td>FIRST NAME :</td>
+    <td className='font-bold'>FIRST NAME :</td>
     <td>{user && user.first_name}</td>
 </tr>
 <tr>
-    <td>LAST NAME:</td>
+    <td className='font-bold'>LAST NAME:</td>
     <td>{user && user.last_name}</td>
 </tr>
 <tr>
-    <td>USERNAME :</td>
+    <td className='font-bold'>USERNAME :</td>
     <td>{user && user.user_name}</td>
 </tr>
 <tr>
-    <td>EMAIL :</td>
-    <td>{user && user.email}</td>
-</tr>
-
-<tr>
-    <td>ROLE:</td>
-    <td>{user && user.role}</td>
-</tr>
-<tr>
-    <td>STATUS :</td>
+    <td className='font-bold'>STATUS :</td>
     <td>{user && user.active ? (
                     <GrStatusGoodSmall className="text-xs mr-1 inline-flex  text-lightgreen" />
                   ) : (
@@ -88,29 +78,22 @@ export default function UserDetails(props) {
                   )}</td>
 </tr>
 <tr>
-    <td>CREATION DATE :</td>
+    <td className='font-bold'>ROLE:</td>
+    <td>{user && user.role}</td>
+</tr>
+<tr>
+    <td className='font-bold'>EMAIL :</td>
+    <td>{user && user.email}</td>
+</tr>
+<tr>
+    <td className='font-bold'>CREATION DATE :</td>
     <td>{user && new Date(user.creation_date).toLocaleDateString(undefined,{year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric'})}</td>
 </tr>
+</tbody>
 </table>
 </div>
 
 </div>
-
-          
-        
-
-    
-      <div className="flex justify-end gap-2 py-4 pr-5">
-        <button
-          className="bg-cyan-400 text-white py-2 px-4 rounded-lg hover:bg-cyan-500 focus:outline-none"
-          type="button"
-          onClick={() => {
-            setOpenDetail(false);
-            setSelectedUser(null);
-            }}>
-          Close
-        </button>
-      </div>
 
   </div>
 );

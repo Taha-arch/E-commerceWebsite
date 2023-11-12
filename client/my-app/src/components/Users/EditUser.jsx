@@ -15,7 +15,8 @@ export default function EditUser(  user, onSubmit ) {
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    user_image: ''
 });
 
 
@@ -61,10 +62,33 @@ const handleSubmit = (e) => {
         email: userInfo.email,
         role: userInfo.role,
         username: userInfo.username,
+        user_image: userInfo.user_image,
     }).then(() => {
         notify();
     });
   };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setUserInfo({
+          ...userInfo,
+          user_image: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDivClick = (event) => {
+    event.preventDefault();
+    // Trigger the hidden file input when the div is clicked
+    fileInputRef.current.click();
+  };
+  const fileInputRef = React.createRef();
+
 
 
   if (!userInfo) {
@@ -86,27 +110,38 @@ const handleSubmit = (e) => {
 </div>
 <div className='flex  flex-row justify-around mb-10'>
 <div className='flex py-2 justify-center'>
-  <div className='profile flex justify-center '>
-      <img className='flex second-col profile-img  bg-no-repeat bg-cover' alt='' src={userInfo.user_image}></img>
-      <div className="icon ">
-          <RiEdit2Fill className="  text-white  text-3xl" />
-        </div>
+<div className='profile flex justify-center'>
+  
+      <label htmlFor="fileInput" className=' flex second-col profile-img bg-no-repeat bg-cover' style={{ backgroundImage: `url(${userInfo.user_image})` }} onClick={handleDivClick}>
+        
+          
+        
+      </label>
+      <RiEdit2Fill className="icon text-white w-5 h-5 " />
+      {/* Hidden file input */}
+      <input
+        type="file"
+        id="fileInput"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
     </div>
-</div>
+    </div>
 
 
 
 <div className='first-row  flex justify-center'>
 <table className='editUser'>
-
+  <tbody>
 <tr>
-<td><label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">User Name</label></td>
+<td><label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userName">User Name</label></td>
 <td><input
       className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
       type="text"
       name="UserName"
       id="UserName"
-      onChange={(e) => setUserInfo({ ...userInfo, firstName: e.target.value })}
+      onChange={(e) => setUserInfo({ ...userInfo, user_name: e.target.value })}
       required
       placeholder={userInfo.user_name}
     /></td>
@@ -173,6 +208,8 @@ const handleSubmit = (e) => {
       <option value="User" >User</option>
     </select></td>
 </tr>
+  </tbody>
+
 </table>
 
 </div>

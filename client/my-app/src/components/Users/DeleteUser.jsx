@@ -15,7 +15,7 @@ function DeleteUser({ setOpenModal, handleDeleteUser}) {
           <p>Are you sure you want to delete this User?</p>
         </div>
         <div className="footer">
-          <button onClick={() => setOpenModal(false)} id="cancelBtn">
+          <button onClick={() => setOpenModal(false)} className='bg-cyan-500 text-white py-2 px-2 rounded-md hover:bg-cyan-600 ' >
             Cancel
           </button>
           <button
@@ -24,7 +24,7 @@ function DeleteUser({ setOpenModal, handleDeleteUser}) {
               setOpenModal(false)
                // Close the modal
             }}
-            id="deleteBtn"
+            className="bg-red-500 py-2 px-2 text-white rounded-md hover:bg-red-600 ml-2"
           >
             Delete
           </button>
