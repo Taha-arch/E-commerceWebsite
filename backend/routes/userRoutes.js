@@ -1,11 +1,12 @@
 
 const express = require('express');
 const router = express.Router();
+const uploadUserImage = require('../middleware/upload');
 const {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser} = require('../controllers/userController.js');
 const { authorization, checkAdminOrManager, checkAdmin } = require('../middleware/authMiddleware.js')
 
 router.post('/login' , logUser);
-router.post('/user', addUser);
+router.post('/user', uploadUserImage.single('user_image'), addUser);
 
 router.get('/users',authorization , (req, res, next) => {
     if (Object.keys(req.query).length > 0) {

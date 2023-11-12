@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function PopUp(props){
 
-const {Title, children} = props;
+const {Title, children, notify} = props;
 
     return (
         <div className="popupBackground w-full bg-opacity-40 absolute inset-0 h-90 z-10  bg-gray-800">
@@ -11,6 +11,7 @@ const {Title, children} = props;
 
           <div className="popupBody">
             {children}
+            {notify}
           </div>
           
         </div>

@@ -1,15 +1,13 @@
 // Modal.jsx
 import React from "react";
-import "../styles/main.css";
+import "../../styles/main.css";
+
 
 
 function DeleteUser({ setOpenModal, handleDeleteUser}) {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
-        <div className="titleCloseBtn">
-          <button onClick={() => setOpenModal(false)}>X</button>
-        </div>
         <div className="title">
           <h1>Delete User</h1>
         </div>
@@ -26,6 +24,7 @@ function DeleteUser({ setOpenModal, handleDeleteUser}) {
               setOpenModal(false)
                // Close the modal
             }}
+            id="deleteBtn"
           >
             Delete
           </button>

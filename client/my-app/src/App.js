@@ -5,14 +5,14 @@
   import Layout from './components/shared/Layout';
   import Customers from './components/Customers';
   import Products from './components/Products';
-  import Users from './components/Users';
+  import Users from './components/Users/Users';
   import Orders from './components/Orders';
   import AddProduct from './components/AddProduct';
   import ProductEdit from './components/ProductEdit';
   import ProductDetails from './components/ProductDetails';
 import AdminLogin from './components/AdminLogin';
-// import AddUser from './components/AddUser';
-import EditUser from './components/EditUser';
+// import AddUser from './components/Users/AddUser';
+import EditUser from './components/Users/EditUser';
 
   function App() {
     return (
