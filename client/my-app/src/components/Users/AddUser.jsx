@@ -47,9 +47,6 @@ try{
     
 };
 
-
-  
-
   return (
     <div className="max-w-2xl mx-auto mt-20 p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl text-center font-semibold text-gray-800 mb-4">Add User</h2>

@@ -27,13 +27,16 @@
         border: none;
         }
         
-        .productDetails > th, td {
-            border-style: none;
-        }
-    
+    .productDetails > th, td {
+        border-style: none;
+    }
+    .productDetails > tr > td {
+        font-weight: bold;
+
+    }
     
     .product-title-details{
-        margin-left: 40%;
+        margin-left: 38%;
     }
 }
 
@@ -44,7 +47,13 @@
     left: 0;
     transition: opacity 0.3s;
 }
-
+.sub-titleAdd-product{
+    padding:7px 0px 0px 22px;
+    color: gray;
+}
+.titleAdd-product{
+    padding:7px 0px 0px 22px;
+}
 .modalContainer {
     width: 500px;
     height: 200px;
@@ -66,15 +75,10 @@
 }
 
 .titleCloseBtn {
-    display: flex;
-    justify-content: flex-start;
-    padding-bottom: 5px;
-}
-
-.titleCloseBtn button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
+    margin-right: 93%;
+    font-size: 15px;
+    padding: 1px;
+    color:white;
     cursor: pointer;
 }
 
@@ -94,25 +98,13 @@
     align-items: center;
 }
 
-.modalContainer .footer button {
-    width: 100px;
-    height: 25px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-}
+::-webkit-scrollbar {
+    width: 12px;
+    }
 
-#cancelBtn {
-    background-color: #00BCD4;
-    height: 70%;
+.popup-details{
+    width: 400px;
 }
-
-#deleteBtn {
-    background-color: #d42000;
-    height: 70%;
+.alert-supp{
+    color: red;
 }
-
