@@ -11,35 +11,37 @@ const addProduct = (req, res) => {
         return res.status(400).json({status: 400, message:"product name is required!!"});
     }
     else if(!subcategory_id){
-        return res.status(400).json({status: 400, message:"subcategory is required!!"});
+        return res.status(400).json({status: 400, message:"subcategory id is required!!"});
     }else if(!price){
         return res.status(400).json({status: 400, message:"price is required!!"});
+    }else{
+        
+        
+        const urlProductImage = req.file ? req.file.path : null;
+        let newProduct = new Product({
+            sku: sku,
+            product_image: urlProductImage,
+            product_name: product_name,
+            subcategory_id: subcategory_id,
+            short_description: short_description,
+            long_description: long_description,
+            price: price,
+            discount_price: discount_price,
+            quantity: quantity,
+            options: options
+        })
+        
+        newProduct.save()
+        .then((newProduct) =>{
+            return res.status(201).json({status: 201, message:"product created successfully"});
+        })
+        .catch((error) => {
+            return res.status(500).json({ error: 'Internal Server Error' });
+        });
     }
-
-    const urlProductImage = req.file ? req.file.path : null;
-    let newProduct = new Product({
-        sku: sku,
-        product_image: urlProductImage,
-        product_name: product_name,
-        subcategory_id: subcategory_id,
-        short_description: short_description,
-        long_description: long_description,
-        price: price,
-        discount_price: discount_price,
-        quantity: quantity,
-        options: options
-    })
-
-    newProduct.save()
-    .then((newProduct) =>{
-        return res.status(201).json({status: 201, message:"product created successfully"});
-    })
-    .catch((error) => {
-        return res.status(500).json({ error: 'Internal Server Error' });
-    });
-}
-
-const getAllProducts = async (req, res) => {
+    }
+    
+    const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find()
             .limit(10)
@@ -51,7 +53,6 @@ const getAllProducts = async (req, res) => {
             .exec();
 
         if (products) {
-            
             const formattedProducts = products.map((product) => ({
                 "_id": product._id,
                 "sku": product.sku,

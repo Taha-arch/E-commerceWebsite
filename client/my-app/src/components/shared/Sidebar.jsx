@@ -21,9 +21,9 @@ export default function Sidebar() {
     
   return (
     
-    <div className="flex flex-row pl-0  md:flex-col rounded-tr-3xl  bg-gradient-to-b from-black to-gray-700   md:w-60 lg:w-80 p-3   text-white">
+    <div className="flex flex-col pl-0  md:flex-col rounded-tr-3xl  bg-gradient-to-b from-black to-gray-700 lg:w-60 p-3   text-white">
     <div className="flex justify-center py-2  ">
-      <div className=" text-cyan-500 justify-center text-3xl">
+      <div className=" text-cyan-500 justify-center text-2xl">
         <span className="font-VarelaRound">PRESTIGIOUS</span>
       </div>
     </div>
@@ -37,6 +37,26 @@ export default function Sidebar() {
         <RxHamburgerMenu />
       </button>
     </div>
+    {/* Sidebar content for medium and large screens */}
+<div className='flex  flex-col h-full justify-between'>
+  <div className={`hidden  md:flex lg:flex py-8 flex flex-col gap-0.7`}>
+      {DASHBOARD_SIDEBAR_LINKS.map((item) => (
+        <SidebarLink key={item.key} item={item} />
+      ))}
+    </div>
+
+    <div className={`hidden md:flex flex-col gap-0.5 pt-4`}>
+      {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map(item => (
+        <SidebarLink key={item.key}  item={item} />
+      ))}
+
+      <button onClick={handleLogout} className={classNames(' cursor-pointer', linkClasses)}>
+        <span className='text-xl px-2'><TbLogout className='text-red'/></span>
+        Logout
+      </button>
+    </div>
+</div>
+
 
     {/* Sidebar content for small screens (dropdown) */}
     <div className={`md:hidden justify-center flex flex-col  gap-0.5 ${isMenuOpen ? 'block' : 'hidden'}`}>
@@ -49,28 +69,13 @@ export default function Sidebar() {
       ))}
 
       <button onClick={handleLogout} className={classNames(' cursor-pointer', linkClasses)}>
-        <span className='text-xl'><TbLogout className='text-red'/></span>
+        <span className='text-xl px-2'><TbLogout className='text-red'/></span>
         Logout
       </button>
     </div>
 
-    {/* Sidebar content for medium and large screens */}
-    <div className={`hidden md:flex lg:flex py-8 flex flex-col gap-0.7`}>
-      {DASHBOARD_SIDEBAR_LINKS.map((item) => (
-        <SidebarLink key={item.key} item={item} />
-      ))}
-    </div>
-
-    <div className={`hidden md:flex flex-col gap-0.5 pt-2 border-t border-white`}>
-      {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map(item => (
-        <SidebarLink key={item.key}  item={item} />
-      ))}
-
-      <button onClick={handleLogout} className={classNames(' cursor-pointer', linkClasses)}>
-        <span className='text-xl'><TbLogout className='text-red'/></span>
-        Logout
-      </button>
-    </div>
+    
+    
       
     </div>
     
@@ -84,7 +89,7 @@ const { pathname } = useLocation()
 
     return (
         <Link to={item.path} className={classNames(pathname === item.path ? 'backdrop-blur bg-gradient-to-r from-cyan-700 to-sky-1000 text-white': 'text-white',linkClasses)}>
-        <span className='text-xl'>{item.icon}</span>
+        <span className='text-xl px-2'>{item.icon}</span>
         {item.label}
         </Link>
     )

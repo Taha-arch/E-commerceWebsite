@@ -42,7 +42,7 @@ const generateUsername = ((firstname, lastname) => {
     return username;
 });
 
-const generertePassword = () => {
+const generatePassword = () => {
     const password = generator.generateMultiple(1,{
         length: 10,
         uppercase: true,
@@ -54,21 +54,32 @@ return password;
 }
 
 const addUser = (req, res) => {
-    let {first_name, last_name, email} = req.body;
-    if (!first_name|| !last_name|| !email) {
-        res.status(400)
-        throw new Error('all Field are required');
-    }
+    let {first_name, last_name, email,role} = req.body;
+    if(!first_name){
+      return res.status(400).json({status: 400, message:"first name is required!!"});
+  }else if(!last_name){
+      return res.status(400).json({status: 400, message:"last name is required!!"});
+  }
+  else if(!email){
+      return res.status(400).json({status: 400, message:"email is required!!"});
+  }else if(!role){
+      return res.status(400).json({status: 400, message:"role is required!!"});
+  }
+
     let password = generertePassword();
 
     let hash_password = md5(password);
-    
+
+    const urlUserImage = req.file ? req.file.path : null;
+
     const newUser = new User({
         first_name : first_name,
         last_name : last_name,
         user_name : generateUsername(first_name, last_name),
         email : email,
-        password : hash_password
+        password : hash_password,
+        role: role,
+        user_image: urlUserImage,
     });
     
     newUser.save()    
@@ -115,7 +126,7 @@ const addUser = (req, res) => {
                                         We're excited to have you join our Team as a Manager!
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0">
-                                        Your username: <b>${generateUsername(first_name, last_name)}</b>,
+                                        Your username: <b>${newUser.user_name}</b>
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0;margin-top:-5px">
                                         Your password: <b>${password}</b>
@@ -164,10 +175,28 @@ const addUser = (req, res) => {
 const getUsers = async (req, res) => {
     const page = parseInt(req.query.page) || 1; 
     const perPage = 10;
-    const users = await User.find({}).sort({ first_name: -1 }).skip((page - 1) * perPage);
-    return (users) ? (res.status(200).json({
-        status: 200,
-        data: users})) : (res.status(403).json("error"));
+    try{
+      const users = await User.find({}).sort({ first_name: -1 }).skip((page - 1) * perPage);
+    if(users){
+      const formattedUsers = users.map((user) => ({
+        "_id": user._id,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "user_name": user.user_name,
+        "email": user.email,
+        "role": user.role,
+        "active": user.active,
+        "creation_date": user.creation_date,
+        "userImage": user.user_image
+      }));
+      res.status(200).json({status: 200,data: formattedUsers});
+    }else{
+      res.status(200).json({status: 400, message:"No Users Found"})
+    }
+    }catch(error){
+      res.status(500).json(error.message);
+    }
+    
 }
 
 const getUser = async (req, res) => {
