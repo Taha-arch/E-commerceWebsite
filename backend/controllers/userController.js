@@ -42,7 +42,7 @@ const generateUsername = ((firstname, lastname) => {
     return username;
 });
 
-const generertePassword = () => {
+const generatePassword = () => {
     const password = generator.generateMultiple(1,{
         length: 10,
         uppercase: true,
@@ -55,6 +55,7 @@ return password;
 
 const addUser = (req, res) => {
     let {first_name, last_name, email,role} = req.body;
+    console.log(req.body);
     if(!first_name){
       return res.status(400).json({status: 400, message:"first name is required!!"});
   }else if(!last_name){
@@ -66,11 +67,11 @@ const addUser = (req, res) => {
       return res.status(400).json({status: 400, message:"role is required!!"});
   }
 
-    let password = generertePassword();
+    let password = generatePassword();
 
     let hash_password = md5(password);
 
-    const urlUserImage = req.file ? req.file.path : null;
+    const urlUserImage = req.file ? req.file.path : 'https://asset.cloudinary.com/dfin3vmgz/f32ecfbcf2f0ba67e0cc0de551130bc3';
 
     const newUser = new User({
         first_name : first_name,
@@ -126,7 +127,7 @@ const addUser = (req, res) => {
                                         We're excited to have you join our Team as a Manager!
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0">
-                                        Your username: <b>${generateUsername(first_name, last_name)}</b>,
+                                        Your username: <b>${newUser.user_name}</b>
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0;margin-top:-5px">
                                         Your password: <b>${password}</b>
@@ -280,4 +281,3 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser};
-

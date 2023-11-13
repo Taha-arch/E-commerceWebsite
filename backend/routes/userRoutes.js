@@ -6,7 +6,7 @@ const {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser} 
 const { authorization, checkAdminOrManager, checkAdmin } = require('../middleware/authMiddleware.js')
 
 router.post('/login' , logUser);
-router.post('/user', uploadUserImage.single('user_image'), addUser);
+router.post('/user', addUser);
 
 router.get('/users',authorization , (req, res, next) => {
     if (Object.keys(req.query).length > 0) {
@@ -18,7 +18,7 @@ router.get('/users',authorization , (req, res, next) => {
 });
 
 router.get('/users/:id',authorization , getUser);
-router.put('/users/:id', updateUser);
+router.put('/users/:id',uploadUserImage.single('user_image'), updateUser);
 router.delete('/users/:id', deleteUser);
 
 module.exports = router;
