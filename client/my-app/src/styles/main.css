@@ -32,11 +32,18 @@
     }
     .productDetails > tr > td {
         font-weight: bold;
-
     }
     
     .product-title-details{
         margin-left: 38%;
+    }
+    .spanError{
+        color:red;
+        font-size: 12px;
+        display: none;
+    }
+    input:invalid ~ span{
+        display: block;
     }
 }
 
@@ -109,4 +116,16 @@
 }
 .alert-supp{
     color: red;
+}
+.Select-category{
+    border: 1px solid #DCDCDC;
+    width: 100%;
+    padding: 3px;
+    border-radius: 5px;
+}
+.Select-category > * {
+    color:#6c757d;
+}
+.Select-category > .addCat{
+    color:#DCDCDC;
 }

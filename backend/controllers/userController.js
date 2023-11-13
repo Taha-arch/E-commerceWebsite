@@ -42,7 +42,7 @@ const generateUsername = ((firstname, lastname) => {
     return username;
 });
 
-const generertePassword = () => {
+const generatePassword = () => {
     const password = generator.generateMultiple(1,{
         length: 10,
         uppercase: true,
@@ -59,7 +59,7 @@ const addUser = (req, res) => {
         res.status(400)
         throw new Error('all Field are required');
     }
-    let password = generertePassword();
+    let password = generatePassword();
 
     let hash_password = md5(password);
     
@@ -115,7 +115,7 @@ const addUser = (req, res) => {
                                         We're excited to have you join our Team as a Manager!
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0">
-                                        Your username: <b>${generateUsername(first_name, last_name)}</b>,
+                                        Your username: <b>${newUser.user_name}</b>
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0;margin-top:-5px">
                                         Your password: <b>${password}</b>

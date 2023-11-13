@@ -10,7 +10,7 @@ export default function AddProduct() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken');
-
+  const [errors, setErrors] = useState({});
   const [productInfo, setProductInfo] = useState({
     productImage: '',
     sku: '',
@@ -21,7 +21,7 @@ export default function AddProduct() {
     discount_price: '',
     quantity: '',
     subcategory_id: '',
-    
+    option: '',
   });
 
   const notify = () => swal(
@@ -33,8 +33,43 @@ export default function AddProduct() {
     }
   );
 
+  
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!productInfo.productName) {
+      newErrors.productName = 'Name is required';
+    }
+
+    if (!productInfo.sku) {
+      newErrors.sku = 'SKU is required';
+    }
+    // if (!productInfo.productInfo.option) {
+    //   newErrors.productName = 'Name is required';
+    // }
+
+    if (!productInfo.subcategory_id) {
+      newErrors.subcategory_id = 'subcategory_id is required';
+    }
+    if (!productInfo.price) {
+      newErrors.price = 'Price is required';
+    }
+
+    if (!productInfo.short_description) {
+      newErrors.short_description = 'Short description is required';
+    }
+    if (!productInfo.productImage) {
+      newErrors.productImage = 'Image is required';
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmitAddProduct = async () => {
-    
+    if (validateForm()) {
     const formData = new FormData();
     formData.append('product_name', productInfo.productName);
     formData.append('product_image', productInfo.productImage);
@@ -45,7 +80,9 @@ export default function AddProduct() {
     formData.append('discount_price', productInfo.discount_price);
     formData.append('quantity', productInfo.quantity);
     formData.append('subcategory_id', productInfo.subcategory_id);
+    formData.append('option', productInfo.option);
   
+    console.log(formData.getAll('product_name'));
     try {
       const config = {
         headers: { Authorization: `Bearer ${token}`}
@@ -57,6 +94,9 @@ export default function AddProduct() {
     } catch (error) {
       console.error('Error adding product:', error);
     }
+  }else{
+    console.log("validation error")
+  }
   };
   
 return (
@@ -64,6 +104,7 @@ return (
   <div className="p-4 ml-10 overflow-auto h-[500px] bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
     
   <p className="titleAdd-product text-cyan-500 mb-4 text-2xl font-bold">Add Product</p>
+  
   <p className="sub-titleAdd-product text-gray-900 mb-4 ">Please make sure all information is correct before submitting them.</p>
   <table className="w-4/4">
     <tbody>
@@ -75,7 +116,7 @@ return (
         </td>
         <td className="w-1/4">
           <input
-            className="w-full px-3 py-2   border rounded-lg focus:border"
+            className="w-full px-3 py-2 border rounded-lg focus:border"
             type="text"
             name="productName"
             id="productName"
@@ -84,7 +125,9 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, productName: e.target.value })}
             required
           />
+            {errors.productName && <div className="text-red-500">{errors.productName}</div>}
         </td>
+        
         <td className='w-1/4'>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="sku">
             SKU
@@ -101,8 +144,10 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, sku: e.target.value })}
             required
           />
+           {errors.sku && <div className="text-red-500">{errors.sku}</div>}
         </td>
       </tr>
+      
       <tr>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="price">
@@ -120,6 +165,7 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, price: e.target.value })}
             required
           />
+          {errors.price && <div className="text-red-500">{errors.price}</div>}
         </td>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="discount_price">
@@ -143,10 +189,37 @@ return (
       <tr>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategory_id">
-            Subcategory Name
+            Category
           </label>
         </td>
         <td>
+          <select className='Select-category' name="" >
+            <option value="women">Women</option>
+            <option value="men">Men</option>
+            <option className="addCat" type="submit"  value="addCat">Add category</option>
+          </select>
+          {/* <input
+            className="w-full px-3 py-2 border rounded-lg focus:border"
+            type="text"
+            name="subcategory_id"
+            id="subcategory_id"
+            placeholder={productInfo && productInfo.subcategory_id}
+            value={productInfo.subcategory_id}
+            onChange={(e) => setProductInfo({ ...productInfo, subcategory_id: e.target.value })}
+            required
+          /> */}
+
+        </td>
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategory_id">
+            Subcategory
+          </label>
+        </td>
+        <td>
+          {/* <select name="" id="">
+            <option value="subCat">Boys</option>
+            <option value="Add subcategory"></option>
+          </select> */}
           <input
             className="w-full px-3 py-2 border rounded-lg focus:border"
             type="text"
@@ -158,6 +231,8 @@ return (
             required
           />
         </td>
+      </tr>
+       <tr>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="active">
             Active
@@ -175,8 +250,24 @@ return (
             required
           />
         </td>
-      </tr>
-
+        <td>
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="option">
+            Options
+          </label>
+        </td>
+        <td>
+          <input
+            className="w-full px-3 py-2 border rounded-lg focus:border"
+            type="text"
+            name="option"
+            id="option"
+            placeholder={productInfo && productInfo.option}
+            value={productInfo.option}
+            onChange={(e) => setProductInfo({ ...productInfo, option: e.target.value })}
+            required
+          />
+          </td>
+       </tr>
       <tr>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="short_description">
@@ -194,6 +285,7 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, short_description: e.target.value })}
             required
           />
+          {errors.short_description && <div className="text-red-500">{errors.short_description}</div>}
         </td>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="quantity">
@@ -242,14 +334,14 @@ return (
         </td>
         <td colSpan="3">
         
+    {errors.productImage && <div className="text-red-500">{errors.productImage}</div>}
     <div class="flex  mt-8">
     <div class="w-full rounded-lg  bg-gray-50">
         <div class=" m-4">
             <label class="inline-block mb-2 text-gray-500">Image Upload</label>
             <div class="flex items-center justify-center w-full">
-                <label
-                    class="flex flex-col w-full h-32 border-4 border-blue-950 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                    <div class="flex flex-col items-center justify-center pt-7">
+                <label class="flex flex-col w-full h-28 border-4 border-blue-950 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                <div class="upload-box flex flex-col items-center justify-center pt-7">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -258,6 +350,7 @@ return (
                         <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                             Attach an image</p>
                     </div>
+
                     <input type="file" class="opacity-0" 
                     name="productImage"
                     id="productImage"
@@ -265,9 +358,10 @@ return (
                     onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
                     required/>
                 </label>
+                    
             </div>
+            
         </div>
-        
     </div>
       </div> 
         </td>

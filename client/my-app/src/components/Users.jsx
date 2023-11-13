@@ -24,9 +24,6 @@ const [openDetail, setOpenDetail] = useState(false);
 const [addUser, setAddUser] = useState(false);
 
 
-
-
-
 const fetchUserData = async (page) => {
   try {
     const config = {
