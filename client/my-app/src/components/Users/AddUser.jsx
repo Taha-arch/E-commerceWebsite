@@ -11,7 +11,6 @@ export default function AddUser(props ) {
     lastName: '',
     email: '',
     role: '',
-    userImage: ''
   });
 
 
@@ -32,8 +31,7 @@ export default function AddUser(props ) {
     formData.append('last_name', userInfo.lastName);
     formData.append('email', userInfo.email);
     formData.append('role', userInfo.role);
-    formData.append('user_image', userInfo.userImage);
-    console.log(formData)
+
     
 try{
    await axios.post('http://localhost:3001/user', formData).then(
@@ -103,7 +101,7 @@ try{
           <select
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="text"
-            name="roles"
+            name="role"
             id="role"
             onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
             >
@@ -114,20 +112,7 @@ try{
           </select>
           
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userImage">
-            Image
-          </label>
-          <input
-            className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-            type="file"
-            name="userImage"
-            id="userImage"
-            onChange={(e) => setUserInfo({ ...userInfo, userImage: e.target.files[0]})}
-            >
-          </input>
-          
-        </div>
+
 
         <div className='flex justify-end gap-4'>
         

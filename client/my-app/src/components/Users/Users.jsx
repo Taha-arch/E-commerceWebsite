@@ -50,7 +50,6 @@ const notify = () => swal(
 );
 
 const handleDeleteUser = async () => {
-  console.log(selectedUser);
   if (selectedUser) {
     try {
       const user_id = selectedUser._id;
@@ -58,8 +57,7 @@ const handleDeleteUser = async () => {
         notify,
         
     );;
-      console.log(selectedUser);
-      
+  
       setUsers((prevUsers) =>
         prevUsers.filter((user) => user._id !== user_id)
       );

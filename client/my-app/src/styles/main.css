@@ -30,12 +30,17 @@
     .productDetails > th, td {
         border-style: none;
     }
-    .productDetails > tr > td {
+    .item-detail {
         font-weight: bold;
     }
     
     .product-title-details{
-        margin-left: 38%;
+        margin-left: 45%;
+    }
+    .close-detail{
+        position: relative;
+        left: 95%;
+        top: 1%; 
     }
     .spanError{
         color:red;
@@ -110,7 +115,7 @@
     }
 
 .popup-details{
-    width: 400px;
+    width: 75%;
 }
 .alert-supp{
     color: red;

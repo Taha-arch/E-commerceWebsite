@@ -36,9 +36,7 @@ const handleDeleteProduct = async () => {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
-        <div className="titleCloseBtn">
-          <button className="bg-red-500  py-1 px-2 hover:bg-red-600" onClick={() => setOpenDelete(false)} bg-red-500 >X</button>
-        </div>
+
         <div className="title">
           <h1>Delete product</h1>
         </div>

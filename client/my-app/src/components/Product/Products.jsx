@@ -63,7 +63,7 @@ export default function Products() {
       <table className=" table w-full ">
         <thead className='border-y-2 '>
           <tr >
-            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider pl-3">
             Image
             </th>
             <th className=" bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
@@ -89,7 +89,7 @@ export default function Products() {
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product) => (
               <tr key={product._id}>
-                <td className=" py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-28 h-28'></img></td>
+                <td className=" py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-26 h-24 rounded-lg'></img></td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
@@ -99,10 +99,11 @@ export default function Products() {
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                 {product.active ? (
                     <GrStatusGoodSmall className="inline-flex mr-2 text-lightgreen" />
-                  ) : (
+                    
+                    ) : (
                     <GrStatusGoodSmall className="inline-flex mr-2 text-red-500" />
                   )}
-            
+                
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700 ">
                     <Menu as="div" className="relative px-4">

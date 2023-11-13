@@ -10,7 +10,6 @@
   import AddProduct from './components/Product/AddProduct';
   import ProductEdit from './components/Product/ProductEdit';
   import AdminLogin from './components/AdminLogin';
-  // import AddUser from './components/Users/AddUser';
   import EditUser from './components/Users/EditUser';
 
   function App() {
