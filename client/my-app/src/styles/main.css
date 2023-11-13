@@ -30,13 +30,25 @@
     .productDetails > th, td {
         border-style: none;
     }
-    .productDetails > tr > td {
+    .item-detail {
         font-weight: bold;
-
     }
     
     .product-title-details{
-        margin-left: 38%;
+        margin-left: 45%;
+    }
+    .close-detail{
+        position: relative;
+        left: 95%;
+        top: 1%; 
+    }
+    .spanError{
+        color:red;
+        font-size: 12px;
+        display: none;
+    }
+    input:invalid ~ span{
+        display: block;
     }
 }
 
@@ -103,9 +115,20 @@
     }
 
 .popup-details{
-    width: 400px;
+    width: 75%;
 }
 .alert-supp{
     color: red;
 }
-
+.Select-category{
+    border: 1px solid #DCDCDC;
+    width: 100%;
+    padding: 3px;
+    border-radius: 5px;
+}
+.Select-category > * {
+    color:#6c757d;
+}
+.Select-category > .addCat{
+    color:#DCDCDC;
+}

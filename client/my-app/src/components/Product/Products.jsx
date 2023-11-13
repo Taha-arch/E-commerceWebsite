@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import {FiEdit,FiDelete} from 'react-icons/fi';
+import {FiEdit} from 'react-icons/fi';
 import { BsTrash } from 'react-icons/bs';
 import {TbListDetails} from 'react-icons/tb';
 import { AiOutlineUserAdd } from 'react-icons/ai';
@@ -51,7 +51,7 @@ export default function Products() {
       
       
         <button className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
-        onClick={() => navigate(`/product/addProduct`)}
+        onClick={() => navigate(`/products/addProduct`)}
         >
           <AiOutlineUserAdd className="w-6 h-6 mr-1" />
           Add Product
@@ -63,7 +63,7 @@ export default function Products() {
       <table className=" table w-full ">
         <thead className='border-y-2 '>
           <tr >
-            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider pl-3">
             Image
             </th>
             <th className=" bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
@@ -89,7 +89,7 @@ export default function Products() {
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product) => (
               <tr key={product._id}>
-                <td className=" py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-28 h-28'></img></td>
+                <td className=" py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-26 h-24 rounded-lg'></img></td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
@@ -99,10 +99,11 @@ export default function Products() {
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                 {product.active ? (
                     <GrStatusGoodSmall className="inline-flex mr-2 text-lightgreen" />
-                  ) : (
+                    
+                    ) : (
                     <GrStatusGoodSmall className="inline-flex mr-2 text-red-500" />
                   )}
-               
+                
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700 ">
                     <Menu as="div" className="relative px-4">
@@ -110,7 +111,7 @@ export default function Products() {
           <Menu.Button className="ml-2 mt-2 rounded-full focus:outline-none text-neutral-400 hover:ring-2 hover:ring-neutral-500">
             
               <RiMoreLine className='w-9 h-9 text-neutral-400'/>
-             
+            
           </Menu.Button>
         </div>
         <Transition
@@ -136,7 +137,7 @@ export default function Products() {
             <Menu.Item>
               {({ active }) => (
                 <div className={classNames(
-                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')}  onClick={() => navigate(`/product/edit/${product._id}`)} >
+                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')}  onClick={() => navigate(`/products/edit/${product._id}`)} >
                   <FiEdit className='flex mt-1 w-6 h-6  p-1 '/>
                   Edit
                 </div>
@@ -160,7 +161,7 @@ export default function Products() {
           </Menu.Items>
         </Transition>
       </Menu>
-           
+        
                 </td>
               </tr>
             ))}

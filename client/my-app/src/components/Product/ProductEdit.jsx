@@ -54,6 +54,7 @@ const { id } = useParams();
         short_description: productInfo.shortDescription,
         long_description: productInfo.longDescription,
         price: productInfo.price,
+        active: productInfo.active,
         discount_price: productInfo.discount_price,
         quantity: productInfo.quantity,
         subcategory_id: productInfo.subcategory_id

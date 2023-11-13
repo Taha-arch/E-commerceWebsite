@@ -14,18 +14,18 @@ const logUser = async (req, res) =>{
         res.status(400)
         throw new Error('all Field are required');
         
-    }
-    const userFound = await User.findOne({user_name});
-    if(!userFound.active) res.status(401).json('your account desactivated');
+      }
+      const userFound = await User.findOne({user_name});
+      if(userFound && !userFound.active) res.status(401).json('your account is Desactivated !!!');
     if(userFound && userFound.password){
-        let access_Token = accessToken(userFound._id, userFound.role, rememberMe, 3);
-        let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe, 12);
-
-        res.status(200).json({ message: "Logged in successfully" , status:200, data: userFound,access_Token,refresh_Token});
-    }else {
-        res.status(401).json('Invalid email or username');
+      let access_Token = accessToken(userFound._id, userFound.role, rememberMe, 3);
+      let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe, 12);
+      
+      res.status(200).json({ message: "Logged in successfully" , status:200, data: userFound,access_Token,refresh_Token});
+  } else {
+      res.status(404).json('Invalid email or username');
     }
-}
+  }
 
 const accessToken = ((id, role, rememberMe, time) => {
     return jwt.sign({id, role, rememberMe}, SECRET_KEY, {expiresIn: rememberMe ? time+'d' : '1d'});
