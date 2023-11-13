@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
             unique: true,
             validate: [isEmail, 'invalid email']
         },
+        user_image: {
+            type: String,
+            required: false,
+        },
         role: {
             type: String,
             default: 'Manager'
@@ -54,7 +58,7 @@ const UserSchema = new mongoose.Schema({
         },
         creation_date: {
             type: Date,
-            default: Date.now,
+            default: Date.now
         },
         last_login: {
             type: Date,

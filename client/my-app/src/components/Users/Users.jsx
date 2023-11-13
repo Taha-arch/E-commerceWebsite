@@ -2,7 +2,8 @@ import React, { useState, useEffect, Fragment }  from 'react';
 import {FiEdit,FiDelete} from 'react-icons/fi';
 import {TbListDetails} from 'react-icons/tb';
 import {LuListFilter} from 'react-icons/lu';
-import {AiOutlineUserAdd} from 'react-icons/ai';
+import {IoIosAddCircleOutline} from 'react-icons/io';
+import {AiOutlineArrowUp} from 'react-icons/ai';
 import {GrStatusGoodSmall} from 'react-icons/gr';
 import {RiMoreLine} from 'react-icons/ri';
 import {Transition, Menu } from '@headlessui/react'
@@ -10,9 +11,10 @@ import classNames from 'classnames'
 import axios from 'axios'; 
 import DeleteUser from './DeleteUser';
 import AddUser from './AddUser';
-import PopUp from './PopUp';
+import PopUp from '../PopUp';
 import { useNavigate } from 'react-router-dom'
 import UserDetails from './UserDetails';
+import swal from 'sweetalert'
 
 export default function Users() {
   
@@ -38,13 +40,24 @@ const fetchUserData = async (page) => {
   }
 };
 
+const notify = () => swal(
+  {
+    title: 'User deleted successfully',
+    icon: 'success',
+    button: 'close',
+    className: 'alert',
+  }
+);
 
 const handleDeleteUser = async () => {
   console.log(selectedUser);
   if (selectedUser) {
     try {
       const user_id = selectedUser._id;
-      await axios.delete(`http://localhost:3001/users/${user_id}`);
+      await axios.delete(`http://localhost:3001/users/${user_id}`).then(
+        notify,
+        
+    );;
       console.log(selectedUser);
       
       setUsers((prevUsers) =>
@@ -83,7 +96,7 @@ return (
         <button className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         onClick={() => {setAddUser(true)}}
         >
-          <AiOutlineUserAdd className="w-6 h-6 mr-1" />
+          <IoIosAddCircleOutline className="w-6 h-6 mr-1" />
           
           Add User
         </button>
@@ -94,9 +107,16 @@ return (
               <div className="table-container shadow-lg max-w-full overflow-x-auto ">
       <table className="flex table w-full ">
         <thead className='border-y-2 '>
-          <tr >
-            <th className=" px-5 bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
-              First Name
+          <tr>
+          <th className="text-center py-3 bg-white text-xs leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+                Image
+              </th>
+            <th className="group px-5 ease-in bg-white hover:bg-gray-200 active:bg-gray-300 text-xs  sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+              
+              <div className="flex w-full group  w-full h-full">
+                First Name
+                <p className="invisible group-hover:visible "><AiOutlineArrowUp className=" inline pb-1 pl-1 w-5 h-5" /></p>
+              </div>
             </th>
             <th className=" bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
               Last Name
@@ -120,7 +140,10 @@ return (
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {users.map((user) => (
-              <tr key={user._id}>
+              <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
+                <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
+                  <img alt="" className='rounded-full w-20 h-20' src={user.userImage}></img>
+                </td>
                 <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.first_name}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.last_name}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.user_name}</td>

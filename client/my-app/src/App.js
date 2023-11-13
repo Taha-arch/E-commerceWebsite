@@ -5,12 +5,13 @@
   import Layout from './components/shared/Layout';
   import Customers from './components/Customers';
   import Products from './components/Product/Products';
-  import Users from './components/Users';
   import Orders from './components/Orders/Orders';
+  import Users from './components/Users/Users';
   import AddProduct from './components/Product/AddProduct';
   import ProductEdit from './components/Product/ProductEdit';
-import AdminLogin from './components/AdminLogin';
-import EditUser from './components/EditUser';
+  import AdminLogin from './components/AdminLogin';
+  // import AddUser from './components/Users/AddUser';
+  import EditUser from './components/Users/EditUser';
 
   function App() {
     return (

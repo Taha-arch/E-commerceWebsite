@@ -10,6 +10,7 @@ const {children} = props;
 
           <div className="popupBody">
             {children}
+            
           </div>
           
         </div>
