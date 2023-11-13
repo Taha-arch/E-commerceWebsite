@@ -5,13 +5,8 @@ const {authorization, checkAdminOrManager, checkAdmin} = require('../middleware/
 
 router.post('/customers/login', authCustomer);
 router.post('/customers', addCustomer);
-
-router.get('/customers',checkAdminOrManager, (req, res, next) => {
-    if (Object.keys(req.query).length > 0) {
-        return searchCustomer(req, res, next);  
-    }
-    getAllCustomers(req, res, next);  
-});
+router.get('/customers/search',checkAdminOrManager, searchCustomer)
+router.get('/customers',checkAdminOrManager, getAllCustomers);
 
 router.get('/customers/:id',checkAdminOrManager, getCustomer);
 router.delete('/customers/delete/:id', deleteCustomer);
