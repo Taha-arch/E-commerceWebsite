@@ -31,7 +31,7 @@ const authorization = async (req, res, next) => {
   }
 };
 
-function checkRole(role) {
+function checkRole(role, role) {
   return (req, res, next) => {
     authorization(req, res, () => {
       if (req.userId && req.role === role) {
@@ -43,7 +43,7 @@ function checkRole(role) {
   };
 }
 
-const checkAdminOrManager = checkRole("Manager" , "Admin");
+const checkAdminOrManager = checkRole("Manager","Admin");
 const checkAdmin = checkRole('Admin');
 
 module.exports = { authorization, checkAdminOrManager, checkAdmin };
