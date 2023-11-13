@@ -8,20 +8,19 @@ import {RiMoreLine} from 'react-icons/ri';
 import {Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames' 
 import axios from 'axios'; 
-import DeleteUser from './DeleteUser';
-import AddUser from './AddUser';
+import DeleteUser from './Users/DeleteUser';
+import AddUser from './Users/AddUser';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom'
-import UserDetails from './UserDetails';
+import UserDetails from './Users/UserDetails';
 
 export default function Customers() {
   
 const token = localStorage.getItem('accessToken');
-const [users, setUsers] = useState([]);
+const [customers, setCostumers] = useState([]);
 const [selectedUser, setSelectedUser] = useState(null);
 const [openModal, setOpenModal] = useState(false);
 const [openDetail, setOpenDetail] = useState(false);
-const [addUser, setAddUser] = useState(false);
 
 const fetchUserData = async (page) => {
   try {
@@ -43,10 +42,10 @@ const handleDeleteUser = async () => {
   if (selectedUser) {
     try {
       const user_id = selectedUser._id;
-      await axios.delete(`http://localhost:3001/users/${user_id}`);
+      await axios.delete(`http://localhost:3001/customers/${user_id}`);
       console.log(selectedUser);
       
-      setUsers((prevUsers) =>
+      setCostumers((prevUsers) =>
         prevUsers.filter((user) => user._id !== user_id)
       );
       setSelectedUser(null);
@@ -60,7 +59,7 @@ const handleDeleteUser = async () => {
 useEffect(() => {
   const fetchData = async () => {
     const userData = await fetchUserData();
-    setUsers(userData);
+    setCostumers(userData);
   };
 
   fetchData();
@@ -68,7 +67,7 @@ useEffect(() => {
      
      const navigate = useNavigate()
 return (
-  <div>
+  <div className='max-w-full '>
   <div>
     
     <div className="flex shadow-lg rounded-t-3xl shadow-lg flex-row sm:flex-row justify-between p-3 bg-white">
@@ -79,13 +78,11 @@ return (
       </button>
       
       {/* <Link to="/users/adduser" style={{ textDecoration: 'none' }}> */}
-        <button className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
-        onClick={() => {setAddUser(true)}}
+        <div className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
+        
         >
-          <AiOutlineUserAdd className="w-6 h-6 mr-1" />
-          
-          Add User
-        </button>
+          6 Customers
+        </div>
       {/* </Link> */}
     </div>
   </div> 
@@ -94,20 +91,15 @@ return (
       <table className="flex table w-full ">
         <thead className='border-y-2 '>
           <tr >
-            <th className=" px-5 bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+           <th className='px-10 bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider'>Status</th>
+            <th className=" px-5 bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider ">
               First Name
             </th>
             <th className=" bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
               Last Name
             </th>
-            <th className="  bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
-              User Name
-            </th>
-            <th className="  bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+            <th className="w-20  bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
               Email
-            </th>
-            <th className="  bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
-              Role
             </th>
             <th className=" text-center bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
               Creation Date
@@ -118,22 +110,21 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.first_name}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.last_name}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.user_name}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.email}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
-                  {user.active ? (
-                    <GrStatusGoodSmall className="text-xs mr-1 inline-flex  text-lightgreen" />
+            {customers.map((customer) => (
+              <tr key={customer._id}>
+                <td className=" px-10 py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
+                  {customer.active ? (
+                    <span className="capitalize py-1 px-2 rounded-md text-xs text-sky-600 bg-sky-100" >ACTIVE</span>
                   ) : (
-                    <GrStatusGoodSmall className="text-xs mr-1 inline-flex  text-red-500" />
+                    <span className="capitalize py-1 px-2 rounded-md text-xs text-gray-600 bg-gray-100">INACTIVE</span>
                   )}
-                  {user.role}
                 </td>
+                <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.first_name}</td>
+                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.last_name}</td>
+                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.email}</td>
+                
                 <td className=" py-2 text-center whitespace-no-wrap text-xs sm:text-sm text-gray-700">
-                  {new Date(user.creation_date).toLocaleDateString('en-GB')}
+                  {new Date(customer.creation_date).toLocaleDateString('en-GB')}
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700 ">
                   
@@ -161,7 +152,7 @@ return (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
                     setOpenDetail(true);
-                    setSelectedUser(user); }}  >
+                    setSelectedUser(customer); }}  >
                   <TbListDetails className='flex mt-1 w-6 h-6  p-1 '/>
                   details
                 </div>
@@ -172,7 +163,7 @@ return (
             <Menu.Item>
               {({ active }) => (
                 <div className={classNames(
-                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/users/edit/${user._id}`)} >
+                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/users/edit/${customer._id}`)} >
                   <FiEdit className='flex mt-1 w-6 h-6  p-1 '/>
                   Edit
                 </div>
@@ -185,7 +176,7 @@ return (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
                     setOpenModal(true);
-                    setSelectedUser(user); }} >
+                    setSelectedUser(customer); }} >
                   <FiDelete className='flex mt-1 w-6 h-6  p-1 '/>
                   Delete
                 </div>
@@ -212,12 +203,7 @@ return (
       <DeleteUser setOpenModal={setOpenModal} handleDeleteUser={handleDeleteUser}/>
   </PopUp>
       )} 
-     {addUser && (
-  
-  <PopUp  > 
-      <AddUser setAddUser={setAddUser}/>
-  </PopUp>
-   )} 
+     
    {openDetail && (
   <PopUp >
     <UserDetails  setOpenDetail={setOpenDetail} selectedUser={selectedUser} setSelectedUser={setSelectedUser}  />
