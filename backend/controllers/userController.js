@@ -66,7 +66,7 @@ const addUser = (req, res) => {
       return res.status(400).json({status: 400, message:"role is required!!"});
   }
 
-    let password = generertePassword();
+    let password = generatePassword();
 
     let hash_password = md5(password);
 
