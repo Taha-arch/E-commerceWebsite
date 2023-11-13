@@ -70,18 +70,21 @@ const handleSubmit = (e) => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setUserInfo({
           ...userInfo,
           user_image: reader.result,
+          
         });
+        
       };
       reader.readAsDataURL(file);
     }
   };
-
+  
   const handleDivClick = (event) => {
     event.preventDefault();
     // Trigger the hidden file input when the div is clicked
@@ -105,23 +108,25 @@ const handleSubmit = (e) => {
 <div className=" max-w-2xl mx-auto  p-4 bg-white shadow-md rounded-lg">
 
 
-<div className="flex justify-center text-xl font-bold  pb-6 ">
+<div className="flex justify-center text-xl text-cyan-500 font-bold ">
   <h2>Edit User</h2>
 </div>
-<div className='flex  flex-row justify-around mb-10'>
+<div className='flex flex-col justify-center p-10 pb-5 mb-5 border rounded-xl'>
+<div className='flex  flex-row justify-around '>
 <div className='flex py-2 justify-center'>
 <div className='profile flex justify-center'>
   
-      <label htmlFor="fileInput" className=' flex second-col profile-img bg-no-repeat bg-cover' style={{ backgroundImage: `url(${userInfo.user_image})` }} onClick={handleDivClick}>
+      <label htmlFor="fileInput" className=' flex second-col profile-img bg-no-repeat bg-cover' style={{ backgroundImage: `url(${userInfo.user_image})`, cursor: 'pointer' }} onClick={handleDivClick}>
         
           
         
       </label>
-      <RiEdit2Fill className="icon text-white w-5 h-5 " />
+      <RiEdit2Fill className="icon text-white w-5 h-5 cursor-pointer  " onClick={handleDivClick}/>
       {/* Hidden file input */}
       <input
         type="file"
-        id="fileInput"
+        name="user_image"
+        id="user_image"
         ref={fileInputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
@@ -215,6 +220,8 @@ const handleSubmit = (e) => {
 </div>
 
 </div>
+</div>
+
 
 
 

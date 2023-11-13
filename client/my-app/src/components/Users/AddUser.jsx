@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios'; 
 import swal from 'sweetalert'
 
-export default function AddUser(props ) {
+export default function AddUser(props) {
   const {setAddUser} = props;
-
 
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
     email: '',
     role: '',
-    userImage: ''
   });
 
 
@@ -26,17 +24,15 @@ export default function AddUser(props ) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const formData = new FormData();
-    formData.append('first_name', userInfo.firstName);
-    formData.append('last_name', userInfo.lastName);
-    formData.append('email', userInfo.email);
-    formData.append('role', userInfo.role);
-    formData.append('user_image', userInfo.userImage);
-    console.log(formData)
-    
+  
 try{
-   await axios.post('http://localhost:3001/user', formData).then(
+
+   await axios.post('http://localhost:3001/user', {
+    first_name:  userInfo.firstName,
+    last_name:  userInfo.lastName,
+    email: userInfo.email,
+    role: userInfo.role,
+  }).then(
     
     notify,
     setAddUser(false)
@@ -56,7 +52,7 @@ try{
             First Name
           </label>
           <input
-          placeholder={userInfo && userInfo.firstName}
+            placeholder="enter user's first name"
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="text"
             name="firstName"
@@ -103,31 +99,17 @@ try{
           <select
             className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             type="text"
-            name="roles"
+            name="role"
             id="role"
             onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
             >
             <option value="" disabled>{userInfo.role}</option>
             <option value="Manager">Manager</option>
             <option value="Admin">Admin</option>
-            <option value="User" >User</option>
           </select>
-          
+        
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userImage">
-            Image
-          </label>
-          <input
-            className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-            type="file"
-            name="userImage"
-            id="userImage"
-            onChange={(e) => setUserInfo({ ...userInfo, userImage: e.target.files[0]})}
-            >
-          </input>
-          
-        </div>
+        
 
         <div className='flex justify-end gap-4'>
         

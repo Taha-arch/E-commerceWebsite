@@ -6,7 +6,7 @@ import {IoIosAddCircleOutline} from 'react-icons/io';
 import {AiOutlineArrowUp} from 'react-icons/ai';
 import {GrStatusGoodSmall} from 'react-icons/gr';
 import {RiMoreLine} from 'react-icons/ri';
-import {Transition, Menu } from '@headlessui/react'
+import {Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames' 
 import axios from 'axios'; 
 import DeleteUser from './DeleteUser';

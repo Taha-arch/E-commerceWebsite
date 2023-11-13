@@ -57,6 +57,27 @@ export default function AddProduct(props) {
       console.error('Error adding product:', error);
     }
   };
+
+  const handleFileChange = (event) => {
+    fileInputRef.current.click();
+    const file = event.target.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProductInfo({
+          ...productInfo,
+          productImage: reader.result,
+          
+        });
+        
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+ 
+  const fileInputRef = React.createRef();
 return (
   
   <div className="max-w-xl  mx-auto mt-6 p-4 bg-white shadow-md  h-full">
@@ -253,7 +274,8 @@ return (
       type="file"
       name="productImage"
       id="productImage"
-      onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
+      ref={fileInputRef}
+      onChange={handleFileChange}
       required
     />
   </td>
