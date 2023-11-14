@@ -9,16 +9,15 @@ import {Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames' 
 import axios from 'axios'; 
 import DeleteUser from './Users/DeleteUser';
-import AddUser from './Users/AddUser';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom'
-import UserDetails from './Users/UserDetails';
+import CustomerDetails from './CustomerDetails';
 
 export default function Customers() {
   
 const token = localStorage.getItem('accessToken');
 const [customers, setCostumers] = useState([]);
-const [selectedUser, setSelectedUser] = useState(null);
+const [selectedCustomer, setSelectedCustomer] = useState(null);
 const [openModal, setOpenModal] = useState(false);
 const [openDetail, setOpenDetail] = useState(false);
 
@@ -38,17 +37,17 @@ const fetchUserData = async (page) => {
 
 
 const handleDeleteUser = async () => {
-  console.log(selectedUser);
-  if (selectedUser) {
+  console.log(selectedCustomer);
+  if (selectedCustomer) {
     try {
-      const user_id = selectedUser._id;
+      const user_id = selectedCustomer._id;
       await axios.delete(`http://localhost:3001/customers/${user_id}`);
-      console.log(selectedUser);
+      console.log(selectedCustomer);
       
       setCostumers((prevUsers) =>
         prevUsers.filter((user) => user._id !== user_id)
       );
-      setSelectedUser(null);
+      setSelectedCustomer(null);
       setOpenModal(false);
     } catch (error) {
       console.error('Error deleting user data:', error);
@@ -76,12 +75,10 @@ return (
         <LuListFilter className="w-4 h-6 mr-1" />
         Filter
       </button>
-      
-      {/* <Link to="/users/adduser" style={{ textDecoration: 'none' }}> */}
         <div className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         
         >
-           Customers
+         {customers.length}  Customers
         </div>
       {/* </Link> */}
     </div>
@@ -152,7 +149,7 @@ return (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
                     setOpenDetail(true);
-                    setSelectedUser(customer); }}  >
+                    setSelectedCustomer(customer); }}  >
                   <TbListDetails className='flex mt-1 w-6 h-6  p-1 '/>
                   details
                 </div>
@@ -163,7 +160,7 @@ return (
             <Menu.Item>
               {({ active }) => (
                 <div className={classNames(
-                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/users/edit/${customer._id}`)} >
+                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/customers/edit/${customer._id}`)} >
                   <FiEdit className='flex mt-1 w-6 h-6  p-1 '/>
                   Edit
                 </div>
@@ -176,7 +173,7 @@ return (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
                     setOpenModal(true);
-                    setSelectedUser(customer); }} >
+                    setSelectedCustomer(customer); }} >
                   <FiDelete className='flex mt-1 w-6 h-6  p-1 '/>
                   Delete
                 </div>
@@ -206,7 +203,7 @@ return (
      
    {openDetail && (
   <PopUp >
-    <UserDetails  setOpenDetail={setOpenDetail} selectedUser={selectedUser} setSelectedUser={setSelectedUser}  />
+    <CustomerDetails  setOpenDetail={setOpenDetail} selectedUser={selectedCustomer} setSelectedUser={setSelectedCustomer}  />
   </PopUp>
   )}
     

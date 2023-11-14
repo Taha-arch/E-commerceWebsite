@@ -242,7 +242,6 @@ const searchUser = async (req, res) => {
 const updateUser = async (req, res) => {
 
         try {
-          console.log('HELLO')
           const idUser = req.params.id;
         const userUpdate = req.body;
         const timeInMss = Date.now();

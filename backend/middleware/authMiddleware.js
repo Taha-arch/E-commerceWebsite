@@ -31,10 +31,10 @@ const authorization = async (req, res, next) => {
   }
 };
 
-function checkRole(role, role) {
+function checkRole(roles) {
   return (req, res, next) => {
     authorization(req, res, () => {
-      if (req.userId && req.role === role) {
+      if (req.userId && roles.includes(req.role)) {
         next();
       } else {
         res.status(403).json({ message: `You do not have permission for this action as ${req.role}` });
@@ -43,7 +43,7 @@ function checkRole(role, role) {
   };
 }
 
-const checkAdminOrManager = checkRole("Manager","Admin");
+const checkAdminOrManager = checkRole(["Manager","Admin"]);
 const checkAdmin = checkRole('Admin');
 
 module.exports = { authorization, checkAdminOrManager, checkAdmin };
