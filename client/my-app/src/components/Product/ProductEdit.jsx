@@ -254,14 +254,14 @@ return (
      </td>
         <td>
           edit icon
-        {/* <input
+        <input
       className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-green-300"
       type="file"
       name="productImage"
       id="productImage"
       onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
       required
-    /> */}
+    />
         </td>
       </tr>
 

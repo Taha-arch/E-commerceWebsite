@@ -81,7 +81,7 @@ return (
         <div className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         
         >
-          6 Customers
+           Customers
         </div>
       {/* </Link> */}
     </div>
