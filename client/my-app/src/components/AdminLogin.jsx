@@ -48,7 +48,7 @@ const AdminLogin = () => {
 
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center font-bold text-3xl font-VarelaRound Display leading-9 text-gray-300">
-            Admin Login
+            Login
           </h2>
         </div>
 

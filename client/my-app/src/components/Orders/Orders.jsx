@@ -6,7 +6,7 @@ import {Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import {RiMoreLine} from 'react-icons/ri';
 import {AiOutlineArrowUp} from 'react-icons/ai';
-import { getOrderStatus } from '../lib/consts/utils'
+import { getOrderStatus } from '../../lib/consts/utils'
 import axios from 'axios';
 
 export default function Orders() {

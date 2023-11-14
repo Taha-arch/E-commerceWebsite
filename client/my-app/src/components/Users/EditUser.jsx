@@ -50,29 +50,10 @@ const { id } = useParams();
 };
 
 
+const formData = new FormData();
+formData.append('user_image', userInfo.user_image);
 
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setUserInfo({
-        ...userInfo,
-        user_image: reader.result,
-      });
-    };
-    
-    reader.readAsDataURL(file);
-  }
-};
 
-const handleDivClick = (event) => {
-  event.preventDefault();
-  // Trigger the hidden file input when the div is clicked
-  fileInputRef.current.click();
-};
-
-const fileInputRef = React.createRef();
 const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -83,7 +64,7 @@ const handleSubmit = (e) => {
         email: userInfo.email,
         role: userInfo.role,
         username: userInfo.username,
-        user_image: userInfo.user_image,
+        user_image: formData.get("user_image"),
     }).then(() => {
         notify();
     });
@@ -222,17 +203,25 @@ const handleSubmit = (e) => {
       Role
     </label></td>
 <td><select
-      className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-      type="text"
-      name="roles"
-      id="role"
-      onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
-      >
-      <option value="" disabled>{userInfo.role}</option>
-      <option value="Manager">Manager</option>
-      <option value="Admin">Admin</option>
-      <option value="User" >User</option>
-    </select></td>
+  className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+  name="roles"
+  id="role"
+  value={userInfo.role}
+  onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
+>
+  {userInfo.role && (
+    <option key={userInfo.role} value={userInfo.role}>
+      {userInfo.role}
+    </option>
+  )}
+  {userInfo.role !== "Admin" && (
+    <option value="Admin">Admin</option>
+  )}
+  {userInfo.role !== "Manager" && (
+    <option value="Manager">Manager</option>
+  )}
+</select>
+</td>
 </tr>
   </tbody>
 

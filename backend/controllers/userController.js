@@ -71,7 +71,7 @@ const addUser = (req, res) => {
 
     let hash_password = md5(password);
 
-    const urlUserImage = req.file ? req.file.path : 'https://asset.cloudinary.com/dfin3vmgz/f32ecfbcf2f0ba67e0cc0de551130bc3';
+    const urlUserImage = req.file ? req.file.path : 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1699881455/users_images/istockphoto-1300845620-612x612_arm4t8.jpg';
 
     const newUser = new User({
         first_name : first_name,
@@ -240,32 +240,52 @@ const searchUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    
-        const idUser = req.params.id;
-        const userUpdate = req.body;
-        const timeInMss = Date.now();
-        userUpdate.last_update = timeInMss;
+  const idUser = req.params.id;
+  console.log(req.body)
+  const userUpdate = req.body;
+  const timeInMss = Date.now();
+  userUpdate.last_update = timeInMss;
 
-        const emailExist = await User.findOne({
-            _id: { $ne: idUser }, // Exclude the user being updated
-            email: userUpdate.email
-        });
+  const emailExist = await User.findOne({
+    _id: { $ne: idUser }, // Exclude the user being updated
+    email: userUpdate.email,
+  });
 
-        if(emailExist) return res.status(400).json({message : `Email already exist`});
-        
-        const usernameExist = await User.findOne({
-            _id: { $ne: idUser }, // Exclude the user being updated
-            user_name: userUpdate.user_name
-        });
-        if(usernameExist) return res.status(400).json({message : `username already exist`});
+  if (emailExist) return res.status(400).json({ message: `Email already exists` });
 
-        const doc = await User.findByIdAndUpdate(idUser, userUpdate);
-        if (doc) {
-            res.status(200).json({status:200, message:"user updated successfully"});
-        } else {
-            res.status(404).json("User not found");
-        }
-    
+  const usernameExist = await User.findOne({
+    _id: { $ne: idUser }, // Exclude the user being updated
+    user_name: userUpdate.user_name,
+  });
+
+  if (usernameExist) return res.status(400).json({ message: `Username already exists` });
+  const urlUserImage = req.file ? req.file.path : null;
+
+  // Check if an image is included in the update
+  // if (req.file) {
+  //   try {
+  //     // Upload the image to Cloudinary
+      
+  //     // Update the user with the Cloudinary image URL
+  //     userUpdate.image_url = result.secure_url;
+
+  //     // Delete the temporary file from your server
+  //     // fs.unlinkSync(req.file.path);
+  //   } catch (error) {
+  //     console.error('Error uploading image to Cloudinary:', error);
+  //     return res.status(500).json({ message: 'Error uploading image' });
+  //   }
+  // }
+
+  // Update the user in the database
+  userUpdate.user_image = urlUserImage
+  const doc = await User.findByIdAndUpdate(idUser, userUpdate, { new: true });
+
+  if (doc) {
+    res.status(200).json({ status: 200, message: 'User updated successfully', user: doc });
+  } else {
+    res.status(404).json({ status: 404, message: 'User not found' });
+  }
 };
 
 
