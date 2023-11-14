@@ -51,28 +51,7 @@ const { id } = useParams();
 
 
 
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setUserInfo({
-        ...userInfo,
-        user_image: reader.result,
-      });
-    };
-    
-    reader.readAsDataURL(file);
-  }
-};
 
-const handleDivClick = (event) => {
-  event.preventDefault();
-  // Trigger the hidden file input when the div is clicked
-  fileInputRef.current.click();
-};
-
-const fileInputRef = React.createRef();
 const handleSubmit = (e) => {
     e.preventDefault();
     
