@@ -120,15 +120,34 @@
 .alert-supp{
     color: red;
 }
-.Select-category{
-    border: 1px solid #DCDCDC;
-    width: 100%;
-    padding: 3px;
-    border-radius: 5px;
+.drop-down {
+    position: relative;
+    display: inline-block;
 }
-.Select-category > * {
-    color:#6c757d;
+
+.category-items {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    z-index: 1;
 }
-.Select-category > .addCat{
-    color:#DCDCDC;
+
+.category-items li {
+    display: block;
+    padding:1px;
+    padding-left: 8px;
+}
+
+.category-items li:hover {
+    background-color: rgb(210, 218, 218);
+}
+
+.drop-down:hover .category-items {
+    display: block;
+}
+.dropbtn{
+    cursor: pointer;
+    width: 200px;
+    padding:1px;
 }

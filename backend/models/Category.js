@@ -14,7 +14,7 @@ const CategorySchema = new mongoose.Schema({
         active: {
             type: Boolean,
             enum: ['true', 'false'],
-            default: false,
+            default: true,
         }
 });
 

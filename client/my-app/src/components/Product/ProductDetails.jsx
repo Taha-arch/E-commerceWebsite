@@ -23,9 +23,9 @@ export default function ProductDetails(props) {
 
     return (
 
-  <div className="popup-details rounded-md overflow-y-auto h-[500px] mx-auto px-4 py-2 bg-white shadow-md  mt-3">
+  <div className="popup-details rounded-md overflow-y-auto h-1/3 mx-auto px-4 py-2 bg-white shadow-md  mt-3">
     <button className="close-detail bg-red-500 text-white p-1 px-2 mt-1 rounded-sm hover:bg-red-600" onClick={()=>setOpenDetails(false)} >X</button>
-    <div className=" py-4">
+    <div className=" py-2">
     <div className="flex mr-8 pr-20">
         <h2 className='text-xl text-center product-title-details text-cyan-500'>Product Details</h2>
       </div>

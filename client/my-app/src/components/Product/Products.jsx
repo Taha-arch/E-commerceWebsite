@@ -98,10 +98,9 @@ export default function Products() {
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                 {product.active ? (
-                    <GrStatusGoodSmall className="inline-flex mr-2 text-lightgreen" />
-                    
+                    <span className="capitalize py-1 px-2 rounded-md text-xs text-cyan-600 bg-sky-100" >Availble</span>
                     ) : (
-                    <GrStatusGoodSmall className="inline-flex mr-2 text-red-500" />
+                    <span className="capitalize py-1 px-2 rounded-md text-xs text-red-600 bg-red-100 " >out of stock</span>
                   )}
                 
                 </td>

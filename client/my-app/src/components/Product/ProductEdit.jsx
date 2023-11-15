@@ -70,7 +70,7 @@ const { id } = useParams();
   
 return (
   
-  <div className="p-4 ml-10 overflow-auto h-[500px] bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
+  <div className="p-4 ml-10 overflow-auto h-full bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
     
   <p className="titleAdd-product text-cyan-500 mb-4 text-2xl font-bold">Edit Product</p>
   <p className="sub-titleAdd-product text-gray-900 mb-4 ">Please make sure all information is correct before submitting them.</p>

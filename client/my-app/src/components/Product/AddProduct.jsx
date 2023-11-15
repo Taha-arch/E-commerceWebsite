@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert'
-
-
+import PopUp from '../PopUp';
+import AddCategory from '../Category/AddCategory';
+import AddSubcategory from '../Subcatgory/AddSubcategory'
 
 export default function AddProduct() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken');
   const [errors, setErrors] = useState({});
+  const [subCategories, setSubcategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [OpenCategory, setOpenCategory] = useState(false);
+  const [OpenSubcategory, setOpenSubcategory] = useState(false);
+  const [subcategory, setSubcategory] = useState('');
+  const [category, setCategory] = useState('');
   const [productInfo, setProductInfo] = useState({
     productImage: '',
     sku: '',
@@ -24,6 +31,59 @@ export default function AddProduct() {
     option: '',
   });
 
+  const fetchSubCategoryData = async () => {  
+    try{
+      const response = await axios.get('http://localhost:3001/subcategories/');
+      return response.data.subcategories;
+    }catch(error){
+      console.log("Error fetching subcategory data: ", error); 
+    }
+  };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setSubcategory('');
+        const subCategoryData = await fetchSubCategoryData();
+        const filtered = subCategoryData.filter(
+          (subCategory) => subCategory.category_id.category_name === category
+        );
+        
+        setSubcategories(filtered)
+      } catch (error) {
+        console.log("Error in useEffect subCategory: ", error); 
+      }
+    }
+    fetchData();
+  }, [category]);
+  
+
+
+  const fetchCategoryData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/categories/');
+      return response.data.categories;
+    } catch (error) {
+      console.error('Error fetching category data:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const categoryData = await fetchCategoryData();
+        setCategories(categoryData);
+      } catch (error) {
+        console.error('Error in fetchData:', error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+
   const notify = () => swal(
     {
       title: 'Product added successfully',
@@ -32,8 +92,6 @@ export default function AddProduct() {
       className: 'alert',
     }
   );
-
-  
 
   const validateForm = () => {
     const newErrors = {};
@@ -81,8 +139,6 @@ export default function AddProduct() {
     formData.append('quantity', productInfo.quantity);
     formData.append('subcategory_id', productInfo.subcategory_id);
     formData.append('option', productInfo.option);
-  
-    console.log(formData.getAll('product_name'));
     try {
       const config = {
         headers: { Authorization: `Bearer ${token}`}
@@ -98,7 +154,8 @@ export default function AddProduct() {
     console.log("validation error")
   }
   };
-  
+
+
 return (
   
   <div className="p-4 ml-10 overflow-auto h-[500px] bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
@@ -193,43 +250,39 @@ return (
           </label>
         </td>
         <td>
-          <select className='Select-category' name="" >
-            <option value="women">Women</option>
-            <option value="men">Men</option>
-            <option className="addCat" type="submit"  value="addCat">Add category</option>
-          </select>
-          {/* <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
-            type="text"
-            name="subcategory_id"
-            id="subcategory_id"
-            placeholder={productInfo && productInfo.subcategory_id}
-            value={productInfo.subcategory_id}
-            onChange={(e) => setProductInfo({ ...productInfo, subcategory_id: e.target.value })}
-            required
-          /> */}
+
+  <div className='drop-down'>
+        <span className="absolute pl-3 pt-2" id="category-value" >{category}</span>
+        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
+        <ul className='category-items'>
+        {categories && categories.map((item) => (
+      
+        <li key={item._id} name={item.category_name} className="cursor-pointer " onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
+            ))}
+          <li className="item add-item"><button onClick={() => setOpenCategory(true)}>Add category</button></li>
+        </ul>
+</div>
 
         </td>
         <td>
-          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategory_id">
+          <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategoryName">
             Subcategory
           </label>
         </td>
         <td>
-          {/* <select name="" id="">
-            <option value="subCat">Boys</option>
-            <option value="Add subcategory"></option>
-          </select> */}
-          <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
-            type="text"
-            name="subcategory_id"
-            id="subcategory_id"
-            placeholder={productInfo && productInfo.subcategory_id}
-            value={productInfo.subcategory_id}
-            onChange={(e) => setProductInfo({ ...productInfo, subcategory_id: e.target.value })}
-            required
-          />
+        <div className='drop-down'>
+        <span className="absolute pl-3 pt-2" id="category-value">{subcategory}</span>
+        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
+        <ul className='category-items'>
+        {subCategories && subCategories.map((item) => (
+        <li key={item._id} name={item.subcategory_name} className="cursor-pointer " 
+        onClick={()=>{setSubcategory(item.subcategory_name)
+          setProductInfo({ ...productInfo, subcategory_id: item._id })}}>{item.subcategory_name}</li>
+            ))}
+          {category && <li className="item add-item"><button onClick={() => setOpenSubcategory(true)}>Add subcategory</button></li>}
+        </ul>
+</div>
+
         </td>
       </tr>
        <tr>
@@ -387,7 +440,15 @@ return (
       Save
     </button>
   </div>
+ {OpenCategory && 
+ <PopUp>
+  <AddCategory setOpenCategory={setOpenCategory} setCategory={setCategory} />
+  </PopUp>}
 
+  {OpenSubcategory && 
+ <PopUp>
+  <AddSubcategory setOpenSubcategory={setOpenSubcategory} setSubcategory={setSubcategory} category={category} />
+  </PopUp>}
 </div>
 
 );

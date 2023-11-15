@@ -71,7 +71,7 @@ const addUser = (req, res) => {
 
     let hash_password = md5(password);
 
-    const urlUserImage = req.file ? req.file.path : 'https://asset.cloudinary.com/dfin3vmgz/f32ecfbcf2f0ba67e0cc0de551130bc3';
+    const urlUserImage ='https://asset.cloudinary.com/dfin3vmgz/f32ecfbcf2f0ba67e0cc0de551130bc3';
 
     const newUser = new User({
         first_name : first_name,
