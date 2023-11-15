@@ -16,6 +16,7 @@ export default function EditUser(  user, onSubmit ) {
     firstName: '',
     lastName: '',
     email: '',
+    userName:'',
     user_image: ''
 });
 
@@ -63,7 +64,7 @@ const handleSubmit = (e) => {
         last_name: userInfo.lastName,
         email: userInfo.email,
         role: userInfo.role,
-        username: userInfo.username,
+        user_name: userInfo.userName,
         user_image: formData.get("user_image"),
     }).then(() => {
         notify();
@@ -148,7 +149,7 @@ const handleSubmit = (e) => {
       type="text"
       name="UserName"
       id="UserName"
-      onChange={(e) => setUserInfo({ ...userInfo, user_name: e.target.value })}
+      onChange={(e) => setUserInfo({ ...userInfo, userName: e.target.value })}
       required
       placeholder={userInfo.user_name}
     /></td>

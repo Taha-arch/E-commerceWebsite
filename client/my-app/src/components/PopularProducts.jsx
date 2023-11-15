@@ -49,9 +49,9 @@ const popularProductsData = [
 
 function PopularProducts() {
   return (
-    <div className='flex bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200  w-full'>
+    <div className='bg-white w-full px-4 pt-3 pb-4 rounded-sm border border-gray-200  lg:w-[20rem] min-w-[20rem]'>
         <strong className='text-gray-700 font-medium'>Popular products</strong>
-        <div className='mt-10 flex flex-col gap-3'>
+        <div className='mt-4 flex flex-col gap-3'>
              {popularProductsData.map(product => (
                 <Link key={product._id} to={`/product/${product._id}`} className='flex hover:no-underline'>
                     <div className='w-10 h-10 min-w-10 bg-gray-200 rounded-sm overflow-hidden'>

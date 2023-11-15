@@ -101,6 +101,7 @@ try{
             type="text"
             name="role"
             id="role"
+            value={userInfo.role}
             onChange={(e) => setUserInfo({ ...userInfo, role: e.target.value })}
             >
             <option value="" disabled>{userInfo.role}</option>

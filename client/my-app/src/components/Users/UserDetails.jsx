@@ -29,12 +29,29 @@ export default function UserDetails(props) {
     }
   }, [selectedUser])
     return (
-        
-  <div className="flex flex-col rounded-xl max-w-xl h-[500px] mx-auto px-4 py-2 bg-white shadow-md  mt-10">
-    
-    <div className="py-4">
-    <div className="flex justify-end  gap-2 text-xl font-bold ">
-        <h2 className='mr-40'>User Details</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      <div className=''>
+  <div className=" max-w-2xl mx-auto  p-4 bg-white shadow-md rounded-lg">
+  <div className="flex justify-center text-xl text-cyan-500 font-bold ">
+  <h2>user details</h2>
+</div>
+  
+  <div className="flex justify-end text-xl text-cyan-500 font-bold ">
+  
         <button
           className=" text-white px-2   "
           type="button"
@@ -46,15 +63,25 @@ export default function UserDetails(props) {
           <AiOutlineCloseCircle style = { {color: "red", fontSize: "1.5em"} } />
         </button>
       </div>
+  
+  <div className='flex flex-col justify-center p-10 pb-5 mb-5 border rounded-xl'>
+<div className='flex  flex-row justify-around '>
+<div className='flex py-2 justify-center'>
+<div className='profile flex justify-center'>
+          <img className="flex rounded-full  " src={user && user.user_image} alt="#"></img>
+        </div>
+        </div>
+
+        </div>
+    <div className="py-4">
+    
     </div>
     
     
     
-<div className='flex justify-center mt-5'>
-<div className=" flex second-col w-20 h-20 mr-10">
-          <img className="flex rounded-full  " src={user && user.user_image} alt="#"></img>
-        </div>
-<div className='first-row'>
+
+
+<div className='first-row  flex justify-center'>
 <table className='userDetails'>
 <tbody>
 <tr>
@@ -96,5 +123,7 @@ export default function UserDetails(props) {
 </div>
 
   </div>
+  </div>
+  
 );
 }

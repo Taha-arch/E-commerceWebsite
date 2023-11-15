@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios'; 
 
 import '../styles/main.css'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 const AdminLogin = () => {
 
@@ -52,12 +53,12 @@ const AdminLogin = () => {
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto backdrop-blur bg-gray-500/30 sm:w-full sm:max-w-sm rounded-3xl">
+        <div className="mt-10 sm:mx-auto backdrop-blur-sm bg-gray-500/30 sm:w-full sm:max-w-sm rounded-3xl">
           
           
-          <form className="space-y-6 m-8" action="#" method="POST">
+          <form className="space-y-6 m-8" >
           <label htmlFor="email" className="block text-lg ts-5 leading-6 text-white">
-          Please fill in your unique admin login details below
+          
               </label>
             <div>
             
@@ -82,53 +83,32 @@ const AdminLogin = () => {
                   Password
                 </label>
               </div>
-              <div className="mt-2">
+              <div className="inputgroup mt-2">
                
-                <input
-                  type={isPasswordVisible ? "text" : "password"}
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                />
-                <button
-        className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
-        onClick={togglePasswordVisibility}
-      >
-        {isPasswordVisible ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-        )}
-      </button>
+              <div className="relative">
+  <input
+    type={isPasswordVisible ? "text" : "password"}
+    placeholder="Password"
+    onChange={(e) => setPassword(e.target.value)}
+    autoComplete="current-password"
+    required
+    className="block absolute w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+  />
+  <span
+    className="absolute right-0 flex items-center px-3 py-3 text-black cursor-pointer"
+    onClick={togglePasswordVisibility}
+  >
+    {isPasswordVisible ? (
+      <FaRegEyeSlash />
+    ) : (
+      <FaRegEye />
+    )}
+  </span>
+</div>
+
+         
+               
+                
                 <div className="flex items-center justify-end">
                 <div className="text-sm">
                   <a href="link.com" className="font-semibold text-white hover:text-indigo-500">
@@ -145,7 +125,7 @@ const AdminLogin = () => {
             <button
             type="button"
             onClick={handleLogin}
-            className="flex w-full justify-center rounded-md bg-black border-2 border-white hover:border-black  px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="flex w-full justify-center rounded-md bg-black border-2 border-white hover:border-black mt-10 px-3 py-1.5 font-semibold leading-6 text-white shadow-sm hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
              
                 Sign in

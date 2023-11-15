@@ -240,11 +240,13 @@ const searchUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-
-        try {
-          console.log('HELLO')
-          const idUser = req.params.id;
-        const userUpdate = req.body;
+  
+  try {
+    
+    const idUser = req.params.id;
+    const userUpdate = req.body;
+    console.log(userUpdate.username)
+        console.log(req.body);
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
          // Current User
@@ -258,11 +260,11 @@ const updateUser = async (req, res) => {
 
         if(emailExist) return res.status(400).json({message : `Email already exist`});
         
-        const usernameExist = await User.findOne({
-            _id: { $ne: idUser }, // Exclude the user being updated
-            user_name: userUpdate.user_name
-        });
-        if(usernameExist) return res.status(400).json({message : `username already exist`});
+        // const usernameExist = await User.findOne({
+        //     _id: { $ne: idUser }, // Exclude the user being updated
+        //     user_name: userUpdate.user_name
+        // });
+        // if(usernameExist) return res.status(400).json({message : `username already exist`});
        
 
         if(userUpdate.user_image !== ''){
@@ -277,8 +279,8 @@ const updateUser = async (req, res) => {
           });
           console.log(newImage)
           userUpdate.user_image=newImage.secure_url;
+
           }
-        
 
         const doc = await User.findByIdAndUpdate(idUser, userUpdate, {new: true})
 
@@ -289,9 +291,9 @@ const updateUser = async (req, res) => {
           message:"user updated successfully"
         })
         } catch (error) {
-          res.status(404).json("User not found");
-          console.log(error);
-          next(error);
+          // res.status(404).json("User not found");
+          console.log(error.message);
+         
         }
     
 };

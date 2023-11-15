@@ -140,7 +140,7 @@ return (
             {users.map((user) => (
               <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
-                  <img alt="" className='rounded-full w-20 h-20' src={user.userImage}></img>
+                  <img alt="" className='rounded-full h-20 w-20 ' src={user.userImage}></img>
                 </td>
                 <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.first_name}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{user.last_name}</td>

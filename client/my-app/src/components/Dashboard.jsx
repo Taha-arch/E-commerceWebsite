@@ -8,20 +8,16 @@ import RecentOrders from './RecentOrders'
 import PopularProducts from './PopularProducts'
 export default function Dashboard() {
   return (
-    <div className='flex flex-col gap-4 w-full'>
-      <div className='w-full'><DashboardStatsGrid /></div>
-  
-
-  <div className='flex flex-col sm:flex-row md:flex-col gap-4 w-full'>
-    <TransactionChart />
-    <BuyerProfileChart />
-  </div>
-
-  <div className='flex flex-col md:flex-col gap-4 w-full'>
-    <RecentOrders />
-    <PopularProducts />
-  </div>
-</div>
-
+    <div className='flex flex-col gap-4'>
+      <DashboardStatsGrid/>
+      <div className='flex flex-col lg:flex-row  gap-4 w-full'>
+        <TransactionChart/>
+       <BuyerProfileChart/> 
+       </div>
+       <div className='flex flex-col lg:flex-row gap-4 w-full'>
+        <RecentOrders />
+        <PopularProducts />
+        </div>
+    </div>
   )
 }
