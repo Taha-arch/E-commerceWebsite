@@ -9,16 +9,15 @@ app.use(cors({
     origin: '*'
 }));
 
-
 const PORT = process.env.PORT;
 const connectDb = require('./config/database.js')
 connectDb();
 
-app.use(express.json({limit: '10mb'}));
+app.use(express.json({limit: '50mb'}));
 app.use(cors());
 // Use body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes.js');

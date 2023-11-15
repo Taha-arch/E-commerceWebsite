@@ -240,13 +240,10 @@ const searchUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  
-  try {
-    
-    const idUser = req.params.id;
-    const userUpdate = req.body;
-    console.log(userUpdate.username)
-        console.log(req.body);
+
+        try {
+          const idUser = req.params.id;
+        const userUpdate = req.body;
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
          // Current User

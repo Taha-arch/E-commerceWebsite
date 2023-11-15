@@ -5,6 +5,7 @@ const Subcategory = require('../models/Subcategory')
 
 
 const addCategory = async (req, res) => {
+
     try {
         const { category_name, active } = req.body;
         
@@ -53,10 +54,10 @@ const addCategory = async (req, res) => {
 
     const getAllCategories = async (req, res) => {
         const { limitPerPage, skipVal } = Pagination(req);
-        const data = [];
+        
         const categories = await Category.find().sort({category_name:-1}).limit(limitPerPage).skip(skipVal);
-        data.push(categories);
-        res.status(200).json(data);
+        
+        res.status(200).json({categories});
     };
 
 
@@ -70,12 +71,11 @@ const addCategory = async (req, res) => {
                 .sort({ category_name: -1 })
                 .limit(limitPerPage)
                 .skip(skipVal);
-                
+                console.log(categories);
                 if (!categories) {
                     res.status(404).json({ message: 'No Categories found.' });
-                    
                 }
-                res.status(200).json(categories);
+                res.status(200).json({categories});
             
             
         } catch (error) {
@@ -88,6 +88,7 @@ const addCategory = async (req, res) => {
 
 
     const getCategory = async (req, res) => {
+
         const idCat = req.params.id;
         await Category.findById(idCat)
         .then((category) => {res.status(200).json({status:200, data : category});

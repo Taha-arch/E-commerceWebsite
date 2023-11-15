@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary').v2;
 const Customer = require('../models/Customer');
 const dotenv = require('dotenv').config();
 const nodemailer = require('nodemailer');
@@ -34,12 +35,13 @@ const addCustomer = async (req, res) => {
 
         
     let hash_password = await bcrypt.hashSync(password, 10);
-
+    const Avatar = 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1699881455/users_images/istockphoto-1300845620-612x612_arm4t8.jpg';
     const newCustomer = await new Customer({
         first_name : first_name,
         last_name : last_name,
         email : email,
         password : hash_password,
+        customer_image: Avatar,
     });
 
         newCustomer.save()
@@ -161,21 +163,56 @@ const addCustomer = async (req, res) => {
         })
     }
 
-    const updateCustomer = async (req, res) => {
-        const idCustomer = req.params.id;
-        const customerUpdate = req.body;
+   
+  const updateCustomer = async (req, res) => {
+        
+
+            try {
+              const idCustomer = req.params.id;
+            const customerUpdate = req.body;
+            const timeInMss = Date.now();
+            customerUpdate.last_update = timeInMss;
+             // Current User
+            const currentUser = await Customer.findById(idCustomer)
+            
+          //Error handling
+            const emailExist = await Customer.findOne({
+                _id: { $ne: idCustomer }, // Exclude the user being updated
+                email: customerUpdate.email
+            });
     
-        try {
-        const doc = await Customer.findByIdAndUpdate(idCustomer, customerUpdate);
-        if (doc) {
-            res.status(200).json("Customer updated");
-        } else {
-            res.status(404).json("Customer not found");
-        }
-        } catch (error) {
-        res.status(404).json("Customer not found");
-        }
+            if(emailExist) return res.status(400).json({message : `Email already exist`});
+            
+            if(customerUpdate.customer_image !== ''){
+              const image = currentUser.customer_image;
+              if(image){
+                 await cloudinary.uploader.destroy(image)
+              }
+              const newImage = await cloudinary.uploader.upload(customerUpdate.customer_image, {
+                folder:'customers/images/' + timeInMss  ,
+                width: 1000,
+                crop: "scale"
+              });
+              console.log(newImage)
+              customerUpdate.customer_image=newImage.secure_url;
+              }
+            
+    
+            const doc = await Customer.findByIdAndUpdate(idCustomer, customerUpdate, {new: true})
+    
+            res.status(200).json({
+              success: true,
+              doc,
+              status:200,
+              message:"customer updated successfully"
+            })
+            } catch (error) {
+              res.status(404).json("Customer not found");
+              console.log(error);
+            }
+        
     };
+    
 
     
     

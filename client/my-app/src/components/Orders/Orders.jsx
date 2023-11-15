@@ -8,12 +8,24 @@ import {RiMoreLine} from 'react-icons/ri';
 import {AiOutlineArrowUp} from 'react-icons/ai';
 import { getOrderStatus } from '../../lib/consts/utils'
 import axios from 'axios';
+import Lottie from 'react-lottie'
+import * as animation from "../../assets/animations/Animation - 1699995980899.json"
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animation.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  }}
 
 export default function Orders() {
-  const [orders, setOrders] = useState(null); // Initialize as null
+  const [orders, setOrders] = useState([]); // Initialize as null
+  const [loading, setLoading] = useState(false);
 
   const fetchOrderData = async () => {
     try {
+      setLoading(true);
       const response = await axios.get('http://localhost:3001/orders');
       return response.data.orders;
     } catch (error) {
@@ -21,11 +33,14 @@ export default function Orders() {
       return [];
     }
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const orderData = await fetchOrderData();
+      setTimeout(() => {
       setOrders(orderData);
+      setLoading(false);
+    }, 2000);
     };
 
     fetchData();
@@ -44,8 +59,8 @@ export default function Orders() {
 
 
       <div className="table-container shadow-lg max-w-full overflow-x-auto">
-        {orders === null ? (
-          <p>Loading...</p>
+        {loading === true ? (
+          <Lottie options={defaultOptions} height={200} width={200} />
         ) : (
           <table className="table-auto w-full">
             <thead className='border-y-2'>
