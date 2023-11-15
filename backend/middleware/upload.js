@@ -1,29 +1,47 @@
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('../config/cloudinariConfig'); // adjust the path
+const cloudinary = require('../config/cloudinariConfig'); 
 
 const usersStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-    folder: 'users_images',
-    format: async (req, file) => 'jpg', // set the format to 'jpg' or whatever you prefer
-    public_id: (req, file) => file.filename + '-' + Date.now(),
+        folder: 'users_images',
+        format: async (req, file) => 'jpg',
+        public_id: (req, file) => file.filename + '-' + Date.now(),
+    },
+});
+const customersStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'customers/images',
+        format: async (req, file) => 'jpg',
+        public_id: (req, file) => file.filename + '-' + Date.now(),
     },
 });
 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-    folder: 'product_images',
-    format: async (req, file) => 'jpg', // set the format to 'jpg' or whatever you prefer
-    public_id: (req, file) => file.filename + '-' + Date.now(),
+        folder: 'product_images',
+        format: async (req, file) => 'jpg',
+        public_id: (req, file) => file.filename + '-' + Date.now(),
     },
 });
 
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 50 }, // Adjust the file size limit (5 MB )
+}).single('product_image');
+
+const uploadUserImage = multer({
+    storage: usersStorage,
+    limits: { fileSize: 50 }, // Adjust the file size limit (5 MB in this example)
+}).single('user_image');
 
 
-const upload = multer({ storage: storage });
-const uploadUserImage = multer({ storage: usersStorage});
+const uploadCustomerImage = multer({
+    storage: customersStorage,
+    limits: { fileSize: 50 }, // Adjust the file size limit (5 MB in this example)
+}).single('customer_image');
 
-module.exports = upload;
-module.exports = uploadUserImage;
+module.exports = { upload, uploadUserImage, uploadCustomerImage }; 

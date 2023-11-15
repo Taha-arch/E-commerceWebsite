@@ -65,7 +65,7 @@ function BuyerProfileChart() {
     setActiveIndex(index);
   };
   return (
-    <div className=' w-[20rem] h-[22rem] bg-white p-4 rounded-lg border border-gray-200 flex flex-col'>
+    <div className=' w-full h-[22rem] bg-white p-4 rounded-lg border border-gray-200 flex flex-col'>
     <strong className='text-gray-700 font-medium'>Customer Profile</strong>
     <div className='w-full mt-3 flex-1 text-xs'>
     <ResponsiveContainer width="105%" height={300}>

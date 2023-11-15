@@ -3,21 +3,25 @@ const mongoose = require("mongoose");
 const cors = require('cors')
 const dotenv = require('dotenv').config();
 const app = express();
+const bodyParser = require('body-parser');
 
 app.use(cors({
     origin: '*'
 }));
 
-
 const PORT = process.env.PORT;
 const connectDb = require('./config/database.js')
 connectDb();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(cors());
+// Use body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+
 const userRouter = require('./routes/userRoutes.js');
 const productRouter = require('./routes/productRoutes.js');
-app.use(userRouter);
+app.use(userRouter); 
 app.use(productRouter);
 
 const costumerRoutes = require('./routes/customerRoutes');

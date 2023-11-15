@@ -71,7 +71,7 @@ const addUser = (req, res) => {
 
     let hash_password = md5(password);
 
-    const urlUserImage ='https://asset.cloudinary.com/dfin3vmgz/f32ecfbcf2f0ba67e0cc0de551130bc3';
+    const urlUserImage = 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1699881455/users_images/istockphoto-1300845620-612x612_arm4t8.jpg';
 
     const newUser = new User({
         first_name : first_name,
@@ -240,12 +240,16 @@ const searchUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    
-        const idUser = req.params.id;
+
+        try {
+          const idUser = req.params.id;
         const userUpdate = req.body;
         const timeInMss = Date.now();
         userUpdate.last_update = timeInMss;
-
+         // Current User
+        const currentUser = await User.findById(idUser)
+        
+      //Error handling
         const emailExist = await User.findOne({
             _id: { $ne: idUser }, // Exclude the user being updated
             email: userUpdate.email
@@ -258,12 +262,35 @@ const updateUser = async (req, res) => {
             user_name: userUpdate.user_name
         });
         if(usernameExist) return res.status(400).json({message : `username already exist`});
+       
 
-        const doc = await User.findByIdAndUpdate(idUser, userUpdate);
-        if (doc) {
-            res.status(200).json({status:200, message:"user updated successfully"});
-        } else {
-            res.status(404).json("User not found");
+        if(userUpdate.user_image !== ''){
+          const image = currentUser.user_image;
+          if(image){
+             await cloudinary.uploader.destroy(image)
+          }
+          const newImage = await cloudinary.uploader.upload(userUpdate.user_image, {
+            folder:'users/images/' + timeInMss  ,
+            width: 1000,
+            crop: "scale"
+          });
+          console.log(newImage)
+          userUpdate.user_image=newImage.secure_url;
+          }
+        
+
+        const doc = await User.findByIdAndUpdate(idUser, userUpdate, {new: true})
+
+        res.status(200).json({
+          success: true,
+          doc,
+          status:200,
+          message:"user updated successfully"
+        })
+        } catch (error) {
+          res.status(404).json("User not found");
+          console.log(error);
+          next(error);
         }
     
 };

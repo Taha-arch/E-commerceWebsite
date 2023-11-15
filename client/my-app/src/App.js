@@ -11,6 +11,7 @@
   import ProductEdit from './components/Product/ProductEdit';
   import AdminLogin from './components/AdminLogin';
   import EditUser from './components/Users/EditUser';
+import EditCustomer from './components/EditCustomer';
 
   function App() {
     return (
@@ -20,6 +21,7 @@
         <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
+        <Route path="/customers/edit/:id" element={<EditCustomer />} />
         <Route path='products' element={<Products/>} />
         <Route path='orders' element={<Orders/>} />
         <Route path='/products/addProduct' element={<AddProduct />} />
