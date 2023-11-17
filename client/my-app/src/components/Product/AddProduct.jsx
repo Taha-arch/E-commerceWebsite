@@ -6,6 +6,7 @@ import swal from 'sweetalert'
 import PopUp from '../PopUp';
 import AddCategory from '../Category/AddCategory';
 import AddSubcategory from '../Subcatgory/AddSubcategory'
+import { FaArrowDown } from "react-icons/fa";
 
 export default function AddProduct() {
 
@@ -103,13 +104,10 @@ export default function AddProduct() {
     if (!productInfo.sku) {
       newErrors.sku = 'SKU is required';
     }
-    // if (!productInfo.productInfo.option) {
-    //   newErrors.productName = 'Name is required';
-    // }
-
-    if (!productInfo.subcategory_id) {
-      newErrors.subcategory_id = 'subcategory_id is required';
+    if (!productInfo.long_description) {
+      newErrors.long_description = 'Long description is required';
     }
+
     if (!productInfo.price) {
       newErrors.price = 'Price is required';
     }
@@ -117,10 +115,16 @@ export default function AddProduct() {
     if (!productInfo.short_description) {
       newErrors.short_description = 'Short description is required';
     }
+ 
     if (!productInfo.productImage) {
       newErrors.productImage = 'Image is required';
     }
-
+    if (!category) {
+      newErrors.categoryName = 'Category is required';
+    }
+    if (!subcategory) {
+      newErrors.subcategoryName = 'Subcategory is required';
+    }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -139,6 +143,7 @@ export default function AddProduct() {
     formData.append('quantity', productInfo.quantity);
     formData.append('subcategory_id', productInfo.subcategory_id);
     formData.append('option', productInfo.option);
+    
     try {
       const config = {
         headers: { Authorization: `Bearer ${token}`}
@@ -253,16 +258,17 @@ return (
 
   <div className='drop-down'>
         <span className="absolute pl-3 pt-2" id="category-value" >{category}</span>
-        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
+        <button type="input" className="dropbtn border rounded-lg focus:border h-8"><FaArrowDown /></button>
         <ul className='category-items'>
         {categories && categories.map((item) => (
-      
-        <li key={item._id} name={item.category_name} className="cursor-pointer " onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
-            ))}
-          <li className="item add-item"><button onClick={() => setOpenCategory(true)}>Add category</button></li>
+          
+          <li key={item._id} name={item.category_name} className="cursor-pointer  overflow-y-auto h-6" onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
+          ))}
+          <li className="item add-item text-cyan-500"><button onClick={() => setOpenCategory(true)}>Add category</button></li>
         </ul>
 </div>
 
+          {errors.categoryName && <div className="text-red-500">{errors.categoryName}</div>}
         </td>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategoryName">
@@ -272,17 +278,18 @@ return (
         <td>
         <div className='drop-down'>
         <span className="absolute pl-3 pt-2" id="category-value">{subcategory}</span>
-        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
-        <ul className='category-items'>
+        <button type="input" className="dropbtn border rounded-lg focus:border h-8"><FaArrowDown /></button>
+        <ul className='category-items overflow-y-auto'>
+          
         {subCategories && subCategories.map((item) => (
         <li key={item._id} name={item.subcategory_name} className="cursor-pointer " 
         onClick={()=>{setSubcategory(item.subcategory_name)
           setProductInfo({ ...productInfo, subcategory_id: item._id })}}>{item.subcategory_name}</li>
             ))}
-          {category && <li className="item add-item"><button onClick={() => setOpenSubcategory(true)}>Add subcategory</button></li>}
+          {category && <li className="item add-item text-cyan-500"><button onClick={() => setOpenSubcategory(true)}>Add subcategory</button></li>}
         </ul>
 </div>
-
+{errors.subcategoryName && <div className="text-red-500">{errors.subcategoryName}</div>}
         </td>
       </tr>
        <tr>
@@ -376,6 +383,7 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, long_description: e.target.value })}
             required
           />
+           {errors.long_description && <div className="text-red-500">{errors.long_description}</div>}
         </td>
       </tr>
 
@@ -410,8 +418,9 @@ return (
                     
                     onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
                     required/>
+                 
                 </label>
-                    
+                <span></span>
             </div>
             
         </div>

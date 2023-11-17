@@ -76,7 +76,7 @@ useEffect(() => {
   };
 
   fetchData();
-}, []);
+});
      
      const navigate = useNavigate()
 return (

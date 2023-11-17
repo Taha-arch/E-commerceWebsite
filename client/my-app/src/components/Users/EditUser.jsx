@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -37,7 +35,7 @@ const { id } = useParams();
         .catch((error) => {
         console.error('Error fetching user data:', error);
         });
-    }, [id]);
+    }, [id, token]);
 
 
   const notify = () => {toast.success('User Updated Successfully!', {
