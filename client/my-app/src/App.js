@@ -12,6 +12,8 @@
   import AdminLogin from './components/AdminLogin';
   import EditUser from './components/Users/EditUser';
 import EditCustomer from './components/EditCustomer';
+import EditOrder from './components/Orders/EditOrder';
+
 
   function App() {
     return (
@@ -24,6 +26,7 @@ import EditCustomer from './components/EditCustomer';
         <Route path="/customers/edit/:id" element={<EditCustomer />} />
         <Route path='products' element={<Products/>} />
         <Route path='orders' element={<Orders/>} />
+        <Route path="/orders/edit/:id" element={<EditOrder />} />
         <Route path='/products/addProduct' element={<AddProduct />} />
         <Route path="/products/edit/:id" element={<ProductEdit />} />
         <Route path='addProduct' element={<AddProduct/>} />

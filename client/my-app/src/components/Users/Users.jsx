@@ -15,6 +15,8 @@ import PopUp from '../PopUp';
 import { useNavigate } from 'react-router-dom'
 import UserDetails from './UserDetails';
 import swal from 'sweetalert'
+import  { useDispatch, useSelector } from 'react-redux'
+import  { fetchUsers } from '../../redux/slicers/userSlice'
 
 export default function Users() {
   
@@ -25,20 +27,29 @@ const [openModal, setOpenModal] = useState(false);
 const [openDetail, setOpenDetail] = useState(false);
 const [addUser, setAddUser] = useState(false);
 
+const user = useSelector(state => state.user)
+const dispatch = useDispatch()
+useEffect(() => {
+  dispatch(fetchUsers())
+}, []);
+console.log(user.users);
 
-const fetchUserData = async (page) => {
-  try {
-    const config = {
-      headers: { Authorization: `Bearer ${token}`}
-    }
-    const response = await axios.get(`http://localhost:3001/users?page=${page}`, config);
+
+
+
+// const fetchUserData = async (page) => {
+//   try {
+//     const config = {
+//       headers: { Authorization: `Bearer ${token}`}
+//     }
+//     const response = await axios.get(`http://localhost:3001/users?page=${page}`, config);
     
-    return response.data.data;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    return [];
-  }
-};
+//     return response.data.data;
+//   } catch (error) {
+//     console.error('Error fetching user data:', error);
+//     return [];
+//   }
+// };
 
 const notify = () => swal(
   {
@@ -69,17 +80,21 @@ const handleDeleteUser = async () => {
   }
 };
 
-useEffect(() => {
-  const fetchData = async () => {
-    const userData = await fetchUserData();
-    setUsers(userData);
-  };
+// useEffect(() => {
+//   const fetchData = async () => {
+//     const userData = await fetchUserData();
+//     setUsers(userData);
+//   };
 
-  fetchData();
-}, []);
+//   fetchData();
+// }, []);
      
      const navigate = useNavigate()
 return (
+  <div>
+    {user.loading && <div>Loading...</div>}
+    {!user.loading && user.error ? <div>Error: {user.error}</div> : null}
+    {!user.loading && user.users.length ? 
   <div>
   <div>
     
@@ -137,7 +152,7 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
+            {user.users.map((user) => (
               <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                   <img alt="" className='rounded-full h-20 w-20 ' src={user.userImage}></img>
@@ -246,6 +261,7 @@ return (
   </PopUp>
   )}
     
+    </div>  : null}
     </div>
     
 )

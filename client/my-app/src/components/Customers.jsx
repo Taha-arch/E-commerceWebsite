@@ -1,14 +1,11 @@
 import React, { useState, useEffect, Fragment }  from 'react';
-import {FiEdit,FiDelete} from 'react-icons/fi';
+import {FiEdit} from 'react-icons/fi';
 import {TbListDetails} from 'react-icons/tb';
 import {LuListFilter} from 'react-icons/lu';
-import {AiOutlineUserAdd} from 'react-icons/ai';
-import {GrStatusGoodSmall} from 'react-icons/gr';
 import {RiMoreLine} from 'react-icons/ri';
 import {Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames' 
 import axios from 'axios'; 
-import DeleteUser from './Users/DeleteUser';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom'
 import CustomerDetails from './CustomerDetails';
@@ -18,7 +15,6 @@ export default function Customers() {
 const token = localStorage.getItem('accessToken');
 const [customers, setCostumers] = useState([]);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
-const [openModal, setOpenModal] = useState(false);
 const [openDetail, setOpenDetail] = useState(false);
 
 const fetchUserData = async (page) => {
@@ -32,26 +28,6 @@ const fetchUserData = async (page) => {
   } catch (error) {
     console.error('Error fetching user data:', error);
     return [];
-  }
-};
-
-
-const handleDeleteUser = async () => {
-  console.log(selectedCustomer);
-  if (selectedCustomer) {
-    try {
-      const user_id = selectedCustomer._id;
-      await axios.delete(`http://localhost:3001/customers/${user_id}`);
-      console.log(selectedCustomer);
-      
-      setCostumers((prevUsers) =>
-        prevUsers.filter((user) => user._id !== user_id)
-      );
-      setSelectedCustomer(null);
-      setOpenModal(false);
-    } catch (error) {
-      console.error('Error deleting user data:', error);
-    }
   }
 };
 
@@ -168,19 +144,7 @@ return (
                 
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div className={classNames(
-                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
-                    setOpenModal(true);
-                    setSelectedCustomer(customer); }} >
-                  <FiDelete className='flex mt-1 w-6 h-6  p-1 '/>
-                  Delete
-                </div>
-                
-                
-              )}
-            </Menu.Item>
+          
           </Menu.Items>
         </Transition>
       </Menu>
@@ -194,13 +158,6 @@ return (
        
         </div>
       </div>
-      {openModal && (
-  
-  <PopUp  Title="Delete User"> 
-      <DeleteUser setOpenModal={setOpenModal} handleDeleteUser={handleDeleteUser}/>
-  </PopUp>
-      )} 
-     
    {openDetail && (
   <PopUp >
     <CustomerDetails  setOpenDetail={setOpenDetail} selectedUser={selectedCustomer} setSelectedUser={setSelectedCustomer}  />
