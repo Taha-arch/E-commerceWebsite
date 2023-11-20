@@ -10,7 +10,8 @@ import '../../styles/HoverBlur.css'
 
 
 
-export default function EditUser(  user, onSubmit ) {
+export default function EditUser(props) {
+  const {titre,userId} = props
   
   const token = localStorage.getItem('accessToken');
 
@@ -114,7 +115,7 @@ const handleSubmit = (e) => {
 
 
 <div className="flex justify-center text-xl text-cyan-500 font-bold ">
-  <h2>Edit User</h2>
+  <h2>{titre}</h2>
 </div>
 <div className='flex flex-col justify-center p-10 pb-5 mb-5 border rounded-xl'>
 <div className='flex  flex-row justify-around '>

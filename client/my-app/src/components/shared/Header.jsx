@@ -1,10 +1,57 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useState,useEffect } from 'react'
 import { HiOutlineBell, HiOutlineChatAlt, HiOutlineSearch } from 'react-icons/hi'
 import { Popover, Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'; 
 export default function Header() {
     const navigate =useNavigate()
+
+    const token = localStorage.getItem('accessToken');
+
+    // Function to decode a JWT
+    function decodeToken(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+    
+      return JSON.parse(jsonPayload);
+    }
+    
+    // Decode the access token
+    const decodedToken = decodeToken(token);
+    
+    // Extract user ID from the decoded token
+    const userId = decodedToken.id; // Replace 'userId' with the actual key used in your token
+    
+    
+    const [user, setuser] = useState([]);
+    
+    
+    
+    const fetchUserData = async () => {
+      try {
+        
+        const response = await axios.get(`http://localhost:3001/users/${userId}`);
+        
+        return response.data.data;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        return [];
+      }
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const userData = await fetchUserData();
+        setuser(userData);
+        console.log(user);
+      };
+    
+      fetchData();
+    }, []);
+
+
   return (
     <div className=" rounded-b-3xl mx-5 bg-gray-100  px-4 flex flex-row p-3 bg-white  sm:flex-row md:flex-row justify-between items-center border-b border-gray-200">
     <div className="relative  ">
@@ -85,10 +132,9 @@ export default function Header() {
             <span className="sr-only">Open user menu</span>
             <div
               className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
-              style={{
-                backgroundImage: 'url("https://source.unsplash.com/150x150?face")',
-              }}
+              
             >
+              <img alt="" className='rounded-full  ' src={user.user_image}></img>
               <span className="sr-only">Taha El atoui</span>
             </div>
           </Menu.Button>
@@ -110,7 +156,7 @@ export default function Header() {
                     active && 'bg-gray-100',
                     'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                   )}
-                  onClick={() => navigate('/profile')}
+                  onClick={() => navigate(`/profile/${userId}}`)}
                 >
                   Your Profile
                 </div>
