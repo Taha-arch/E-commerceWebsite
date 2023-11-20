@@ -6,6 +6,9 @@ import {
     HiOutlineQuestionMarkCircle,
     HiOutlineCog
 } from 'react-icons/hi'
+import { Link, useLocation } from 'react-router-dom'
+import classNames from 'classnames'
+
 
 export const DASHBOARD_SIDEBAR_LINKS = [
    
@@ -57,3 +60,16 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
         icon: <HiOutlineQuestionMarkCircle />
     }
 ]
+
+export function SidebarReducedLink({ item, linkClasses = 'flex justify-start  w-full gap-2 font-light px-4 py-4 hover:bg-gradient-to-r from-cyan-700 to-cyan-1000 hover:no-underline active:bg-cyan-700 rounded-sm text-base'
+}) {
+    const { pathname } = useLocation();
+
+    return (
+        <Link to={item.path} className={classNames('flex justify-start transition-all duration-400',pathname === item.path ? 'flex justify-start backdrop-blur w-full bg-gradient-to-r from-cyan-500 to-gray-1000 text-white' : 'text-white', linkClasses)}>
+            <span className='text-2xl '>{item.icon}</span>
+        </Link>
+    );
+}
+
+
