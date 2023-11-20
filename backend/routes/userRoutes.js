@@ -8,7 +8,7 @@ const { authorization, checkAdminOrManager, checkAdmin } = require('../middlewar
 router.post('/login' , logUser);
 router.post('/user', addUser);
 
-router.get('/users',authorization , (req, res, next) => {
+router.get('/users' , (req, res, next) => {
     if (Object.keys(req.query).length > 0) {
         return getUsers(req, res, next);  
     }else{
@@ -17,7 +17,7 @@ router.get('/users',authorization , (req, res, next) => {
     
 });
 
-router.get('/users/:id',authorization , getUser);
+router.get('/users/:id' , getUser);
 router.put('/users/:id',uploadUserImage, updateUser);
 router.delete('/users/:id', deleteUser);
 

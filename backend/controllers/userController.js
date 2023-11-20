@@ -18,6 +18,7 @@ const logUser = async (req, res) =>{
       const userFound = await User.findOne({user_name});
       if(userFound && !userFound.active) res.status(401).json('your account is Desactivated !!!');
     if(userFound && userFound.password){
+      
       let access_Token = accessToken(userFound._id, userFound.role, rememberMe, 3);
       let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe, 12);
       
