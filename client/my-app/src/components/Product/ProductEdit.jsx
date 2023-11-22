@@ -9,7 +9,8 @@ import { useParams } from 'react-router-dom';
 import AddCategory from '../Category/AddCategory';
 import AddSubcategory from '../Subcatgory/AddSubcategory'
 import { RiEdit2Fill } from 'react-icons/ri';
-// import { IoClose } from "react-icons/io5";
+import { FaArrowAltCircleDown } from "react-icons/fa";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 export default function ProductEdit() {
 
@@ -185,7 +186,40 @@ export default function ProductEdit() {
       console.error('Error Editing product:', error);
     }
   };
+  function show() {
+    var elem = document.getElementById('list');
+    var showButton = document.getElementById('showButton');
+    var offButton = document.getElementById('offButton');
+    elem.style.display = 'block'; 
+    showButton.style.display = 'none';
+    offButton.style.display = 'block';
+  }
 
+  function off() {
+    var elem = document.getElementById('list');
+    elem.style.display = 'none'; 
+    var offButton = document.getElementById('offButton');
+    var showButton = document.getElementById('showButton');
+    offButton.style.display = 'none';
+    showButton.style.display = 'block';
+  }
+  function showSubCategory() {
+    var elem = document.getElementById('subList');
+    var showButton = document.getElementById('showSubButton');
+    var offButton = document.getElementById('offSubButton');
+    elem.style.display = 'block'; 
+    showButton.style.display = 'none';
+    offButton.style.display = 'block';
+  }
+
+  function offSubCategory() {
+    var elem = document.getElementById('subList');
+    elem.style.display = 'none'; 
+    var offButton = document.getElementById('offSubButton');
+    var showButton = document.getElementById('showSubButton');
+    offButton.style.display = 'none';
+    showButton.style.display = 'block';
+  }
 
 return (
   
@@ -283,11 +317,15 @@ return (
         <td>
         
   <div className='drop-down' >
-        
-        {category && <span className="absolute pl-3 pt-2" id="category-value" >{category}</span>}
-        <button type="input" className="dropbtn  border rounded-lg  h-8" id="open" onClick={toggleList}><FaArrowDown /></button>
-        {/* <button type="input" className="dropbtn  border rounded-lg  h-8 absolute right-0" id="close" onClick={toggleList} ><IoClose /></button> */}
-        <ul className='hide-list category-items  overflow-y-auto h-24' id="hide-list" >
+  <span className="absolute mt-1 ml-2" id="category-value" >{category}</span>
+          <div id="offButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={off}>
+          <FaArrowAltCircleUp className='mt-2 '/>
+          </div>
+          <div id="showButton" className="border rounded-lg focus:border h-8 w-full  z-10" onClick={show}>
+          <FaArrowAltCircleDown className='mt-2 '/>
+          </div>
+
+        <ul className='hide-list category-items  overflow-y-auto h-24' id="list" >
         {categories && categories.map((item) => (
       
         <li key={item._id} name={item.category_name} className="cursor-pointer"
@@ -306,10 +344,15 @@ return (
           </label>
         </td>
         <td>
-        <div className='drop-down'>
-        <span className="absolute pl-3 pt-2" id="category-value">{subcategory}</span>
-        <button type="input" className="dropbtn border rounded-lg focus:border h-8"><FaArrowDown /></button>
-        <ul className='category-items  overflow-y-auto' id="list">
+        <div className=''>
+        <span className="absolute mt-1 ml-2" id="category-value" >{subcategory}</span>
+          <div id="offSubButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={offSubCategory}>
+          <FaArrowAltCircleUp className='mt-2 ml-44'/>
+          </div>
+          <div id="showSubButton" className="border rounded-lg focus:border h-8 w-full  " onClick={showSubCategory}>
+          <FaArrowAltCircleDown className='mt-2 ml-44'/>
+          </div>
+        <ul className='category-items  overflow-y-auto' id="subList">
         {subCategories && subCategories.map((item) => (
         <li key={item._id} name={item.subcategory_name} className="cursor-pointer " 
         onClick={()=>{setSubcategory(item.subcategory_name)

@@ -50,6 +50,7 @@
     input:invalid ~ span{
         display: block;
     }
+
 }
 
 .modalBackground {
@@ -149,10 +150,12 @@
     display: block;
 }
 
-.dropbtn{
+
+#offButton, #showButton{
     cursor: pointer;
     width: 200px;
     padding:1px;
     padding-left: 88%;
 }
+
 

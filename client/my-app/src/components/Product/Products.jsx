@@ -3,40 +3,52 @@ import {FiEdit} from 'react-icons/fi';
 import { BsTrash } from 'react-icons/bs';
 import {TbListDetails} from 'react-icons/tb';
 import { AiOutlineUserAdd } from 'react-icons/ai';
+import { GrStatusGoodSmall } from 'react-icons/gr';
 import {RiMoreLine} from 'react-icons/ri';
 import {Transition, Menu } from '@headlessui/react'
 import PopUp from '../PopUp';
 import classNames from 'classnames';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ProductDetails from './ProductDetails';
 import ProductDelete from './ProductDelete';
-import  { useDispatch, useSelector } from 'react-redux'
-import  { fetchProducts } from '../../redux/slicers/products/productSlice';
 
 export default function Products() {
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
-  const product = useSelector(state => state.products)
-  const dispatch = useDispatch()
+
+  const fetchProductData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/products');
+      return response.data.data;
+    } catch (error) {
+      console.error('Error fetching product data:', error);
+      return [];
+    }
+  };
+
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch]);
-  
-  
+    const fetchData = async () => {
+      const productData = await fetchProductData();
+      setProducts(productData);
+    };
+
+    fetchData();
+  }, []); 
+
   const navigate = useNavigate();
 
   return (
     <div>
+  <div>
     
-   
-     <div>
-    
-    <div className="flex rounded-t-3xl shadow-lg flex-row sm:flex-row justify-between p-3 bg-white">
+    <div className="flex shadow-lg rounded-t-3xl shadow-lg flex-row sm:flex-row justify-between p-3 bg-white">
       
       <h1 className='text-xl px-3 mt-2'>Products</h1>
+      
       
         <button className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         onClick={() => navigate(`/products/addProduct`)}
@@ -46,12 +58,12 @@ export default function Products() {
         </button>
     </div>
   </div> 
-  {product.products && product.products.length > 0 ? (
+
         <div className="table-container shadow-lg max-w-full overflow-x-auto ">
       <table className=" table w-full ">
         <thead className='border-y-2 '>
           <tr >
-            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider pl-3">
+            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider pl-10">
             Image
             </th>
             <th className=" bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
@@ -62,6 +74,9 @@ export default function Products() {
             </th>
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Category
+            </th>
+            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+            Subcategory
             </th>
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Quantity
@@ -75,14 +90,14 @@ export default function Products() {
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-          
-            {product.products.map((product) => (
+            {products.map((product) => (
               <tr key={product._id}>
-                <td className=" py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-26 h-24 rounded-lg'></img></td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
+                <td className="  py-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-26 h-24 rounded-lg'></img></td>
+                <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
+                <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
+                <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
+                <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.subcategoryName}</td>
+                <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                   {product.quantity}
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
@@ -117,7 +132,7 @@ export default function Products() {
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')}
                   onClick={() => {setOpenDetails(true); setSelectedProduct(product)}}  >
-                  <TbListDetails className='flex mt-1 w-6 h-6  p-1 '/>
+                  <TbListDetails className='flex mt-1 w-6 h-6  p-1 mb-1'/>
                   details
                 </div>
               )}
@@ -126,7 +141,7 @@ export default function Products() {
               {({ active }) => (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')}  onClick={() => navigate(`/products/edit/${product._id}`)} >
-                  <FiEdit className='flex mt-1 w-6 h-6  p-1 '/>
+                  <FiEdit className='flex mt-1 w-6 h-6  p-1 mb-1'/>
                   Edit
                 </div>
                 
@@ -140,7 +155,7 @@ export default function Products() {
                     setOpenDelete(true);
                     setSelectedProduct(product);
                   }} >
-                  <BsTrash className='flex mt-1 w-6 h-6  p-1 pb-1 '/>
+                  <BsTrash className='flex mt-1 w-6 h-6  p-1 mb-1 '/>
                   Delete
                 </div>
                 
@@ -158,22 +173,18 @@ export default function Products() {
         <div className='flex  justify-end  flex-col md:flex-row   w-full '>
       
         </div>
-        
-      </div> 
-      ) : (
-          <div>No products available</div>
-      )}
-      {openDelete && 
-        <PopUp>
-          <ProductDelete selectedProduct={selectedProduct} setOpenDelete={setOpenDelete} setSelectedProduct={setSelectedProduct} 
-          />
-        </PopUp>}
-    
-        {openDetails && 
-        <PopUp>
-          <ProductDetails selectedProduct={selectedProduct} setOpenDetails={setOpenDetails} />
-        </PopUp>} 
-        
+      </div>
+      
+    {openDelete && 
+    <PopUp>
+      <ProductDelete selectedProduct={selectedProduct} setOpenDelete={setOpenDelete} setSelectedProduct={setSelectedProduct} 
+      setProducts={setProducts}/>
+    </PopUp>}
+
+    {openDetails && 
+    <PopUp>
+      <ProductDetails selectedProduct={selectedProduct} setOpenDetails={setOpenDetails} />
+    </PopUp>}
     
     </div>
     

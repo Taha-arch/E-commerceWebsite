@@ -91,19 +91,9 @@ const users = useSelector((state) => state.user);
 const loadingstate = useSelector((state) => state.loading);
 const dispatch = useDispatch();
 useEffect(() => {
-<<<<<<< HEAD
-  const fetchData = async () => {
-    const userData = await fetchUserData();
-    setUsers(userData);
-  };
-
-  fetchData();
-});
-=======
   
   dispatch(fetchData(1));
 }, [dispatch]);
->>>>>>> 39e7ad7467c41d87e7924d9c7b708d9a7e00d5ff
      
   console.log(users);
 
