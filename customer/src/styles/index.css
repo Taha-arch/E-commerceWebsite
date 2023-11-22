@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Oswald:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Your additional styles go here */
+h1{
+    font-size:40px;
+}
+
+.heart{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.parent{
+    background-color: whitesmoke;
+}
+
+.box{
+width: 1120px;
+height: 816px;
+}
+
+.images{
+    width: 69px;
+    height: 338px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.main-image{
+    width: 439px;
+    height: 400px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-top: 80px;
+}
+.card{
+    transition: 0.3s;
+}
+.card:hover{
+    transform:scale(1.05);
+    box-shadow: 0px 0px 8px 0px gray;
+}
+.product-info{
+    margin-top: 80px;
+    padding-left: 30px;
+}

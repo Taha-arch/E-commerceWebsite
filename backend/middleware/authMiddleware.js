@@ -18,6 +18,7 @@ const authorization = async (req, res, next) => {
   try {
     const token = extractToken(req);
     if (!token) {
+      
       return res.status(403).send('Access Denied');
     }
 
