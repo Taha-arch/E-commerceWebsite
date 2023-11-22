@@ -1,0 +1,121 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;1,100;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+body{
+    font-family: Playfair;
+    background-color: whitesmoke;
+}
+
+.para{
+    width:480px;
+    line-height: 1.4;
+}
+.container{
+  width: 1045px;
+}
+.firstImage, .secondImage{
+    height: 421px;
+    width: 281px;
+}
+.shop-btn{
+    width: 300px;
+    height: 50px;
+    margin-left: 4.5rem;
+    margin-top: 4rem
+}
+span{
+    text-decoration-line: line-through;
+    text-decoration-line: 0px;
+}
+
+.item-a {
+    grid-area: first; 
+    width: 200px;
+    height: 160px;
+    align-self: center;
+    
+  }
+  .item-b {
+    grid-area: second;
+    width: 196px;
+    height: 160px;
+  }
+  .item-c {
+    grid-area: third;
+    width: 196px;
+    height: 160px;
+    
+  }
+  .item-d {
+    grid-area: Fourth;
+    width: 185px;
+    height: 400px;
+  }
+  .item-e {
+    grid-area: Fifth;
+    width: 196px;
+    height: 160px;
+  }
+  .item-f {
+    grid-area: Sixth;
+    width: 196px;
+    height: 160px;
+  }
+  .item-g {
+    grid-area: seventh;
+    width: 196px;
+    height: 160px;
+    align-self: center;
+  }
+
+.categories-items > * {
+    background-color: #EBE0DB;
+}
+
+.categories-items{
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-areas: 
+    "first second Fourth  Fifth  seventh"
+    "first  .     Fourth   .     seventh"
+    "first third  Fourth  Sixth  seventh";
+  column-gap: 1rem;
+  
+}
+.item-a > img{
+  width: 6rem;
+  height: 7rem;
+  
+}
+.item-b > img{
+  width: 7.5rem;
+  height: 7rem;
+}
+.item-c > img{
+  width: 8rem;
+  height: 5.5rem;
+}
+.item-e >  img{
+  
+}
+
+.item-f > img{
+  width: 9rem;
+  height: 6rem;
+}
+.item-g > img{
+  width: 8rem;
+  height: 6rem;
+}
+
+
+.item-img{
+  width: 21rem;
+  height: 21rem;; 
+}
