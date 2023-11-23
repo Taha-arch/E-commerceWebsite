@@ -54,8 +54,8 @@ const addCategory = async (req, res) => {
 
     const getAllCategories = async (req, res) => {
         const { limitPerPage, skipVal } = Pagination(req);
-        
-        const categories = await Category.find().sort({category_name:-1}).limit(limitPerPage).skip(skipVal);
+        // .limit(limitPerPage).skip(skipVal)
+        const categories = await Category.find().sort({category_name:-1});
         
         res.status(200).json({categories});
     };
@@ -71,7 +71,7 @@ const addCategory = async (req, res) => {
                 .sort({ category_name: -1 })
                 .limit(limitPerPage)
                 .skip(skipVal);
-                console.log(categories);
+                
                 if (!categories) {
                     res.status(404).json({ message: 'No Categories found.' });
                 }

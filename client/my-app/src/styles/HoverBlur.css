@@ -39,3 +39,16 @@
     line-height:150px;
     margin:0;
 }
+.product-img{
+    height: 10rem;
+    width: 10rem;
+    filter: blur(0);
+    transition: .1s ease-in-out;
+    border-radius: 10px;
+}
+.product{
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 100px;
+}

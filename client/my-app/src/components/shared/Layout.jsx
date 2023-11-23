@@ -21,7 +21,7 @@ export default function Layout() {
   <Sidebar />
   <div className='flex-1   overflow-y-auto'>
     <Header />
-    <div className='p-5 pb-0 rounded-xl relative  '>
+    <div className='p-5 pb-0 rounded-xl relative   '>
       {<Outlet />}
     </div>
   </div>

@@ -16,11 +16,12 @@ import EditOrder from './components/Orders/EditOrder';
 import Profile from './components/shared/Profile';
 
 
+
   function App() {
     return (
       <Router>
       <Routes>
-      <Route path='/Login' element={<AdminLogin />}></Route>
+        <Route path='/Login' element={<AdminLogin />}></Route>
         <Route path="/" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path='customers' element={<Customers />} />
@@ -35,8 +36,7 @@ import Profile from './components/shared/Profile';
         <Route path="/users/edit/:id" element={<EditUser />} />
         <Route path="/profile/:id" element={<Profile />} />
         </Route>
-        <Route path='login' element={<div>this is the login page</div>} />
-
+        <Route path='/login' element={<div>this is the login page</div>} />
       </Routes>
       </Router>
     );

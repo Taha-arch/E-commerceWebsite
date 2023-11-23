@@ -54,7 +54,7 @@ export default function Orders() {
       </div>
 
 
-      <div className="table-container shadow-lg max-w-full overflow-x-auto">
+      <div className="table-container shadow-lg h-full overflow-x-auto">
         {loading === true ? (
           <Lottie options={defaultOptions} height={200} width={200} />
         ) : (
@@ -62,7 +62,7 @@ export default function Orders() {
             <thead className='border-y-2'>
               <tr>
                 <th className="group px-5 ease-in bg-white hover:bg-gray-200 active:bg-gray-300 text-xs  sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
-                <div className="flex w-full group  w-full h-full">
+                <div className="flex w-full group h-full">
                   First Name
                   <p className="invisible group-hover:visible "><AiOutlineArrowUp className=" inline pb-1 pl-1 w-5 h-5" /></p>
                   </div>

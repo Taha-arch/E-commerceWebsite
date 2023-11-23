@@ -58,19 +58,20 @@ useEffect(() => {
      
      const navigate = useNavigate()
 return (
+<div>
   <div className='max-w-full '>
+    
   <div>
     
-    <div className="flex shadow-lg rounded-t-3xl shadow-lg flex-row sm:flex-row justify-between p-3 bg-white">
+    <div className="flex shadow-lg rounded-t-3xl flex-row sm:flex-row justify-between p-3 bg-white">
       
-      <button className="px-2 py-2 sm:px-4 sm:py-2 flex text-sm text-gray-400 bg-white rounded-lg hover-text-white focus:outline-none">
-        <LuListFilter className="w-4 h-6 mr-1" />
-        Filter
-      </button>
-        <div className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
+        <h1 className="px-4 py-2 flex text-xl rounded-lg  focus:outline-none">
+          Customers
+        </h1>
+        <div className="px-2 py-2 sm:px-4  sm:py-3 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         
         >
-         {customers.length}  Customers
+         {customers.customer.length}  Customers
         </div>
       {/* </Link> */}
     </div>
@@ -102,21 +103,21 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {customers.map((customer) => (
-              <tr key={customer._id}>
+            {customers.customer.map((item) => (
+              <tr key={item._id}>
                 <td className=" px-10 py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
-                  {customer.active ? (
+                  {item.active ? (
                     <span className="capitalize py-1 px-2 rounded-md text-xs text-sky-600 bg-sky-100" >ACTIVE</span>
                   ) : (
                     <span className="capitalize py-1 px-2 rounded-md text-xs text-gray-600 bg-gray-100">INACTIVE</span>
                   )}
                 </td>
-                <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.first_name}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.last_name}</td>
-                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{customer.email}</td>
+                <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.first_name}</td>
+                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.last_name}</td>
+                <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.email}</td>
                 
                 <td className=" py-2 text-center whitespace-no-wrap text-xs sm:text-sm text-gray-700">
-                  {new Date(customer.creation_date).toLocaleDateString('en-GB')}
+                  {new Date(item.creation_date).toLocaleDateString('en-GB')}
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700 ">
                   
@@ -144,7 +145,7 @@ return (
                 <div className={classNames(
                   active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => {
                     setOpenDetail(true);
-                    setSelectedCustomer(customer); }}  >
+                    setSelectedCustomer(item); }}  >
                   <TbListDetails className='flex mt-1 w-6 h-6  p-1 '/>
                   details
                 </div>
@@ -155,7 +156,7 @@ return (
             <Menu.Item>
               {({ active }) => (
                 <div className={classNames(
-                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/customers/edit/${customer._id}`)} >
+                  active && 'bg-gray-100','px-3 flex items-center text-base text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2 ')} onClick={() => navigate(`/customers/edit/${item._id}`)} >
                   <FiEdit className='flex mt-1 w-6 h-6  p-1 '/>
                   Edit
                 </div>
@@ -185,7 +186,7 @@ return (
   )}
     
     </div>
-    
+    </div>
 )
 }
     
