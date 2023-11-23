@@ -101,9 +101,6 @@ span{
   width: 8rem;
   height: 5.5rem;
 }
-.item-e >  img{
-  
-}
 
 .item-f > img{
   width: 9rem;
@@ -114,8 +111,61 @@ span{
   height: 6rem;
 }
 
-
 .item-img{
   width: 21rem;
-  height: 21rem;; 
+  height: 20rem;
+}
+.img1 {
+  border-radius: 70px 0px 0px 70px;
+  width: 21rem;
+  height: 15rem;
+  background-image: url('https://res.cloudinary.com/dfin3vmgz/image/upload/v1700574343/images/pexels-cottonbro-studio-9430435_nihc84.jpg');
+  background-position:0cm -4.5cm;
+}
+.img2 {
+  border-radius: 0px 70px 70px 0px;
+  width: 21rem;
+  height: 15rem;
+  background-image: url('https://res.cloudinary.com/dfin3vmgz/image/upload/v1700574343/images/pexels-gursher-gill-18633029_zpwige.jpg');
+  background-position:0cm -2cm;
+}
+.section_img{
+  height: 24rem;
+  background-image: url(https://res.cloudinary.com/dfin3vmgz/image/upload/v1700713956/images/Capture_d_%C3%A9cran_2023-11-23_052745_gikfx9.png);
+  width: 22rem;
+  background-repeat: round;
+}
+.item{
+  min-height: 15rem;
+  min-width: 15rem;
+}
+.item img{
+  width:100%;
+  height: 100%;
+} 
+.carousel{
+  cursor:grab;
+}
+.inner-carousel{
+  display:flex;
+  overflow-x: scroll;
+  
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.advantage h5{
+  font-size: 1.22rem;
+  padding-top:1rem;
+}
+.advantage  p{
+width: 15.5rem;
+padding:1rem 0rem;
+color:rgb(81, 81, 81);
+}
+.icon{
+  margin-left: 30%;
+  font-size: 100px;
+  
 }
