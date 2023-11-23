@@ -13,6 +13,7 @@
   import EditUser from './components/Users/EditUser';
 import EditCustomer from './components/EditCustomer';
 import EditOrder from './components/Orders/EditOrder';
+import Profile from './components/shared/Profile';
 
 
   function App() {
@@ -32,6 +33,7 @@ import EditOrder from './components/Orders/EditOrder';
         <Route path='addProduct' element={<AddProduct/>} />
         <Route path='/users' element={<Users />} />
         <Route path="/users/edit/:id" element={<EditUser />} />
+        <Route path="/profile/:id" element={<Profile />} />
         </Route>
         <Route path='login' element={<div>this is the login page</div>} />
 

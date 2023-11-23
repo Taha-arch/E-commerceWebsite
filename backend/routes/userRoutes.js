@@ -11,7 +11,7 @@ router.post('/user', addUser);
 router.get('/users' , getUsers);
 router.get('/users/search',authorization , searchUser);
 
-router.get('/users/:id',authorization , getUser);
+router.get('/users/:id' , getUser);
 router.put('/users/:id',uploadUserImage, updateUser);
 router.delete('/users/:id', deleteUser);
 

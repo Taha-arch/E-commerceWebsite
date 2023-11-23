@@ -7,7 +7,7 @@ import Lottie from 'react-lottie';
 import { useNavigate } from 'react-router-dom';
 import * as animation from "../../assets/animations/Animation - 1699995980899.json"
 
-const defaultOptions = {
+ export const  defaultOptions =  {
   loop: true,
   autoplay: true,
   animationData: animation.default,
@@ -36,7 +36,7 @@ export default function Orders() {
       setTimeout(() => {
       setOrders(orderData);
       setLoading(false);
-    }, 0);
+    }, 1000);
     };
 
     fetchData();

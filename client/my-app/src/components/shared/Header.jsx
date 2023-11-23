@@ -3,7 +3,19 @@ import { HiOutlineBell, HiOutlineChatAlt, HiOutlineSearch } from 'react-icons/hi
 import { Popover, Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+
+
+
 export default function Header() {
+
+  const user  = useSelector((state) => state.auth.user);
+    
+  
+ 
+ 
+
     const navigate =useNavigate()
   return (
     <div className=" rounded-b-3xl mx-5 bg-gray-100  px-4 flex flex-row p-3 bg-white  sm:flex-row md:flex-row justify-between items-center border-b border-gray-200">
@@ -86,7 +98,7 @@ export default function Header() {
             <div
               className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
               style={{
-                backgroundImage: 'url("https://source.unsplash.com/150x150?face")',
+                backgroundImage: `url(${user.user_image})`,
               }}
             >
               <span className="sr-only">Taha El atoui</span>
@@ -103,14 +115,14 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Menu.Item>
+          <Menu.Item>
               {({ active }) => (
                 <div
                   className={classNames(
                     active && 'bg-gray-100',
                     'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                   )}
-                  onClick={() => navigate('/profile')}
+                  onClick={() => navigate(`/profile/${user._id}}`)}
                 >
                   Your Profile
                 </div>

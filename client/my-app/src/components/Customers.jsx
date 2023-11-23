@@ -9,6 +9,17 @@ import axios from 'axios';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom'
 import CustomerDetails from './CustomerDetails';
+import * as animation from "../assets/animations/Animation - 1700668658077.json"
+import Lottie from 'react-lottie';
+
+export const  defaultOptions =  {
+  loop: true,
+  autoplay: true,
+  animationData: animation.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  }}
+
 
 export default function Customers() {
   
@@ -16,12 +27,14 @@ const token = localStorage.getItem('accessToken');
 const [customers, setCostumers] = useState([]);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
 const [openDetail, setOpenDetail] = useState(false);
+const [loading, setLoading] = useState(false);
 
 const fetchUserData = async (page) => {
   try {
     const config = {
       headers: { Authorization: `Bearer ${token}`}
     }
+    setLoading(true);
     const response = await axios.get(`http://localhost:3001/customers`, config);
     
     return response.data;
@@ -34,7 +47,10 @@ const fetchUserData = async (page) => {
 useEffect(() => {
   const fetchData = async () => {
     const userData = await fetchUserData();
+    setTimeout(() => {
     setCostumers(userData);
+    setLoading(false);
+  }, 2000);
   };
 
   fetchData();
@@ -61,6 +77,9 @@ return (
   </div> 
 
               <div className="table-container shadow-lg max-w-full overflow-x-auto ">
+              {loading === true ? (
+          <Lottie options={defaultOptions} height={200} width={200} />
+        ) : (
       <table className="flex table w-full ">
         <thead className='border-y-2 '>
           <tr >
@@ -154,6 +173,7 @@ return (
             ))}
           </tbody>
         </table>
+        )}
         <div className='flex  justify-end  flex-col md:flex-row   w-full '>
        
         </div>

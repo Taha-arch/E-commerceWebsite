@@ -12,16 +12,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ProductDetails from './ProductDetails';
 import ProductDelete from './ProductDelete';
+import * as animation from "../../assets/animations/Animation - 1699995980899.json"
+import { defaultOptions } from '../Orders/Orders';
+import Lottie from 'react-lottie';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
+  const [loading, setLoading] = useState(false);
 
   const fetchProductData = async () => {
     try {
+      setLoading(true);
       const response = await axios.get('http://localhost:3001/products');
       return response.data.data;
     } catch (error) {
@@ -33,7 +37,10 @@ export default function Products() {
   useEffect(() => {
     const fetchData = async () => {
       const productData = await fetchProductData();
+      setTimeout(() => {
       setProducts(productData);
+      setLoading(false);
+    }, 1000);
     };
 
     fetchData();
@@ -60,6 +67,9 @@ export default function Products() {
   </div> 
 
         <div className="table-container shadow-lg max-w-full overflow-x-auto ">
+        {loading === true ? (
+          <Lottie options={defaultOptions} height={200} width={200} />
+        ) : (
       <table className=" table w-full ">
         <thead className='border-y-2 '>
           <tr >
@@ -166,6 +176,7 @@ export default function Products() {
             ))}
           </tbody>
         </table>
+        )}
         <div className='flex  justify-end  flex-col md:flex-row   w-full '>
       
         </div>
