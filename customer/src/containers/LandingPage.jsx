@@ -99,7 +99,7 @@ function LandingPage() {
                 </div>
 
                 <div className="section_img bg-green h-[310px] w-1/4">
-                    {/* <img src="https://res.cloudinary.com/dfin3vmgz/image/upload/v1700713956/images/Capture_d_%C3%A9cran_2023-11-23_052745_gikfx9.png" alt="" /> */}
+                <button className='border px-6 py-2 bg-green relative left-24 top-80 font-bold text-white hover:text-green hover:bg-white'>Jewelry Sets</button>
                 </div>
                 </div>
         </div>
