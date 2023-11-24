@@ -14,48 +14,6 @@ export default function Header() {
     
     const navigate =useNavigate()
 
-    const token = localStorage.getItem('accessToken');
-
-    // Function to decode a JWT
-    function decodeToken(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-    
-      return JSON.parse(jsonPayload);
-    }
-    
-    // Decode the access token
-    const decodedToken = decodeToken(token);
-    
-    // Extract user ID from the decoded token
-    const userId = decodedToken.id; // Replace 'userId' with the actual key used in your token
-    
-    
-    
-    
-    
-    const fetchUserData = async () => {
-      try {
-        
-        const response = await axios.get(`http://localhost:3001/users/${userId}`);
-        
-        return response.data.data;
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        return [];
-      }
-    };
-
-    useEffect(() => {
-      const fetchData = async () => {
-        const userData = await fetchUserData();
-        setuser(userData);
-        console.log(user);
-      };
-    
-      fetchData();
-    }, []);
 
 
   return (

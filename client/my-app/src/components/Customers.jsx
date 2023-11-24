@@ -24,7 +24,7 @@ export const  defaultOptions =  {
 export default function Customers() {
   
 const token = localStorage.getItem('accessToken');
-// const [customers, setCostumers] = useState([]);
+const [customers, setCostumers] = useState([]);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
 const [openDetail, setOpenDetail] = useState(false);
 const [loading, setLoading] = useState(false);
@@ -72,7 +72,7 @@ return (
         <div className="px-2 py-2 sm:px-4  sm:py-3 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         
         >
-         {customers.customer.length}  Customers
+         {customers.length}  Customers
         </div>
       {/* </Link> */}
     </div>

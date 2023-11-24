@@ -145,9 +145,9 @@ return (
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.email}</td>
                 <td className=" py-2 text-center whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                   {item.active ? (
-                    <span className="capitalize py-1 px-2 rounded-md text-md text-emerald-600 bg-emerald-100" >{item.role}</span>
+                    <span className="capitalize py-1 px-2 rounded-md text-md text-sky-600 bg-sky-100" >{item.role}</span>
                   ) : (
-                    <span className="capitalize py-1 px-2 rounded-md text-md text-red-600 bg-red-100">{item.role}</span>
+                    <span className="capitalize py-1 px-2 rounded-md text-md text-gray-600 bg-gray-100">{item.role}</span>
                   )}
                   
                 </td>
