@@ -15,7 +15,8 @@ export default function Layout() {
   const token = localStorage.getItem('accessToken');
 
    if (!token){
-     window.location.href='/login'}else{
+     window.location.href='/login'
+    }else{
   return (
     <div className='flex   flex-col md:flex-row bg-neutral-100 h-screen w-screen '>
   <Sidebar />

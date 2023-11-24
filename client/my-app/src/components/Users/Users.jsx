@@ -19,7 +19,8 @@ import  { useDispatch, useSelector } from 'react-redux'
 import  { fetchUsers } from '../../redux/slicers/USER/useServices'
 import { deleteUser } from '../../redux/slicers/USER/useServices';
 import * as animation from "../../assets/animations/Animation - 1700668658077.json"
-import Lottie from 'react-lottie';
+
+
 
  const defaultOptions =  {
   loop: true,
@@ -29,21 +30,9 @@ import Lottie from 'react-lottie';
     preserveAspectRatio: "xMidYMid slice",
   }}
 
-import { useDispatch } from 'react-redux';
-import { fetchData } from '../../redux/slicers/userSlice';
-import { useSelector } from 'react-redux';
-import * as animation from "../../assets/animations/Animation - 1699995980899.json"
 
 
 
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: animation.default,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  }}
 
 
 export default function Users() {
@@ -145,7 +134,7 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {user.users.map((user) => (
+            {user.users.map((item) => (
               <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                   <img alt="" className='rounded-full h-20 w-20 ' src={item.userImage}></img>
@@ -237,12 +226,12 @@ return (
        
         </div>
       </div>
-      {/* {openModal && (
+      {openModal && (
   
   <PopUp  Title="Delete User"> 
       <DeleteUser setOpenModal={setOpenModal} handleDeleteUser={handleDeleteUser}/>
   </PopUp>
-      )}  */}
+      )} 
      {addUser && (
   
   <PopUp  > 

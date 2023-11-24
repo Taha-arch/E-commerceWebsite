@@ -1,4 +1,4 @@
-import React, { Fragment,useState,useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { HiOutlineBell, HiOutlineChatAlt, HiOutlineSearch } from 'react-icons/hi'
 import { Popover, Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames'
@@ -12,10 +12,6 @@ export default function Header() {
 
   const user  = useSelector((state) => state.auth.user);
     
-  
- 
- 
-
     const navigate =useNavigate()
   return (
     <div className=" rounded-b-3xl mx-5 bg-gray-100  px-4 flex flex-row p-3 bg-white  sm:flex-row md:flex-row justify-between items-center border-b border-gray-200">

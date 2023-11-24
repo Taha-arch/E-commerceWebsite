@@ -44,6 +44,7 @@ const fetchUserData = async (page) => {
   }
 };
 
+
 useEffect(() => {
   const fetchData = async () => {
     const userData = await fetchUserData();
@@ -71,7 +72,7 @@ return (
         <div className="px-2 py-2 sm:px-4  sm:py-3 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         
         >
-         {customers.customer.length}  Customers
+         {customers.length}  Customers
         </div>
       {/* </Link> */}
     </div>
@@ -103,7 +104,7 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {customers.customer.map((item) => (
+            {customers.map((item) => (
               <tr key={item._id}>
                 <td className=" px-10 py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                   {item.active ? (
