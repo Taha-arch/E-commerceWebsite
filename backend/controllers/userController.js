@@ -277,9 +277,10 @@ const updateUser = async (req, res) => {
 
     if (req.body.password) {
       let hash_password = md5(req.body.password);
-      
+      console.log(req.body.password);
+      console.log(hash_password);
       req.body.password = hash_password;
-     
+      
     }
     const timeInMss = Date.now();
     userUpdate.last_update = timeInMss;
@@ -311,7 +312,7 @@ const updateUser = async (req, res) => {
         width: 1000,
         crop: "scale",
       });
-      console.log(newImage);
+      // console.log(newImage);
       userUpdate.user_image = newImage.secure_url;
     }
 
