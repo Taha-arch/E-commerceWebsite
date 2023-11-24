@@ -222,7 +222,7 @@ function LandingPage() {
                         ))}
                     </motion.div>
                     </motion.div>
-                    <button className='border px-6 py-4 bg-green my-4 ml-8 relative left-96 w-1/5 text-white hover:text-green hover:bg-white text-xl'>VIEW GALLERY</button>
+                    <button className='border px-6 py-4 bg-green mb-4 ml-8 relative left-96 w-1/5 text-white hover:text-green hover:bg-white text-xl'>VIEW GALLERY</button>
                 </div>
         </div>
 

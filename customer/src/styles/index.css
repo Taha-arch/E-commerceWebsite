@@ -136,12 +136,12 @@ span{
   background-repeat: round;
 }
 .item{
-  min-height: 15rem;
+  /* min-height: 10rem; */
   min-width: 15rem;
 }
 .item img{
   width:100%;
-  height: 100%;
+  height: 80%;
 } 
 .carousel{
   cursor:grab;
@@ -159,6 +159,7 @@ span{
   font-size: 1.22rem;
   padding-top:1rem;
 }
+
 .advantage  p{
 width: 15.5rem;
 padding:1rem 0rem;
