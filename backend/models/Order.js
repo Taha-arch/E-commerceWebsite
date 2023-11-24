@@ -8,10 +8,10 @@ const OrderSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Customer',
   },
-  order_items: {
-      type: Object,
-      default: {},
-  },
+  order_items: [{
+    product_id: { type: String },
+    quantity: { type: Number },
+  }],
   order_date: { type: Date, default: Date.now },
   cart_total_price: { type: mongoose.Types.Decimal128 },
   status: { type: String, default: 'Open' },

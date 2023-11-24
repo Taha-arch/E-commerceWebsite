@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import  { useDispatch, useSelector } from 'react-redux';
+
 
 export default function ProductDelete(props) {
 
@@ -38,10 +40,10 @@ const handleDeleteProduct = async () => {
       <div className="modalContainer">
 
         <div className="title">
-          <h1>Delete product</h1>
+          <h1 className='text-xl'>Delete product</h1>
         </div>
         <div className="body">
-          <p>Are you sure you want to delete this product : {selectedProduct.productName}?</p>
+          <p>Are you sure you want to delete this product ? <p className=' pt-2 font-bold'> {selectedProduct.productName}</p></p>
         </div>
         <div className="footer">
           <button className='bg-cyan-500 text-white py-2 px-2 rounded-md hover:bg-cyan-600 'onClick={() => setOpenDelete(false)} id="cancelBtn">

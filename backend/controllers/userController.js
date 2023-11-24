@@ -1,109 +1,140 @@
-const User = require('../models/User');
-const generator = require('generate-password');
-const md5 = require('md5');
-const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
-const dotenv = require('dotenv').config();
-const nodemailer = require('nodemailer');
+const User = require("../models/User");
+const generator = require("generate-password");
+const md5 = require("md5");
+const jwt = require("jsonwebtoken");
+const cloudinary = require("cloudinary").v2;
+const dotenv = require("dotenv").config();
+const nodemailer = require("nodemailer");
 const SECRET_KEY = process.env.JWT_SECRET;
 
-const logUser = async (req, res) =>{
-    const {user_name, password, rememberMe } = req.body;
-    
-    if (!user_name || !password){
-        res.status(400)
-        throw new Error('all Field are required');
-        
-      }
-      const userFound = await User.findOne({user_name});
-      if(userFound && !userFound.active) res.status(401).json('your account is Desactivated !!!');
-    if(userFound && userFound.password){
-      let access_Token = accessToken(userFound._id, userFound.role, rememberMe, 3);
-      let refresh_Token = refreshToken(userFound._id, userFound.role, rememberMe, 12);
-      
-      res.status(200).json({ message: "Logged in successfully" , status:200, data: userFound,access_Token,refresh_Token});
-  } else {
-      res.status(404).json('Invalid email or username');
-    }
+const logUser = async (req, res) => {
+  const { user_name, password, rememberMe } = req.body;
+
+  if (!user_name || !password) {
+    res.status(400);
+    throw new Error("all Field are required");
   }
+ 
+  const userFound = await User.findOne({ user_name , password });
+  if (userFound && !userFound.active)
+    res.status(401).json("your account is Desactivated !!!");
+  if (userFound && userFound.password) {
+    let access_Token = accessToken(
+      userFound._id,
+      userFound.role,
+      rememberMe,
+      3
+    );
+    let refresh_Token = refreshToken(
+      userFound._id,
+      userFound.role,
+      rememberMe,
+      12
+    );
 
-const accessToken = ((id, role, rememberMe, time) => {
-    return jwt.sign({id, role, rememberMe}, SECRET_KEY, {expiresIn: rememberMe ? time+'d' : '1d'});
-});
-
-
-const refreshToken = (id, role, rememberMe, time)=>{
-    return jwt.sign({id, role, rememberMe},process.env.REFREFRESH_TOKEN_SECRET,{expiresIn : time+'d'})
+    res
+      .status(200)
+      .json({
+        message: "Logged in successfully",
+        status: 200,
+        data: userFound,
+        access_Token,
+        refresh_Token,
+      });
+  } else {
+    res.status(404).json("Invalid  username or password");
+  }
 };
 
-const generateUsername = ((firstname, lastname) => {
-    let randomNumber = Math.floor(Math.random() * 1000);
-    let username = firstname.slice(0, 3) + lastname.slice(0, 3) + "_" + randomNumber;
-    return username;
-});
+const accessToken = (id, role, rememberMe, time) => {
+  return jwt.sign({ id, role, rememberMe }, SECRET_KEY, {
+    expiresIn: rememberMe ? time + "d" : "1d",
+  });
+};
+
+const refreshToken = (id, role, rememberMe, time) => {
+  return jwt.sign(
+    { id, role, rememberMe },
+    process.env.REFREFRESH_TOKEN_SECRET,
+    { expiresIn: time + "d" }
+  );
+};
+
+const generateUsername = (firstname, lastname) => {
+  let randomNumber = Math.floor(Math.random() * 1000);
+  let username =
+    firstname.slice(0, 3) + lastname.slice(0, 3) + "_" + randomNumber;
+  return username;
+};
 
 const generatePassword = () => {
-    const password = generator.generateMultiple(1,{
-        length: 10,
-        uppercase: true,
-        lowercase: true,
-        symbols: true,
-        numbers: true,
-    });
-return password;
-}
+  const password = generator.generateMultiple(1, {
+    length: 10,
+    uppercase: true,
+    lowercase: true,
+    symbols: true,
+    numbers: true,
+  });
+  return password;
+};
 
 const addUser = (req, res) => {
-    let {first_name, last_name, email,role} = req.body;
-    console.log(req.body);
-    if(!first_name){
-      return res.status(400).json({status: 400, message:"first name is required!!"});
-  }else if(!last_name){
-      return res.status(400).json({status: 400, message:"last name is required!!"});
+  let { first_name, last_name, email, role } = req.body;
+  console.log(req.body);
+  if (!first_name) {
+    return res
+      .status(400)
+      .json({ status: 400, message: "first name is required!!" });
+  } else if (!last_name) {
+    return res
+      .status(400)
+      .json({ status: 400, message: "last name is required!!" });
+  } else if (!email) {
+    return res
+      .status(400)
+      .json({ status: 400, message: "email is required!!" });
+  } else if (!role) {
+    return res.status(400).json({ status: 400, message: "role is required!!" });
   }
-  else if(!email){
-      return res.status(400).json({status: 400, message:"email is required!!"});
-  }else if(!role){
-      return res.status(400).json({status: 400, message:"role is required!!"});
-  }
 
-    let password = generatePassword();
+  let password = generatePassword();
 
-    let hash_password = md5(password);
+  let hash_password = md5(password);
 
-    const urlUserImage = 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1699881455/users_images/istockphoto-1300845620-612x612_arm4t8.jpg';
+  const urlUserImage =
+    "https://res.cloudinary.com/dfin3vmgz/image/upload/v1699881455/users_images/istockphoto-1300845620-612x612_arm4t8.jpg";
 
-    const newUser = new User({
-        first_name : first_name,
-        last_name : last_name,
-        user_name : generateUsername(first_name, last_name),
-        email : email,
-        password : hash_password,
-        role: role,
-        user_image: urlUserImage,
+  const newUser = new User({
+    first_name: first_name,
+    last_name: last_name,
+    user_name: generateUsername(first_name, last_name),
+    email: email,
+    password: hash_password,
+    role: role,
+    user_image: urlUserImage,
+  });
+
+  newUser.save().then((newUser) => {
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      service: "gmail",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.user,
+        pass: process.env.password,
+      },
     });
-    
-    newUser.save()    
-    .then((newUser) => {
-        let transporter = nodemailer.createTransport({
-            host : 'smtp.gmail.com',
-            service: 'gmail',
-            port: 587,
-            secure: false,
-            auth: {
-            user: process.env.user,
-            pass: process.env.password
-            }
-        });
-        
-        const cloudinaryImageURL = "https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837";
-        const link = "http://localhost:3000/SignIn";
-        
-        let mailOptions = {
-            from: `"PRESTIGIOUS" <${process.env.user}>`,
-            to: email,
-            subject: 'WELCOME TO OUR TEAM',
-            html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    const cloudinaryImageURL =
+      "https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837";
+    const link = "http://localhost:3000/SignIn";
+
+    let mailOptions = {
+      from: `"PRESTIGIOUS" <${process.env.user}>`,
+      to: email,
+      subject: "WELCOME TO OUR TEAM",
+      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html lang="en">
               <head></head>
               <body style="background-color:#fff;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,Oxygen-Sans,Ubuntu,Cantarell,&quot;Helvetica Neue&quot;,sans-serif">
@@ -161,150 +192,162 @@ const addUser = (req, res) => {
                 </table>
               </body>
             </html>            
-            `
-        };
-        
+            `,
+    };
 
-        if(transporter.sendMail(mailOptions)){
-            res.status(200).json({status:200, message:"Add User successfully 😊 👌"});
-        }else {
-            res.status(400).json("Error sending email");
-        }
-    })
-}
+    if (transporter.sendMail(mailOptions)) {
+      res
+        .status(200)
+        .json({ status: 200, message: "Add User successfully 😊 👌" });
+    } else {
+      res.status(400).json("Error sending email");
+    }
+  });
+};
 
 const getUsers = async (req, res) => {
-    const page = parseInt(req.query.page) || 1; 
-    const perPage = 10;
-    try{
-      const users = await User.find({}).sort({ first_name: -1 }).skip((page - 1) * perPage);
-    if(users){
+  const page = parseInt(req.query.page) || 1;
+  const perPage = 10;
+  try {
+    const users = await User.find({})
+      .sort({ first_name: -1 })
+      .skip((page - 1) * perPage);
+    if (users) {
       const formattedUsers = users.map((user) => ({
-        "_id": user._id,
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "user_name": user.user_name,
-        "email": user.email,
-        "role": user.role,
-        "active": user.active,
-        "creation_date": user.creation_date,
-        "userImage": user.user_image
+        _id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        user_name: user.user_name,
+        email: user.email,
+        role: user.role,
+        active: user.active,
+        creation_date: user.creation_date,
+        userImage: user.user_image,
       }));
-      res.status(200).json({status: 200,data: formattedUsers});
-    }else{
-      res.status(200).json({status: 400, message:"No Users Found"})
+      res.status(200).json({ status: 200, data: formattedUsers });
+    } else {
+      res.status(200).json({ status: 400, message: "No Users Found" });
     }
-    }catch(error){
-      res.status(500).json(error.message);
-    }
-    
-}
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
 
 const getUser = async (req, res) => {
-    let idUser = req.params.id;
-    await User.findById(idUser)
+  let idUser = req.params.id;
+  await User.findById(idUser)
     .then((user) => {
-
-        res.status(200).json({status:203, data : user});
+      res.status(200).json({ status: 203, data: user });
     })
     .catch((error) => {
-
-        res.status(404).json('Invalid user ID');
+      res.status(404).json("Invalid user ID");
     });
-}
-
+};
 
 const searchUser = async (req, res) => {
-    try {
+  try {
     const queryObject = req.query;
-        console.log(queryObject);
+    console.log(queryObject);
     if (!queryObject.first_name) {
-        res.status(400).json('Missing first_name parameter');
-        return;
+      res.status(400).json("Missing first_name parameter");
+      return;
     }
-    const users = await User.find({first_name: { $regex: new RegExp(queryObject.first_name , 'i')}})
-    .sort({ first_name: -1 })
-    .limit(10)
-    .exec()
-    
+    const users = await User.find({
+      first_name: { $regex: new RegExp(queryObject.first_name, "i") },
+    })
+      .sort({ first_name: -1 })
+      .limit(10)
+      .exec();
+
     if (users.length === 0) {
-        return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
-    
-    res.status(200).json({status:200, data : users});
-    
-    } catch (error) {
-        console.error('Error searching for a user by first_name:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-        }
+
+    res.status(200).json({ status: 200, data: users });
+  } catch (error) {
+    console.error("Error searching for a user by first_name:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const updateUser = async (req, res) => {
+  try {
+    const idUser = req.params.id;
+    const userUpdate = req.body;
 
-        try {
-          const idUser = req.params.id;
-        const userUpdate = req.body;
-        const timeInMss = Date.now();
-        userUpdate.last_update = timeInMss;
-         // Current User
-        const currentUser = await User.findById(idUser)
-        
-      //Error handling
-        const emailExist = await User.findOne({
-            _id: { $ne: idUser }, // Exclude the user being updated
-            email: userUpdate.email
-        });
+    if (req.body.password) {
+      let hash_password = md5(req.body.password);
+      
+      req.body.password = hash_password;
+     
+    }
+    const timeInMss = Date.now();
+    userUpdate.last_update = timeInMss;
+    // Current User
+    const currentUser = await User.findById(idUser);
 
-        if(emailExist) return res.status(400).json({message : `Email already exist`});
-        
-        // const usernameExist = await User.findOne({
-        //     _id: { $ne: idUser }, // Exclude the user being updated
-        //     user_name: userUpdate.user_name
-        // });
-        // if(usernameExist) return res.status(400).json({message : `username already exist`});
-       
+    //Error handling
+    const emailExist = await User.findOne({
+      _id: { $ne: idUser }, // Exclude the user being updated
+      email: userUpdate.email,
+    });
 
-        if(userUpdate.user_image !== ''){
-          const image = currentUser.user_image;
-          if(image){
-             await cloudinary.uploader.destroy(image)
-          }
-          const newImage = await cloudinary.uploader.upload(userUpdate.user_image, {
-            folder:'users/images/' + timeInMss  ,
-            width: 1000,
-            crop: "scale"
-          });
-          console.log(newImage)
-          userUpdate.user_image=newImage.secure_url;
+    if (emailExist)
+      return res.status(400).json({ message: `Email already exist` });
 
-          }
+    // const usernameExist = await User.findOne({
+    //     _id: { $ne: idUser }, // Exclude the user being updated
+    //     user_name: userUpdate.user_name
+    // });
+    // if(usernameExist) return res.status(400).json({message : `username already exist`});
 
-        const doc = await User.findByIdAndUpdate(idUser, userUpdate, {new: true})
+    if (userUpdate.user_image !== "") {
+      const image = currentUser.user_image;
+      if (image) {
+        await cloudinary.uploader.destroy(image);
+      }
+      const newImage = await cloudinary.uploader.upload(userUpdate.user_image, {
+        folder: "users/images/" + timeInMss,
+        width: 1000,
+        crop: "scale",
+      });
+      console.log(newImage);
+      userUpdate.user_image = newImage.secure_url;
+    }
 
-        res.status(200).json({
-          success: true,
-          doc,
-          status:200,
-          message:"user updated successfully"
-        })
-        } catch (error) {
-          // res.status(404).json("User not found");
-          console.log(error.message);
-         
-        }
-    
+    const doc = await User.findByIdAndUpdate(idUser, userUpdate, { new: true });
+
+    res.status(200).json({
+      success: true,
+      doc,
+      status: 200,
+      message: "user updated successfully",
+    });
+  } catch (error) {
+    // res.status(404).json("User not found");
+    console.log(error.message);
+  }
 };
 
-
 const deleteUser = async (req, res) => {
-    let idUser = req.params.id;
-    User.findByIdAndDelete(idUser)
+  let idUser = req.params.id;
+  User.findByIdAndDelete(idUser)
     .then((user) => {
-        res.status(200).json({status:200, message:"user deleted successfully"});
+      res
+        .status(200)
+        .json({ status: 200, message: "user deleted successfully" });
     })
     .catch((error) => {
-        res.status(404).json("invalid user id");
-    })
-}
+      res.status(404).json("invalid user id");
+    });
+};
 
-module.exports = {logUser, addUser, getUsers, getUser, searchUser, updateUser, deleteUser};
+module.exports = {
+  logUser,
+  addUser,
+  getUsers,
+  getUser,
+  searchUser,
+  updateUser,
+  deleteUser,
+};

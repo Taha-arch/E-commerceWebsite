@@ -7,6 +7,12 @@ const dotenv = require('dotenv').config();
 const addOrder = async (req, res) => {
     
     let {customer_id, order_items, order_date, cart_total_price, status} = req.body;
+
+    order_items = order_items.map(item => ({
+        product_id: item.product_id,
+        quantity: item.quantity
+      }));
+
     try{
     const newOrder = await new Order({
         customer_id : customer_id,
@@ -57,31 +63,32 @@ const getAllOrders = async (req, res) => {
     }
 };
 
-const getOrder = async (req,res) => {
-    try{
-        let idOrder = req.params.id;
-        const order = await Order.findById(idOrder)
-        .populate({path: 'customer_id', select: 'first_name last_name'})
-        .exec();
+const getOrder = async (req, res) => {
+  try {
+    let idOrder = req.params.id;
+    const order = await Order.findById(idOrder)
+      .populate({ path: 'customer_id', select: 'first_name last_name' })
+      .exec();
 
-        if (!order) {
-            res.status(404).json("No order found with the provided ID");
-        } else {
-            
-                const processedOrder = { ...order.toObject() };
-                processedOrder.order_items = Object.entries(order.order_items).map(([product_id, quantity]) => ({
-                    product_id,
-                    quantity
-                }));
-                
-                res.json({ order: processedOrder});
-            };
-            
-        }
-    catch (error) {
-        res.status(500).json({ error: error.message });
+    if (!order) {
+      res.status(404).json("No order found with the provided ID");
+    } else {
+      const processedOrder = { ...order.toObject() };
+      
+      // Assuming order_items is an array of objects [{ product_id, quantity }]
+      processedOrder.order_items = processedOrder.order_items.map(item => ({
+        product_id: item.product_id,
+        quantity: item.quantity
+      }));
+
+      res.json({ order: processedOrder });
     }
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
+
 
 
 

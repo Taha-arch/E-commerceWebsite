@@ -1,49 +1,49 @@
 import React, {useState, useEffect} from 'react';
 import {GrStatusGoodSmall} from 'react-icons/gr';
 import {AiOutlineCloseCircle} from 'react-icons/ai';
-
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import  { fetchUserDetails } from '../../redux/slicers/USER/useServices'
 export default function UserDetails(props) {
-  const {setOpenDetail, selectedUser, setSelectedUser} = props;
-  const token = localStorage.getItem('accessToken');
-  const [user, setUser] = useState(null);
-  console.log(selectedUser);
-  useEffect(() => {
-    if (selectedUser) {
-      const fetchUserDetails = async () => {
-        try {
-            const user_id = selectedUser._id;
-            const config = {
-                headers: { Authorization: `Bearer ${token}`}
-              }
-            fetch(`http://localhost:3001/users/${user_id}`, config)
-            .then(response => response.json())
-            .then( res => setUser(res.data));
-        } catch (error) {
-          console.log(error);
-        }
-      };
 
-      fetchUserDetails();
-    }
-  }, [selectedUser])
+const dispatch = useDispatch();
+
+  const {setOpenDetail, selectedUser, setSelectedUser} = props;
+  // const token = localStorage.getItem('accessToken');d
+  // const [user, setUser] = useState(null);
+
+  
+  // const user = useSelector(state => state.userDetail)
+  // console.log(user);
+  // useEffect(() => {
+  //   if (selectedUser) {
+      // const user_id = selectedUser._id;  
+      
+      //  dispatch(fetchUserDetails(user_id))
+       
+
+
+      // const fetchUserDetails = async () => {
+      //   try {
+      //       const config = {
+      //           headers: { Authorization: `Bearer ${token}`}
+      //         }
+      //       fetch(`http://localhost:3001/users/${user_id}`, config)
+      //       .then(response => response.json())
+      //       .then( res => setUser(res.data));
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
+
+      // fetchUserDetails();
+    // }
+  // }, [dispatch , selectedUser])
+
+  const user = selectedUser;
     return (
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-      
+    
       <div className=''>
   <div className=" max-w-2xl mx-auto  p-4 bg-white shadow-md rounded-lg">
   <div className="flex justify-center text-xl text-cyan-500 font-bold ">
@@ -68,7 +68,7 @@ export default function UserDetails(props) {
 <div className='flex  flex-row justify-around '>
 <div className='flex py-2 justify-center'>
 <div className='profile flex justify-center'>
-          <img className="flex rounded-full  " src={user && user.user_image} alt="#"></img>
+          <img className="flex rounded-full  " src={user && user.userImage} alt="#"></img>
         </div>
         </div>
 

@@ -3,8 +3,15 @@ import { HiOutlineBell, HiOutlineChatAlt, HiOutlineSearch } from 'react-icons/hi
 import { Popover, Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'; 
+import { useSelector } from 'react-redux'
+
+
+
+
 export default function Header() {
+
+  const user  = useSelector((state) => state.auth.user);
+    
     const navigate =useNavigate()
 
     const token = localStorage.getItem('accessToken');
@@ -25,7 +32,6 @@ export default function Header() {
     const userId = decodedToken.id; // Replace 'userId' with the actual key used in your token
     
     
-    const [user, setuser] = useState([]);
     
     
     
@@ -132,7 +138,9 @@ export default function Header() {
             <span className="sr-only">Open user menu</span>
             <div
               className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
-              
+              style={{
+                backgroundImage: `url(${user.user_image})`,
+              }}
             >
               <img alt="" className='rounded-full  ' src={user.user_image}></img>
               <span className="sr-only">Taha El atoui</span>
@@ -149,14 +157,14 @@ export default function Header() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Menu.Item>
+          <Menu.Item>
               {({ active }) => (
                 <div
                   className={classNames(
                     active && 'bg-gray-100',
                     'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                   )}
-                  onClick={() => navigate(`/profile/${userId}}`)}
+                  onClick={() => navigate(`/profile/${user._id}}`)}
                 >
                   Your Profile
                 </div>

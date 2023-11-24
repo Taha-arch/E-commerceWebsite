@@ -8,7 +8,6 @@ import {GrStatusGoodSmall} from 'react-icons/gr';
 import {RiMoreLine} from 'react-icons/ri';
 import {Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames' 
-import axios from 'axios'; 
 import DeleteUser from './DeleteUser';
 import AddUser from './AddUser';
 import PopUp from '../PopUp';
@@ -16,16 +15,14 @@ import { useNavigate } from 'react-router-dom'
 import UserDetails from './UserDetails';
 import Lottie from 'react-lottie'
 import swal from 'sweetalert'
-
-import { useDispatch } from 'react-redux';
-import { fetchData } from '../../redux/slicers/userSlice';
-import { useSelector } from 'react-redux';
-import * as animation from "../../assets/animations/Animation - 1699995980899.json"
-
+import  { useDispatch, useSelector } from 'react-redux'
+import  { fetchUsers } from '../../redux/slicers/USER/useServices'
+import { deleteUser } from '../../redux/slicers/USER/useServices';
+import * as animation from "../../assets/animations/Animation - 1700668658077.json"
 
 
 
-const defaultOptions = {
+ const defaultOptions =  {
   loop: true,
   autoplay: true,
   animationData: animation.default,
@@ -34,29 +31,29 @@ const defaultOptions = {
   }}
 
 
+
+
+
+
 export default function Users() {
   
-// const token = localStorage.getItem('accessToken');
-// const [users, setUsers] = useState([]);
 const [selectedUser, setSelectedUser] = useState(null);
 const [openModal, setOpenModal] = useState(false);
 const [openDetail, setOpenDetail] = useState(false);
 const [addUser, setAddUser] = useState(false);
+const [loading, setLoading] = useState(true);
 
+const user = useSelector(state => state.user)
+const dispatch = useDispatch()
 
-// const fetchUserData = async (page) => {
-//   try {
-//     const config = {
-//       headers: { Authorization: `Bearer ${token}`}
-//     }
-//     const response = await axios.get(`http://localhost:3001/users?page=${page}`, config);
-    
-//     return response.data.data;
-//   } catch (error) {
-//     console.error('Error fetching user data:', error);
-//     return [];
-//   }
-// };
+useEffect(() => {
+   setTimeout(() => {
+    dispatch(fetchUsers());
+    setLoading(false);
+  }, 1500);
+}, [dispatch]);
+
+console.log(user.users);
 
 const notify = () => swal(
   {
@@ -67,39 +64,17 @@ const notify = () => swal(
   }
 );
 
-// const handleDeleteUser = async () => {
-//   if (selectedUser) {
-//     try {
-//       const user_id = selectedUser._id;
-//       await axios.delete(`http://localhost:3001/users/${user_id}`).then(
-//         notify,
-        
-//     );;
-  
-//       setUsers((prevUsers) =>
-//         prevUsers.filter((user) => user._id !== user_id)
-//       );
-//       setSelectedUser(null);
-//       setOpenModal(false);
-//     } catch (error) {
-//       console.error('Error deleting user data:', error);
-//     }
-//   }
-// };
 
-const users = useSelector((state) => state.user);
-const loadingstate = useSelector((state) => state.loading);
-const dispatch = useDispatch();
-useEffect(() => {
-  
-  dispatch(fetchData(1));
-}, [dispatch]);
-     
-  console.log(users);
+const handleDeleteUser = () => {
+  dispatch(deleteUser(selectedUser._id));
+  notify();
+};
+ 
+     const navigate = useNavigate();
 
-
-     const navigate = useNavigate()
 return (
+  <div>
+     
   <div>
   <div>
     
@@ -121,10 +96,10 @@ return (
     </div>
   </div> 
 
-              <div className="table-container shadow-lg max-w-full overscroll-contain  ">
-              {loadingstate === true ? (
-          <Lottie options={defaultOptions} height={200} width={200} />
-        ) : (
+              <div className="table-container shadow-lg max-w-full overflow-x-auto ">
+              {loading && <Lottie options={defaultOptions} height={200} width={200} />}
+    {!loading && user.error ? <div>Error: {user.error}</div> : null}
+    {!loading && user.users.length ? ( 
       <table className="flex table w-full ">
         <thead className='border-y-2 '>
           <tr>
@@ -159,8 +134,8 @@ return (
           </tr>
         </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.user.map((item) => (
-              <tr key={item._id} className='relative bt-3 hover:bg-gray-200 transition-colors'>
+            {user.users.map((item) => (
+              <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                   <img alt="" className='rounded-full h-20 w-20 ' src={item.userImage}></img>
                 </td>
@@ -246,17 +221,17 @@ return (
             ))}
           </tbody>
         </table>
-        )}
+        ) : null}
         <div className='flex  justify-end  flex-col md:flex-row   w-full '>
        
         </div>
       </div>
-      {/* {openModal && (
+      {openModal && (
   
   <PopUp  Title="Delete User"> 
       <DeleteUser setOpenModal={setOpenModal} handleDeleteUser={handleDeleteUser}/>
   </PopUp>
-      )}  */}
+      )} 
      {addUser && (
   
   <PopUp  > 
@@ -269,6 +244,7 @@ return (
   </PopUp>
   )}
     
+    </div> 
     </div>
     
 )
