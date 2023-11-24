@@ -95,12 +95,12 @@ export default function Header() {
           <Menu.Button className="ml-2  rounded-full focus:outline-none focus:ring-2 focus:ring-neutral-400">
             <span className="sr-only">Open user menu</span>
             <div
-              className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
+              className="h-10 w-10 rounded-full  bg-cover bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${user.user_image})`,
               }}
             >
-              <img alt="" className='rounded-full  ' src={user.user_image}></img>
+              
               <span className="sr-only">Taha El atoui</span>
             </div>
           </Menu.Button>

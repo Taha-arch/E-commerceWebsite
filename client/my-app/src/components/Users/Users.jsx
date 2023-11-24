@@ -85,7 +85,7 @@ return (
         </h1>
       
       {/* <Link to="/users/adduser" style={{ textDecoration: 'none' }}> */}
-        <button className="px-2 py-1 sm:px-4  sm:py-2 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
+        <button className="px-2 py-1 sm:px-4  sm:py-3 flex font-semibold text-white bg-cyan-500 hover:bg-sky-800 focus:ring focus:ring-blue-300 rounded-lg focus:outline-none"
         onClick={() => {setAddUser(true)}}
         >
           <IoIosAddCircleOutline className="w-6 h-6 mr-1" />
@@ -137,7 +137,9 @@ return (
             {user.users.map((item) => (
               <tr key={user._id} className='bt-3 hover:bg-gray-200 transition-colors'>
                 <td className="text-center py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
-                  <img alt="" className='rounded-full h-20 w-20 ' src={item.userImage}></img>
+                  <div className='flex w-10 h-10 md:w-20 md:h-20 '>
+                  <img alt="" className='rounded-full w-full ' src={item.userImage}></img>
+                  </div>
                 </td>
                 <td className=" p-5  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.first_name}</td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{item.last_name}</td>
