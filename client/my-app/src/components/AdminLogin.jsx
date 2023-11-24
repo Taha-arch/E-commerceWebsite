@@ -23,7 +23,6 @@ const AdminLogin = () => {
       setIsLoggingIn(true);
       await dispatch(login({ user_name, password }));
       window.location.href = '/';
-
     
     } catch (error) {
       setIsLoggingIn(false);
