@@ -29,12 +29,14 @@ export default function Profile() {
   }, [user]);
 
   const handleFieldChange = (fieldName, value) => {
+    
     setUserInfo({ ...userInfo, [fieldName]: value });
+    console.log(userInfo.password);
   };
   const handlePasswordChange = (value) => {
   const password = md5(value);
-  console.log(password)
-  console.log(user.password)
+  // console.log(password)
+  // console.log(user.password)
       if(password === user.password)
      { return;}else {
         alert('Wrong password');
@@ -44,7 +46,7 @@ export default function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedFields = { ...userInfo, Id: user._id }; // Include the 'Id' field
-    console.log(updatedFields);
+    // console.log(updatedFields);
     dispatch(updateUserDetails(updatedFields));
     notify();
   };
@@ -64,7 +66,7 @@ export default function Profile() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
