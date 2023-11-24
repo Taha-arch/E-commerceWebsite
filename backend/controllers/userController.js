@@ -14,7 +14,8 @@ const logUser = async (req, res) => {
     res.status(400);
     throw new Error("all Field are required");
   }
-  const userFound = await User.findOne({ user_name });
+ 
+  const userFound = await User.findOne({ user_name , password });
   if (userFound && !userFound.active)
     res.status(401).json("your account is Desactivated !!!");
   if (userFound && userFound.password) {
@@ -41,7 +42,7 @@ const logUser = async (req, res) => {
         refresh_Token,
       });
   } else {
-    res.status(404).json("Invalid email or username");
+    res.status(404).json("Invalid  username or password");
   }
 };
 
