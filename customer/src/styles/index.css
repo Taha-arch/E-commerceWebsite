@@ -10,9 +10,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@media screen and (max-width: 768px) {
+    .images {
+        width: 100%; /* Adjust the width as needed for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        margin-left: 0;
+        margin-top: 0;
+    }
+}
+
+
+
+
 /* Your additional styles go here */
 h1{
-    font-size:40px;
+    font-size:30px;
 }
 
 .heart{
@@ -23,22 +35,20 @@ h1{
 }
 
 .box{
-width: 1120px;
-height: 816px;
+width: 80%;
 }
 
 .images{
     width: 69px;
-    height: 338px;
+    height: auto;
     margin-left: 15px;
-    margin-top: 15px;
+    margin-top: 80px;
 }
 .main-image{
     width: 439px;
-    height: 400px;
-    margin-left: 15px;
-    margin-top: 15px;
+    height: 550px;
     margin-top: 80px;
+   
 }
 .card{
     transition: 0.3s;
@@ -49,5 +59,13 @@ height: 816px;
 }
 .product-info{
     margin-top: 80px;
-    padding-left: 30px;
+    width: 30%;
 }
+.image-thumbnail {
+    cursor: pointer;
+  }
+  
+  .selected {
+    border: 2px solid black; /* You can adjust the border style and color as needed */
+  }
+  

@@ -9,8 +9,8 @@ export default function ProductCard() {
     setButtonActive(!isButtonActive);
   };
   return (
-    <div>
-        <div className='parent flex justify-center items-center h-full  bg-slate-400'>
+    <div className='w-full'>
+        <div className=' flex justify-center items-center h-full  '>
         <div className='card w-80 h-fit bg-white border m-5 rounded-2xl'>
             <div className='flex justify-between '>
               <div className='bg-orange-500 h-fit font-bold   text-md  ml-4 pl-2 pr-1 pt-0 mt-2    text-white '>
