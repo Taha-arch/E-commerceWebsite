@@ -1,4 +1,4 @@
-import React, { Fragment,useState,useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { HiOutlineBell, HiOutlineChatAlt, HiOutlineSearch } from 'react-icons/hi'
 import { Popover, Transition, Menu } from '@headlessui/react'
 import classNames from 'classnames'
@@ -100,7 +100,6 @@ export default function Header() {
                 backgroundImage: `url(${user.user_image})`,
               }}
             >
-              <img alt="" className='rounded-full  ' src={user.user_image}></img>
               <span className="sr-only">Taha El atoui</span>
             </div>
           </Menu.Button>
