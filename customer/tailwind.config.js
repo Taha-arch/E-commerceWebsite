@@ -11,9 +11,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'oswald': ['Oswald', 'sans-serif'],
+        'Playfair': ['Playfair Display', 'sans-serif'],
+        'Lora': ['Lora', 'sans-serif'],
+        'Poppins': ['Poppins', 'sans-serif'],
+      },
       colors: {
-        'primary_bg': '#f3f3f3',
-      }
+        truegreen: "#2F5951",
+        truegreentint: "#587A73",
+        primary: " #f3f3f3"
+      },
     },
   },
   plugins: [],
