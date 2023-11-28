@@ -20,6 +20,7 @@ module.exports = {
       colors: {
         truegreen: "#2F5951",
         truegreentint: "#587A73",
+        primary: " #f3f3f3"
       },
     },
   },

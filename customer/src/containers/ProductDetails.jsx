@@ -1,8 +1,18 @@
-import { React, useState } from "react";
+import { React, useState,useRef } from "react";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { SlHandbag } from "react-icons/sl";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 import "../styles/index.css";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Inline from "yet-another-react-lightbox/plugins/inline";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+
+
+
+
+
 
 export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
@@ -11,6 +21,7 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("/prada1.jpg");
   const UnitPrice = 100;
   const [TotalPrice, setTotalPrice] = useState(UnitPrice);
+  const thumbnailsRef = useRef(null);
 
   const changeMainImage = (newImage) => {
     setMainImage(newImage);
@@ -33,12 +44,23 @@ export default function ProductDetails() {
       });
     }
   };
+  const inline = {
+    style: {
+      width: "100%",
+      maxWidth: "900px",
+      aspectRatio: "3 / 2",
+      margin: "0 auto",
+    },
+  };
+
 
   return (
-    <div className="parent h-full flex flex-col items-center">
+    
       <div className=" box flex flex-col  gap-4">
-        <div className="flex flex-row justify-start  gap-5">
-          <div className="images flex flex-col justify-start gap-3 p-1 pt-0">
+        <div className="container w-full justify-start  gap-5">
+        <div className="imagescontainer">
+          <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
+          
             <div
               className={`image-thumbnail ${
                 selectedImage === "/prada1.jpg" && "selected"
@@ -64,6 +86,11 @@ export default function ProductDetails() {
               <img src="/prada2.jpg" alt="" />
             </div>
           </div>
+          </div>
+
+
+
+        <div className="mainimagecontainer">
           <div
             className="main-image"
             style={{
@@ -73,6 +100,55 @@ export default function ProductDetails() {
               backgroundRepeat: "no-repeat",
             }}
           ></div>
+          </div>
+
+          <div className="slide visible md:hidden">
+      <Lightbox styles={{root:{height:"350px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnailsContainer:{height:"70px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnailsTrack:{height:"60px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnail:{width:"120px",height:"60px","--yarl__thumbnails_thumbnail_background": "rgba(255, 255, 255)","--yarl__thumbnails_thumbnail_active_border_color": "rgba(0, 0, 0)"},button:{height:"5px","--yarl__slide_description_color": "rgba(0, 0, 0)"},slide:{height:"270px",width:"100px"}}} slides={[
+          {
+            src: "/prada1.jpg",
+            alt: "image 1",
+            width: 3840,
+            height: 2560,
+            srcSet: [
+              { src: "/prada1.jpg", width: 640, height: 427 },
+              { src: "/prada1.jpg", width: 1200, height: 800 },
+              { src: "/prada1.jpg", width: 2048, height: 1365 },
+              { src: "/prada1.jpg", width: 3840, height: 2560 },
+            ]
+          },
+          {
+            src: "/prada2.jpg",
+            alt: "image 1",
+            width: 3840,
+            height: 2560,
+            srcSet: [
+              { src: "/prada2.jpg", width: 640, height: 427 },
+              { src: "/prada2.jpg", width: 1200, height: 800 },
+              { src: "/prada2.jpg", width: 2048, height: 1365 },
+              { src: "/prada2.jpg", width: 3840, height: 2560 },
+            ]
+          },
+          {
+            src: "/prada3.jpg",
+            alt: "image 1",
+            width: 3840,
+            height: 2560,
+            srcSet: [
+              { src: "/prada3.jpg", width: 640, height: 427 },
+              { src: "/prada3.jpg", width: 1200, height: 800 },
+              { src: "/prada3.jpg", width: 2048, height: 1365 },
+              { src: "/prada3.jpg", width: 3840, height: 2560 },
+            ]
+          },
+          // ...
+        ]} inline={inline} plugins={[Inline,Thumbnails]}  thumbnails={{ref: thumbnailsRef }} />
+      </div>
+
+          <div className="smallscreenimagecontainer">
+
+          </div>
+          
+          
           <div className="product-info flex flex-col gap-10">
             <div class="flex items-center">
               <svg
@@ -176,11 +252,11 @@ export default function ProductDetails() {
               </div>
               <div className="pt-3">
                 <h5 className=" font-oswald flex flex-row items-center gap-1">
-                  {" "}
+                  
                   <SlHandbag /> Return Delivery
                 </h5>
                 <p className="ml-5 font-Poppins flex flex-row text-gray-400">
-                  Free 30 days Delivery Return.{" "}
+                  Free 30 days Delivery Return.
                   <p className="underline font-Poppins">Details</p>
                 </p>
               </div>
@@ -188,15 +264,15 @@ export default function ProductDetails() {
           </div>
         </div>
 
-        <div className=" flex flex-col">
-          <div className="w-full h-10  border-b-2 border-gray-400 font-oswald">
+        <div className=" flex flex-col w-full">
+          <div className="sectiontitle w-full   border-b-2 border-gray-400 font-oswald">
             <span className="pb-3.5 px-2  border-b-2 border-black">
               DESCRIPTION
             </span>
           </div>
-          <div className="flex flex-row mt-7">
-            <div className="ml-5 w-2/4">
-              <h2 className="font-oswald mb-5">ABOUT PRODUCT</h2>
+          <div className="flex flex-col  md:flex-row mt-7">
+            <div className="descriptioncontainer1 ml-5 w-2/4">
+              <h2 className="font-oswald mb-5 underline">ABOUT PRODUCT</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
                 dolor praesentium velit officia nemo numquam fugit nostrum
@@ -205,16 +281,11 @@ export default function ProductDetails() {
                 amet consectetur adipisicing elit. Voluptatibus quam vitae,
                 voluptatem sequi fugiat, dolores quia expedita error in ullam
                 tempore magni assumenda autem necessitatibus consequuntur sunt
-                adipisci vero! Dolorum. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Deserunt, quae assumenda, doloremque
-                accusamus, cupiditate reprehenderit doloribus quis non nesciunt
-                placeat nulla provident error dicta! Nihil placeat fuga
-                repudiandae iusto et! Tenetur ea inventore non, laboriosam
-                voluptatem maiores cumque quia voluptate hic optio quos dolores,
-                beatae nobis laborum mollitia quidem ex tempora nam aut qui
-                fugit sed.
+                adipisci vero! Dolorum. Lorem ipsum dolor sit amet consectetur.
+                
               </p>
-              <h2 className="font-oswald mb-3 mt-5">ADVANTAGES</h2>
+              
+              <h2 className="font-oswald mb-3 mt-5 underline">ADVANTAGES</h2>
               <ul className="ml-6 leading-9 list-disc">
                 <li> Smocked body</li>
                 <li>Adjustable straps</li>
@@ -226,8 +297,8 @@ export default function ProductDetails() {
                 <li>Machine washable</li>
               </ul>
             </div>
-            <div className="ml-10 w-2/4">
-              <h2 className="font-oswald mb-5">SHIPPING</h2>
+            <div className="descriptioncontainer2 ml-5 w-2/4">
+              <h2 className="font-oswald mb-5 underline">SHIPPING</h2>
               <p className="leading-9">
                 SHIPPING We offer Free Standard Shipping for all orders over $75
                 to the 50 states and the District of Columbia. The minimum order
@@ -239,13 +310,19 @@ export default function ProductDetails() {
               </p>
             </div>
           </div>
-          <div className=" flex flex-row">
+          <div className="sectiontitle w-full h-10  border-b-2 border-gray-400 font-oswald">
+            <span className="pb-3.5 px-2  border-b-2 border-black">
+              More +
+            </span>
+          </div>
+          <div className="morecontainer w-100 flex flex-row over">
             <ProductCard />
             <ProductCard />
             <ProductCard />
           </div>
+          
         </div>
       </div>
-    </div>
+    
   );
 }
