@@ -8,8 +8,8 @@ import ProductDetails from './containers/ProductDetails';
 import OrderSummary from './components/OrderSummary';
 import CartItems from './components/CartItems';
 import Cart from './containers/Cart';
-import Layout from './component/Layout';
-import CustomerSiderbar from './component/CustomerSiderbar';
+import Layout from './components/Layout';
+import CustomerSiderbar from './components/CustomerSiderbar';
 
 
 function App() {
@@ -17,8 +17,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/profile' element={<CustomerSiderbar/>}></Route>
-          
+          <Route path='/Cart' element={<Cart/>}></Route>
         </Route>
       </Routes>
     </Router>
