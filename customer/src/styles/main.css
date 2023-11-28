@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap');
+
+/* Include Tailwind CSS directives */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+html, body{
+    font-family: 'Playfair Display' ;
+}
+.primary-bg{
+    background-color: #f3f3f3;
+}
+.box{
+    width: 100%;
+    height: auto;
+    padding-inline: 10%;
+    }
+
+    .secondary-bg {
+        color: #2F5951;
+    }
+    .green-bg {
+      background-color: #2F5951;
+    }
+    hr{
+        border-color: grey;
+        margin: auto;
+        display: block;
+    }
+    .icon-size{
+        font-size: 2rem;
+    }
+
+
+    /* Active link style */
+.nav-link {
+    position: relative;
+    color: black; /* Set the default text color */
+  }
+  
+  /* Underline for active link */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; /* Adjust to position the line as needed */
+    left: 0;
+    width: 0;
+    height: 3px; /* Adjust line thickness if needed */
+    background-color: #2F5951; /* Set the color of the underline */
+    transition: width 0.5s ease; /* Transition width for smooth movement */
+  }
+  
+  /* Active link underline */
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    width: 100%; /* Set full width for the active link and hovered link */
+  }
+  
+
+  /* FOOTER */
+
+  .footer {
+    border-bottom-width: 2rem;
+    border-color: #f3f3f3;
+  }
+  .footer-title{
+    font-size: 1.85rem;
+    font-weight: 500;
+  }
+  .phone{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+
+  /* PROFILE SIDEBAR SETUP */
+  .green-hover:hover {
+    background-color: #2F5951;
+    color: white;
+  }
