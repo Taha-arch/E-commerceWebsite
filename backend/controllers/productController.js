@@ -17,10 +17,10 @@ const addProduct = (req, res) => {
     }else{
         
         
-        const urlProductImage = req.file ? req.file.path : null;
+        const urlProductImages = req.files ? req.files.map(file => file.path) : null;;
         let newProduct = new Product({
             sku: sku,
-            product_image: urlProductImage,
+            product_image: urlProductImages,
             product_name: product_name,
             subcategory_id: subcategory_id,
             short_description: short_description,
