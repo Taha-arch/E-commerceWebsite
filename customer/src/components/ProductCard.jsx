@@ -9,7 +9,7 @@ export default function ProductCard() {
     setButtonActive(!isButtonActive);
   };
   return (
-    <div className='w-auto'>
+    <div className='w-auto cursor-pointer'>
         <div className=' flex justify-center items-center h-full  '>
         <div className='card w-80 h-fit bg-white border m-5 rounded-2xl'>
             <div className='flex justify-between '>

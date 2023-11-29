@@ -10,6 +10,7 @@ import CartItems from './components/CartItems';
 import Cart from './containers/Cart';
 import Layout from './components/Layout';
 import CustomerSiderbar from './components/CustomerSiderbar';
+import Collections from './containers/Collections';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
+          <Route path='/collections' element={<Collections/>}></Route>
         </Route>
       </Routes>
     </Router>
