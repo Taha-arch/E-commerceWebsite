@@ -7,15 +7,20 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./src/App.js",
     "./public/index.html",
-    "./src/styles/*.{css,scss}",
+    "./src/styles/*.{css,scss}", // Assuming your custom styles are in a 'styles' directory
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'oswald': ['Oswald', 'sans-serif'],
+        'Playfair': ['Playfair Display', 'sans-serif'],
+        'Lora': ['Lora', 'sans-serif'],
+        'Poppins': ['Poppins', 'sans-serif'],
+      },
       colors: {
-        'whitesmoke': '#f5f5f5',
-        black: '#141415',
-        green : '#2F5951',
-        'rose': '#EBE0DB',
+        truegreen: "#2F5951",
+        truegreentint: "#587A73",
+        primary: " #f3f3f3"
       },
     },
   },

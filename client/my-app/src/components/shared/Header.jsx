@@ -27,12 +27,14 @@ export default function Header() {
     
     const [user, setuser] = useState([]);
     
-    
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     
     const fetchUserData = async () => {
       try {
         
-        const response = await axios.get(`http://localhost:3001/users/${userId}`);
+        const response = await axios.get(`http://localhost:3001/users/${userId}`,config);
         
         return response.data.data;
       } catch (error) {
@@ -45,7 +47,7 @@ export default function Header() {
       const fetchData = async () => {
         const userData = await fetchUserData();
         setuser(userData);
-        console.log(user);
+        
       };
     
       fetchData();
