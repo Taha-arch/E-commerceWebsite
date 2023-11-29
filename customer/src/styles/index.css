@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* src/index.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;1,100;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&display=swap');
@@ -376,3 +377,182 @@ color:rgb(81, 81, 81);
     text-align: center;
   }
 }
+=======
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Oswald:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+
+/* Your additional styles go here */
+h1{
+    font-size:30px;
+}
+
+.heart{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.parent{
+    background-color: whitesmoke;
+}
+
+.box{
+width: 100%;
+align-items: center;
+padding-inline: 10%;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+}
+.images{
+    width: 69px;
+    height: auto;
+    
+    margin-top: 80px;
+}
+.main-image{
+    width: 100%;
+    height: 550px;
+    margin-top: 80px;
+}
+.mainimagecontainer{
+        width: 400px;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+.card{
+    transition: 0.3s;
+}
+.card:hover{
+    transform:scale(1.05);
+    box-shadow: 0px 0px 8px 0px gray;
+}
+.product-info{
+    margin-top: 80px;
+    width: 30%;
+}
+.image-thumbnail {
+    cursor: pointer;
+}
+
+.selected {
+    border: 2px solid black; /* You can adjust the border style and color as needed */
+}
+.sectiontitle{
+    
+    height: 40px;
+}
+.morecontainer{
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: center;
+overflow: scroll;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .images {
+        display: none;
+        width: 50%; /* Adjust the width as needed for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        flex-direction: row;
+        align-items: center;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .imagescontainer{
+        display: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .slide{
+        height: 300px;
+    }
+    .mainimagecontainer{
+        display: none;
+        width: 100%;
+        height: fit-content;
+        display: hidden;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-image{
+        display: none;
+        width: 80%;
+        height: 380px;
+        margin-top: 0px;
+    }
+    
+    .product-info{
+        margin-top: 40px;
+        width: 100%;
+    }
+    .descriptioncontainer1{
+        width: 90%;
+        font-size: 20px;
+    }
+    .descriptioncontainer2{
+        margin-top: 20px;
+        width: 90%;
+        font-size: 20px;
+    }
+    .sectiontitle{
+        font-size: 30px;
+        height: 60px;
+    }
+    .morecontainer{
+        width: 100%;
+        overflow: scroll;
+    }
+}
+>>>>>>> 71052738551363839d47003122c5485ebc67db1a

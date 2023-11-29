@@ -44,7 +44,7 @@ export default function ProductDetails(props) {
             <td className=''></td>
             <td className='item-detail w-1/4 '>Sku:</td>
             <td className=''>{product && product.sku}</td>
-           
+          
         </tr>
         <tr>
             <td className='item-detail pr-2'>Category:</td>

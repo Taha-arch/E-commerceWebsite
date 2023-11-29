@@ -1,3 +1,4 @@
+import './styles/main.css';
 import React from 'react';
 import './styles/index.css';
 import LandingPage from './containers/LandingPage';
@@ -13,5 +14,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;
