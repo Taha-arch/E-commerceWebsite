@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ImageSlider from "../imageSlider";
 
 
 export default function ProductDetails(props) {
@@ -17,10 +18,11 @@ export default function ProductDetails(props) {
           console.log(error);
         }
       };
-
       fetchProductDetails();
+
   }, [selectedProduct]);
 
+  
     return (
 
   <div className="popup-details rounded-md overflow-y-auto h-1/3 mx-auto px-4 py-2 bg-white shadow-md  mt-3">
@@ -33,9 +35,14 @@ export default function ProductDetails(props) {
     <div className="bodyPopup pt-2 ml-2">
         <div className="container flex gap-3">
           <div className="w-5/5 h-5/5 image-product">
-          <div className="pt-4">
-          <img className="" src={product && product.productImage} alt="product_image"></img>
-        </div>
+        
+          {/* {product && product.productImage && product.productImage.length > 0 && (
+              <div className="pt-4 image-slider w-1/2 h-1/2">
+                <ImageSlider images={product.productImage} />
+              </div>
+            )} */}
+          <img className="" src={product && product.productImage[0]} alt="product_image"></img>
+        
           </div>
         <table className='productDetails '>
         <tr className=''>
@@ -44,7 +51,7 @@ export default function ProductDetails(props) {
             <td className=''></td>
             <td className='item-detail w-1/4 '>Sku:</td>
             <td className=''>{product && product.sku}</td>
-           
+          
         </tr>
         <tr>
             <td className='item-detail pr-2'>Category:</td>
@@ -80,16 +87,13 @@ export default function ProductDetails(props) {
             
             <td colSpan={3} className='p-1'> {product && product.longDescription}</td>
         </tr>
- 
+
     </table>
         </div>
- 
+
     </div>
 
   </div>
 
 );
 }
-
-
-  

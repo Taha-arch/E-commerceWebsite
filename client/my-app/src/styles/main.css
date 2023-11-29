@@ -157,5 +157,16 @@
     padding:1px;
     padding-left: 88%;
 }
-
-
+.image-slider {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.image-slider .slick-dots {
+    bottom: -30px;
+}
+.image-slider img {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}

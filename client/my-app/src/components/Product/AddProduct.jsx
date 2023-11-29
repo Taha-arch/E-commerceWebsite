@@ -136,7 +136,9 @@ export default function AddProduct() {
     if (validateForm()) {
     const formData = new FormData();
     formData.append('product_name', productInfo.productName);
-    formData.append('product_image', productInfo.productImage);
+    for (let i = 0; i < productInfo.productImage.length; i++) {
+      formData.append('product_image', productInfo.productImage[i]);
+    }
     formData.append('sku', productInfo.sku);
     formData.append('short_description', productInfo.short_description);
     formData.append('long_description', productInfo.long_description);
@@ -460,8 +462,8 @@ return (
                     <input type="file" class="opacity-0" 
                     name="productImage"
                     id="productImage"
-                    
-                    onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
+                    multiple
+                    onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files })}
                     required/>
                  
                 </label>
