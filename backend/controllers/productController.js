@@ -1,6 +1,7 @@
 const Product = require('../models/Product');
 const Subcategory = require('../models/Subcategory');
 const Category = require('../models/Category');
+const cloudinary = require("cloudinary").v2;
 
 const addProduct = (req, res) => {
     let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
@@ -149,6 +150,16 @@ const updateProduct = async (req, res) => {
     const skuExist = await Product.findOne({ _id: { $ne: idProduct}, sku :productUpdate.sku});
     if(skuExist) return res.status(400).json({message : `sku already exist`});
 
+    if (productUpdate.product_image !== "") {
+        const timeInMss = Date.now();
+        const newImage = await cloudinary.uploader.upload(productUpdate.product_image, {
+          folder: "product_images/" + timeInMss,
+          width: 1000,
+          crop: "scale",
+        });
+        // console.log(newImage);
+        productUpdate.product_image = newImage.secure_url;
+      }
     const doc = await Product.findByIdAndUpdate(idProduct, productUpdate);
     if (doc) {
         res.status(200).json({status:200, message:"Product updated successfully"});
