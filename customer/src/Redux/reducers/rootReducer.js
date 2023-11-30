@@ -5,7 +5,7 @@ import productReducer from '../slicers/Product/productDetailsSlice'
 
 
 const rootReducer = combineReducers({
-  product: productReducer
+  productDetails: productReducer
 });
 
 export const persistConfig = {

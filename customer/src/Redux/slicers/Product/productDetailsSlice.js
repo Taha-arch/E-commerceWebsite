@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProductDetails } from './productDetailsSlice'
+import { fetchProductDetails } from './productServices'
 // Define the initial state
 const initialState = {
     productDetails: null,
@@ -20,7 +20,7 @@ const productDetailSlice = createSlice({
       })
       .addCase(fetchProductDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.userDetail = action.payload;
+        state.productDetails = action.payload;
         state.error = null;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
