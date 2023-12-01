@@ -27,6 +27,7 @@ export default function Products() {
     try {
       setLoading(true);
       const response = await axios.get('http://localhost:3001/products');
+      console.log(response.data);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching product data:', error);

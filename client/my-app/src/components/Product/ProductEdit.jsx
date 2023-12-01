@@ -53,27 +53,29 @@ export default function ProductEdit() {
     }
   }
 
-  const handleFileChange = (event) => {
+  const handleDivClick = (index) => {
+    const fileInput = document.getElementById(`fileInput_${index}`);
+    if (fileInput) {
+      fileInput.click();
+    }
+  };
+  
+  const handleFileChange = (event, index) => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
+        const updatedImages = [...productInfo.productImage];
+        updatedImages[index] = reader.result;
         setProductInfo({
           ...productInfo,
-          productImage: reader.result,
-          
+          productImage: updatedImages,
         });
-        
       };
       reader.readAsDataURL(file);
     }
-  };
-  const handleDivClick = (event) => {
-    event.preventDefault();
-    // Trigger the hidden file input when the div is clicked
-    fileInputRef.current.click();
-  };
+  };  
+  
   const fileInputRef = React.createRef();
 
   const fetchSubCategoryData = async () => {  
@@ -104,8 +106,6 @@ export default function ProductEdit() {
   }, [category]);
   
 
-
-
   const fetchCategoryData = async () => {
     try {
       const response = await axios.get('http://localhost:3001/categories/');
@@ -129,7 +129,6 @@ export default function ProductEdit() {
     fetchData();
   }, [category]); 
 
- 
     
   const { id } = useParams();
 
@@ -247,7 +246,7 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, productName: e.target.value })}
             required
           />
-           
+          
         </td>
         
         <td className='w-1/4'>
@@ -467,21 +466,25 @@ return (
           </td>
           <td colSpan={3}>
           <div className='flex py-2 '>
-      <div className='profile flex justify-center'>
-  
-      <label htmlFor="fileInput" className=' flex second-col product-img bg-no-repeat bg-cover' style={{ backgroundImage: `url(${productInfo.productImage})`, cursor: 'pointer' }} onClick={handleDivClick}>
+
+          {productInfo.productImage && productInfo.productImage.map((product, index) => (
         
-      </label>
-      <RiEdit2Fill className="icon text-white w-5 h-5 cursor-pointer" onClick={handleDivClick}/>
-      <input
-        type="file"
-        name="productImage"
-        id="productImage"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
-    </div>
+        <div className='profile flex justify-center mx-2 ' key={index}>
+        <label htmlFor={`fileInput_${index}`} className='flex second-col product-img bg-no-repeat bg-cover' 
+        style={{ backgroundImage: `url(${product})`, cursor: 'pointer' }} onClick={() => handleDivClick(index)}>
+        </label>
+        <RiEdit2Fill className="icon text-white w-5 h-5 cursor-pointer" onClick={() => handleDivClick(index)}/>
+        <input
+          type="file"
+          name={`productImage_${index}`}
+          id={`fileInput_${index}`}
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={(e) => handleFileChange(e, index)}
+        />
+      </div>
+      
+     ))}
     </div>
 
         </td>
