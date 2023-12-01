@@ -27,6 +27,7 @@ export default function Products() {
     try {
       setLoading(true);
       const response = await axios.get('http://localhost:3001/products');
+      console.log(response.data);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching product data:', error);
@@ -102,7 +103,7 @@ export default function Products() {
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product) => (
               <tr key={product._id}>
-                <td className="  py-5  whitespace-no-wrap text-xs  sm:text-sm text-gray-700"><img alt="product" src={product.productImage} className='w-26 h-24 rounded-lg'></img></td>
+                <td className="  py-5  whitespace-no-wrap text-xs  sm:text-sm text-gray-700"><img alt="product" src={product.productImage[0]} className='w-26 h-24 rounded-lg'></img></td>
                 <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
                 <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
                 <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
