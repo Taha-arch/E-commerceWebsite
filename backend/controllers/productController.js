@@ -1,6 +1,7 @@
 const Product = require('../models/Product');
 const Subcategory = require('../models/Subcategory');
 const Category = require('../models/Category');
+const cloudinary = require("cloudinary").v2;
 
 const addProduct = (req, res) => {
     let {sku, product_name, subcategory_id, short_description, long_description, quantity, price,discount_price, options} = req.body;
@@ -17,10 +18,10 @@ const addProduct = (req, res) => {
     }else{
         
         
-        const urlProductImage = req.file ? req.file.path : null;
+        const urlProductImages = req.files ? req.files.map(file => file.path) : null;;
         let newProduct = new Product({
             sku: sku,
-            product_image: urlProductImage,
+            product_image: urlProductImages,
             product_name: product_name,
             subcategory_id: subcategory_id,
             short_description: short_description,
@@ -61,6 +62,7 @@ const addProduct = (req, res) => {
                 "categoryName": product.subcategory_id ? product.subcategory_id.category_id.category_name : null,
                 "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
                 "shortDescription": product.short_description,
+                "longDescription": product.long_description,
                 "price": product.price,
                 "quantity": product.quantity,
                 "discountPrice": product.discount_price,
@@ -149,6 +151,20 @@ const updateProduct = async (req, res) => {
     const skuExist = await Product.findOne({ _id: { $ne: idProduct}, sku :productUpdate.sku});
     if(skuExist) return res.status(400).json({message : `sku already exist`});
 
+    if (Array.isArray(productUpdate.product_image) && productUpdate.product_image.length > 0) {
+        const updatedImages = [];
+        for (const image of productUpdate.product_image) {
+          const timeInMss = Date.now();
+          const newImage = await cloudinary.uploader.upload(image, {
+            folder: "product_images/" + timeInMss,
+            width: 1000,
+            crop: "scale",
+          });
+          updatedImages.push(newImage.secure_url);
+        }
+        productUpdate.product_image = updatedImages;
+      }
+
     const doc = await Product.findByIdAndUpdate(idProduct, productUpdate);
     if (doc) {
         res.status(200).json({status:200, message:"Product updated successfully"});
@@ -157,8 +173,6 @@ const updateProduct = async (req, res) => {
     }
 
 };
-
-
 
 const deleteProduct = async (req, res) => {
     let idProduct = req.params.id;

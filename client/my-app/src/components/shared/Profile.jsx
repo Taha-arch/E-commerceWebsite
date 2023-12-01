@@ -5,42 +5,48 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/HoverBlur.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserDetails } from "../../redux/slicers/USER/useServices";
 import { updateUserDetails } from "../../redux/slicers/USER/useServices";
+import md5 from "md5";
 
-export default function EditUser() {
-
+export default function Profile() {
   const [userInfo, setUserInfo] = useState();
+  const [showOldPassword, setShowOldPassword] = useState(false);
 
-  const { id } = useParams();
   const dispatch = useDispatch();
-  const userDetail = useSelector((state) => state.userDetails.userDetail);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    dispatch(fetchUserDetails(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    if (userDetail) {
+    if (user) {
       setUserInfo({
-        first_name: userDetail.first_name || "",
-        last_name: userDetail.last_name || "",
-        email: userDetail.email || "",
-        user_name: userDetail.user_name || "",
-        user_image: userDetail.user_image || "",
-        role: userDetail.role,
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        email: user.email || "",
+        user_name: user.user_name || "",
+        user_image: user.user_image || "",
+        role: user.role,
       });
     }
-  }, [userDetail]);
+  }, [user]);
 
   const handleFieldChange = (fieldName, value) => {
+    
     setUserInfo({ ...userInfo, [fieldName]: value });
+    console.log(userInfo.password);
   };
+  const handlePasswordChange = (value) => {
+  const password = md5(value);
+  // console.log(password)
+  // console.log(user.password)
+      if(password === user.password)
+     { return;}else {
+        alert('Wrong password');
+     }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedFields = { ...userInfo, Id: id }; // Include the 'Id' field
-    console.log(updatedFields);
+    const updatedFields = { ...userInfo, Id: user._id }; // Include the 'Id' field
+    // console.log(updatedFields);
     dispatch(updateUserDetails(updatedFields));
     notify();
   };
@@ -60,7 +66,7 @@ export default function EditUser() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    // console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -86,17 +92,17 @@ export default function EditUser() {
 
   return (
     <div className="">
-      <div className=" max-w-2xl mx-auto  p-4 bg-white shadow-md rounded-lg">
+      <div className=" max-w-4xl mx-auto  p-4 bg-white shadow-md rounded-lg">
         <div className="flex justify-center text-xl text-cyan-500 font-bold ">
-          <h2>Edit User</h2>
+          <h2>My Profile</h2>
         </div>
         <div className="flex flex-col justify-center p-10 pb-5 mb-5 border rounded-xl">
           <div className="flex  flex-row justify-around ">
             <div className="flex py-2 justify-center">
-              <div className="profile flex justify-center">
+              <div className="profile w-48 h-48 flex justify-center">
                 <label
                   htmlFor="fileInput"
-                  className=" flex second-col profile-img bg-no-repeat bg-cover"
+                  className=" flex second-col profile-img w-48 h-48 bg-no-repeat bg-cover"
                   style={{
                     backgroundImage: `url(${userInfo.user_image})`,
                     cursor: "pointer",
@@ -191,6 +197,7 @@ export default function EditUser() {
                       />
                     </td>
                   </tr>
+
                   <tr>
                     <td>
                       <label
@@ -213,6 +220,50 @@ export default function EditUser() {
                         placeholder={userInfo.email}
                       />
                     </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor="password"
+                      >
+                       New Password
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                        type="password"
+                        name="password"
+                        id="password"
+                        onChange={(e) =>
+                          handleFieldChange("password", e.target.value)
+                        }
+                        required
+                        placeholder={"Enter Your New Password"}
+                        onFocus={() => setShowOldPassword(true)}
+                        
+                      />
+                    </td>
+                  
+                  {/* {showOldPassword && (
+                    <td>
+                      <input
+                        className="w-full px-3 py-2 placeholder-gray-300 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                        type="password"
+                        name="oldPassword"
+                        id="oldPassword"
+                        onChange={(e) =>
+                            handlePasswordChange(e.target.value)
+                        }
+                        required
+                        placeholder={"Enter Your Old Password"}
+                        onFocus={() => setShowOldPassword(true)}
+                        // onBlur={() => setShowOldPassword(false)}
+                        
+                      />
+                    </td>
+                  )} */}
                   </tr>
 
                   <tr>
@@ -260,7 +311,7 @@ export default function EditUser() {
             type="submit"
             onClick={handleSubmit}
           >
-            Update User
+            Update Profile
           </button>
         </div>
         <ToastContainer />

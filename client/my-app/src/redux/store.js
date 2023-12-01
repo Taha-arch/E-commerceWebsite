@@ -1,13 +1,12 @@
+
 import { configureStore } from '@reduxjs/toolkit';
-import userSlice from './slicers/userSlice';
-import customerSlice from './slicers/customers/customerSlice';
+import persistedReducer from './reducers/rootReducer';
+
+
 
 const store = configureStore({
-  reducer:{
-    user: userSlice,
-    customer: customerSlice,
-  }
-  
-  });
+  reducer: persistedReducer,
+});
+
 
 export default store;

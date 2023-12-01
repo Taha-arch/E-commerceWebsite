@@ -6,6 +6,9 @@ import swal from 'sweetalert'
 import PopUp from '../PopUp';
 import AddCategory from '../Category/AddCategory';
 import AddSubcategory from '../Subcatgory/AddSubcategory'
+import { FaArrowAltCircleDown } from "react-icons/fa";
+
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 export default function AddProduct() {
 
@@ -103,13 +106,10 @@ export default function AddProduct() {
     if (!productInfo.sku) {
       newErrors.sku = 'SKU is required';
     }
-    // if (!productInfo.productInfo.option) {
-    //   newErrors.productName = 'Name is required';
-    // }
-
-    if (!productInfo.subcategory_id) {
-      newErrors.subcategory_id = 'subcategory_id is required';
+    if (!productInfo.long_description) {
+      newErrors.long_description = 'Long description is required';
     }
+
     if (!productInfo.price) {
       newErrors.price = 'Price is required';
     }
@@ -117,10 +117,16 @@ export default function AddProduct() {
     if (!productInfo.short_description) {
       newErrors.short_description = 'Short description is required';
     }
+ 
     if (!productInfo.productImage) {
       newErrors.productImage = 'Image is required';
     }
-
+    if (!category) {
+      newErrors.categoryName = 'Category is required';
+    }
+    if (!subcategory) {
+      newErrors.subcategoryName = 'Subcategory is required';
+    }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -130,7 +136,9 @@ export default function AddProduct() {
     if (validateForm()) {
     const formData = new FormData();
     formData.append('product_name', productInfo.productName);
-    formData.append('product_image', productInfo.productImage);
+    for (let i = 0; i < productInfo.productImage.length; i++) {
+      formData.append('product_image', productInfo.productImage[i]);
+    }
     formData.append('sku', productInfo.sku);
     formData.append('short_description', productInfo.short_description);
     formData.append('long_description', productInfo.long_description);
@@ -139,6 +147,7 @@ export default function AddProduct() {
     formData.append('quantity', productInfo.quantity);
     formData.append('subcategory_id', productInfo.subcategory_id);
     formData.append('option', productInfo.option);
+    
     try {
       const config = {
         headers: { Authorization: `Bearer ${token}`}
@@ -155,10 +164,43 @@ export default function AddProduct() {
   }
   };
 
+  function show() {
+    var elem = document.getElementById('list');
+    var showButton = document.getElementById('showButton');
+    var offButton = document.getElementById('offButton');
+    elem.style.display = 'block'; 
+    showButton.style.display = 'none';
+    offButton.style.display = 'block';
+  }
 
+  function off() {
+    var elem = document.getElementById('list');
+    elem.style.display = 'none'; 
+    var offButton = document.getElementById('offButton');
+    var showButton = document.getElementById('showButton');
+    offButton.style.display = 'none';
+    showButton.style.display = 'block';
+  }
+  function showSubCategory() {
+    var elem = document.getElementById('subList');
+    var showButton = document.getElementById('showSubButton');
+    var offButton = document.getElementById('offSubButton');
+    elem.style.display = 'block'; 
+    showButton.style.display = 'none';
+    offButton.style.display = 'block';
+  }
+
+  function offSubCategory() {
+    var elem = document.getElementById('subList');
+    elem.style.display = 'none'; 
+    var offButton = document.getElementById('offSubButton');
+    var showButton = document.getElementById('showSubButton');
+    offButton.style.display = 'none';
+    showButton.style.display = 'block';
+  }
 return (
   
-  <div className="p-4 ml-10 overflow-auto h-[500px] bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
+  <div className="p-4 ml-10 overflow-auto h-full bg-white rounded-t-3xl rounded-lg" style={{width:'92%'}}>
     
   <p className="titleAdd-product text-cyan-500 mb-4 text-2xl font-bold">Add Product</p>
   
@@ -251,18 +293,24 @@ return (
         </td>
         <td>
 
-  <div className='drop-down'>
-        <span className="absolute pl-3 pt-2" id="category-value" >{category}</span>
-        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
-        <ul className='category-items'>
+  <div className=''>
+        <span className="absolute mt-1 ml-2" id="category-value" >{category}</span>
+          <div id="offButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={off}>
+          <FaArrowAltCircleUp className='mt-2 '/>
+          </div>
+          <div id="showButton" className="border rounded-lg focus:border h-8 w-full  z-10" onClick={show}>
+          <FaArrowAltCircleDown className='mt-2 '/>
+          </div>
+        <ul className='category-items h-24 overflow-y-auto' id="list">
         {categories && categories.map((item) => (
-      
-        <li key={item._id} name={item.category_name} className="cursor-pointer " onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
-            ))}
-          <li className="item add-item"><button onClick={() => setOpenCategory(true)}>Add category</button></li>
+          
+          <li key={item._id} name={item.category_name} className="cursor-pointer " onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
+          ))}
+          <li className="item add-item text-cyan-500"><button onClick={() => setOpenCategory(true)}>Add category</button></li>
         </ul>
 </div>
 
+          {errors.categoryName && <div className="text-red-500">{errors.categoryName}</div>}
         </td>
         <td>
           <label className="block font-bold text-gray-700 text-sm mb-2 pl-8" htmlFor="subcategoryName">
@@ -270,19 +318,25 @@ return (
           </label>
         </td>
         <td>
-        <div className='drop-down'>
-        <span className="absolute pl-3 pt-2" id="category-value">{subcategory}</span>
-        <button type="input" className="dropbtn border rounded-lg focus:border h-8"></button>
-        <ul className='category-items'>
+        <div className=''>
+        <span className="absolute mt-1 ml-2" id="category-value" >{subcategory}</span>
+          <div id="offSubButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={offSubCategory}>
+          <FaArrowAltCircleUp className='mt-2 ml-44'/>
+          </div>
+          <div id="showSubButton" className="border rounded-lg focus:border h-8 w-full  " onClick={showSubCategory}>
+          <FaArrowAltCircleDown className='mt-2 ml-44'/>
+          </div>
+        <ul className='category-items overflow-y-auto' id="subList">
+          
         {subCategories && subCategories.map((item) => (
         <li key={item._id} name={item.subcategory_name} className="cursor-pointer " 
         onClick={()=>{setSubcategory(item.subcategory_name)
           setProductInfo({ ...productInfo, subcategory_id: item._id })}}>{item.subcategory_name}</li>
             ))}
-          {category && <li className="item add-item"><button onClick={() => setOpenSubcategory(true)}>Add subcategory</button></li>}
+          {category && <li className="item add-item text-cyan-500"><button onClick={() => setOpenSubcategory(true)}>Add subcategory</button></li>}
         </ul>
 </div>
-
+{errors.subcategoryName && <div className="text-red-500">{errors.subcategoryName}</div>}
         </td>
       </tr>
        <tr>
@@ -376,6 +430,7 @@ return (
             onChange={(e) => setProductInfo({ ...productInfo, long_description: e.target.value })}
             required
           />
+           {errors.long_description && <div className="text-red-500">{errors.long_description}</div>}
         </td>
       </tr>
 
@@ -407,11 +462,12 @@ return (
                     <input type="file" class="opacity-0" 
                     name="productImage"
                     id="productImage"
-                    
-                    onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files[0] })}
+                    multiple
+                    onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files })}
                     required/>
+                 
                 </label>
-                    
+                <span></span>
             </div>
             
         </div>
