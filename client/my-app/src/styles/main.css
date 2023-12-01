@@ -50,6 +50,7 @@
     input:invalid ~ span{
         display: block;
     }
+
 }
 
 .modalBackground {
@@ -137,17 +138,24 @@
     display: block;
     padding:1px;
     padding-left: 8px;
+   
 }
 
 .category-items li:hover {
     background-color: rgb(210, 218, 218);
+    
 }
 
 .drop-down:hover .category-items {
     display: block;
 }
-.dropbtn{
+
+
+#offButton, #showButton{
     cursor: pointer;
     width: 200px;
     padding:1px;
+    padding-left: 88%;
 }
+
+

@@ -30,7 +30,7 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 50 }, // Adjust the file size limit (5 MB )
+    limits: {fileSize: 1024 * 1024 * 5} // Adjust the file size limit (5 MB )
 }).single('product_image');
 
 const uploadUserImage = multer({

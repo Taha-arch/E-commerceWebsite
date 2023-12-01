@@ -27,7 +27,7 @@ const handleAddCategory = async () => {
           }
           await axios.post(`http://localhost:3001/categories`,
           {category_name : categoryInfo.categoryName},config);
-
+          console.log(categoryInfo.categoryName)
           setCategory(categoryInfo.categoryName);
           
         setOpenCategory(false);
