@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 function Collections() {
   return (
-    <div  className='flex flex-col gap-3 m-8'>
+    <div  className='flex flex-col gap-3 pt-40'>
          <h1 className='font-medium'>WOMEN</h1>
      <div className='flex flex-col justify-start items-center gap-4'>
         <div className='flex justify-start flex-wrap'>

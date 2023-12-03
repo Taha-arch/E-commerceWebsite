@@ -4,13 +4,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Oswald:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
+@font-face { 
+    font-family: "Dubiel"; 
+    src: url("../../assets/DubielPlain.ttf"); 
+}
 /* styles.css */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* Custom styles for the carousel */
+.swiper-container {
+    width: 100%;
+    margin: auto;
+}
 
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+}
 
 
 /* Your additional styles go here */
@@ -83,7 +95,39 @@ overflow: scroll;
 }
 
 
-
+.button {
+    position: relative;
+    
+    
+    
+   
+    
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .button:after {
+    content: "";
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  
+  .button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
 
 
 
