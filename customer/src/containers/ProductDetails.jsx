@@ -8,6 +8,7 @@ import "yet-another-react-lightbox/styles.css";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import ImageSlider from "../components/ImageSlider";
 
 
 
@@ -101,9 +102,9 @@ export default function ProductDetails() {
             }}
           ></div>
           </div>
-
+          
           <div className="slide visible md:hidden">
-      <Lightbox styles={{root:{height:"350px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnailsContainer:{height:"70px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnailsTrack:{height:"60px","--yarl__color_backdrop": "rgba(255, 255, 255, .8)"},thumbnail:{width:"120px",height:"60px","--yarl__thumbnails_thumbnail_background": "rgba(255, 255, 255)","--yarl__thumbnails_thumbnail_active_border_color": "rgba(0, 0, 0)"},button:{height:"5px","--yarl__slide_description_color": "rgba(0, 0, 0)"},slide:{height:"270px",width:"100px"}}} slides={[
+          <Lightbox slides={[
           {
             src: "/prada1.jpg",
             alt: "image 1",
@@ -204,7 +205,7 @@ export default function ProductDetails() {
                 <div className="flex items-center border-2">
                   <button
                     onClick={decrement}
-                    className="bg-white  text-gray-300 hover:bg-gray-300  hover:text-white border-gray-300 text-2xl pb-1 px-4    "
+                    className="button bg-white  text-gray-300 hover:bg-gray-300  hover:text-white border-gray-300 text-2xl pb-1 px-4    "
                   >
                     -
                   </button>
@@ -217,7 +218,7 @@ export default function ProductDetails() {
                   />
                   <button
                     onClick={increment}
-                    className="bg-white  text-gray-300 hover:bg-gray-300  hover:text-white border-gray-300  text-2xl pb-1 px-3 "
+                    className="button bg-white  text-gray-300 hover:bg-gray-300  hover:text-white border-gray-300  text-2xl pb-1 px-3 "
                   >
                     +
                   </button>
@@ -231,10 +232,10 @@ export default function ProductDetails() {
             <div className="flex flex-row gap-5">
               <div>
                 <div>
-                  <button className="bg-truegreen text-gray-300 font-oswald hover:bg-truegreentint text-xl pb-1 px-3 h-10 w-40 mr-5">
+                  <button className=" bg-truegreen text-gray-300 font-oswald hover:bg-truegreentint text-xl pb-1 px-3 h-10 w-40 mr-5" data-te-ripple-color="light">
                     Add To Cart
                   </button>
-                  <button className="bg-white border-2 text-gray-300 font-oswald hover:bg-gray-300  hover:text-white border-gray-300  text-xl pb-1 px-3 h-10 w-40 mr-5 ">
+                  <button className="button bg-white border-2 text-gray-300 font-oswald hover:bg-gray-300  hover:text-white border-gray-300  text-xl pb-1 px-3 h-10 w-40 mr-5 ">
                     Add To Favorite
                   </button>
                 </div>

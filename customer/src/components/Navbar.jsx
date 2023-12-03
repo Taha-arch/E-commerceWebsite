@@ -19,24 +19,24 @@ function Navbar() {
     }, [dispatch, query]);
 
   return (
-    <div className="primary-bg">
+    <div className=" fixed w-full primary-bg z-10 ">
     <div className="box primary-bg">
       <div>
         <div className="mb-10 pt-6  ">
           <nav className="flex justify-between items-center">
 
-            <div className="font-bold text-3xl ">
+            <div className="font-bold text-xl md:text-3xl ">
               <span>PREST</span>
               <span className="secondary-bg">IGIOUS</span>
             </div>
 
-            <div className="font-bold flex justify-between gap-5">
+            <div className="font-bold flex flex-col md:flex-row justify-between gap-5">
               <NavLink to="/home" className="nav-link ">HOME</NavLink>
               <NavLink to="/collections" className="nav-link ">COLLECTIONS</NavLink>
               <NavLink to="/about us" className="nav-link ">ABOUT US</NavLink>
             </div>
 
-            <div className="icon-size flex justify-between items-center gap-4 ml-20">
+            <div className="icon-size flex flex-row justify-between items-center gap-4 ml-20">
             <div className="cursor-pointer">  
             {!search && <CiSearch className="secondary-bg" onClick={() =>setSearch(true)}/>}
             {search && (

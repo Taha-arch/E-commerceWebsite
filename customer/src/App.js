@@ -9,7 +9,6 @@ import OrderSummary from './components/OrderSummary';
 import CartItems from './components/CartItems';
 import Cart from './containers/Cart';
 import Layout from './components/Layout';
-import CustomerSiderbar from './components/CustomerSiderbar';
 import Collections from './containers/Collections';
 import LandingPage from './containers/LandingPage';
 
@@ -21,6 +20,7 @@ function App() {
           <Route path='/Cart' element={<Cart/>}></Route>
           <Route path='/productDetails' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
+          <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path='/Home' element={<LandingPage/>}></Route>
         </Route>
       </Routes>

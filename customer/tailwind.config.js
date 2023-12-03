@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+module.exports = withMT({
   content: [
     "./src/**/*.css",
     "./src/**/**/**/*.js",
@@ -8,6 +9,7 @@ module.exports = {
     "./src/App.js",
     "./public/index.html",
     "./src/styles/*.{css,scss}", // Assuming your custom styles are in a 'styles' directory
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
@@ -16,14 +18,18 @@ module.exports = {
         'Playfair': ['Playfair Display', 'sans-serif'],
         'Lora': ['Lora', 'sans-serif'],
         'Poppins': ['Poppins', 'sans-serif'],
+        'Dubiel' : ['Dubiel', 'sans-serif'],
       },
       colors: {
         truegreen: "#2F5951",
         truegreentint: "#587A73",
-        primary: " #f3f3f3"
+        primary: " #f3f3f3",
+        coffe: "#EBE0DB"
       },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    require('tailwindcss-animated'),
+  ],
+});
 
