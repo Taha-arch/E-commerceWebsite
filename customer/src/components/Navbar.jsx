@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/main.css";
-import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 import { TbHeart } from "react-icons/tb";
@@ -10,6 +9,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 function Navbar() {
     const [search, setSearch] = useState(false)
+    const navigate = useNavigate();
   return (
     <div className="primary-bg">
     <div className="box primary-bg">
@@ -44,7 +44,7 @@ function Navbar() {
 )}
 
             </div>
-            <div>  <IoBagOutline /></div>
+            <div className='cursor-pointer' onClick={() => navigate('/cart')}>  <IoBagOutline /></div>
             <div>  <TbHeart /></div>
             <div>  <FaUserCircle /></div>
             </div>

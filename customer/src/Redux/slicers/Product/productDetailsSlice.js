@@ -8,10 +8,16 @@ const initialState = {
 };
 
 // Create the userDetailSlice
-const productDetailSlice = createSlice({
+const productDetailsSlice = createSlice({
   name: 'productDetails',
   initialState,
-  reducers: {},
+  reducers: {
+    clearProductDetails: (state) => {
+        state.productDetails = null;
+        state.loading = false;
+        state.error = null;
+      },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductDetails.pending, (state) => {
@@ -24,10 +30,11 @@ const productDetailSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
+        console.log(action.payload)
         state.loading = false;
         state.error = action.payload ? action.payload.error : 'Something went wrong';
       });
   },
 });
-
-export default productDetailSlice.reducer;
+export const { clearProductDetails } = productDetailsSlice.actions;
+export default productDetailsSlice.reducer;

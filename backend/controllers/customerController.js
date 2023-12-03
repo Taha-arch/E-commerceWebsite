@@ -16,13 +16,12 @@ const authCustomer = async (req, res) => {
     const customerFound = await Customer.findOne({ email });
 
     if (customerFound && (await bcrypt.compareSync(password, customerFound.password))) {
-        if (customerFound.active) {
-            let token = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '3d' });
-            let refreshToken = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '12d' });
-            res.status(200).json({ "access_token": token , "refreshtoken" : refreshToken,"status" : 200, "customer": customerFound});
-        } else {
-            res.status(401).json('Account is not active');
-        }
+        let token = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '3d' });
+        let refreshToken = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '12d' });
+        res.status(200).json({ "access_token": token , "refreshtoken" : refreshToken,"status" : 200, "customer": customerFound});
+        // if (!customerFound.active) {
+        //     res.status(401).json('Account is not active');
+        // }
     } else {
         res.status(401).json('Invalid email or password');
     }

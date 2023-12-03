@@ -1,18 +1,24 @@
 import { combineReducers } from 'redux';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
-import productReducer from '../slicers/Product/productDetailsSlice'
+import productReducer from '../slicers/Product/productSlice'
+import productDetailsReducer from '../slicers/Product/productDetailsSlice'
+import CardReducer from '../slicers/CardSlice';
+import authReducer from '../slicers/AUTH/authSlice'
 
 
 const rootReducer = combineReducers({
-  productDetails: productReducer
+  product: productReducer,
+  productDetails: productDetailsReducer,
+  Card: CardReducer,
+  auth: authReducer
 });
 
 export const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth'], // Specify the reducers you want to persist
+  whitelist: ['auth','Card'], // Specify the reducers you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

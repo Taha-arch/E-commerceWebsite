@@ -1,9 +1,13 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+
 
 function Layout() {
+
   return (
     <div className='primary-bg min-h-screen'>
       <Navbar/>
@@ -16,5 +20,6 @@ function Layout() {
     </div>
   )
 }
+
 
 export default Layout
