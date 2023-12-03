@@ -46,7 +46,7 @@ function Navbar() {
             </div>
             <div>  <IoBagOutline /></div>
             <div>  <TbHeart /></div>
-            <div>  <FaUserCircle /></div>
+            <div><Link to="/profile/:id" className="nav-link "><FaUserCircle /></Link>  </div>
             </div>
 
           </nav>
