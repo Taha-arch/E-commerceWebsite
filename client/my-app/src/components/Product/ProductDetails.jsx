@@ -4,26 +4,25 @@ import ImageSlider from './ImageSlider';
 export default function ProductDetails(props) {
 
   const { selectedProduct, setOpenDetails } = props;
-// console.log(selectedProduct.productImage.map((url) => ( url )))
-//   const slides = selectedProduct.productImage;
+
   const containerStyles = {
     width: "300px",
-    height: "280px",
+    height: "320px",
     margin: "0 auto",
     
   };
     return (
 
-  <div className="popup-details rounded-md overflow-y-auto h-1/3 mx-auto px-4 py-2 bg-white shadow-md  mt-3">
-    <button className="close-detail bg-red-500 text-white p-1 px-2 mt-1 rounded-sm hover:bg-red-600" onClick={()=>setOpenDetails(false)} >X</button>
-    <div className=" py-2">
+  <div className="popup-details rounded-md overflow-y-auto h-1/3  mx-auto px-4 py-5 bg-white shadow-md  mt-3">
+    <button className="close-detail bg-red-500 text-white p-1 px-2 mt-1 ml-4 rounded-sm hover:bg-red-600" onClick={()=>setOpenDetails(false)} >X</button>
+    <div className="py-2">
     <div className="flex mr-8 pr-20">
         <h2 className='text-xl text-center product-title-details text-cyan-500'>Product Details</h2>
       </div>
     </div>
     <div className="bodyPopup pt-2 ml-2">
         <div className="container flex gap-3">
-        <div className="container flex gap-3">
+        <div className="containerr px-20 pb-10 pt-5 flex gap-3">
           {selectedProduct && selectedProduct.productImage && selectedProduct.productImage.length > 0 && (
             <div style={containerStyles}>
               <ImageSlider slides={selectedProduct.productImage} />
@@ -32,11 +31,11 @@ export default function ProductDetails(props) {
         </div>
         <table className='productDetails '>
         <tr className=''>
-            <td className='item-detail '>Product:</td>
-            <td>{selectedProduct && selectedProduct.productName}</td>
+            <td className='item-detail '>Sku:</td>
+            <td>{selectedProduct && selectedProduct.sku}</td>
             <td className=''></td>
-            <td className='item-detail w-1/4 '>Sku:</td>
-            <td className=''>{selectedProduct && selectedProduct.sku}</td>
+            <td className='item-detail w-1/4 '>Product:</td>
+            <td className=''>{selectedProduct && selectedProduct.productName}</td>
           
         </tr>
         <tr>

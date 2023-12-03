@@ -55,7 +55,7 @@ const ProductSchema = new mongoose.Schema({
             type: Boolean,
             require: true,
             enum : ['true', 'false'],
-            default:'false'
+            default:'true'
         }
 
 }, { strictPopulate: false });

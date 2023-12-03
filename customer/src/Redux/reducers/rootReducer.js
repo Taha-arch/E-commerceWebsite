@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
-import productReducer from '../slicers/Product/productDetailsSlice'
-
+import productReducer from '../slicers/Product/productDetailsSlice';
+import productFoundReducer from '../slicers/Product/SearchProductSlice';
 
 const rootReducer = combineReducers({
-  productDetails: productReducer
+  productDetails: productReducer,
+  productsFound: productFoundReducer
 });
 
 export const persistConfig = {

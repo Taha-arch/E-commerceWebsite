@@ -17,10 +17,10 @@ const addProduct = (req, res) => {
         return res.status(400).json({status: 400, message:"price is required!!"});
     }else{
         
-        
+        let ms = Date.now();
         const urlProductImages = req.files ? req.files.map(file => file.path) : null;;
         let newProduct = new Product({
-            sku: sku,
+            sku: sku + ms,
             product_image: urlProductImages,
             product_name: product_name,
             subcategory_id: subcategory_id,
@@ -45,7 +45,7 @@ const addProduct = (req, res) => {
     const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find()
-            .limit(10)
+            
             .populate({ path: 'subcategory_id', select: 'subcategory_name', 
             populate: {
                 path: 'category_id',
@@ -82,7 +82,7 @@ const addProduct = (req, res) => {
 const searchProducts = async (req, res) => {
     try {
         const queryObject = req.query;
-    
+
         if (!queryObject.product_name) {
             res.status(400).json('Missing product_name parameter');
             return;
@@ -96,9 +96,25 @@ const searchProducts = async (req, res) => {
             return res.status(404).json({ message: 'product not found' });
         }
         
-        res.status(200).json({status:200, data : products});
-        
-        } catch (error) {
+        if (products) {
+            const formattedProducts = products.map((product) => ({
+                "_id": product._id,
+                "sku": product.sku,
+                "productImage": product.product_image,
+                "productName": product.product_name,
+                "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
+                "shortDescription": product.short_description,
+                "longDescription": product.long_description,
+                "price": product.price,
+                "quantity": product.quantity,
+                "discountPrice": product.discount_price,
+                "active": product.active
+            }));
+            res.status(200).json({ status: 200, data: formattedProducts });
+            }
+
+            
+    }catch (error) {
             console.error('Error searching for a product by product_name:', error);
             res.status(500).json({ error: 'Internal Server Error' });
             }

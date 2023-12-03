@@ -94,7 +94,7 @@ export default function ProductDetails() {
           <div
             className="main-image"
             style={{
-              backgroundImage: `url(${mainImage})`,
+              backgroundImage: `url("https://res.cloudinary.com/dfin3vmgz/image/upload/v1701533152/product_images/undefined-1701533152362.jpg")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

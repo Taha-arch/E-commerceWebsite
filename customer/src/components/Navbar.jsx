@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/main.css";
 import { Link } from "react-router-dom";
@@ -6,10 +6,18 @@ import { CiSearch } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 import { TbHeart } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
+import {fetchProductFound } from "../Redux/slicers/Product/productServices";
 
 function Navbar() {
-    const [search, setSearch] = useState(false)
+    const [search, setSearch] = useState(false);
+    const [query, setQuery] = useState("");
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+      dispatch(fetchProductFound(query));
+    }, [dispatch, query]);
+
   return (
     <div className="primary-bg">
     <div className="box primary-bg">
@@ -37,7 +45,7 @@ function Navbar() {
       type="text"
       placeholder="Search product"
       className="primary-bg w-40 h-10 pl-10  border-2  border-white rounded text-sm"
-      
+      onChange={(e) => setQuery(e.target.value)}
     />
     <CiSearch className="secondary-bg absolute left-1.5 top-3.5"/>
   </div>

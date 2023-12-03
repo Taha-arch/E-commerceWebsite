@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { FaRegHeart,FaHeart  } from "react-icons/fa";
 import '../styles/index.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard(props) {
   const [isButtonActive, setButtonActive] = useState(false);
   const {product} = props; 
-  // console.log("props " + product);
+  const navigate = useNavigate();
   const toggleButton = () => {
     setButtonActive(!isButtonActive);
   };
@@ -19,13 +20,13 @@ export default function ProductCard(props) {
               </div>
                 <button className='heart rounded-full flex m-2  text-lg p-3 text-red-500  ' onClick={toggleButton}>{isButtonActive ? <FaHeart /> : <FaRegHeart />}</button>
             </div>
-            <div className='mx-5 py-2'>
-              <img alt='' src={product && product.productImage} className='w-full h-72 rounded-xl'></img>
+            <div className='mx-5 py-2' onClick={() => navigate(`/productDetails/${product._id}`)}>
+              <img alt='' src={product && product.productImage[0]} className='w-full h-72 rounded-xl'></img>
             </div>
             <div className='flex justify-center'>
             <div className='flex flex-col w-60 pt-5 pb-2'>
               <div className='flex flex-row justify-center text-lg font-inter font-bold'>
-                <span>{product && product.productName}</span>
+                <span onClick={() => navigate(`/productDetails/${product._id}`)}>{product && product.productName}</span>
               </div>
               <div className='flex flex-row justify-between'>
                 <span className='font-bold text-lg'>{product && product.price}DH</span>
