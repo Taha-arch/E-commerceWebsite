@@ -11,6 +11,7 @@ import Cart from './containers/Cart';
 import Layout from './components/Layout';
 import Collections from './containers/Collections';
 import LandingPage from './containers/LandingPage';
+import Profile from './containers/Profile';
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/Cart' element={<Cart/>}></Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/Home' element={<LandingPage/>}></Route>
+          <Route path="/profile/:id" element={<Profile/>} />
         </Route>
       </Routes>
     </Router>

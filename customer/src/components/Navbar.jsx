@@ -11,7 +11,7 @@ import { FaUserCircle } from "react-icons/fa";
 function Navbar() {
     const [search, setSearch] = useState(false)
   return (
-    <div className=" fixed w-full primary-bg z-10 ">
+    <div className=" md:fixed w-full primary-bg z-10 ">
     <div className="box primary-bg">
       <div>
         <div className="mb-10 pt-6  ">
