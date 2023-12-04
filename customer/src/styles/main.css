@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Borel&family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital@1&family=Montserrat:ital,wght@0,100;1,100;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&display=swap');
 /* Include Tailwind CSS directives */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -78,6 +78,8 @@ html, body{
     background-color: #2F5951;
     color: white;
   }
+
+
 
 
  

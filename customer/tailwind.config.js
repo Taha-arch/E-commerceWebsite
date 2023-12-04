@@ -19,6 +19,7 @@ module.exports = withMT({
         'Lora': ['Lora', 'sans-serif'],
         'Poppins': ['Poppins', 'sans-serif'],
         'Dubiel' : ['Dubiel', 'sans-serif'],
+        'karla' : ['karla', 'sans-serif'],
       },
       colors: {
         truegreen: "#2F5951",

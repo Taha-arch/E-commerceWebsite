@@ -10,13 +10,15 @@ export default function ProductCard(props) {
   const toggleButton = () => {
     setButtonActive(!isButtonActive);
   };
+  
+  
   return (
     <div className='w-auto cursor-pointer'>
         <div className=' flex justify-center items-center h-full  '>
         <div className='card w-80 h-fit bg-white border m-5 rounded-2xl'>
             <div className='flex justify-between '>
               <div className='bg-orange-500 h-fit font-bold   text-md  ml-4 pl-2 pr-1 pt-0 mt-2    text-white '>
-              <span>10%</span>
+              <span>{product && Math.floor(((product.discountPrice * 100) / product.price))} %</span>
               </div>
                 <button className='heart rounded-full flex m-2  text-lg p-3 text-red-500  ' onClick={toggleButton}>{isButtonActive ? <FaHeart /> : <FaRegHeart />}</button>
             </div>
