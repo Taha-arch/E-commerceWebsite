@@ -14,7 +14,7 @@ function Navbar() {
     <div className=" md:fixed w-full primary-bg z-10 ">
     <div className="box primary-bg">
       <div>
-        <div className="mb-10 pt-6  ">
+        <div className="mb-7 pt-6  ">
           <nav className="flex justify-between items-center">
 
             <div className="font-bold text-xl md:text-3xl ">

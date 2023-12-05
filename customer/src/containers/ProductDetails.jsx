@@ -8,7 +8,6 @@ import "yet-another-react-lightbox/styles.css";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import ImageSlider from "../components/ImageSlider";
 
 
 

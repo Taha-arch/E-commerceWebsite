@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Carousel } from "@material-tailwind/react";
+import Slider from "../components/Slider";
+
 
 export default function LandingPage() {
   useEffect(() => {
@@ -10,61 +11,47 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="bg-primary h-fit">
+    <div className="bg-primary h-fit flex flex-col items-center">
       <div
-        className=" flex flex-row  justify-between w-full h-fit pt-40  "
-        data-aos="fade"
-      >
-        <div className="flex flex-col md:flex-row  bg-green-100 rounded-3xl">
-          <div
-            className="flex flex-col pt-16  w-1/3  p-10 bg-green-100 rounded-3xl"
-            data-aos="fade-right"
-          >
-            <div className=" ">
-              <h1 className="quote text-6xl text-center text-black font-Dubiel">
-                Fashion is not dresses only.
-              </h1>
-            </div>
-            <div className="mt-5">
-              <p className="text-lg text-black">
-                Shop for Accessories For <span className="font-bold">Men</span>{" "}
-                and <span className="font-bold">Women</span> online at best
-                prices in India. Choose from a wide range of{" "}
-                <span className="underline">Watches</span>,{" "}
-                <span className="underline">Jewellery</span>,{" "}
-                <span className="underline">Handbags</span>, ...
-              </p>
-            </div>
-          </div>
-          <div className="w-2/3 flex flex-col justify-center py-10 bg-green-100 ">
-            <Carousel className="rounded-xl">
-              <img
-                src="sliderimage.jpg"
-                alt=" 1"
-                className="h-full w-full object-cover"
-              />
-              <img
-                src="sliderimage2.jpg"
-                alt=" 2"
-                className="h-full w-full object-cover"
-              />
-              <img
-                src="sliderimage3.jpg"
-                alt=" 3"
-                className="h-full w-full object-cover"
-              />
-            </Carousel>
-          </div>
-          <div
-            className="  w-1/3 flex flex-col pb-5  justify-center items-center bg-emerald-200 rounded-3xl"
-            data-aos="fade-left"
-          >
-            <img className="w-4/5 " src="landingwatch.png" alt="" />
-          </div>
+  className="slide flex flex-row justify-between w-full  "
+  data-aos="fade"
+>
+<Slider/>
+</div>
+<div className="flex flex-row justify-center px-20  w-full h-44 " data-aos="fade">
+    <div className="serviceimage1 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+        <h3>ON-DATE DELIVERY</h3>
         </div>
-      </div>
+      
+    </div>
+    <div className="serviceimage2 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+        <h3>CERTIFIED PRODUCTS</h3>
+        </div>
+      
+    </div>
+    <div className="serviceimage3 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+        <h3>ELEGANT STYLE</h3>
+        </div>
+      
+    </div>
+    <div className="serviceimage4 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+        <h3>EASY RETURN</h3>
+        </div>
+      
+    </div>
+    <div className="serviceimage5 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+        <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+        <h3>100% SECURE PAYMENTS</h3>
+        </div>
+      
+    </div>
+</div>
 
-      <div className="flex flex-row  justify-between w-full h-fit py-20">
+      <div className="flex flex-row  justify-between w-4/5 h-fit py-20">
         <div className="w-1/4 h-fit mb-10 " data-aos="fade-right">
           <img
             className="landingimage1 w-full "
@@ -110,7 +97,7 @@ export default function LandingPage() {
         </h1>
       </div>
 
-      <div className="section2 flex flex-row gap-5 justify-between w-full h-fit py-20">
+      <div className="section2 flex flex-row gap-5 justify-between w-4/5 h-fit py-20">
         <div className="w-1/3 md:w-2/5 gap-5 flex flex-col md:flex-row">
           <div
             className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center"
@@ -287,7 +274,7 @@ export default function LandingPage() {
           SPECIAL OFFER FOR ONLY FOR YOU COUPLES
         </h1>
       </div>
-      <div className="section5 flex flex-col">
+      <div className="section5 flex flex-col w-4/5">
         <div className="flex flex-row justify-center md:flex-row gap-14 w-full h-full  py-10">
           <div className="image7 w-1/2 h-full" data-aos="fade-right"></div>
           <div className="image8 w-1/2 h-full" data-aos="fade-left"></div>
@@ -304,6 +291,7 @@ export default function LandingPage() {
           DISCOVER THE OFFER
         </button>
       </div>
+      
     </div>
   );
 }

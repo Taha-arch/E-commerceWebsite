@@ -69,10 +69,119 @@
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
 }
+.slide{
+    padding-top: 89px;
+    height: 650px;
+}
+.serviceimage1{
+    background-image: url("../../public/calendar(1).svg");
+    
+    background-size: 20%;
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
 
+.serviceimage1:hover{
+    background-image: url("../../public/calendar.svg");
+    background-size: 25%;    
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.serviceimage2{
+    background-image: url("../../public/certified.svg");
+    
+    background-size: 20%;
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#serviceimage2 {transition-timing-function: ease;}
+.serviceimage2:hover{
+    background-image: url("../../public/certified.svg");
+    background-size: 25%;    
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.serviceimage3{
+    background-image: url("../../public/gem.svg");
+    
+    background-size: 20%;
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#serviceimage3 {transition-timing-function: ease;}
+.serviceimage3:hover{
+    background-image: url("../../public/gem.svg");
+    background-size: 25%;    
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.serviceimage4{
+    background-image: url("../../public/hand.svg");
+    
+    background-size: 20%;
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#serviceimage4 {transition-timing-function: ease;}
+.serviceimage4:hover{
+    background-image: url("../../public/hand.svg");
+    background-size: 25%;    
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.serviceimage5{
+    background-image: url("../../public/payment.svg");
+    
+    background-size: 20%;
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#serviceimage5 {transition-timing-function: ease;}
+.serviceimage5:hover{
+    background-image: url("../../public/payment.svg");
+    background-size: 25%;    
+    background-position-y: 25%;
+    background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
 @media screen and (max-width: 768px) {
     .women{
-        width: 60%;
+        width: 20%;
+        height: 100%;
     }
     
 }
