@@ -6,13 +6,13 @@ const {authorization, checkAdminOrManager, checkAdmin} = require('../middleware/
 
 router.post('/customers/login', authCustomer);
 router.post('/customers', addCustomer);
-router.get('/customers/search',checkAdminOrManager, searchCustomer)
-router.get('/customers',checkAdminOrManager, getAllCustomers);
+router.get('/customers/search',authorization, searchCustomer)
+router.get('/customers',authorization, getAllCustomers);
 
-router.get('/customers/:id',checkAdminOrManager, getCustomer);
+router.get('/customers/:id',authorization, getCustomer);
 router.delete('/customers/delete/:id', deleteCustomer);
 router.put('/customers/validate',authorization, validateCustomerEmail);
-router.put('/customers/:id', uploadCustomerImage ,checkAdminOrManager, updateCustomer);
+router.put('/customers/:id', uploadCustomerImage ,authorization, updateCustomer);
 
 //router.get('/customers/profile', getCustomerProfile);
 //router.patch('/customers/profile/update', updateCustomerProfile);

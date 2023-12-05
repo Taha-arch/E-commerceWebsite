@@ -8,9 +8,15 @@ export default function Cart() {
     <div className='bg-primary flex flex-col items-center'>
         <table className='w-4/6 h-full'>
             <tr>
-                <td className=''>
+               
+               <div className='flex flex-col'>
+                 <td className=''>
                     <CustomerSiderbar/>
                 </td>
+                <td>
+                <OrderSummary/>
+                </td>
+                </div>
                 <td rowSpan={2} className='pl-40'>
                     <div className='flex h-full flex-col justify-start mt-28 items-center'>
                         <div>
@@ -19,16 +25,8 @@ export default function Cart() {
                         </div>
                         <div className=' h-fit overflow-y-scroll mt-10'>
                             <CartItems/>
-                            <CartItems/>
-                            <CartItems/>
-                            <CartItems/>
                         </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <OrderSummary/>
                 </td>
             </tr>
         </table>

@@ -2,16 +2,16 @@ import React, { useEffect } from "react";
 import ProductCard from '../components/ProductCard'
 import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import  { fetchProductDetails } from '../../src/Redux/slicers/Product/productServices';
+import  { fetchProduct } from '../../src/Redux/slicers/Product/productServices';
 
 
 function Collections() {
   const dispatch = useDispatch();
-  const productDetails = useSelector((state) => state.productDetails.productDetails);
+  const product = useSelector((state) => state.product.product);
   const productsFound = useSelector((state) => state.productsFound.productFound);
-
+  console.log(product);
   useEffect(() => {
-    dispatch(fetchProductDetails());
+    dispatch(fetchProduct());
   }, [dispatch]);
 
   return (
@@ -21,7 +21,7 @@ function Collections() {
           <h1 className='font-medium'></h1>
           <div className='flex flex-col justify-start items-center gap-4'>
             <div className='flex justify-start flex-wrap'>
-              {productDetails && productDetails.map((product, index) => (
+              {product && product.map((product, index) => (
                 <div key={index}><ProductCard product={product} /></div>
               ))}
             </div>

@@ -11,17 +11,23 @@ import Cart from './containers/Cart';
 import Layout from './components/Layout';
 import Collections from './containers/Collections';
 import LandingPage from './containers/LandingPage';
+import SignInForm from './containers/SignIn';
+import RegisterForm from './containers/Register';
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/login' element={<SignInForm />}></Route>
+        <Route path='/register' element={<RegisterForm />}></Route>
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
-          <Route path='/productDetails' element={<ProductDetails/>}> </Route>
+          <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/Home' element={<LandingPage/>}></Route>
         </Route>
+        
       </Routes>
     </Router>
   );

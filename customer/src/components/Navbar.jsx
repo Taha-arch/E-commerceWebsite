@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/main.css";
-import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 import { TbHeart } from "react-icons/tb";
@@ -127,7 +126,7 @@ function Navbar() {
 )}
 
             </div>
-            <div>  <IoBagOutline /></div>
+            <div className='cursor-pointer' onClick={() => navigate('/cart')}>  <IoBagOutline /></div>
             <div>  <TbHeart /></div>
             <div>  <FaUserCircle /></div>
             </div>

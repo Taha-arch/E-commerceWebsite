@@ -462,7 +462,7 @@ return (
                     </div>
 
                     <input type="file" class="opacity-0" 
-                    name="productImage"
+                    name="product_image"
                     id="productImage"
                     multiple
                     onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files })}

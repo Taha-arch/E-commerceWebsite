@@ -12,7 +12,6 @@ const AdminLogin = () => {
   const dispatch = useDispatch();
   const loginError = useSelector((state) => state.auth.error);
   const role  = useSelector((state) => state.auth.role);
-  const error = useSelector((state) => state.auth.error)
   
   useEffect(() => {
     console.log("Token updated:", role);

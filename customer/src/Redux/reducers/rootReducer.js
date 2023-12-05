@@ -8,6 +8,9 @@ import subcategoriesReducer from '../slicers/Subcategory/subcategorySlices';
 
 const rootReducer = combineReducers({
   product: productReducer,
+  productDetails: productDetailsReducer,
+  Card: CardReducer,
+  auth: authReducer,
   productsFound: productFoundReducer,
   categories: categoriesReducer,
   subcategories: subcategoriesReducer
@@ -17,7 +20,7 @@ export const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth'], // Specify the reducers you want to persist
+  whitelist: ['auth','Card'], // Specify the reducers you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
