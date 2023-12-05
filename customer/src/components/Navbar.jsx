@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate,Link  } from "react-router-dom";
 import "../styles/main.css";
 import { CiSearch } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ import {  ChevronUpIcon } from "@heroicons/react/24/solid";
 import {Menu,MenuHandler,MenuList,MenuItem,Button} from "@material-tailwind/react";
 
 function Navbar() {
+
     const [search, setSearch] = useState(false);
     const [query, setQuery] = useState("");
     const [categoryId, setCategoryId] = useState("");
@@ -22,7 +23,8 @@ function Navbar() {
     const categories = useSelector((state) => state.categories.categories);
     const subcategories = useSelector((state) => state.subcategories.subcategories);
     const [openMenu, setOpenMenu] = React.useState(false);
-
+    const navigate = useNavigate();
+  
     useEffect(() => {
       dispatch(fetchProductFound(query));
     }, [dispatch, query]);
@@ -45,9 +47,7 @@ function Navbar() {
         }
       
     }, [categoryId, subcategories]);
-    console.log(categoryId);
-    console.log(subcategories)
-    console.log(filtered);
+
   return (
     <div className=" fixed w-full primary-bg z-10 ">
     <div className="box primary-bg">
@@ -61,53 +61,36 @@ function Navbar() {
             </div>
 
             <div className="font-bold flex flex-col md:flex-row justify-between gap-5">
-              <NavLink to="/home" className="nav-link  " variant="text">Home</NavLink>
-              <Menu>
-      <MenuHandler>
-        <Link  className="nav-link text-md " variant="text">Collections</Link>
-      </MenuHandler>
-      <MenuList>
-        <Menu
-          placement="right-start"
-          open={openMenu}
-          handler={setOpenMenu}
-          allowHover
-          offset={15}
-        >
-          <MenuHandler className="flex items-center justify-between">
-            
-            <MenuItem>
-              <ChevronUpIcon
-                strokeWidth={2.5}
-                className={`h-3.5 w-3.5 transition-transform ${
-                  openMenu ? "rotate-90" : ""
-                }`}
-                
-              />
+            <NavLink to="/home" className="nav-link  " variant="text">HOME</NavLink>
               
-            </MenuItem>
-          </MenuHandler>
-          <MenuList>
-            <NavLink to="/collections">Nested Item 1</NavLink>
-          </MenuList>
-        </Menu>
-      </MenuList>
-    </Menu>
-              {/* <NavLink to="/collections" className="nav-link ">Collections <IoIosArrowDown className="mt-1" /> </NavLink>
-              <ul className="flex flex-col relative top-6 z-20">
-              {categories && categories.map((category) => (
-                <li className="relative top-6 py-2 bg-green-900" key={category._id} onClick={()=>{setCategoryId(category._id)}}>
-                  {category.category_name} 
-                  
-                  </li>
+      <ul className="main-navigation">
+      <li>
+        <NavLink to="/collections" className="nav-link">
+          COLLECTIONS
+        </NavLink>
+        <ul>
+          {categories &&
+            categories.map((category) => (
+              <li key={category._id} onMouseEnter={() => setCategoryId(category._id)} onMouseLeave={() => setCategoryId(null)}>
+                {category.category_name}
+            
+        {categoryId && (
+          <ul>
+            {filtered && filtered.map((subcategory) => (
+                <li key={subcategory._id} onClick={() => {
+                  setQuery(`${subcategory.subcategory_name}`);
+                  navigate(`/collections`);
+                }}>  {subcategory.subcategory_name}</li>
               ))}
-              </ul>
-              <ul className="bg-green-900">
-                  {filtered && filtered.map((subcategory) => (
-                    <li key={subcategory._id} onClick={() => setQuery(`${subcategory.subcategory_name}`)}>{subcategory.subcategory_name}</li>
-                    ))}
-                    </ul> */}
-              <NavLink to="/about us" className="nav-link  " variant="text">About us</NavLink>
+          </ul>
+        )}
+          </li>
+            ))}
+        </ul>
+      </li>
+    </ul>
+
+          <NavLink to="/about us" className="nav-link  " variant="text">ABOUT US</NavLink>
             </div>
 
             <div className="icon-size flex flex-row justify-between items-center gap-4 ml-20">
@@ -120,6 +103,7 @@ function Navbar() {
       placeholder="Search product"
       className="primary-bg w-40 h-10 pl-10  border-2  border-white rounded text-sm"
       onChange={(e) => setQuery(e.target.value)}
+      
     />
     <CiSearch className="secondary-bg absolute left-1.5 top-3.5"/>
   </div>

@@ -91,5 +91,43 @@ html, body{
 .line {
   height: 1px; 
 }
+/* drop menu of naveBar */
+ul:before,
+ul:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+ul:after { clear: both; }
+ul ul ul {
+  left: 100%;
+  top: 0;
+}
+li:hover > ul {
+  display: block;
+  position: absolute;
+}
+li:hover li { 
+  float: none;
+  width: 100%;
+  padding:5px 14px;
+  background-color: #F5f5f5;
+}
+.main-navigation li ul li { border-top: 0; }
+li ul { 
+  display: none;
+  border:1px solid #cccccc;
+  }
 
- 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+ul li {
+  display: block;
+  position: relative;
+  float: left;
+  
+}
+

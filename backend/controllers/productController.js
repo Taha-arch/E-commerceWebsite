@@ -44,12 +44,20 @@ const addProduct = (req, res) => {
     
     const getAllProducts = async (req, res) => {
     try {
+        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter or default to page 1
+        const limit = 10; // Number of products per page
+        const skip = (page - 1) * limit; // Calculate the number of products to skip
+        
+        const totalProducts = await Product.countDocuments();
+        const totalPages = Math.ceil(totalProducts / limit);
+        
         const products = await Product.find().sort({creation_date:-1})
             .populate({ path: 'subcategory_id', select: 'subcategory_name', 
             populate: {
                 path: 'category_id',
                 select: 'category_name'
             } })
+            
             .exec();
 
         if (products) {
@@ -78,18 +86,18 @@ const addProduct = (req, res) => {
 }
 
 
-const searchProducts = async (req, res) => {
+const searchProducts = async (req, res, next) => {
     try {
         const queryObject = req.query;
+        if(Object.keys(queryObject).length > 0 && queryObject.product_name){
 
-        
-        const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
-        .sort({ product_name: -1 })
-        .limit(10)
-        .exec()
-        
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'product not found' });
+            const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
+            .sort({ product_name: -1 })
+            .limit(10)
+            .exec()
+            
+            if (products.length === 0) {
+                return res.status(404).json({ message: 'product not found' });
         }
         
         if (products) {
@@ -107,13 +115,14 @@ const searchProducts = async (req, res) => {
                 "active": product.active
             }));
             res.status(200).json({ status: 200, data: formattedProducts });
-            }
-
-            
+        }
+        }else {
+            return getAllProducts(req, res, next);
+        }
     }catch (error) {
-            console.error('Error searching for a product by product_name:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-            }
+        console.error('Error searching for a product by product_name:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 const getProduct = async (req, res) => {

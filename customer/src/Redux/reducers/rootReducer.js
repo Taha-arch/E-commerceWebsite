@@ -5,6 +5,9 @@ import productReducer from '../slicers/Product/productSlice'
 import productFoundReducer from '../slicers/Product/SearchProductSlice';
 import categoriesReducer from '../slicers/Category/categorySlice';
 import subcategoriesReducer from '../slicers/Subcategory/subcategorySlices';
+import productDetailsReducer from '../slicers/Product/productDetailsSlice'
+import CardReducer from '../slicers/CardSlice';
+import authReducer from '../slicers/AUTH/authSlice';
 
 const rootReducer = combineReducers({
   product: productReducer,

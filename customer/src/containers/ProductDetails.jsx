@@ -10,7 +10,7 @@ import "yet-another-react-lightbox/styles.css";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import { fetchProductDetails } from "../Redux/slicers/Product/productServices";
+import { fetchProductDetails, fetchProduct } from "../Redux/slicers/Product/productServices";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { clearProductDetails } from "../Redux/slicers/Product/productDetailsSlice";
@@ -19,7 +19,10 @@ import shortid from "shortid";
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const card = useSelector((state) => state.Card.cards)
+  const card = useSelector((state) => state.Card.cards);
+  const products = useSelector((state) => state.product.product);
+  
+
   const isInCard = () => {
     return (card?.find(({ _id }) => _id === id)) ? true : false;
   }
@@ -40,6 +43,23 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const [productsRelated, setProductsRelated] = useState([]);
+  useEffect(() => {
+    if(products && productDetails && productDetails.subcategoryName){
+
+      dispatch(fetchProduct()); 
+      console.log(productDetails.subcategoryName)
+      const currentProductSubcategoryName = productDetails.subcategoryName;
+      const filteredProducts = products.filter(
+        (product) =>
+        product.subcategoryName === currentProductSubcategoryName &&
+        product._id !== id
+        );
+        console.log(filteredProducts)
+        setProductsRelated(filteredProducts);
+      }
+  
+  }, [dispatch, id, productDetails, products]);
 
   const notify = (productName) => {
     toast.success(`${productName} Added to cart Successfully!`, {
@@ -371,10 +391,14 @@ export default function ProductDetails() {
                 More +
               </span>
             </div>
+
             <div className="morecontainer w-100 flex flex-row over">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+            {productsRelated && productsRelated.map((product) => (
+                <div key={product._id}>
+                <ProductCard product={product}/>
+                </div>
+              ))}
+
             </div>
           </div>
         </div>
