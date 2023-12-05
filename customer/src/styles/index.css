@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora&family=Oswald:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Poppins&display=swap');
 
 @font-face { 
     font-family: "Dubiel"; 
@@ -40,7 +41,7 @@ h1{
 .box{
 width: 100%;
 align-items: center;
-padding-inline: 10%;
+padding-inline: 5%;
 }
 .container{
     display: flex;

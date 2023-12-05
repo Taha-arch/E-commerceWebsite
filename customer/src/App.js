@@ -11,8 +11,11 @@ import Cart from './containers/Cart';
 import Layout from './components/Layout';
 import Collections from './containers/Collections';
 import LandingPage from './containers/LandingPage';
+import Profile from './containers/Profile';
+
 import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
+import Checkout from './containers/Checkout';
 
 
 function App() {
@@ -23,9 +26,11 @@ function App() {
         <Route path='/register' element={<RegisterForm />}></Route>
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
+          <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/Home' element={<LandingPage/>}></Route>
+          <Route path="/profile/:id" element={<Profile/>} />
         </Route>
         
       </Routes>
