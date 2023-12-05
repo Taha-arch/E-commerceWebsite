@@ -44,8 +44,7 @@ const addProduct = (req, res) => {
     
     const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find()
-            
+        const products = await Product.find().sort({creation_date:-1})
             .populate({ path: 'subcategory_id', select: 'subcategory_name', 
             populate: {
                 path: 'category_id',
@@ -83,10 +82,7 @@ const searchProducts = async (req, res) => {
     try {
         const queryObject = req.query;
 
-        if (!queryObject.product_name) {
-            res.status(400).json('Missing product_name parameter');
-            return;
-        }
+        
         const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
         .sort({ product_name: -1 })
         .limit(10)
