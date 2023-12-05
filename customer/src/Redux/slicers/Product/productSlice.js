@@ -1,33 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProductDetails } from './productServices'
+import { fetchProduct } from './productServices'
 // Define the initial state
 const initialState = {
-    productDetails: null,
+    product: null,
     loading: false,
     error: null,
 };
 
 // Create the userDetailSlice
-const productDetailSlice = createSlice({
-  name: 'productDetails',
+const productSlice = createSlice({
+  name: 'product',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProductDetails.pending, (state) => {
+      .addCase(fetchProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchProductDetails.fulfilled, (state, action) => {
+      .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.productDetails = action.payload;
+        state.product = action.payload;
         state.error = null;
       })
-      .addCase(fetchProductDetails.rejected, (state, action) => {
+      .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ? action.payload.error : 'Something went wrong';
       });
   },
 });
 
-export default productDetailSlice.reducer;
+export default productSlice.reducer;
