@@ -2,10 +2,20 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { getOrderStatus } from '../lib/consts/utils'
+import * as animation from "../assets/animations/Animation - 1700668619891.json"
+import Lottie from 'react-lottie'
 
+export const  defaultOptions =  {
+  loop: true,
+  autoplay: true,
+  animationData: animation.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  }}
 
 function RecentOrders() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
 const fetchOrderData = async () => {
@@ -26,6 +36,8 @@ useEffect(() => {
   const fetchData = async () => {
     const orderData = await fetchOrderData();
     setOrders(orderData);
+    setLoading(false)
+  
   };
 
   fetchData();
@@ -33,6 +45,9 @@ useEffect(() => {
   return (
     <div className='bg-white px-4 pt-3 pb-4 rounded-sm border overflow-scroll md:overflow-visible w-full border-gray-200 flex-1'>
     <strong className='text-gray-700 font-medium'>Recent Orders</strong>
+    {loading === true ? (
+          <Lottie options={defaultOptions} height={200} width={200} />
+        ) : (
     <div className='mt-3'>
      <table className='w-full text-gray-700'>
       <thead>
@@ -63,6 +78,7 @@ useEffect(() => {
       </tbody>
      </table>
     </div>
+     )}
   </div>
   )
 }

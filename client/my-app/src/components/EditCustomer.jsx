@@ -34,7 +34,7 @@ const { id } = useParams();
         .catch((error) => {
         console.error('Error fetching user data:', error);
         });
-    }, [id, config]);
+    }, [id]);
 
 
   const notify = () => {toast.success('Customer Updated Successfully!', {
