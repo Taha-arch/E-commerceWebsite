@@ -18,7 +18,7 @@ export default function Cart() {
                 </td>
                 </div>
                 <td rowSpan={2} className='pl-40'>
-                    <div className='flex h-full flex-col justify-start mt-28 items-center'>
+                    <div className='flex h-full flex-col justify-start mt-12 items-center'>
                         <div>
                             <h1>Shopping Cart</h1>
                             <p>You are eligible for Free Shipping.</p>

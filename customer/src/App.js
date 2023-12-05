@@ -13,6 +13,7 @@ import CustomerSiderbar from './components/CustomerSiderbar';
 import Collections from './containers/Collections';
 import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
+import Checkout from './containers/Checkout';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/register' element={<RegisterForm />}></Route>
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
+          <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
         </Route>

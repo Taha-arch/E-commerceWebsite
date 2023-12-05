@@ -18,7 +18,7 @@ export const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth','Card'], // Specify the reducers you want to persist
+  whitelist: ['auth','Card'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

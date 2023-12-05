@@ -13,14 +13,14 @@ const CartItems = () => {
         <div className='bg-primary w-fit cursor-pointer' key={product._id} onClick={() => navigate(`/product/${product._id}`)}>
             <table className='flex'>
                 <tr>
-                    <td className=' w-52 py-7 pr-4'>
-                        <div className='w-52'>
+                    <td className=' w-24 py-7 pr-4 rounded-md'>
+                        <div className='w-24 rounded-md'>
                             <img src={product && product.productImage[0]} alt="" />
                         </div>
                     </td>
                     <td>
-                        <div className='flex flex-col h-40 w-96 justify-between'>
-                            <div className='flex flex-row justify-between'>
+                        <div className='flex flex-col h-40 w-96 justify-around gap-6'>
+                            <div className='flex flex-row justify-around gap-3'>
                                 <div>
                                     <h4 className=' font-Playfair'>{product.productName}</h4>
                                     <div className='flex flex-row justify-between'>

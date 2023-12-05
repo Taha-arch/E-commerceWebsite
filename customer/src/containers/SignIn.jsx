@@ -1,30 +1,35 @@
 import "../styles/main.css";
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { Redirect, Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/images/sans.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../Redux/slicers/AUTH/authServices";
 
 function SignInForm() {
   const [isSignIn, setIsSignIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const status = useSelector((state) => state.auth.status);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const { search } = useLocation();
 
   const handleSignIn = async () => {
     try {
       await dispatch(login({ email, password }));
       setIsSignIn(true);
-      navigate('/');
+      
     } catch (error) {
       setIsSignIn(false);
       console.error("SignIn error:", error);
     }
   };
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+
+  if(isSignIn){
+      navigate(redirect)
+  }
  
 
   return (
