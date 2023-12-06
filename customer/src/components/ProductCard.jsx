@@ -20,7 +20,7 @@ export default function ProductCard(props) {
               <div className='bg-orange-500 h-fit font-bold   text-md  ml-4 pl-2 pr-1 pt-0 mt-2    text-white '>
               <span>10%</span>
               </div>
-                <button className='heart rounded-full flex m-2  text-lg p-3 text-red-500  ' onClick={(event) =>toggleButton(event) } >{isButtonActive ? <FaHeart /> : <FaRegHeart /> }</button>
+                <button className='heart rounded-full  m-2  text-lg p-3 text-red-500  ' onClick={(event) =>toggleButton(event) } >{isButtonActive ? <FaHeart /> : <FaRegHeart /> }</button>
             </div>
             <div className='mx-5 py-2'>
               <img alt='' src={product && product.productImage[0]} className='w-auto h-72 rounded-xl'></img>

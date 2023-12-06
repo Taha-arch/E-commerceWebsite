@@ -164,7 +164,7 @@ export default function ProductDetails() {
               <Lightbox
                 styles={{
                   root: {
-                    height: "350px",
+                    height: "400px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsContainer: {
@@ -172,7 +172,7 @@ export default function ProductDetails() {
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsTrack: {
-                    height: "60px",
+                    height: "100px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnail: {
@@ -182,12 +182,14 @@ export default function ProductDetails() {
                       "rgba(255, 255, 255)",
                     "--yarl__thumbnails_thumbnail_active_border_color":
                       "rgba(0, 0, 0)",
+                      
                   },
                   button: {
                     height: "5px",
                     "--yarl__slide_description_color": "rgba(0, 0, 0)",
                   },
-                  slide: { height: "270px", width: "100px" },
+                  slide: { height: "270px", width: "200px" },
+                  
                 }}
                 slides={productDetails.productImage.map((image, index) => ({
                   src: image,

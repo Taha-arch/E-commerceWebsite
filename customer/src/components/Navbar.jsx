@@ -33,7 +33,7 @@ function Navbar() {
             </div>
 
             <div className="font-bold flex flex-col md:flex-row justify-between gap-5">
-              <NavLink to="/home" className="nav-link ">HOME</NavLink>
+              <NavLink to="/" className="nav-link ">HOME</NavLink>
               <NavLink to="/collections" className="nav-link ">COLLECTIONS</NavLink>
               <NavLink to="/about us" className="nav-link ">ABOUT US</NavLink>
             </div>
@@ -55,7 +55,7 @@ function Navbar() {
 
             </div>
             <div className='cursor-pointer' onClick={() => navigate('/cart')}>  <IoBagOutline /></div>
-            <div>  <TbHeart /></div>
+            <div className='cursor-pointer' onClick={() => navigate('/favorites')}> <TbHeart /></div>
             <div>  {!customer ?
              <div className="cursor-pointer" onClick={() => navigate('/login')}>  <FaUserCircle /> </div>
              :
