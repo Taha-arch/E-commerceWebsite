@@ -8,6 +8,8 @@ import subcategoriesReducer from '../slicers/Subcategory/subcategorySlices';
 import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
+import custmerUpdateReducer from '../slicers/Customer/customerUpdate'
+import getCustomerIdReducer from '../slicers/Customer/customerById'
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   productsFound: productFoundReducer,
   categories: categoriesReducer,
-  subcategories: subcategoriesReducer
+  subcategories: subcategoriesReducer,
+  customerUpdate: custmerUpdateReducer,
+  customerId: getCustomerIdReducer,
 });
 
 export const persistConfig = {

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
-
+import { useDispatch } from "react-redux";
+import { useNavigate} from "react-router-dom";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -13,9 +14,7 @@ export default function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(fetchProductFound(productName));
-  }, [dispatch, productName]);
+
 
   return (
     <div className="bg-primary h-fit flex flex-col items-center">
@@ -117,14 +116,8 @@ export default function LandingPage() {
           >
             <div className="h-fullp pb-4 md:h-2/4 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-3xl mt-2"
-                onClick={()=>{ 
-                            dispatch(fetchProductFound('bag'));
-                                navigate(`/collections`);
-                }}>BAGS</span>
-              <img className="w-full h-full" src="/sac.png" alt="" onClick={()=>{ 
-                            dispatch(fetchProductFound('bag'));
-                                navigate(`/collections`);
-                }}/>
+               >BAGS</span>
+              <img className="w-full h-full" src="/sac.png" alt="" />
             </div>
           </div>
           <div className="w-full md:w-1/2  gap-5 flex flex-col justify-center">
@@ -132,31 +125,23 @@ export default function LandingPage() {
               className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe"
               data-aos="fade-down"
             >
-              <span className="font-bold text-lg md:text-2xl" 
-              onClick={()=>{ 
-                dispatch(fetchProductFound('hat'));
-                    navigate(`/collections`);
-                }}>HATS</span>
-              <img className="w-full h-full" src="/hat.png" alt="" onClick={()=>{ 
-                dispatch(fetchProductFound('hat'));
-                    navigate(`/collections`);
-                }} />
+              <span className="font-bold text-lg md:text-2xl" >
+              
+              </span>
+              <img className="w-full h-full" src="/hat.png" alt="" 
+               
+                />
             </div>
             <div
               className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe"
               data-aos="fade-up"
             >
               <span className="font-bold text-lg md:text-2xl mt-1"
-              onClick={()=>{ 
-                dispatch(fetchProductFound('ring'));
-                    navigate(`/collections`);
-                  }}>
+             >
                 JEWELRY
               </span>
-              <img className="w-full" src="/ring.png" alt="" onClick={()=>{ 
-                dispatch(fetchProductFound('ring'));
-                    navigate(`/collections`);
-                  }} />
+              <img className="w-full" src="/ring.png" alt="" 
+                 />
             </div>
           </div>
         </div>
@@ -180,16 +165,11 @@ export default function LandingPage() {
               data-aos="fade-up"
             >
               <span className="font-bold text-lg md:text-2xl mt-1"
-              onClick={()=>{ 
-                dispatch(fetchProductFound('glasses'));
-                    navigate(`/collections`);
-                  }}>
+              >
                 ACCESSORIES
               </span>
-              <img className="w-full" src="/sunglasses.png" alt="" onClick={()=>{ 
-                dispatch(fetchProductFound('glasses'));
-                    navigate(`/collections`);
-                  }} />
+              <img className="w-full" src="/sunglasses.png" alt="" 
+                 />
             </div>
           </div>
           <div
@@ -198,14 +178,9 @@ export default function LandingPage() {
           >
             <div className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-2xl mt-1"
-              onClick={()=>{ 
-                dispatch(fetchProductFound('boots'));
-                    navigate(`/collections`);
-                  }}>SHOES</span>
-              <img className="w-full px-3 mt-2" src="/shoes.png" alt="" onClick={()=>{ 
-                dispatch(fetchProductFound('boots'));
-                    navigate(`/collections`);
-                  }}/>
+              >SHOES</span>
+              <img className="w-full px-3 mt-2" src="/shoes.png" alt=""  
+                />
             </div>
           </div>
         </div>
@@ -226,11 +201,11 @@ export default function LandingPage() {
             data-aos="fade-up"
           >
             <div className="image1 w-96 h-96 "></div>
-            <div className="flex flex-col items-center gap-5" onClick={()=>{ dispatch(fetchProductFound('earnings')); navigate(`/collections`);}}>
+            <div className="flex flex-col items-center gap-5" >
               <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
               <button
                className="font-bold text-xl underline text-truegreen"
-               onClick={()=>{ dispatch(fetchProductFound('earnings')); navigate(`/collections`);}}
+              
                >
                 SHOP NOW
               </button>
@@ -240,14 +215,14 @@ export default function LandingPage() {
             className="md:w-1/3 h-full flex flex-col items-center gap-5 mt-40"
             data-aos="fade-down"
           >
-            <div className="image2 w-96 h-96 "  onClick={()=>{dispatch(fetchProductFound('neck')); navigate(`/collections`);}}></div>
+            <div className="image2 w-96 h-96 "  ></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl w-full text-black">
                 Moonlight Serenity
               </h1>
               <button 
               className="font-bold text-xl underline text-truegreen"
-              onClick={()=>{dispatch(fetchProductFound('neck')); navigate(`/collections`);}}
+
               >
                 SHOP NOW
               </button >
@@ -265,7 +240,7 @@ export default function LandingPage() {
               </h1>
               <button
               className="font-bold text-xl underline text-truegreen"
-              onClick={()=>{ dispatch(fetchProductFound('ring')); navigate(`/collections`);}}
+              
               >
                 SHOP NOW
               </button>
@@ -289,7 +264,7 @@ export default function LandingPage() {
               <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
               <button
               className="font-bold text-xl underline text-truegreen"
-              onClick={()=>{ dispatch(fetchProductFound('watch')); navigate(`/collections`);}}
+              
               >
                 SHOP NOW
               </button>
@@ -307,7 +282,7 @@ export default function LandingPage() {
               </h1>
               <button 
               className="font-bold text-xl underline text-truegreen"
-              onClick={()=>{ dispatch(fetchProductFound('bracelet')); navigate(`/collections`);}}
+             
               >
                 SHOP NOW
               </button>
@@ -325,7 +300,7 @@ export default function LandingPage() {
               </h1>
               <button 
               className="font-bold text-xl underline text-truegreen"
-              onClick={()=>{dispatch(fetchProductFound('watch')); navigate(`/collections`);}}
+              
               >
                 SHOP NOW
               </button>
@@ -345,16 +320,16 @@ export default function LandingPage() {
           <div className="image8 w-1/2 h-full" data-aos="fade-left" onClick={()=>{ navigate(`/collections`);}}></div>
         </div>
         <div className="flex flex-row justify-around px-20">
-          <h1 className="text-truegreen font-bold" onClick={()=>{dispatch(fetchProductFound('')); navigate(`/collections`);}}>Aurora Blossom</h1>
+          <h1 className="text-truegreen font-bold" >Aurora Blossom</h1>
           <span className="text-4xl font-bold">-50%</span>
-          <h1 className="text-truegreen font-bold" onClick={()=>{dispatch(fetchProductFound('')); navigate(`/collections`);}}>Sparkling stars</h1>
+          <h1 className="text-truegreen font-bold" >Sparkling stars</h1>
         </div>
       </div>
 
       <div className="flex flex-row justify-center h-fit">
         <button 
         className="font-bold text-2xl text-truegreen underline py-10"
-        onClick={()=>{ navigate(`/collections`);}}
+       
         >
           DISCOVER THE OFFER
         </button>

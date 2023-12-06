@@ -1,4 +1,4 @@
-import React, { useState , Fragment} from "react";
+import React, { useState , Fragment, useEffect} from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { Transition, Menu } from '@headlessui/react'
 import "../styles/main.css";
@@ -7,7 +7,6 @@ import { IoBagOutline } from "react-icons/io5";
 import { TbHeart } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
 import classNames from 'classnames'
-import { useSelector , useDispatch} from 'react-redux'
 import { logout } from '../Redux/slicers/AUTH/authServices'
 import { useDispatch, useSelector } from "react-redux";
 import {fetchProductFound } from "../Redux/slicers/Product/productServices";
@@ -15,7 +14,6 @@ import { fetchCategories } from "../Redux/slicers/Category/categoryServices";
 import { fetchSubcategories } from "../Redux/slicers/Subcategory/subcategoryServices";
 import { IoIosArrowDown } from "react-icons/io";
 import {  ChevronUpIcon } from "@heroicons/react/24/solid";
-import {Menu,MenuHandler,MenuList,MenuItem,Button} from "@material-tailwind/react";
 
 
 
@@ -30,7 +28,6 @@ function Navbar() {
     const subcategories = useSelector((state) => state.subcategories.subcategories);
     const [openMenu, setOpenMenu] = React.useState(false);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const customer =useSelector((state) => state.auth.customer)
 
     const handleLogout = () => {
