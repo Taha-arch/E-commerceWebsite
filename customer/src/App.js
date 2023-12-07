@@ -16,7 +16,6 @@ import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
 import Checkout from './containers/Checkout';
 import Favorites from './containers/Favorites';
-
 import Products from "./containers/Products";
 
 function App() {
