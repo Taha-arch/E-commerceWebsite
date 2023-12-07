@@ -18,7 +18,7 @@ export default function ProductCard(props) {
         <div className='card w-80 h-fit bg-white border m-5 rounded-2xl' onClick={() => navigate(`/product/${product && product._id}`)}>
             <div className='flex justify-between '>
               <div className='bg-orange-500 h-fit font-bold   text-md  ml-4 pl-2 pr-1 pt-0 mt-2    text-white '>
-              <span>10%</span>
+              <span>{product && Math.floor(((product.discountPrice * 100) / product.price))} %</span>
               </div>
                 <button className='heart rounded-full  m-2  text-lg p-3 text-red-500  ' onClick={(event) =>toggleButton(event) } >{isButtonActive ? <FaHeart /> : <FaRegHeart /> }</button>
             </div>
@@ -28,7 +28,7 @@ export default function ProductCard(props) {
             <div className='flex justify-center'>
             <div className='flex flex-col w-60 pt-5 pb-2'>
               <div className='flex flex-row justify-center text-lg font-inter font-bold'>
-                <span>{product && product.productName}</span>
+                <span onClick={() => navigate(`/productDetails/${product._id}`)}>{product && product.productName}</span>
               </div>
               <div className='flex flex-row justify-between'>
                 <span className='font-bold text-lg'>{product && product.price}DH</span>

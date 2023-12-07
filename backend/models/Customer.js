@@ -54,6 +54,10 @@ const CustomerSchema = new mongoose.Schema({
        enum: ['true', 'false'],
        default: 'false' 
       },
+      Phone: {
+        type: Boolean,
+        type: String, 
+      }
   });
 
 

@@ -32,7 +32,7 @@ const upload = multer({
     storage: storage,
     limits: {fileSize: 1024 * 1024 * 5} // Adjust the file size limit (5 MB )
 });
-const uploadMultipleImages = upload.array('product_image', 3);
+const uploadMultipleImages = upload.array('product_image', 4);
 
 const uploadUserImage = multer({
     storage: usersStorage,

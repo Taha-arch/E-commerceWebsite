@@ -26,10 +26,10 @@ export default function ProductEdit() {
     productImage: '',
     sku: '',
     productName: '',
-    short_description: '',
-    long_description: '',
+    shortDescription: '',
+    longDescription: '',
     price: '',
-    discount_price: '',
+    discountPrice: '',
     quantity: '',
     subcategory_id: '',
     option: '',
@@ -173,7 +173,7 @@ export default function ProductEdit() {
           long_description: productInfo.longDescription,
           price: productInfo.price,
           active: productInfo.active,
-          discount_price: productInfo.discount_price,
+          discount_price: productInfo.discountPrice,
           quantity: productInfo.quantity,
           subcategory_id: productInfo.subcategory_id
       });
@@ -299,9 +299,9 @@ return (
             type="text"
             name="discount_price"
             id="discount_price"
-            placeholder={productInfo && productInfo.discount_price}
-            value={productInfo.discount_price}
-            onChange={(e) => setProductInfo({ ...productInfo, discount_price: e.target.value })}
+            placeholder={productInfo && productInfo.discountPrice}
+            value={productInfo.discountPrice}
+            onChange={(e) => setProductInfo({ ...productInfo, discountPrice: e.target.value })}
             required
           />
         </td>
@@ -412,9 +412,9 @@ return (
             type="textarea"
             name="short_description"
             id="short_description"
-            placeholder={productInfo && productInfo.short_description}
-            value={productInfo.short_Description}
-            onChange={(e) => setProductInfo({ ...productInfo, short_description: e.target.value })}
+            placeholder={productInfo && productInfo.shortDescription}
+            value={productInfo.shortDescription}
+            onChange={(e) => setProductInfo({ ...productInfo, shortDescription: e.target.value })}
             required
           />
         
@@ -450,9 +450,9 @@ return (
             type="text"
             name="long_description"
             id="long_description"
-            placeholder={productInfo.long_description}
-            value={productInfo.long_description}
-            onChange={(e) => setProductInfo({ ...productInfo, long_description: e.target.value })}
+            placeholder={productInfo.longDescription}
+            value={productInfo.longDescription}
+            onChange={(e) => setProductInfo({ ...productInfo, longDescription: e.target.value })}
             required
           />
         </td>

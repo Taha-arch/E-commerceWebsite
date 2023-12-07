@@ -33,16 +33,12 @@ const notify = () => swal(
     const handleAddSubcategory = async () => {
       try {
         const categorySearched = await SearchCategory(category);
-    
-        console.log("hi " + category);
-        console.log(categorySearched);
 
         const categoryId = categorySearched[0]._id;     
         const config = {
           headers: { Authorization: `Bearer ${token}` }
         };
     
-        console.log(subcategoryInfo);
     
         await axios.post(`http://localhost:3001/subcategories/`, {
           subcategory_name: subcategoryInfo.subcategoryName,

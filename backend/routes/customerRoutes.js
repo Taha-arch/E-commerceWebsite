@@ -8,12 +8,12 @@ router.post('/customers/login', authCustomer);
 router.post('/customers', addCustomer);
 router.get('/customers/search',authorization, searchCustomer)
 router.get('/customers',authorization, getAllCustomers);
-
-router.get('/customers/:id',authorization, getCustomer);
+// ,authorization
+router.get('/customers/:id', getCustomer);
 router.delete('/customers/delete/:id', deleteCustomer);
 router.put('/customers/validate',authorization, validateCustomerEmail);
-router.put('/customers/:id', uploadCustomerImage ,authorization, updateCustomer);
-
+router.put('/customers/:id', uploadCustomerImage , updateCustomer);
+// ,authorization
 //router.get('/customers/profile', getCustomerProfile);
 //router.patch('/customers/profile/update', updateCustomerProfile);
 

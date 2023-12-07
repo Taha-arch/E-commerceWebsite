@@ -139,6 +139,7 @@ const addCustomer = async (req, res) => {
 
     const getCustomer = async (req, res) => {
         let idCustomer = req.params.id;
+        
         await Customer.findById(idCustomer)
         .then((customer) => {
     
@@ -164,11 +165,12 @@ const addCustomer = async (req, res) => {
 
    
   const updateCustomer = async (req, res) => {
-        
 
             try {
-              const idCustomer = req.params.id;
+               
+            const idCustomer = req.params.id;
             const customerUpdate = req.body;
+            
             const timeInMss = Date.now();
             customerUpdate.last_update = timeInMss;
              // Current User
@@ -192,7 +194,7 @@ const addCustomer = async (req, res) => {
                 width: 1000,
                 crop: "scale"
               });
-              console.log(newImage)
+              
               customerUpdate.customer_image=newImage.secure_url;
               }
             

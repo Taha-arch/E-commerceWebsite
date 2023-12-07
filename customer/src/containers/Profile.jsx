@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { MdOutlineSmartphone } from "react-icons/md";
+import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import { updateCustomer } from "../../src/Redux/slicers/Customer/customerServices";
+import { getCustomerById } from "../../src/Redux/slicers/Customer/customerServices";
 
 export default function Profile(props) {
   const { titre, customerId } = props;
-  const [selectedImage, setSelectedImage] = useState("/image1.jpg");
+  const [selectedImage, setSelectedImage] = useState("");
+  const customer = useSelector((state) => state.auth.customer);
+  const customerById = useSelector((state) => state.customerId.customerById);
+  const dispatch = useDispatch();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -13,73 +20,122 @@ export default function Profile(props) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
+        setCustomerInfo({ ...customerInfo, customer_image: reader.result });
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const [customerInfo, setCustomerInfo] = useState({
+    customer_image: "",
+    first_name:  "",
+    last_name: "",
+    email:  "",
+    Phone: "",
+  });
+  const [updatedProfile, setUpdatedProfile] = useState(false);
+
+  const notify = () => {
+    toast.success("User Updated Successfully!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  useEffect(() => {
+    const id = customer._id;
+    
+    dispatch(getCustomerById({id}))
+    setUpdatedProfile(false)
+  }, [customer, dispatch, updatedProfile]);
+  
+  const handleSubmitEditCustomer = (id) => {
+    const updatedCustomerInfo = {
+      ...customerInfo,
+    customer_image: selectedImage || (customer && customer.customer_image),
+    first_name: customerInfo.first_name || (customer && customer.first_name),
+    last_name: customerInfo.last_name || (customer && customer.last_name),
+    email: customerInfo.email || (customer && customer.email),
+    Phone: customerInfo.Phone || (customer && customer.Phone),
+    };
+
+    dispatch(updateCustomer({ id, updatedInfo: updatedCustomerInfo }));
+    setUpdatedProfile(true);
+    notify()
+  };
+
+  
   return (
     <div>
       <div className=" h-full flex flex-col pt-40">
         <div className="h-fit w-fit mb-10">
           <h1 className="text-truegreen">
-            User Profile <hr />{" "}
+            Your Profile <hr />{" "}
           </h1>
         </div>
 
         <div className="flex flex-row justify-around gap-20">
             <div className="flex flex-row">
-            {selectedImage && (
-          <div className="image  flex flex-row">
-            <img
-              src={selectedImage}
-              alt=""
-              className="w-32 h-auto rounded-full border-4 border-white"
-            />    
-          </div>
-          )}
-            <div className=" ml-5 flex flex-col justify-center">
-              <h2 className="font-bold">Alaa Mohamed</h2>
-              <p>Product Design</p>
-              <p>Eastern European Time (EET), Cairo UTC +3</p>
-            </div>
-            </div>
-        
-          <div className="flex flex-row justify-center items-center">
-            <div>
-              <input
-                type="file"
-                id="image-input"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-              <label
-                htmlFor="image-input"
-                className="bg-truegreen hover:bg-truegreentint text-white  font-Poppins  py-5 px-4 rounded cursor-pointer"
-              >
-                Upload New Image
-              </label>
-              <button className="border-2 border-truegreen text-truegreen ml-5 hover:bg-truegreen font-Poppins   hover:text-white h-16 w-44 rounded-lg">
-                Delete
-              </button>
+              
+          
+            <div className="image  flex flex-row">
+  <img
+    src={selectedImage || (customerById && customerById.customer_image)}
+    alt=""
+    className="w-32 h-auto rounded-full border-4 border-white"
+  />
+</div>
+
+<input
+  type="file"
+  id="image-input"
+  accept="image/*"
+  className="hidden"
+  onChange={handleImageChange}
+/>
+<label
+  htmlFor="image-input"
+  className="bg-truegreen hover:bg-truegreentint text-white  font-Poppins h-14 py-4 px-4 rounded cursor-pointer"
+>
+  Upload New Image
+</label>
+
+             
             </div>
           </div>
         </div>
         <div className="flex flex-row w-full mt-10 gap-10">
         <div className="w-1/2">
             <label htmlFor="" className="text-lg font-Poppins font-bold">First Name</label>
-            <input type="text" className="w-full h-12 border-2 border-gray-500 rounded-md px-2" placeholder="eg.Alaa"/>
+            <input
+  type="text"
+  name="first_name"
+  className="w-full h-12 border-2 border-gray-500 rounded-md px-2"
+  placeholder={customerById && customerById.first_name}
+  value={customerInfo && customerInfo.first_name}
+  onChange={(e) => setCustomerInfo({ ...customerInfo, first_name: e.target.value })}
+/>
         </div>
         <div className="w-1/2">
             <label htmlFor="" className="text-lg font-Poppins font-bold">Last Name</label>
-            <input type="text" className="w-full h-12 border-2 border-gray-500 rounded-md px-2" placeholder="eg.Mohammed"/>
+            <input
+  type="text"
+  name="first_name"
+  className="w-full h-12 border-2 border-gray-500 rounded-md px-2"
+  placeholder={customerById && customerById.last_name}
+  value={customerInfo.last_name}
+  onChange={(e) => setCustomerInfo({ ...customerInfo, last_name: e.target.value })}
+/>
+            
         </div>
         </div>
-        <div className="mt-5">
-            <label htmlFor="" className="text-lg font-Poppins font-bold">User Name</label>
-            <input type="text" className="w-full h-12 border-2 border-gray-500 rounded-md px-2" placeholder="eg.Mohammed"/>
-        </div>
+        
         <div className="flex flex-row w-full mt-10 gap-10">
         <div className="w-1/2 flex flex-col  ">
                 <label htmlFor="" className="text-lg font-Poppins font-bold">Email</label>
@@ -88,7 +144,14 @@ export default function Profile(props) {
                     <MdEmail className="w-6 h-full text-gray-500 "/>
                 </div>
                 <div className="w-full h-full  rounded-md ">
-                    <input type="text " className="w-full h-full focus:outline-none rounded-md" placeholder="Enter Your Email" />
+                <input
+  type="text"
+  name="first_name"
+  className="w-full h-12 border-2 rounded-md px-2"
+  placeholder={customerById && customerById.email} 
+  value={customerInfo.email}
+  onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
+/>
                 </div>
                 </div>
         </div>
@@ -99,7 +162,14 @@ export default function Profile(props) {
                     <MdOutlineSmartphone className="w-6 h-full text-gray-500"/>
                 </div>
                 <div className="w-full h-12  rounded-md ">
-                    <input type="text " className="w-full h-full focus:outline-none rounded-md" placeholder="Enter Your Phone Number"/>
+                <input
+  type="text"
+  name="Phone"
+  className="w-full h-12 border-2  rounded-md px-2"
+  placeholder={customerById && customerById.Phone}
+  value={customerInfo.Phone}
+  onChange={(e) => setCustomerInfo({ ...customerInfo, Phone: e.target.value })}
+/>
                 </div>
                 </div>
         </div>
@@ -107,7 +177,13 @@ export default function Profile(props) {
         <div className="py-10">
             <hr />
         </div>
+        <button className="border-2 border-truegreen text-truegreen ml-5
+               hover:bg-truegreen font-Poppins   hover:text-white h-16 w-44 rounded-lg"
+               onClick={()=> handleSubmitEditCustomer(customer._id)}
+               >
+                Save
+              </button>
+        <ToastContainer />
       </div>
-    </div>
   );
 }
