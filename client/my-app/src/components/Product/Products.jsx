@@ -83,14 +83,17 @@ export default function Products() {
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             SKU
             </th>
-            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+            {/* <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Category
-            </th>
+            </th> */}
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Subcategory
             </th>
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Quantity
+            </th>
+            <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
+           Price
             </th>
             <th className="bg-white text-xs sm:text-sm leading-4 font-semibold text-gray-600 uppercase tracking-wider">
             Status
@@ -106,10 +109,13 @@ export default function Products() {
                 <td className="  py-5  whitespace-no-wrap text-xs  sm:text-sm text-gray-700"><img alt="product" src={product.productImage[0]} className='w-26 h-24 rounded-lg'></img></td>
                 <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.productName}</td>
                 <td className="  py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.sku}</td>
-                <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td>
+                {/* <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.categoryName}</td> */}
                 <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">{product.subcategoryName}</td>
                 <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                   {product.quantity}
+                </td>
+                <td className=" text-center py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
+                  {product.price}
                 </td>
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700">
                 {product.active ? (
@@ -122,11 +128,11 @@ export default function Products() {
                 <td className=" py-2  whitespace-no-wrap text-xs sm:text-sm text-gray-700 ">
                     <Menu as="div" className="relative px-4">
         <div>
-          <Menu.Button className="ml-2 mt-2 rounded-full focus:outline-none text-neutral-400 hover:ring-2 hover:ring-neutral-500">
+        <Menu.Button className="ml-2 mt-2 rounded-full focus:outline-none   ">
             
-              <RiMoreLine className='w-9 h-9 text-neutral-400'/>
-            
-          </Menu.Button>
+            <RiMoreLine className='w-10 h-10 text-neutral-400 hover:text-cyan-700'/>
+           
+        </Menu.Button>
         </div>
         <Transition
           as={Fragment}
@@ -137,7 +143,7 @@ export default function Products() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+           <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               {({ active }) => (
                 <div className={classNames(
