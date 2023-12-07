@@ -38,3 +38,19 @@ export const fetchProductDetails = createAsyncThunk(
       }
     }
   );
+
+  // export const productBySubcategory = createAsyncThunk(
+  //   'productSubcategory/productBySubcategory',
+  //   async ({SubcategoryName, productName}, thunkAPI) => {
+  //     try {
+  //       const products = await fetchProductFound(productName);
+  //       const productFiltred = await products.filter((product) => 
+  //         product.SubcategoryName === SubcategoryName
+  //       )
+  //       console.log(productFiltred);
+  //       return productFiltred.data;
+  //     } catch (error) {
+  //       return thunkAPI.rejectWithValue(error.response.data);
+  //     }
+  //   }
+  // );

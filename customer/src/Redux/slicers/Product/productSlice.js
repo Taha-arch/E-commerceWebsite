@@ -25,7 +25,7 @@ const productSlice = createSlice({
       })
       .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ? action.payload.error : 'Something went wrong';
+        state.error = action.payload ? action.payload.error : 'Something went wrong with products';
       });
   },
 });

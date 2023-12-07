@@ -12,10 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {fetchProductFound } from "../Redux/slicers/Product/productServices";
 import { fetchCategories } from "../Redux/slicers/Category/categoryServices";
 import { fetchSubcategories } from "../Redux/slicers/Subcategory/subcategoryServices";
-import { IoIosArrowDown } from "react-icons/io";
-import {  ChevronUpIcon } from "@heroicons/react/24/solid";
-
-
+import {removeProducts, addProducts} from '../Redux/slicers/productBySubcat';
+import {fetchProduct} from "../Redux/slicers/Product/productServices";
 
 function Navbar() {
 
@@ -25,15 +23,37 @@ function Navbar() {
     const dispatch = useDispatch();
     const [filtered, setFiltered] = useState([]);
     const categories = useSelector((state) => state.categories.categories);
+    const products = useSelector((state) => state.product.product);
     const subcategories = useSelector((state) => state.subcategories.subcategories);
     const [openMenu, setOpenMenu] = React.useState(false);
     const navigate = useNavigate();
-    const customer =useSelector((state) => state.auth.customer)
+    const [productsBySubCategory, setProductsRelated] = useState([]);
+    const customer = useSelector((state) => state.auth.customer)
+    const [searchBySubCategory, setSubCategory] = useState("");
 
     const handleLogout = () => {
       dispatch(logout())
     }
   
+    //Fetch products with category and subCategory
+    useEffect(() => {
+      if (searchBySubCategory && products) {
+        const productsFiltred =  products.filter((product) => 
+          product.subcategoryName === searchBySubCategory
+        )
+          setProductsRelated(productsFiltred);
+      } 
+    }, [searchBySubCategory, products]);
+    
+    useEffect(()=> {
+      dispatch(fetchProduct());
+    }, [dispatch]);
+
+    useEffect(() => {
+      dispatch(addProducts(productsBySubCategory));
+    }, [dispatch, productsBySubCategory]);
+    
+  //Search
     useEffect(() => {
       dispatch(fetchProductFound(query));
     }, [dispatch, query]);
@@ -80,15 +100,18 @@ function Navbar() {
         <ul>
           {categories &&
             categories.map((category) => (
-              <li key={category._id} onMouseEnter={() => setCategoryId(category._id)} onMouseLeave={() => setCategoryId(null)}>
+              <li key={category._id} onMouseEnter={() => {setCategoryId(category._id);}} onMouseLeave={() => setCategoryId(null)}>
                 {category.category_name}
             
         {categoryId && (
           <ul>
             {filtered && filtered.map((subcategory) => (
                 <li key={subcategory._id} onClick={() => {
-                  setQuery(`${subcategory.subcategory_name}`);
-                  navigate(`/collections`);
+                  
+                  setSubCategory(subcategory.subcategory_name);
+                  dispatch(removeProducts())
+      
+                  navigate(`/${category.category_name}/${subcategory.subcategory_name}`);
                 }}>  {subcategory.subcategory_name}</li>
               ))}
           </ul>
