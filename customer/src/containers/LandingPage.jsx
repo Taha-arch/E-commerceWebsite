@@ -9,9 +9,7 @@ export default function LandingPage() {
   useEffect(() => {
     AOS.init({ duration: 2000 });
   }, []);
-  const [productName, setProductName] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
 
 
 
