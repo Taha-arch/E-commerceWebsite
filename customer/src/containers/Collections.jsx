@@ -4,72 +4,109 @@ import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import  { fetchProduct } from '../../src/Redux/slicers/Product/productServices';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import Sort from '../components/Sort';
 import { FaArrowLeft } from "react-icons/fa";
+import styled from "styled-components";
+import { BsFillGridFill, BsList } from "react-icons/bs";
 
+
+// function Collections() {
+
+//   const dispatch = useDispatch();
+//   const product = useSelector((state) => state.product.product);
+//   const productsFound = useSelector((state) => state.productsFound.productFound);
+//   const categories = useSelector((state) =>state.categories.categories); 
+//   const maxProductsPerCategory = 6;
+//   useEffect(() => {
+//     dispatch(fetchProduct());
+//   }, [dispatch]);
+  
+//   return (
+//     <div className='flex flex-col gap-3 m-8'>
+//       {(!productsFound || productsFound.length === 0) ? (
+//         <>
+//           <h1 className='font-medium'>COLLECTIONS</h1>
+//           {categories && product && categories.map((category)=> (
+//             <div key={category._id}>
+//               <h1 className='font-medium'>{category.category_name} ok</h1>
+//               <div className='flex flex-col justify-start items-center gap-4 '>
+//                 <div className='flex justify-start flex-wrap'>
+//                   {product
+//                     .filter((productItem) => productItem.categoryName === category.category_name)
+//                     .slice(0, maxProductsPerCategory) 
+//                     .map((productItem) => (
+//                       <div key={productItem._id}>
+//                         <ProductCard product={productItem} />
+//                       </div>
+//                     ))}
+//                 </div>
+//                 <div className='w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black'>
+//                   Discover more <FaArrowRight/>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </>
+//       ) : (
+//         <>
+//         <div className="flex items-end justify-between" style={{ alignItems: 'flex-end' }}>
+//         <div><span className="text-xl font-Playfair font-sm">COLLECTIONS </span></div>
+
+//       <div></div>
+//         </div>
+//         <div className='flex justify-start flex-wrap'>
+        
+//           {productsFound && productsFound.map((product, index) => (
+//             <div key={index}>
+//               <ProductCard product={product} /></div>
+//           ))}
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Collections;
 
 function Collections() {
-
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
   const productsFound = useSelector((state) => state.productsFound.productFound);
-  console.log(product);
+  const categories = useSelector((state) => state.categories.categories); 
+  const maxProductsPerCategory = 6;
+
   useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
-  const [sortedProducts, setSortedProducts] = useState([]);
-  const handleSortChange = (selectedSortOption) => {
-    let sorted = [];
-    if (selectedSortOption === 'lowest') {
-      sorted = [...product].sort((a, b) => a.price - b.price);
-      console.log("lowest " + sorted)
-    } else if(selectedSortOption === 'highest') {
-      sorted = [...product].sort((a, b) => b.price - a.price);
-    } else {
-      sorted = [];
-    }
-    setSortedProducts(sorted);
-  };
   
-  console.log("sorted products "+ sortedProducts);
- 
   return (
     <div className='flex flex-col gap-3 m-8'>
-      {(!productsFound || productsFound.length === 0) ? (
-        <>
-          <h1 className='font-medium'>PRODUCTS</h1>
-          <div className="flex items-end justify-between" style={{ alignItems: 'flex-end' }}>
-        <span className="text-xl font-Playfair font-bold">{product && product.length} ITEMS FOUND</span>
-
-        <Sort handleSortChange={handleSortChange} />
-
-        </div>
+      <h1 className='font-medium'>COLLECTIONS</h1>
+      {categories && product && categories.map((category)=> (
+        <div key={category._id}>
+          <h1 className='font-karla'>{category.category_name}</h1>
           <div className='flex flex-col justify-start items-center gap-4 '>
             <div className='flex justify-start flex-wrap'>
-            {product && (sortedProducts.length > 0 ? sortedProducts : product).map((productItem, index) => (
-  <div key={index}><ProductCard product={productItem} /></div>
-))}
-              
+            {(productsFound && productsFound.length > 0 ?
+                productsFound
+                  .filter((productItem) => productItem.categoryName === category.category_name)
+                  .slice(0, maxProductsPerCategory)
+                :
+                product
+                  .filter((productItem) => productItem.categoryName === category.category_name)
+                  .slice(0, maxProductsPerCategory)
+              ).map((productItem, index) => (
+                <div key={index}>
+                  <ProductCard product={productItem} />
+                </div>
+              ))}
             </div>
-            <div className='w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black'> Discover more  <FaArrowRight/></div>
+            <div className='w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black'>
+              Discover more <FaArrowRight/>
+            </div>
           </div>
-
-        </>
-      ) : (
-        <>
-        <div className="flex items-end justify-between" style={{ alignItems: 'flex-end' }}>
-        <div><span className="text-xl font-Playfair font-sm">{productsFound.length} ITEMS FOUND</span></div>
-       <div> <Sort handleSortChange={handleSortChange} className=""/></div>
         </div>
-        <div className='flex justify-start flex-wrap'>
-        
-          {productsFound && productsFound.map((product, index) => (
-            <div key={index}>
-              <ProductCard product={product} /></div>
-          ))}
-          </div>
-        </>
-      )}
+      ))}
     </div>
   );
 }

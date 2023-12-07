@@ -12,12 +12,12 @@ import Layout from './components/Layout';
 import Collections from './containers/Collections';
 import LandingPage from './containers/LandingPage';
 import Profile from './containers/Profile';
-
 import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
 import Checkout from './containers/Checkout';
 import Favorites from './containers/Favorites';
 
+import Products from "./containers/Products";
 
 function App() {
   
@@ -33,6 +33,8 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/' element={<LandingPage/>}></Route>
+          <Route path="/:category/:subcategory" element={<Products/>} />
+          <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path="/profile/:id" element={<Profile/>} />
         </Route>
         

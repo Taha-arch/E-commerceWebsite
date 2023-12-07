@@ -10,6 +10,7 @@ import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
 import custmerUpdateReducer from '../slicers/Customer/customerUpdate'
 import getCustomerIdReducer from '../slicers/Customer/customerById'
+import productBySubcatReducer from '../slicers/productBySubcat';
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   subcategories: subcategoriesReducer,
   customerUpdate: custmerUpdateReducer,
   customerId: getCustomerIdReducer,
+  productBySubcategory: productBySubcatReducer,
 });
 
 export const persistConfig = {
