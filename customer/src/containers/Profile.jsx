@@ -72,8 +72,8 @@ export default function Profile(props) {
 
   
   return (
-    <div>
-      <div className=" h-full flex flex-col pt-40">
+    <div className="px-40">
+      <div className=" h-full flex flex-col pt-16">
         <div className="h-fit w-fit mb-10">
           <h1 className="text-truegreen">
             Your Profile <hr />{" "}
@@ -81,7 +81,7 @@ export default function Profile(props) {
         </div>
 
         <div className="flex flex-row justify-around gap-20">
-            <div className="flex flex-row">
+            <div className="flex flex-row ">
               
           
             <div className="image  flex flex-row">

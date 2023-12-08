@@ -65,10 +65,10 @@ padding-inline: 5%;
         justify-content: center;
         align-items: center;
     } 
-.card{
+.cardimage{
     transition: 0.3s;
 }
-.card:hover{
+.cardimage:hover{
     transform:scale(1.05);
     box-shadow: 0px 0px 8px 0px gray;
 }

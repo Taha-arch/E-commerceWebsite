@@ -11,7 +11,7 @@ function Layout() {
   return (
     <div className='primary-bg min-h-screen'>
       <Navbar/>
-      <div className='pt-28'>
+      <div className='pt-24'>
         {<Outlet/>}
       </div>
      <div className='bottom-0'>

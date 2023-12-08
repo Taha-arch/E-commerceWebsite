@@ -150,7 +150,7 @@ export default function ProductDetails() {
       {!loading && product.error ? <div>Error: {product.error}</div> : null}
       {!loading && productDetails && Object.keys(productDetails).length > 0 ? (
         <div className=" box flex flex-col  gap-4">
-          <div className="container w-full justify-start  gap-5">
+          <div className="container w-full justify-center  gap-5">
             <div className="imagescontainer">
               <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
                 {productDetails &&
@@ -395,7 +395,7 @@ export default function ProductDetails() {
             </div>
 
             <div className="morecontainer w-100 flex flex-row over">
-            {productsRelated && productsRelated.map((product) => (
+            {productsRelated && productsRelated.slice(0,4).map((product) => (
                 <div key={product._id}>
                 <ProductCard product={product}/>
                 </div>

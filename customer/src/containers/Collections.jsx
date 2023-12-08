@@ -73,20 +73,20 @@ function Collections() {
   const product = useSelector((state) => state.product.product);
   const productsFound = useSelector((state) => state.productsFound.productFound);
   const categories = useSelector((state) => state.categories.categories); 
-  const maxProductsPerCategory = 6;
+  const maxProductsPerCategory = 8;
 
   useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
   
   return (
-    <div className='flex flex-col gap-3 m-8'>
+    <div className='flex flex-col gap-3 m-8 px-20'>
       <h1 className='font-medium'>COLLECTIONS</h1>
       {categories && product && categories.map((category)=> (
         <div key={category._id}>
-          <h1 className='font-karla'>{category.category_name}</h1>
+          <h1 >{category.category_name}</h1>
           <div className='flex flex-col justify-start items-center gap-4 '>
-            <div className='flex justify-start flex-wrap'>
+            <div className='flex justify-center flex-wrap'>
             {(productsFound && productsFound.length > 0 ?
                 productsFound
                   .filter((productItem) => productItem.categoryName === category.category_name)
