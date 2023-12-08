@@ -9,6 +9,7 @@ import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
 import customerUpdateReducer from '../slicers/Customer/customerUpdate'
+import orderReducer from '../slicers/Order/orderSlice';
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
 import SearchQueryReducer from '../slicers/SearchQuery';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   productDetails: productDetailsReducer,
   Card: CardReducer,
   auth: authReducer,
+  order: orderReducer,
   productsFound: productFoundReducer,
   categories: categoriesReducer,
   subcategories: subcategoriesReducer,
