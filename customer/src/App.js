@@ -35,6 +35,7 @@ function App() {
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
+          <Route path='/' element={<LandingPage/>}></Route>
           <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
           <Route path="/:category/:subcategory" element={<Products/>} />
           <Route path='/Home' element={<LandingPage/>}></Route>

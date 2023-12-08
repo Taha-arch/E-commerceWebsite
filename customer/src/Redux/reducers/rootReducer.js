@@ -8,8 +8,9 @@ import subcategoriesReducer from '../slicers/Subcategory/subcategorySlices';
 import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
-import customerUpdateReducer from '../slicers/Customer/customerUpdate'
 import orderReducer from '../slicers/Order/orderSlice';
+import customerUpdateReducer from '../slicers/Customer/customerUpdate'
+>>>>>>>>> Temporary merge branch 2
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
 import SearchQueryReducer from '../slicers/SearchQuery';
