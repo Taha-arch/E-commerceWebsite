@@ -55,8 +55,12 @@ const ProductSchema = new mongoose.Schema({
             type: Boolean,
             require: true,
             enum : ['true', 'false'],
-            default:'false'
-        }
+            default:'true'
+        },
+        creation_date: {
+            type: Date,
+            default: Date.now
+        },
 
 }, { strictPopulate: false });
 module.exports = mongoose.model('Product', ProductSchema);

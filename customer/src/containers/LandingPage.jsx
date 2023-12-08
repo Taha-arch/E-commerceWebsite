@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
-
 
 export default function LandingPage() {
   useEffect(() => {
@@ -13,45 +12,13 @@ export default function LandingPage() {
   return (
     <div className="bg-primary h-fit flex flex-col items-center">
       <div
-  className="slide flex flex-row justify-between w-full  "
-  data-aos="fade"
->
-<Slider/>
-</div>
-<div className="flex flex-row justify-center px-20  w-full h-44 " data-aos="fade">
-    <div className="serviceimage1 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
-        <h3>ON-DATE DELIVERY</h3>
-        </div>
-      
-    </div>
-    <div className="serviceimage2 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
-        <h3>CERTIFIED PRODUCTS</h3>
-        </div>
-      
-    </div>
-    <div className="serviceimage3 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
-        <h3>ELEGANT STYLE</h3>
-        </div>
-      
-    </div>
-    <div className="serviceimage4 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-        <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
-        <h3>EASY RETURN</h3>
-        </div>
-      
-    </div>
-    <div className="serviceimage5 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-        <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
-        <h3>100% SECURE PAYMENTS</h3>
-        </div>
-      
-    </div>
-</div>
+        className="slide flex flex-row justify-between w-full  "
+        data-aos="fade"
+      >
+        <Slider />
+      </div>
 
-      <div className="flex flex-row  justify-between w-4/5 h-fit py-20">
+      <div className="hidden lg:flex flex-row  justify-between w-4/5 h-fit py-20">
         <div className="w-1/4 h-fit mb-10 " data-aos="fade-right">
           <img
             className="landingimage1 w-full "
@@ -59,14 +26,14 @@ export default function LandingPage() {
             alt=""
           />
         </div>
-        <div className="w-2/5 mt-10" data-aos="fade-down">
+        <div className="w-2/5 mt-20" data-aos="fade-down">
           <div>
             <h1 className="font-bold text-justify text-4xl">
               FIND YOUR{" "}
               <span className="text-truegreen line-through ">STYLE</span> <br />
               REFRESH YOUR LOOK
             </h1>
-            <p className="text-justify hidden md:flex">
+            <p className="text-justify hidden md:flex mt-5">
               Discover Your Style, Elevate Your Look with PRESTIGIOUS. Unleash
               your inner charm with our luxurious accessories and jewelry.
               Explore our handpicked collection for men and women, featuring
@@ -91,6 +58,50 @@ export default function LandingPage() {
         </div>
       </div>
 
+      <div className="flex flex-col lg:hidden  justify-between w-4/5 h-fit py-20">
+        <div className="flex flex-row w-full  items-center h-fit " data-aos="fade-right">
+          <div className="w-1/2">
+          <img
+            className="mobilelandingimage1 w-full "
+            src="/landingimage1.jpg"
+            alt=""
+          />
+          </div>
+          
+          <div className="w-1/2">
+          <h1 className="font-bold text-start text-4xl ml-5">
+              FIND YOUR{" "}
+              <span className="text-truegreen line-through ">STYLE</span> <br />
+              REFRESH YOUR LOOK
+            </h1>
+          </div>
+        </div>
+        
+        <div className="flex flex-row items-center w-full h-1/2" data-aos="fade-down">
+          <div className="w-1/2">
+            
+            <p className="font-bold text-justify text-4xl  mr-5">
+              Discover Your Style, Elevate Your Look with <p className="inline">PREST</p>
+                <p className="secondary-bg inline">IGIOUS</p>. 
+            </p>
+          </div>
+          <div className="w-1/2 " >
+          <img
+            className=" mobilelandingimage2 w-full"
+            src="/landingimage2.jpg"
+            alt=""
+          />
+        </div>
+          
+        </div>
+        <div className="flex flex-row justify-center mt-10">
+            <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-20">
+              Shop Now
+            </button>
+          </div>
+        
+      </div>
+
       <div className="flex flex-row justify-center  h-fit">
         <h1 className="font-bold text-4xl text-truegreen">
           STYLE AND FASHION CATEGORY
@@ -113,7 +124,7 @@ export default function LandingPage() {
               className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe"
               data-aos="fade-down"
             >
-              <span className="font-bold text-lg md:text-2xl">HATS</span>
+              <span className="font-bold text-lg md:text-2xl"></span>
               <img className="w-full h-full" src="/hat.png" alt="" />
             </div>
             <div
@@ -163,7 +174,32 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-
+      <div
+        className="flex flex-row justify-center px-20  w-full h-52 "
+        data-aos="fade"
+      >
+        <div className="popularimage1 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage2 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage3 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage4 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage5 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage6 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+        <div className="popularimage7 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        </div>
+      </div>
       <div className="flex flex-row justify-center mb-20 h-fit">
         <h1 className="font-bold text-4xl text-truegreen">BEST SELLERS</h1>
       </div>
@@ -173,7 +209,7 @@ export default function LandingPage() {
       </div>
 
       <div className="section3 ">
-        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full h- my-20">
+        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
           <div
             className="md:w h-full flex flex-col items-center gap-5"
             data-aos="fade-up"
@@ -223,7 +259,7 @@ export default function LandingPage() {
       </div>
 
       <div className="section4">
-        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full h- py-20">
+        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full pt-10 ">
           <div
             className="md:w-1/3 h-full flex flex-col items-center gap-5"
             data-aos="fade-down"
@@ -271,7 +307,7 @@ export default function LandingPage() {
 
       <div className="flex flex-row justify-center h-fit">
         <h1 className="font-bold text-4xl text-black">
-          SPECIAL OFFER FOR ONLY FOR YOU COUPLES
+          SPECIAL OFFER ONLY FOR YOU COUPLES
         </h1>
       </div>
       <div className="section5 flex flex-col w-4/5">
@@ -291,7 +327,72 @@ export default function LandingPage() {
           DISCOVER THE OFFER
         </button>
       </div>
-      
+      <div className="font-Dubiel ">
+        <h1>OUR SERVICES</h1>
+      </div>
+      <div
+        className="flex flex-row justify-center px-20  w-full h-44 "
+        data-aos="fade"
+      >
+        <div className="serviceimage1 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+            <h3>ON-DATE DELIVERY</h3>
+          </div>
+        </div>
+        <div className="serviceimage2 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+            <h3>CERTIFIED PRODUCTS</h3>
+          </div>
+        </div>
+        <div className="serviceimage3 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+            <h3>ELEGANT STYLE</h3>
+          </div>
+        </div>
+        <div className="serviceimage4 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+            <h3>EASY RETURN</h3>
+          </div>
+        </div>
+        <div className="serviceimage5 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
+          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black ">
+            <h3>100% SECURE PAYMENTS</h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-row">
+        <div className="flex flex-col items-center justify-center gap-5 w-1/2  py-10 ">
+          <div className="font-Dubiel text-2xl">
+            <h1>ABOUT US</h1>
+          </div>
+
+          <div className="w-2/3 text-center flex flex-col justify-between gap-5 font-Karla ">
+            <p>
+              Elevate your style with Prestigious, your ultimate destination for
+              fashion-forward accessories that seamlessly blend timeless
+              elegance with contemporary flair. Explore our curated collection,
+              where every piece becomes a statement, reflecting your unique
+              identity.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-5 py-14  w-1/2  ">
+          <div className="font-Dubiel ">
+            <h1>FIND US</h1>
+          </div>
+          <div className="w-full px-10   ">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d740.4028379302448!2d-7.647602442472446!3d33.571654777452444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sma!4v1701793052643!5m2!1sen!2sma"
+              className="w-full h-96 rounded-3xl"
+              title="location"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

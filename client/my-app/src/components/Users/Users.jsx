@@ -31,10 +31,6 @@ import * as animation from "../../assets/animations/Animation - 1700668658077.js
   }}
 
 
-
-
-
-
 export default function Users() {
   
 const [selectedUser, setSelectedUser] = useState(null);
@@ -47,13 +43,12 @@ const user = useSelector(state => state.user)
 const dispatch = useDispatch()
 
 useEffect(() => {
-   setTimeout(() => {
+    setTimeout(() => {
     dispatch(fetchUsers());
     setLoading(false);
   }, 1500);
 }, [dispatch]);
 
-console.log(user.users);
 
 const notify = () => swal(
   {

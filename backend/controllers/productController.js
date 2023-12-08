@@ -17,10 +17,10 @@ const addProduct = (req, res) => {
         return res.status(400).json({status: 400, message:"price is required!!"});
     }else{
         
-        
+        let ms = Date.now();
         const urlProductImages = req.files ? req.files.map(file => file.path) : null;;
         let newProduct = new Product({
-            sku: sku,
+            sku: sku + ms,
             product_image: urlProductImages,
             product_name: product_name,
             subcategory_id: subcategory_id,
@@ -44,13 +44,20 @@ const addProduct = (req, res) => {
     
     const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find()
-            .limit(10)
+        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter or default to page 1
+        const limit = 10; // Number of products per page
+        const skip = (page - 1) * limit; // Calculate the number of products to skip
+        
+        const totalProducts = await Product.countDocuments();
+        const totalPages = Math.ceil(totalProducts / limit);
+        
+        const products = await Product.find().sort({creation_date:-1})
             .populate({ path: 'subcategory_id', select: 'subcategory_name', 
             populate: {
                 path: 'category_id',
                 select: 'category_name'
             } })
+            
             .exec();
 
         if (products) {
@@ -79,29 +86,43 @@ const addProduct = (req, res) => {
 }
 
 
-const searchProducts = async (req, res) => {
+const searchProducts = async (req, res, next) => {
     try {
         const queryObject = req.query;
-    
-        if (!queryObject.product_name) {
-            res.status(400).json('Missing product_name parameter');
-            return;
-        }
-        const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
-        .sort({ product_name: -1 })
-        .limit(10)
-        .exec()
-        
-        if (products.length === 0) {
-            return res.status(404).json({ message: 'product not found' });
+        if(Object.keys(queryObject).length > 0 && queryObject.product_name){
+
+            const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
+            .sort({ product_name: -1 })
+            .limit(10)
+            .exec()
+            
+            if (products.length === 0) {
+                return res.status(404).json({ message: 'product not found' });
         }
         
-        res.status(200).json({status:200, data : products});
-        
-        } catch (error) {
-            console.error('Error searching for a product by product_name:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-            }
+        if (products) {
+            const formattedProducts = products.map((product) => ({
+                "_id": product._id,
+                "sku": product.sku,
+                "productImage": product.product_image,
+                "productName": product.product_name,
+                "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
+                "shortDescription": product.short_description,
+                "longDescription": product.long_description,
+                "price": product.price,
+                "quantity": product.quantity,
+                "discountPrice": product.discount_price,
+                "active": product.active
+            }));
+            res.status(200).json({ status: 200, data: formattedProducts });
+        }
+        }else {
+            return getAllProducts(req, res, next);
+        }
+    }catch (error) {
+        console.error('Error searching for a product by product_name:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 const getProduct = async (req, res) => {

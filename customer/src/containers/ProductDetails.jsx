@@ -10,7 +10,7 @@ import "yet-another-react-lightbox/styles.css";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import { fetchProductDetails } from "../Redux/slicers/Product/productServices";
+import { fetchProductDetails, fetchProduct } from "../Redux/slicers/Product/productServices";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { clearProductDetails } from "../Redux/slicers/Product/productDetailsSlice";
@@ -19,7 +19,10 @@ import shortid from "shortid";
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const card = useSelector((state) => state.Card.cards)
+  const card = useSelector((state) => state.Card.cards);
+  const products = useSelector((state) => state.product.product);
+  
+
   const isInCard = () => {
     return (card?.find(({ _id }) => _id === id)) ? true : false;
   }
@@ -38,6 +41,23 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const [productsRelated, setProductsRelated] = useState([]);
+  useEffect(() => {
+    if(products && productDetails && productDetails.subcategoryName){
+
+      dispatch(fetchProduct()); 
+      console.log(productDetails.subcategoryName)
+      const currentProductSubcategoryName = productDetails.subcategoryName;
+      const filteredProducts = products.filter(
+        (product) =>
+        product.subcategoryName === currentProductSubcategoryName &&
+        product._id !== id
+        );
+        console.log(filteredProducts)
+        setProductsRelated(filteredProducts);
+      }
+  
+  }, [dispatch, id, productDetails, products]);
 
   const notify = (productName) => {
     toast.success(`${productName} Added to cart Successfully!`, {
@@ -127,7 +147,7 @@ export default function ProductDetails() {
       {!loading && product.error ? <div>Error: {product.error}</div> : null}
       {!loading && productDetails && Object.keys(productDetails).length > 0 ? (
         <div className=" box flex flex-col  gap-4">
-          <div className="container w-full justify-start  gap-5">
+          <div className="container w-full justify-center  gap-5">
             <div className="imagescontainer">
               <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
                 {productDetails &&
@@ -161,7 +181,7 @@ export default function ProductDetails() {
               <Lightbox
                 styles={{
                   root: {
-                    height: "350px",
+                    height: "400px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsContainer: {
@@ -169,7 +189,7 @@ export default function ProductDetails() {
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsTrack: {
-                    height: "60px",
+                    height: "100px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnail: {
@@ -179,12 +199,14 @@ export default function ProductDetails() {
                       "rgba(255, 255, 255)",
                     "--yarl__thumbnails_thumbnail_active_border_color":
                       "rgba(0, 0, 0)",
+                      
                   },
                   button: {
                     height: "5px",
                     "--yarl__slide_description_color": "rgba(0, 0, 0)",
                   },
-                  slide: { height: "270px", width: "100px" },
+                  slide: { height: "270px", width: "200px" },
+                  
                 }}
                 slides={productDetails.productImage.map((image, index) => ({
                   src: image,
@@ -368,10 +390,14 @@ export default function ProductDetails() {
                 More +
               </span>
             </div>
+
             <div className="morecontainer w-100 flex flex-row over">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+            {productsRelated && productsRelated.slice(0,4).map((product) => (
+                <div key={product._id}>
+                <ProductCard product={product}/>
+                </div>
+              ))}
+
             </div>
           </div>
         </div>

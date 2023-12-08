@@ -83,7 +83,6 @@
 .modalContainer .title {
     display: inline-block;
     text-align: center;
-    
     font-weight: bold;
 }
 
@@ -116,7 +115,7 @@
     }
 
 .popup-details{
-    width: 75%;
+    width: 90%;
 }
 .alert-supp{
     color: red;

@@ -6,7 +6,21 @@ export const fetchProduct = createAsyncThunk(
     async (thunkAPI) => {
       try {
         const response = await axios.get(`http://localhost:3001/products/`);
+        console.log(response.data);
         return response.data.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  export const fetchProductFound = createAsyncThunk(
+    'productFound/fetchProductFound',
+    async (productName, thunkAPI) => {
+      try {
+          const response = await axios.get(`http://localhost:3001/products?product_name=${productName}`);
+          return response.data.data;
+        
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
       }
@@ -24,3 +38,19 @@ export const fetchProductDetails = createAsyncThunk(
       }
     }
   );
+
+  // export const productBySubcategory = createAsyncThunk(
+  //   'productSubcategory/productBySubcategory',
+  //   async ({SubcategoryName, productName}, thunkAPI) => {
+  //     try {
+  //       const products = await fetchProductFound(productName);
+  //       const productFiltred = await products.filter((product) => 
+  //         product.SubcategoryName === SubcategoryName
+  //       )
+  //       console.log(productFiltred);
+  //       return productFiltred.data;
+  //     } catch (error) {
+  //       return thunkAPI.rejectWithValue(error.response.data);
+  //     }
+  //   }
+  // );

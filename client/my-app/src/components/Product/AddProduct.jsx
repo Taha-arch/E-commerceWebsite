@@ -301,7 +301,7 @@ return (
           <div id="showButton" className="border rounded-lg focus:border h-8 w-full  z-10" onClick={show}>
           <FaArrowAltCircleDown className='mt-2 '/>
           </div>
-        <ul className='category-items h-24 overflow-y-auto' id="list">
+        <ul className='category-items  overflow-y-auto' id="list">
         {categories && categories.map((item) => (
           
           <li key={item._id} name={item.category_name} className="cursor-pointer " onClick={()=>{setCategory(item.category_name)}}>{item.category_name}</li>
@@ -329,7 +329,9 @@ return (
         <ul className='category-items overflow-y-auto' id="subList">
           
         {subCategories && subCategories.map((item) => (
+          
         <li key={item._id} name={item.subcategory_name} className="cursor-pointer " 
+              
         onClick={()=>{setSubcategory(item.subcategory_name)
           setProductInfo({ ...productInfo, subcategory_id: item._id })}}>{item.subcategory_name}</li>
             ))}
