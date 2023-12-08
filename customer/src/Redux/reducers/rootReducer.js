@@ -4,14 +4,16 @@ import storage from 'redux-persist/lib/storage';
 import productReducer from '../slicers/Product/productSlice'
 import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
-import authReducer from '../slicers/AUTH/authSlice'
+import authReducer from '../slicers/AUTH/authSlice';
+import orderReducer from '../slicers/Order/orderSlice';
 
 
 const rootReducer = combineReducers({
   product: productReducer,
   productDetails: productDetailsReducer,
   Card: CardReducer,
-  auth: authReducer
+  auth: authReducer,
+  order: orderReducer
 });
 
 export const persistConfig = {

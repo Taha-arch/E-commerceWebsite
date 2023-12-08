@@ -15,7 +15,7 @@ function Collections() {
   }, [dispatch]);
 
   return (
-    <div  className='flex flex-col gap-3 pt-40'>
+    <div  className='flex flex-col gap-3 box'>
          <h1 className='font-medium'>WOMEN</h1>
      <div className='flex flex-col justify-start items-center gap-4'>
         <div className='flex justify-start flex-wrap'>
@@ -27,7 +27,7 @@ function Collections() {
         </div>
 
       <h1 className='font-medium'>MEN</h1>
-      <div className='flex flex-col justify-start items-center gap-4'>
+      <div className='flex flex-col justify-start items-center gap-4 '>
       <div className='flex justify-start flex-wrap'>
             <div><ProductCard /></div>
             <div><ProductCard /></div>

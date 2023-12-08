@@ -40,8 +40,7 @@ h1{
 
 .box{
 width: 100%;
-align-items: center;
-padding-inline: 5%;
+padding-inline: 10%;
 }
 .container{
     display: flex;

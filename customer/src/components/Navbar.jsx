@@ -9,6 +9,7 @@ import { FaUserCircle } from "react-icons/fa";
 import classNames from 'classnames'
 import { useSelector , useDispatch} from 'react-redux'
 import { logout } from '../Redux/slicers/AUTH/authServices'
+import { clearCards } from "../Redux/slicers/CardSlice";
 
 
 function Navbar() {
@@ -18,7 +19,8 @@ function Navbar() {
     const customer =useSelector((state) => state.auth.customer)
 
     const handleLogout = () => {
-      dispatch(logout())
+      dispatch(logout());
+      dispatch(clearCards());
     }
   return (
     <div className=" md:fixed w-full primary-bg z-10 ">

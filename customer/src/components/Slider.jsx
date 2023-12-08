@@ -16,7 +16,7 @@ function Slider() {
       data-aos="fade"
     >
       <div
-          className="flex flex-col justify-center px-24 w-96    h-full p-10 text-black "
+          className="flex flex-col justify-center px-24 w-96 h-full p-10 text-black "
           data-aos="fade-right"
         >
           <div>
@@ -34,9 +34,6 @@ function Slider() {
             <span className="underline">Handbags</span>, ...
             </p>
           </div>
-        </div>
-      <div className="w-2/3 flex flex-col justify-center py-10 ">
-        
         </div>
         
     </div>

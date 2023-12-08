@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login, logout } from './authServices';
+import { login, logout, purgePersistedState } from './authServices';
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -21,6 +22,7 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.customer = null;
         state.token = null;
+        
       });
   },
 });

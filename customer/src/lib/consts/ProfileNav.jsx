@@ -7,7 +7,7 @@ export const PROFILE_SIDEBAR_LINKS = [
     {
         key: 'profile',
         label: 'My Profile',
-        path: '/profile' 
+        path: '/profile/:id' 
 
     },
     {

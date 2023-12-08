@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  cards: [], // Initial state for cards
+  cards: [], 
+  totalCartPrice: 0,
   loading: false,
   error: null,
 };
@@ -14,13 +15,20 @@ const cardSlice = createSlice({
       state.cards = [];
       state.loading = false;
       state.error = null;
+      state.totalCartPrice = 0;
     },
     addCard: (state, action) => {
-      state.cards.push(action.payload); // Assuming payload is the new card object
+      state.cards.push(action.payload); 
+      state.totalCartPrice = state.cards.reduce((total, card) => total + parseFloat(card.totalPrice), 0);
+      state.totalCartPrice = parseFloat(state.totalCartPrice.toFixed(2));
     },
     removeCard: (state, action) => {
-      // Assuming action.payload is the ID of the card to remove
-      state.cards = state.cards.filter((card) => card._id !== action.payload);
+      const removedCard = state.cards.find((card) => card._id === action.payload);
+      if (removedCard) {
+        state.cards = state.cards.filter((card) => card._id !== action.payload);
+        state.totalCartPrice -= parseFloat(removedCard.totalPrice); 
+        state.totalCartPrice = parseFloat(state.totalCartPrice.toFixed(2));
+      }
     },
   },
 });

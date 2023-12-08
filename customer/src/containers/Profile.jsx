@@ -19,8 +19,8 @@ export default function Profile(props) {
   };
 
   return (
-    <div>
-      <div className=" h-full flex flex-col pt-40">
+    <div className="box">
+      <div className=" h-full flex flex-col">
         <div className="h-fit w-fit mb-10">
           <h1 className="text-truegreen">
             User Profile <hr />{" "}
