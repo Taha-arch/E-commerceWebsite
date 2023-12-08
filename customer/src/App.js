@@ -36,7 +36,6 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
-
           <Route path="/:category/:subcategory" element={<Products/>} />
           <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path="/profile/:id" element={<Profile/>} />

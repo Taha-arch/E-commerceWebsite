@@ -13,7 +13,7 @@ function Collections() {
   const productsFound = useSelector((state) => state.productsFound.productFound);
   const SearchQuery = useSelector((state) => state.searchQuery.SearchQuery);
   const categories = useSelector((state) => state.categories.categories); 
-  const [maxProductsPerCategory, setProductsPerCategory] = useState(6)
+  // const [maxProductsPerCategory, setProductsPerCategory] = useState(6)
   let TotalProductsPerCategory;
   const navigate = useNavigate(); 
 
