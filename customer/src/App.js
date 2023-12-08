@@ -15,11 +15,14 @@ import Profile from './containers/Profile';
 import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
 import Checkout from './containers/Checkout';
+import Favorites from './containers/Favorites';
+import Orders from './containers/Orders';
 import Products from "./containers/Products";
 import CollectionPerCategory from "./components/CollectionPerCategory";
 
 
 function App() {
+  
   return (
     <Router>
       <Routes>
@@ -27,11 +30,13 @@ function App() {
         <Route path='/register' element={<RegisterForm />}></Route>
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
+          <Route path='/Favorites' element={<Favorites/>}></Route>
+          <Route path='/order' element={<Orders/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
-          <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
-          <Route path="/:subcategory/:category" element={<Products/>} />
+          <Route path='/' element={<LandingPage/>}></Route>
+          <Route path="/:category/:subcategory" element={<Products/>} />
           <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path="/profile/:id" element={<Profile/>} />
         </Route>

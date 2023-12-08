@@ -10,6 +10,16 @@
     border-top-left-radius: 130px;
     border-bottom-left-radius: 130px;
 }
+.mobilelandingimage1{
+    border-top-right-radius: 130px;
+    border-top-left-radius: 130px;
+    border-bottom-left-radius: 130px;
+}
+.mobilelandingimage2{
+    border-top-right-radius: 130px;
+    border-bottom-left-radius: 130px;
+    border-bottom-right-radius: 130px;
+}
 .women{
     width: 30%;
 }
@@ -70,8 +80,7 @@
     border-bottom-right-radius: 100px;
 }
 .slide{
-    padding-top: 89px;
-    height: 650px;
+    height: 540px;
 }
 .serviceimage1{
     background-image: url("../../public/calendar(1).svg");
@@ -174,6 +183,139 @@
     background-size: 25%;    
     background-position-y: 25%;
     background-position-x: 50%;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage1{
+    background-image: url("../../public/popularimage1.jpg");
+    
+    background-size: 130%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+
+.popularimage1:hover{
+    background-image: url("../../public/popularimage1.jpg");
+    background-size: 150%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage2{
+    background-image: url("../../public/popularimage2.jpg");
+    
+    background-size: 130%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage2 {transition-timing-function: ease;}
+.popularimage2:hover{
+    background-image: url("../../public/popularimage2.jpg");
+    background-size: 150%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage3{
+    background-image: url("../../public/popularimage3.jpg");
+    
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage3 {transition-timing-function: ease;}
+.popularimage3:hover{
+    background-image: url("../../public/popularimage3.jpg");
+    background-size: 110%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage4{
+    background-image: url("../../public/popularimage4.jpg");
+    
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage4 {transition-timing-function: ease;}
+.popularimage4:hover{
+    background-image: url("../../public/popularimage4.jpg");
+    background-size: 110%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage5{
+    background-image: url("../../public/popularimage5.jpg");
+    
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage5 {transition-timing-function: ease;}
+.popularimage5:hover{
+    background-image: url("../../public/popularimage5.jpg");
+    background-size: 110%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage6{
+    background-image: url("../../public/popularimage6.jpg");
+    
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage6 {transition-timing-function: ease;}
+.popularimage6:hover{
+    background-image: url("../../public/popularimage6.jpg");
+    background-size: 110%;    
+    background-position: center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+   
+}
+.popularimage7{
+    background-image: url("../../public/popularimage7.jpg");
+    
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
+    transition:   0.1s;
+    
+   
+}
+#popularimage7 {transition-timing-function: ease;}
+.popularimage7:hover{
+    background-image: url("../../public/popularimage7.jpg");
+    background-size: 110%;    
+    background-position: center;
     background-repeat:no-repeat;
     cursor: pointer;
    

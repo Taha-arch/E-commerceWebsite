@@ -40,8 +40,7 @@ h1{
 
 .box{
 width: 100%;
-align-items: center;
-padding-inline: 5%;
+padding-inline: 10%;
 }
 .container{
     display: flex;
@@ -65,10 +64,10 @@ padding-inline: 5%;
         justify-content: center;
         align-items: center;
     } 
-.card{
+.cardimage{
     transition: 0.3s;
 }
-.card:hover{
+.cardimage:hover{
     transform:scale(1.05);
     box-shadow: 0px 0px 8px 0px gray;
 }

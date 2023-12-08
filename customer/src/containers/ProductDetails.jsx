@@ -36,9 +36,7 @@ export default function ProductDetails() {
   );
   const product = useSelector((state) => state.productDetails);
   const UnitPrice = productDetails ? productDetails.price : 0;
-  const [quantity, setQuantity] = useState(
-    productDetails ? productDetails.quantity : null
-  );
+  const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -91,12 +89,11 @@ export default function ProductDetails() {
     if (productDetails && productDetails.productImage && productDetails.productImage.length > 0) {
       setMainImage(productDetails.productImage[0]);
       setSelectedImage(productDetails.productImage[0]);
-      if (productDetails.quantity) {
-        setQuantity(productDetails.quantity);
-        setTotalPrice((productDetails.quantity * UnitPrice).toFixed(2));
+      if (productDetails.quantity !== 0) {   
+        setTotalPrice((quantity * UnitPrice).toFixed(2));
       }
     }
-  }, [productDetails, UnitPrice]);
+  }, [productDetails, UnitPrice, quantity]);
 
   const increment = () => {
     setQuantity((prevQuantity) => {
@@ -125,7 +122,7 @@ export default function ProductDetails() {
   };
 
   const handleCardClick = () => {
-    setIsAddedToCart((prevIsAdded) => !prevIsAdded); // Toggle the state when the button is clicked
+    setIsAddedToCart((prevIsAdded) => !prevIsAdded); 
     if (!isAddedToCart) {
       addToCart();
     } else {
@@ -135,7 +132,7 @@ export default function ProductDetails() {
 
   const addToCart = () => {
     const id = shortid.generate();
-    const productWithId = { ...productDetails, id };
+    const productWithId = { ...productDetails, id: id , orderedQuantity: quantity ,totalPrice : TotalPrice};
     dispatch(addCard(productWithId));
     notify(productDetails.productName); // Notify upon adding to cart
     setIsAddedToCart(true); // Update state to indicate product is added
@@ -150,7 +147,7 @@ export default function ProductDetails() {
       {!loading && product.error ? <div>Error: {product.error}</div> : null}
       {!loading && productDetails && Object.keys(productDetails).length > 0 ? (
         <div className=" box flex flex-col  gap-4">
-          <div className="container w-full justify-start  gap-5">
+          <div className="container w-full justify-center  gap-5">
             <div className="imagescontainer">
               <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
                 {productDetails &&
@@ -160,7 +157,7 @@ export default function ProductDetails() {
                         selectedImage === `${image[index]}` && "selected"
                       }`}
                       onClick={() => changeMainImage(`${image}`)}
-                      key={index} // Add a unique key for each element in the array
+                      key={index} 
                     >
                       <img src={image} alt="" />
                     </div>
@@ -184,7 +181,7 @@ export default function ProductDetails() {
               <Lightbox
                 styles={{
                   root: {
-                    height: "350px",
+                    height: "400px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsContainer: {
@@ -192,7 +189,7 @@ export default function ProductDetails() {
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnailsTrack: {
-                    height: "60px",
+                    height: "100px",
                     "--yarl__color_backdrop": "rgba(255, 255, 255, .8)",
                   },
                   thumbnail: {
@@ -202,12 +199,14 @@ export default function ProductDetails() {
                       "rgba(255, 255, 255)",
                     "--yarl__thumbnails_thumbnail_active_border_color":
                       "rgba(0, 0, 0)",
+                      
                   },
                   button: {
                     height: "5px",
                     "--yarl__slide_description_color": "rgba(0, 0, 0)",
                   },
-                  slide: { height: "270px", width: "100px" },
+                  slide: { height: "270px", width: "200px" },
+                  
                 }}
                 slides={productDetails.productImage.map((image, index) => ({
                   src: image,
@@ -313,8 +312,8 @@ export default function ProductDetails() {
                 <div>
                   <div>
                     <button
-                      className={`bg-truegreen text-gray-300 font-oswald hover:bg-truegreentint text-xl pb-1 px-3 h-10 w-40 mr-5 ${
-                        isAddedToCart ? "bg-gray-400 text-white hover:bg-gray-600" : ""
+                      className={`  font-oswald text-xl pb-1 px-3 h-10 w-40 mr-5 ${
+                        isAddedToCart ? "bg-gray-400 text-white hover:bg-gray-600" : "bg-truegreen text-gray-300  hover:bg-truegreentint"
                       }`}
                       onClick={handleCardClick}
                     >
@@ -393,7 +392,7 @@ export default function ProductDetails() {
             </div>
 
             <div className="morecontainer w-100 flex flex-row over">
-            {productsRelated && productsRelated.map((product) => (
+            {productsRelated && productsRelated.slice(0,4).map((product) => (
                 <div key={product._id}>
                 <ProductCard product={product}/>
                 </div>

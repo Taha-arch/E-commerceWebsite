@@ -5,7 +5,7 @@ import CustomerSiderbar from '../components/CustomerSiderbar'
 
 export default function Cart() {
   return (
-    <div className='bg-primary flex flex-col items-center'>
+    <div className='bg-primary flex flex-col items-center  box'>
         <table className='w-4/6 h-full'>
             <tr>
                

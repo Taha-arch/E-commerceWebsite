@@ -13,30 +13,25 @@ function Collections() {
   const productsFound = useSelector((state) => state.productsFound.productFound);
   const SearchQuery = useSelector((state) => state.searchQuery.SearchQuery);
   const categories = useSelector((state) => state.categories.categories); 
-  const [maxProductsPerCategory, setProductsPerCategory] = useState(6)
-  let TotalProductsPerCategory;
-  const navigate = useNavigate(); 
-
-
-  useEffect(() => {
-      dispatch(fetchProductFound(SearchQuery));
-}, [dispatch, SearchQuery]);
-
+  const maxProductsPerCategory = 8;
 
   useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
   
   return (
-    <div className='flex flex-col gap-3 m-8'>
+    <div className='flex flex-col gap-3 m-8 px-20'>
       <h1 className='font-medium'>COLLECTIONS</h1>
       {categories && product && categories.map((category)=> (
         <div key={category._id}>
-          <h1 className='font-fairly'>{category.category_name}</h1>
+          <h1 >{category.category_name}</h1>
           <div className='flex flex-col justify-start items-center gap-4 '>
-            
             <div className='flex justify-center flex-wrap'>
-            {(product && product.length >0) &&
+            {(productsFound && productsFound.length > 0 ?
+                productsFound
+                  .filter((productItem) => productItem.categoryName === category.category_name)
+                  .slice(0, maxProductsPerCategory)
+                :
                 product
                   .filter((productItem) => productItem.categoryName === category.category_name)
                   .slice(0, maxProductsPerCategory)

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/images/sans.png";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/slicers/AUTH/authServices";
+import { login } from '../Redux/slicers/AUTH/authServices'
 
 function SignInForm() {
   const [isSignIn, setIsSignIn] = useState(false);

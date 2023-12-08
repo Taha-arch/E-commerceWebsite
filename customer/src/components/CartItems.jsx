@@ -20,7 +20,7 @@ const CartItems = () => {
                     </td>
                     <td>
                         <div className='flex flex-col h-40 w-96 justify-around gap-6'>
-                            <div className='flex flex-row justify-around gap-3'>
+                            <div className='flex  justify-around items-start gap-3'>
                                 <div>
                                     <h4 className=' font-Playfair'>{product.productName}</h4>
                                     <div className='flex flex-row justify-between'>
@@ -28,11 +28,11 @@ const CartItems = () => {
                                         <p className='border-l pl-3 text-gray-400 text-xs'>Size:M</p>
                                     </div>                                    
                                 </div>
-                                <div className='flex flex-row w-28 pt-2 pr-1 justify-between'>
-                                    <select className='border border-black w-12 h-6 rounded-md bg-white'>
-                                        <option value="1">1</option>
-                                    </select>
-                                    <p>{product.price}DH</p>
+                                <div className='flex justify-center w-28 pt-1 pr-1 justify-between'>
+                                    <div className='text-center border border-black w-8 h-7 rounded-md bg-white'>
+                                        <option value="1">{product.orderedQuantity}</option>
+                                    </div>
+                                  <div>  <p>{product.totalPrice}DH</p></div>
                                 </div>
                             </div>
                             <div className='flex flex-row justify-between'>
