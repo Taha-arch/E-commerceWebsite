@@ -36,7 +36,7 @@ export default function Profile(props) {
   const [updatedProfile, setUpdatedProfile] = useState(false);
 
   const notify = () => {
-    toast.success("User Updated Successfully!", {
+    toast.success("pROFILE Updated Successfully!", {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -50,7 +50,6 @@ export default function Profile(props) {
 
   useEffect(() => {
     const id = customer._id;
-    
     dispatch(getCustomerById({id}))
     setUpdatedProfile(false)
   }, [customer, dispatch, updatedProfile]);

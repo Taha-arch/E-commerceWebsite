@@ -16,6 +16,8 @@ import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
 import Checkout from './containers/Checkout';
 import Products from "./containers/Products";
+import CollectionPerCategory from "./components/CollectionPerCategory";
+
 
 function App() {
   return (
@@ -28,11 +30,11 @@ function App() {
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
-          <Route path="/:category/:subcategory" element={<Products/>} />
+          <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
+          <Route path="/:subcategory/:category" element={<Products/>} />
           <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path="/profile/:id" element={<Profile/>} />
         </Route>
-        
       </Routes>
     </Router>
   );

@@ -86,26 +86,70 @@ const addProduct = (req, res) => {
 }
 
 
+// const searchProducts = async (req, res, next) => {
+//     try {
+//         const queryObject = req.query;
+//         if(Object.keys(queryObject).length > 0 && queryObject.product_name){
+
+//             const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
+//             .sort({ product_name: -1 })
+//             .limit(10)
+//             .exec()
+            
+//             if (products.length === 0) {
+//                 return res.status(404).json({ message: 'product not found' });
+//         }
+        
+//         if (products) {
+//             const formattedProducts = products.map((product) => ({
+//                 "_id": product._id,
+//                 "sku": product.sku,
+//                 "productImage": product.product_image,
+//                 "productName": product.product_name,
+//                 "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
+//                 "shortDescription": product.short_description,
+//                 "longDescription": product.long_description,
+//                 "price": product.price,
+//                 "quantity": product.quantity,
+//                 "discountPrice": product.discount_price,
+//                 "active": product.active
+//             }));
+//             res.status(200).json({ status: 200, data: formattedProducts });
+//         }
+//         }else {
+//             return getAllProducts(req, res, next);
+//         }
+//     }catch (error) {
+//         console.error('Error searching for a product by product_name:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// }
+
 const searchProducts = async (req, res, next) => {
     try {
-        const queryObject = req.query;
-        if(Object.keys(queryObject).length > 0 && queryObject.product_name){
-
-            const products = await Product.find({product_name: { $regex: new RegExp(queryObject.product_name , 'i')}})
-            .sort({ product_name: -1 })
-            .limit(10)
-            .exec()
-            
-            if (products.length === 0) {
-                return res.status(404).json({ message: 'product not found' });
+      const queryObject = req.query;
+      if ('product_name' in queryObject && queryObject.product_name.trim() !== '') {
+        const products = await Product.find({
+          product_name: { $regex: new RegExp(queryObject.product_name, 'i') },
+        })
+          .sort({ product_name: -1 })
+          .limit(10)
+          .populate({ path: 'subcategory_id', select: 'subcategory_name', 
+            populate: {
+                path: 'category_id',
+                select: 'category_name'
+            } })
+          .exec();
+        if (products.length === 0) {
+          return res.status(404).json({ message: 'Product not found' });
         }
-        
-        if (products) {
-            const formattedProducts = products.map((product) => ({
+        const formattedProducts = products.map((product) => ({
+
                 "_id": product._id,
                 "sku": product.sku,
                 "productImage": product.product_image,
                 "productName": product.product_name,
+                "categoryName": product.subcategory_id ? product.subcategory_id.category_id.category_name : null,
                 "subcategoryName": product.subcategory_id ? product.subcategory_id.subcategory_name : null,
                 "shortDescription": product.short_description,
                 "longDescription": product.long_description,
@@ -113,17 +157,17 @@ const searchProducts = async (req, res, next) => {
                 "quantity": product.quantity,
                 "discountPrice": product.discount_price,
                 "active": product.active
-            }));
-            res.status(200).json({ status: 200, data: formattedProducts });
-        }
-        }else {
-            return getAllProducts(req, res, next);
-        }
-    }catch (error) {
-        console.error('Error searching for a product by product_name:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        }));
+        res.status(200).json({ status: 200, data: formattedProducts });
+      } else {
+        return res.status(400).json({ message: 'Product name is required for search' });
+      }
+    } catch (error) {
+      console.error('Error searching for a product by product_name:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+  };
+  
 
 const getProduct = async (req, res) => {
     try{

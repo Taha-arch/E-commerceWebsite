@@ -14,6 +14,7 @@ import { fetchCategories } from "../Redux/slicers/Category/categoryServices";
 import { fetchSubcategories } from "../Redux/slicers/Subcategory/subcategoryServices";
 import {removeProducts, addProducts} from '../Redux/slicers/productBySubcat';
 import {fetchProduct} from "../Redux/slicers/Product/productServices";
+import {removeSearchQuery, addSearchQuery} from '../Redux/slicers/SearchQuery';
 
 function Navbar() {
 
@@ -24,6 +25,7 @@ function Navbar() {
     const [filtered, setFiltered] = useState([]);
     const categories = useSelector((state) => state.categories.categories);
     const products = useSelector((state) => state.product.product);
+  
     const subcategories = useSelector((state) => state.subcategories.subcategories);
     const [openMenu, setOpenMenu] = React.useState(false);
     const navigate = useNavigate();
@@ -53,10 +55,15 @@ function Navbar() {
       dispatch(addProducts(productsBySubCategory));
     }, [dispatch, productsBySubCategory]);
     
+    
   //Search
     useEffect(() => {
-      dispatch(fetchProductFound(query));
+      // dispatch(fetchProductFound(query));
+      console.log("query " + query)
+      dispatch(addSearchQuery(query));
+     
     }, [dispatch, query]);
+
 
     useEffect(() => {
       dispatch(fetchCategories());
@@ -100,18 +107,21 @@ function Navbar() {
         <ul>
           {categories &&
             categories.map((category) => (
-              <li key={category._id} onMouseEnter={() => {setCategoryId(category._id);}} onMouseLeave={() => setCategoryId(null)}>
+              <li key={category._id} 
+              onMouseEnter={() => {setCategoryId(category._id);}} 
+              onMouseLeave={() => setCategoryId(null)}
+              // onClick={()=>{navigate(`/collections/${category.category_name}`)}}
+              >
                 {category.category_name}
             
         {categoryId && (
           <ul>
             {filtered && filtered.map((subcategory) => (
-                <li key={subcategory._id} onClick={() => {
-                  
+                <li key={subcategory._id}
+                  onClick={() => {
                   setSubCategory(subcategory.subcategory_name);
                   dispatch(removeProducts())
-      
-                  navigate(`/${category.category_name}/${subcategory.subcategory_name}`);
+                  navigate(`/${subcategory.subcategory_name}/${category.category_name}`);
                 }}>  {subcategory.subcategory_name}</li>
               ))}
           </ul>
@@ -134,7 +144,7 @@ function Navbar() {
       type="text"
       placeholder="Search product"
       className="primary-bg w-40 h-10 pl-10  border-2  border-white rounded text-sm"
-      onChange={(e) => setQuery(e.target.value)}
+      onChange={(e) => {setQuery(e.target.value); }}
       
     />
     <CiSearch className="secondary-bg absolute left-1.5 top-3.5"/>
@@ -154,13 +164,11 @@ function Navbar() {
             
             <div
               className="h-10 w-10 rounded-full  bg-cover bg-no-repeat bg-center"
-
               style={{ 
                 backgroundImage: `url(${customer && customer.customer_image})`,
               }}
             >
-              
-              <span className="sr-only">Taha El atoui</span>
+
             </div>
           </Menu.Button>
         </div>

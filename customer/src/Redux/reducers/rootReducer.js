@@ -8,9 +8,10 @@ import subcategoriesReducer from '../slicers/Subcategory/subcategorySlices';
 import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
-import custmerUpdateReducer from '../slicers/Customer/customerUpdate'
+import customerUpdateReducer from '../slicers/Customer/customerUpdate'
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
+import SearchQueryReducer from '../slicers/SearchQuery';
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -20,9 +21,11 @@ const rootReducer = combineReducers({
   productsFound: productFoundReducer,
   categories: categoriesReducer,
   subcategories: subcategoriesReducer,
-  customerUpdate: custmerUpdateReducer,
+  customerUpdate: customerUpdateReducer,
   customerId: getCustomerIdReducer,
   productBySubcategory: productBySubcatReducer,
+  searchQuery: SearchQueryReducer,
+
 });
 
 export const persistConfig = {
