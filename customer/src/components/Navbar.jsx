@@ -15,8 +15,15 @@ import { fetchCategories } from "../Redux/slicers/Category/categoryServices";
 import { fetchSubcategories } from "../Redux/slicers/Subcategory/subcategoryServices";
 import { removeProducts, addProducts } from "../Redux/slicers/productBySubcat";
 import { fetchProduct } from "../Redux/slicers/Product/productServices";
+import {
+  Navbar,
+  MobileNav,
+  Typography,
+  Button,
+  IconButton,
+} from "@material-tailwind/react";
 
-function Navbar() {
+function NavbarDefault() {
   const [search, setSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -77,30 +84,28 @@ function Navbar() {
       console.log("error inside useEffect subcategories");
     }
   }, [categoryId, subcategories]);
-
-  return (
-    <div className=" md:fixed w-full primary-bg z-10 ">
-      <div className="box primary-bg">
-        <div>
-          <div className="py-6 ">
-            <nav className="flex justify-between items-center">
-              <div className="font-bold text-xl md:text-3xl ">
-                <span>PREST</span>
-                <span className="secondary-bg">IGIOUS</span>
-              </div>
-
-              <div className="font-bold flex flex-col md:flex-row justify-between gap-5">
+  const [openNav, setOpenNav] = React.useState(false);
+ 
+  React.useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false),
+    );
+  }, []);
+ 
+  const navList = (
+    <div className="font-bold flex flex-row justify-between h-fit mt-5 md:mt-0 gap-5 w-fit">
                 <NavLink to="/" className="nav-link  " variant="text">
                   HOME
                 </NavLink>
 
                 <ul className="">
-                  <li>
+                  <li className="flex flex-row">
                     <NavLink to="/collections" className="nav-link">
                       COLLECTIONS
                     </NavLink>
                     {categories && (
-                      <ul className="categories-list">
+                      <ul className="categories-list ">
                         {categories.map((category) => (
                           <li
                             key={category._id}
@@ -118,7 +123,7 @@ function Navbar() {
                               </div>
                             </span>
                             {categoryId && (
-                              <ul className="subcategories-list">
+                              <ul className="subcategories-list text-black">
                                 {filtered &&
                                   filtered.map((subcategory) => (
                                     <li
@@ -144,29 +149,32 @@ function Navbar() {
                     )}
                   </li>
                 </ul>
+                
+                  
 
                 <NavLink to="/about us" className="nav-link  " variant="text">
                   ABOUT US
                 </NavLink>
               </div>
-
-              <div className="icon-size flex flex-row items-center   ml-20">
-                <div className="cursor-pointer">
+  );
+  const navright = (
+    <div className="icon-size flex flex-row items-center gap-2  w-fit ml-20">
+                <div className="cursor-pointer flex flex-col justify-center">
                   {!search && (
                     <CiSearch
-                      className="secondary-bg text-2xl"
+                      className="secondary-bg text-3xl"
                       onClick={() => setSearch(true)}
                     />
                   )}
                   {search && (
-                    <div className="relative">
+                    <div className="relative flex flex-col justify-center">
                       <input
                         type="text"
                         placeholder="Search product"
                         className="primary-bg w-40 h-10 pl-10  border-2  border-white rounded text-sm "
                         onChange={(e) => setQuery(e.target.value)}
                       />
-                      <CiSearch className="secondary-bg absolute text-3xl left-1.5 top-3.5" />
+                      <CiSearch className="secondary-bg absolute text-3xl left-1.5 top-1.5" />
                     </div>
                   )}
                 </div>
@@ -176,8 +184,8 @@ function Navbar() {
                 >
                   <div className="relative inline-block">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center">
-                      {/* Replace this with your PiBagThin icon */}
-                      <PiBagThin />
+                      
+                      <PiBagThin className="text-black"/>
                     </div>
                     <span className="notif absolute top-2 right-1 flex items-center justify-center bg-black text-white rounded-full w-3 h-3 text-xs">
                       0
@@ -192,7 +200,7 @@ function Navbar() {
                   <div className="relative inline-block">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center">
                       {/* Replace this with your PiBagThin icon */}
-                      <CiHeart />
+                      <CiHeart className="text-black"/>
                     </div>
                     <span className="notif absolute top-2 right-1 flex items-center justify-center bg-black text-white rounded-full w-3 h-3 text-xs">
                       0
@@ -274,13 +282,70 @@ function Navbar() {
                   )}
                 </div>
               </div>
-            </nav>
-          </div>
-          <hr />
-        </div>
+  );
+  return (
+    <div className=" md:fixed w-full primary-bg z-10 ">
+      <Navbar className=" bg-primary w-full mx-auto shadow-none border-none px-4 py-2 lg:px-8 lg:py-8 rounded-none">
+      <div className=" mx-auto flex items-center justify-between text-blue-gray-900">
+      <div className="font-bold text-xl md:text-3xl ">
+                <span>PREST</span>
+                <span className="secondary-bg">IGIOUS</span>
+              </div>
+        <div className="hidden lg:block">{navList}</div>
+        <div className="hidden lg:block">{navright}</div>
+        
+        <IconButton
+          variant="text"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          ripple={false}
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              className="h-6 w-6"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
+        </IconButton>
       </div>
+      <MobileNav open={openNav}>
+        <div className=" mx-auto justify-between flex flex-row">
+          
+          {navList}
+          
+          
+         {navright}
+        </div>
+      </MobileNav>
+    </Navbar>
+     
+<hr />
     </div>
   );
 }
 
-export default Navbar;
+export default NavbarDefault;

@@ -27,7 +27,7 @@ export default function ProductCard(props) {
             </div>
             <div className='flex justify-center'>
             <div className='flex flex-col w-60 pt-2 pb-2'>
-              <div className='mx-5 mb-3 flex flex-row justify-center font-bold'>
+              <div className='mx-5 mb-3 flex flex-row justify-center '>
                 <span onClick={() => navigate(`/productDetails/${product._id}`)}>{product && product.productName}</span>
               </div>
               <div className=' mx-5 flex flex-row justify-between'>

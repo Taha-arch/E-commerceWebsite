@@ -18,7 +18,7 @@ export default function LandingPage() {
         <Slider />
       </div>
 
-      <div className="flex flex-row  justify-between w-4/5 h-fit py-20">
+      <div className="hidden lg:flex flex-row  justify-between w-4/5 h-fit py-20">
         <div className="w-1/4 h-fit mb-10 " data-aos="fade-right">
           <img
             className="landingimage1 w-full "
@@ -26,14 +26,14 @@ export default function LandingPage() {
             alt=""
           />
         </div>
-        <div className="w-2/5 mt-10" data-aos="fade-down">
+        <div className="w-2/5 mt-20" data-aos="fade-down">
           <div>
             <h1 className="font-bold text-justify text-4xl">
               FIND YOUR{" "}
               <span className="text-truegreen line-through ">STYLE</span> <br />
               REFRESH YOUR LOOK
             </h1>
-            <p className="text-justify hidden md:flex">
+            <p className="text-justify hidden md:flex mt-5">
               Discover Your Style, Elevate Your Look with PRESTIGIOUS. Unleash
               your inner charm with our luxurious accessories and jewelry.
               Explore our handpicked collection for men and women, featuring
@@ -56,6 +56,50 @@ export default function LandingPage() {
             alt=""
           />
         </div>
+      </div>
+
+      <div className="flex flex-col lg:hidden  justify-between w-4/5 h-fit py-20">
+        <div className="flex flex-row w-full  items-center h-fit " data-aos="fade-right">
+          <div className="w-1/2">
+          <img
+            className="mobilelandingimage1 w-full "
+            src="/landingimage1.jpg"
+            alt=""
+          />
+          </div>
+          
+          <div className="w-1/2">
+          <h1 className="font-bold text-start text-4xl ml-5">
+              FIND YOUR{" "}
+              <span className="text-truegreen line-through ">STYLE</span> <br />
+              REFRESH YOUR LOOK
+            </h1>
+          </div>
+        </div>
+        
+        <div className="flex flex-row items-center w-full h-1/2" data-aos="fade-down">
+          <div className="w-1/2">
+            
+            <p className="font-bold text-justify text-4xl  mr-5">
+              Discover Your Style, Elevate Your Look with <p className="inline">PREST</p>
+                <p className="secondary-bg inline">IGIOUS</p>. 
+            </p>
+          </div>
+          <div className="w-1/2 " >
+          <img
+            className=" mobilelandingimage2 w-full"
+            src="/landingimage2.jpg"
+            alt=""
+          />
+        </div>
+          
+        </div>
+        <div className="flex flex-row justify-center mt-10">
+            <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-20">
+              Shop Now
+            </button>
+          </div>
+        
       </div>
 
       <div className="flex flex-row justify-center  h-fit">

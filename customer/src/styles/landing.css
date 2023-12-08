@@ -10,6 +10,16 @@
     border-top-left-radius: 130px;
     border-bottom-left-radius: 130px;
 }
+.mobilelandingimage1{
+    border-top-right-radius: 130px;
+    border-top-left-radius: 130px;
+    border-bottom-left-radius: 130px;
+}
+.mobilelandingimage2{
+    border-top-right-radius: 130px;
+    border-bottom-left-radius: 130px;
+    border-bottom-right-radius: 130px;
+}
 .women{
     width: 30%;
 }

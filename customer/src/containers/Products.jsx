@@ -98,7 +98,7 @@ function Collections() {
                 productItem.map((product) => (
                   <div
                     key={product._id}
-                    className="w-1/2 lg:w-1/3 p-4   mt-5 "
+                    className="w-1/2 lg:w-1/4 p-4   mt-5 "
                   >
                     <ProductCard product={product} />
                   </div>
