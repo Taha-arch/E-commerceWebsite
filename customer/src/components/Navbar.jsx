@@ -22,6 +22,8 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { clearCards } from "../Redux/slicers/CardSlice";
+import { clearFavorites } from "../Redux/slicers/FavoriteSlice";
 
 function NavbarDefault() {
   const [search, setSearch] = useState(false);
@@ -37,10 +39,14 @@ function NavbarDefault() {
   const navigate = useNavigate();
   const [productsBySubCategory, setProductsRelated] = useState([]);
   const customer = useSelector((state) => state.auth.customer);
+  const favorites = useSelector((state) => state.Favorite.favorites)
+  const cards = useSelector((state) => state.Card.cards)
   const [searchBySubCategory, setSubCategory] = useState("");
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearCards());
+    dispatch(clearFavorites());
   };
 
   //Fetch products with category and subCategory
@@ -188,7 +194,7 @@ function NavbarDefault() {
                       <PiBagThin className="text-black"/>
                     </div>
                     <span className="notif absolute top-2 right-1 flex items-center justify-center bg-black text-white rounded-full w-3 h-3 text-xs">
-                      0
+                      {cards.length}
                     </span>
                   </div>
                 </div>
@@ -203,7 +209,7 @@ function NavbarDefault() {
                       <CiHeart className="text-black"/>
                     </div>
                     <span className="notif absolute top-2 right-1 flex items-center justify-center bg-black text-white rounded-full w-3 h-3 text-xs">
-                      0
+                      {favorites.length}
                     </span>
                   </div>
                 </div>

@@ -2,11 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchOrders = createAsyncThunk(
-    'order/fetchOrders',
-    async (_, thunkAPI) => {
+    'orders/fetchOrders',
+    async (idCustomer, thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/orders/`);
-        return response.data; // Assuming response.data contains the orders array or object
+        const response = await axios.get(`http://localhost:3001/customer/orders/${idCustomer}`);
+        return response.data.orders; 
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response ? error.response.data : 'Network Error');
       }

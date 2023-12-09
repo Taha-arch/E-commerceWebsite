@@ -37,7 +37,7 @@ function Collections() {
   console.log("sorted products" + sortedProducts);
 
   return (
-    <div className="flex flex-col  gap-3 m-8 px-20 ">
+    <div className="flex flex-col px-20 ">
       {/* <h1 className="font-medium">
           Products{productsBySubCategory && productsBySubCategory.categoryName}
         </h1>
@@ -91,15 +91,15 @@ function Collections() {
           
         </div>
       </div>
-      <div className="flex flex-wrap justify-center w-full">
+      <div className="flex flex-wrap justify-center  w-full">
         {productsBySubCategory &&
           productsBySubCategory.map((productItem, rowIndex) => (
-            <div className="flex flex-wrap w-full " key={rowIndex}>
+            <div className="flex flex-wrap justify-center gap-2 w-full " key={rowIndex}>
               {productItem &&
                 productItem.map((product) => (
                   <div
                     key={product._id}
-                    className="w-1/2 lg:w-1/4 p-4   mt-5 "
+                    className="w-1/2 lg:w-fit   mt-5 "
                   >
                     <ProductCard product={product} />
                   </div>
