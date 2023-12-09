@@ -4,7 +4,6 @@ const cors = require('cors')
 const dotenv = require('dotenv').config();
 const app = express();
 const bodyParser = require('body-parser');
-
 app.use(cors({
     origin: '*'
 }));
@@ -28,16 +27,17 @@ const costumerRoutes = require('./routes/customerRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
 
-    app.use(costumerRoutes);
-    app.use(orderRoutes);
+app.use(costumerRoutes);
+app.use(orderRoutes);
 
 const categoryRouter = require('./routes/categoryRoutes.js');
 app.use('/categories', categoryRouter)
 
 const subcategoryRouter = require('./routes/SubcategoryRoutes.js');
 app.use('/subcategories', subcategoryRouter);
+const stripe = require("./routes/stripe.js");
+app.use("/stripe", stripe)
 
 app.listen(PORT, () => {
     console.log('Server started port: ', PORT);
 });
-

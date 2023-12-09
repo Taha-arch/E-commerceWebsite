@@ -80,7 +80,7 @@ const generatePassword = () => {
 
 const addUser = (req, res) => {
   let { first_name, last_name, email, role } = req.body;
-  console.log(req.body);
+
   if (!first_name) {
     return res
       .status(400)
@@ -126,8 +126,7 @@ const addUser = (req, res) => {
       },
     });
 
-    const cloudinaryImageURL =
-      "https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837";
+
     const link = "http://localhost:3000/SignIn";
 
     let mailOptions = {
@@ -284,10 +283,10 @@ const updateUser = async (req, res) => {
     }
     const timeInMss = Date.now();
     userUpdate.last_update = timeInMss;
-    // Current User
+ 
     const currentUser = await User.findById(idUser);
 
-    //Error handling
+  
     const emailExist = await User.findOne({
       _id: { $ne: idUser }, // Exclude the user being updated
       email: userUpdate.email,
@@ -295,12 +294,6 @@ const updateUser = async (req, res) => {
 
     if (emailExist)
       return res.status(400).json({ message: `Email already exist` });
-
-    // const usernameExist = await User.findOne({
-    //     _id: { $ne: idUser }, // Exclude the user being updated
-    //     user_name: userUpdate.user_name
-    // });
-    // if(usernameExist) return res.status(400).json({message : `username already exist`});
 
     if (userUpdate.user_image !== "") {
       const image = currentUser.user_image;

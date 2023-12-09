@@ -19,8 +19,7 @@ import Favorites from './containers/Favorites';
 import Orders from './containers/Orders';
 import Products from "./containers/Products";
 import CollectionPerCategory from "./components/CollectionPerCategory";
-
-
+import CheckoutSuccess from "./components/CheckoutSuccess" 
 function App() {
   
   return (
@@ -36,6 +35,7 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/' element={<LandingPage/>}></Route>
+          <Route path='/checkout-success' element={<CheckoutSuccess/>}></Route>
           <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
           <Route path="/:category/:subcategory" element={<Products/>} />
           <Route path='/Home' element={<LandingPage/>}></Route>

@@ -10,10 +10,10 @@ import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
 import orderReducer from '../slicers/Order/orderSlice';
 import customerUpdateReducer from '../slicers/Customer/customerUpdate'
->>>>>>>>> Temporary merge branch 2
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
 import SearchQueryReducer from '../slicers/SearchQuery';
+import addCheckoutReducer from '../slicers/Checkout/addCheckout';
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   customerId: getCustomerIdReducer,
   productBySubcategory: productBySubcatReducer,
   searchQuery: SearchQueryReducer,
-
+  addCheckout: addCheckoutReducer
 });
 
 export const persistConfig = {

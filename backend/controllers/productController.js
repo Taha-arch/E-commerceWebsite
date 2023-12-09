@@ -57,7 +57,6 @@ const addProduct = (req, res) => {
                 path: 'category_id',
                 select: 'category_name'
             } })
-            
             .exec();
 
         if (products) {

@@ -11,6 +11,7 @@ const OrderSchema = new mongoose.Schema({
     {
       product_id: { type: String },
       quantity: { type: Number },
+      product_name: { type: String, default: null },
     },
   ],
   cart_total_price: { type: mongoose.Types.Decimal128 },

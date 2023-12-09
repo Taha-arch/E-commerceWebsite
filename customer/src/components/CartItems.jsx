@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const CartItems = () => {
     const cardProducts = useSelector((state) => state.Card.cards)
-    console.log(cardProducts)
     const navigate = useNavigate();
     return (
         <div>
