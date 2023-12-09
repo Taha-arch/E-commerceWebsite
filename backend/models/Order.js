@@ -9,17 +9,20 @@ const OrderSchema = new mongoose.Schema({
   },
   order_items: [
     {
-      product_id: { type: String },
+      product_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
       quantity: { type: Number },
     },
   ],
   cart_total_price: { type: mongoose.Types.Decimal128 },
   address: { type: String },
-  city:{ type: String },
-  postal_code: { type: Number},
-  PaymentMethod: { type: String , default: 'Cash On Delivery'},
+  city: { type: String },
+  postal_code: { type: Number },
+  PaymentMethod: { type: String, default: "Cash On Delivery" },
   order_date: { type: Date, default: Date.now },
   status: { type: String, default: "Open" },
-});
+})
 
 module.exports = mongoose.model("Order", OrderSchema);

@@ -30,9 +30,9 @@ const CartItems = () => {
                                 </div>
                                 <div className='flex justify-center w-28 pt-1 pr-1 justify-between'>
                                     <div className='text-center border border-black w-8 h-7 rounded-md bg-white'>
-                                        <option value="1">{product.orderedQuantity}</option>
+                                        <option value="1">{product.orderedQuantity ? product.orderedQuantity : 1}</option>
                                     </div>
-                                  <div>  <p>{product.totalPrice}DH</p></div>
+                                  <div>  <p>{product.totalPrice ? product.totalPrice : product.price}DH</p></div>
                                 </div>
                             </div>
                             <div className='flex flex-row justify-between'>

@@ -13,7 +13,7 @@ export const PROFILE_SIDEBAR_LINKS = [
     {
         key: 'orders',
         label: 'My Orders',
-        path: '/order'
+        path: '/orders'
     },
     {
         key: 'cart',

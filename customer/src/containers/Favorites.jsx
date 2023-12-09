@@ -1,6 +1,5 @@
 import React from 'react'
 import CustomerSiderbar from '../components/CustomerSiderbar'
-import OrderSummary from '../components/OrderSummary'
 import FavoriteItems from '../components/FavoriteItems'
 
 export default function Favorites() {
