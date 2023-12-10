@@ -59,7 +59,7 @@ export default function LandingPage() {
       </div>
 
       <div className="flex flex-col lg:hidden  justify-between w-4/5 h-fit py-20">
-        <div className="flex flex-row w-full  items-center h-fit " data-aos="fade-right">
+        <div className="flex flex-row w-full  items-center h-fit " data-aos="fade-up">
           <div className="w-1/2">
           <img
             className="mobilelandingimage1 w-full "

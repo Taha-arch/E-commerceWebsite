@@ -152,7 +152,7 @@ export default function ProductDetails() {
         <div className=" box flex flex-col  gap-4">
           <div className="container w-full justify-center  gap-5">
             <div className="imagescontainer">
-              <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
+              <div className="images flex flex-col justify-start gap-3 p-1 pt-0">
                 {productDetails &&
                   productDetails.productImage.map((image, index) => (
                     <div
