@@ -59,47 +59,51 @@ export default function LandingPage() {
       </div>
 
       <div className="flex flex-col lg:hidden  justify-between w-4/5 h-fit py-20">
-        <div className="flex flex-row w-full  items-center h-fit " data-aos="fade-up">
+        <div
+          className="flex flex-row w-full  items-center h-fit "
+          data-aos="fade-up"
+        >
           <div className="w-1/2">
-          <img
-            className="mobilelandingimage1 w-full "
-            src="/landingimage1.jpg"
-            alt=""
-          />
+            <img
+              className="mobilelandingimage1 w-full "
+              src="/landingimage1.jpg"
+              alt=""
+            />
           </div>
-          
+
           <div className="w-1/2">
-          <h1 className="font-bold text-start text-4xl ml-5">
+            <h1 className="font-bold text-start text-4xl ml-5">
               FIND YOUR{" "}
               <span className="text-truegreen line-through ">STYLE</span> <br />
               REFRESH YOUR LOOK
             </h1>
           </div>
         </div>
-        
-        <div className="flex flex-row items-center w-full h-1/2" data-aos="fade-down">
+
+        <div
+          className="flex flex-row items-center w-full h-1/2"
+          data-aos="fade-down"
+        >
           <div className="w-1/2">
-            
             <p className="font-bold text-justify text-4xl  mr-5">
-              Discover Your Style, Elevate Your Look with <p className="inline">PREST</p>
-                <p className="secondary-bg inline">IGIOUS</p>. 
+              Discover Your Style, Elevate Your Look with{" "}
+              <p className="inline">PREST</p>
+              <p className="secondary-bg inline">IGIOUS</p>.
             </p>
           </div>
-          <div className="w-1/2 " >
-          <img
-            className=" mobilelandingimage2 w-full"
-            src="/landingimage2.jpg"
-            alt=""
-          />
-        </div>
-          
+          <div className="w-1/2 ">
+            <img
+              className=" mobilelandingimage2 w-full"
+              src="/landingimage2.jpg"
+              alt=""
+            />
+          </div>
         </div>
         <div className="flex flex-row justify-center mt-10">
-            <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-20">
-              Shop Now
-            </button>
-          </div>
-        
+          <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-20">
+            Shop Now
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-row justify-center  h-fit">
@@ -108,13 +112,13 @@ export default function LandingPage() {
         </h1>
       </div>
 
-      <div className="section2 flex flex-row gap-5 justify-between w-4/5 h-fit py-20">
+      <div className="section2 flex flex-row  gap-5 w-4/5 h-fit py-20">
         <div className="w-1/3 md:w-2/5 gap-5 flex flex-col md:flex-row">
           <div
             className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center"
             data-aos="fade-right"
           >
-            <div className="h-fullp pb-4 md:h-2/4 w-full flex flex-col items-center bg-coffe">
+            <div className="h-full pb-4 md:h-2/4 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-3xl mt-2">BAGS</span>
               <img className="w-full h-full" src="/sac.png" alt="" />
             </div>
@@ -124,7 +128,7 @@ export default function LandingPage() {
               className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe"
               data-aos="fade-down"
             >
-              <span className="font-bold text-lg md:text-2xl"></span>
+              <span className="font-bold text-lg md:text-2xl">HATS</span>
               <img className="w-full h-full" src="/hat.png" alt="" />
             </div>
             <div
@@ -174,47 +178,84 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-      <div
-        className="flex flex-row justify-center px-20  w-full h-52 "
-        data-aos="fade"
-      >
-        <div className="popularimage1 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
-          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+      <div className="flex flex-col w-full" data-aos="fade">
+        <div>
+          <div className="font-Dubiel w-full text-center h-1/5 ">
+            <h1 className="text-4xl">Popular Products</h1>
+          </div>
         </div>
-        <div className="popularimage2 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
-          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
-        </div>
-        <div className="popularimage3 flex flex-col justify-evenly pt-24 items-center  w-1/6 h-full ">
-          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
-        </div>
-        <div className="popularimage4 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-          <div className="w-1/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
-        </div>
-        <div className="popularimage5 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
-        </div>
-        <div className="popularimage6 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
-        </div>
-        <div className="popularimage7 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">
-          <div className="w-2/3 flex flex-row justify-center text-center text-2xl  font-Lora text-black "></div>
+        <div className="flex flex-col items-center md:flex-row gap-5 md:gap-10 justify-center px-16 md:px-24 w-full md:h-56 my-10 ">
+          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+            <div className="flex flex-col  w-1/2 md:w-full  gap-3">
+              <div className="popularimage1 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>NECKLACES</h2>
+              </div>
+            </div>
+            <div className="flex flex-col  w-1/2  md:w-full gap-3">
+              <div className="popularimage2 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>RINGS</h2>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+            <div className="flex flex-col  w-1/2 md:w-full  gap-3">
+              <div className="popularimage3 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>BRACELETS</h2>
+              </div>
+            </div>
+            <div className="flex flex-col  w-1/2  md:w-full gap-3">
+              <div className="popularimage4 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>EARNINGS</h2>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+            <div className="flex flex-col  w-1/2 md:w-full  gap-3">
+              <div className="popularimage5 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>DANGLES</h2>
+              </div>
+            </div>
+            <div className="flex flex-col  w-1/2  md:w-full gap-3">
+              <div className="popularimage6 flex flex-col justify-evenly pt-24 items-center w-full h-full">
+                <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
+              </div>
+              <div className="text-center text-xl font-Jost">
+                <h2>GIFT IDEAS</h2>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex flex-row justify-center mb-20 h-fit">
         <h1 className="font-bold text-4xl text-truegreen">BEST SELLERS</h1>
       </div>
 
-      <div className="flex flex-row h-fit">
+      <div className="flex flex-row w-full px-20 text-start h-fit">
         <h1 className="font-bold text-4xl text-black">FOR YOU LADY</h1>
       </div>
 
-      <div className="section3 ">
+      <div className="section3 px-32 ">
         <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
           <div
-            className="md:w h-full flex flex-col items-center gap-5"
+            className=" h-full w-1/3 flex flex-col items-center gap-5"
             data-aos="fade-up"
           >
-            <div className="image1 w-96 h-96 "></div>
+            <div className="image1 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
               <button className="font-bold text-xl underline text-truegreen">
@@ -223,10 +264,10 @@ export default function LandingPage() {
             </div>
           </div>
           <div
-            className="md:w-1/3 h-full flex flex-col items-center gap-5 mt-40"
+            className="w-1/3 h-full flex flex-col items-center gap-5 mt-40"
             data-aos="fade-down"
           >
-            <div className="image2 w-96 h-96 "></div>
+            <div className="image2 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl w-full text-black">
                 Moonlight Serenity
@@ -241,7 +282,7 @@ export default function LandingPage() {
             className="w-1/3 h-full flex flex-col items-center gap-5"
             data-aos="fade-up"
           >
-            <div className="image3 w-96 h-96 "></div>
+            <div className="image3 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl text-black">
                 Rose Gold Elegance
@@ -258,8 +299,8 @@ export default function LandingPage() {
         <h1 className="font-bold text-4xl text-black">FOR YOU MISTER</h1>
       </div>
 
-      <div className="section4">
-        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full pt-10 ">
+      <div className="section4 px-32 ">
+        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
           <div
             className="md:w-1/3 h-full flex flex-col items-center gap-5"
             data-aos="fade-down"
@@ -312,8 +353,8 @@ export default function LandingPage() {
       </div>
       <div className="section5 flex flex-col w-4/5">
         <div className="flex flex-row justify-center md:flex-row gap-14 w-full h-full  py-10">
-          <div className="image7 w-1/2 h-full" data-aos="fade-right"></div>
-          <div className="image8 w-1/2 h-full" data-aos="fade-left"></div>
+          <div className="image7 w-1/2 h-full"></div>
+          <div className="image8 w-1/2 h-full" ></div>
         </div>
         <div className="flex flex-row justify-around px-20">
           <h1 className="text-truegreen font-bold">Aurora Blossom</h1>
@@ -331,7 +372,7 @@ export default function LandingPage() {
         <h1>OUR SERVICES</h1>
       </div>
       <div
-        className="flex flex-row justify-center px-20  w-full h-44 "
+        className="flex flex-col md:flex-row items-center justify-center px-20  w-full md:h-44 "
         data-aos="fade"
       >
         <div className="serviceimage1 flex flex-col justify-evenly pt-24 items-center  w-1/5 h-full ">

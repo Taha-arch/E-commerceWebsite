@@ -109,7 +109,7 @@ export default function Profile(props) {
               />
               <label
                 htmlFor="image-input"
-                className="bg-truegreen hover:bg-truegreentint text-white  font-Poppins  py-5 px-4 rounded cursor-pointer"
+                className="bg-truegreen hover:bg-truegreentint text-white  font-Poppins  py-5 px-5 rounded cursor-pointer"
               >
                 Upload New Image
               </label>
@@ -200,13 +200,16 @@ export default function Profile(props) {
         <div className="py-10">
           <hr />
         </div>
+        <div className="flex flex-row justify-end pr-40">
         <button
           className="border-2 border-truegreen text-truegreen ml-5
-               hover:bg-truegreen font-Poppins   hover:text-white h-16 w-44 rounded-lg"
+               hover:bg-truegreen font-Poppins   hover:text-white  py-5 px-20 rounded-lg mb-10"
           onClick={() => handleSubmitEditCustomer(customer._id)}
         >
           Save
         </button>
+        </div>
+        
         <ToastContainer />
       </div>
     </div>
