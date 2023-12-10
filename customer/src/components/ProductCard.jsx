@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFavorite, removeFavorite } from '../Redux/slicers/FavoriteSlice';
 
-export default function ProductCard(props) {
+export default function ProductCard({ product}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isButtonActive, setButtonActive] = useState(false);
   const favoriteProducts = useSelector((state) => state.Favorite.favorites)
-  const { product} = props; 
+
 
   if (!product) {
     return null; 

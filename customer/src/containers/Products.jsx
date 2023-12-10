@@ -42,6 +42,7 @@ function Products() {
     }
   };
   useEffect(() => {
+    setSortedByPrice([]);
     setLoading(true)
    const timer = setTimeout(() => {
      setLoading(false);
@@ -55,10 +56,10 @@ function Products() {
     {loading && <PreLoader/>}
     <div className={loading? 'hidden': ''} data-aos={loading ? 'fade-out' : 'fade-in'}>
     <div className="flex flex-col px-20 ">
-      <h1 className="font-medium">{subcategory}</h1>
+      <h1 className="font-medium py-2">{subcategory}</h1>
 
       <div className="flex justify-between">
-        <span className="text-xl font-fairly">
+        <span className="text-xl font-fairly py-2">
           {productsBySubCategory &&
             productsBySubCategory.flat().length} ITEMS FOUND
         </span>
@@ -100,22 +101,22 @@ function Products() {
             </div>
           ))
         ) : (
-          sortedByPrice &&
-          sortedByPrice.map((productItem, rowIndex) => (
-            <div className="bg-blue-gray-600 flex flex-wrap " >
-              <div className="flex flex-row " key={rowIndex}>
-                  <div key={productItem._id} className="w-1/2 lg:w-fit mt-5">
-                    <ProductCard product={productItem} />
-                  </div>
-              </div>
-                
-              <hr className="color-black" />
-            </div>
-          ))
+          <div className=" flex flex-wrap justify-center">
+  {sortedByPrice && sortedByPrice.map((productItem) => (
+    <div key={productItem._id}>
+      <div className="flex flex-row">
+        <div className="w-1/2 lg:w-fit mt-5">
+          <ProductCard product={productItem} />
+        </div>
+      </div>
+      <hr className="color-black" />
+    </div>
+  ))}
+</div>
         )}
       </div>
 
-      <div className="w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black"
+      <div className="relative left-74 w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl my-4 gap-2 hover:bg-black"
         onClick={() => {
           navigate(`/collections`);
         }}

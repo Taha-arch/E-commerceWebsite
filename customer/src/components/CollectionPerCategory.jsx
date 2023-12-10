@@ -31,10 +31,9 @@ function CollectionPerCategory() {
     }
   }, [SearchQuery, dispatch]);
 
-  console.log("product found " + productFound);
+
   useEffect(() => {
     if (productFound && productFound.length > 0 && categoryURL) {
-      console.log('Product :', productFound);
       const filteredProducts = productFound.filter((productItem) => {
         return productItem.categoryName === categoryURL;
       });
@@ -51,7 +50,7 @@ function CollectionPerCategory() {
             .map((category) => (
               <div key={category._id}>
                 <h1 className='font-fairly'>{category.category_name}</h1>
-                <div className='flex flex-col justify-start gap-4 '>
+                <div className='flex flex-col justify-center gap-4 '>
                   <h1 className='font-fairly text-xl'>{products && products.length} ITEMS FOUND</h1>
                   <div className='flex justify-start flex-wrap'>
                     {products.filter((productItem) => productItem.categoryName === category.category_name)
