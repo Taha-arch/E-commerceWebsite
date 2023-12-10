@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProductFound } from './productServices'
-// Define the initial state
+
 const initialState = {
     productFound: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
+
 const productsFoundSlice = createSlice({
   name: 'productFound',
   initialState,
-  reducers: {},
+  reducers: {
+    clearProductFound: (state) => {
+      state.productFound = null;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductFound.pending, (state) => {
@@ -30,4 +36,5 @@ const productsFoundSlice = createSlice({
   },
 });
 
+export const { clearProductFound } = productsFoundSlice.actions;
 export default productsFoundSlice.reducer;

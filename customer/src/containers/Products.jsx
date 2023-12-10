@@ -30,7 +30,8 @@ function Collections() {
     } else {
       sorted = [];
     }
-    setSortedProducts(sorted);
+  
+    setSortedProducts([...sorted]);
   };
 
   console.log("sorted products" + sortedProducts);

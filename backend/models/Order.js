@@ -14,6 +14,7 @@ const OrderSchema = new mongoose.Schema({
         ref: "Product",
       },
       quantity: { type: Number },
+      product_name: { type: String, default: null },
     },
   ],
   cart_total_price: { type: mongoose.Types.Decimal128 },

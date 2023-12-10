@@ -9,9 +9,11 @@ import productDetailsReducer from '../slicers/Product/productDetailsSlice'
 import CardReducer from '../slicers/CardSlice';
 import authReducer from '../slicers/AUTH/authSlice';
 import orderReducer from '../slicers/Order/orderSlice';
-import custmerUpdateReducer from '../slicers/Customer/customerUpdate'
+import customerUpdateReducer from '../slicers/Customer/customerUpdate'
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
+import SearchQueryReducer from '../slicers/SearchQuery';
+import addCheckoutReducer from '../slicers/Checkout/addCheckout';
 import favoriteReducer from '../slicers/FavoriteSlice'
 
 const rootReducer = combineReducers({
@@ -24,9 +26,11 @@ const rootReducer = combineReducers({
   productsFound: productFoundReducer,
   categories: categoriesReducer,
   subcategories: subcategoriesReducer,
-  customerUpdate: custmerUpdateReducer,
+  customerUpdate: customerUpdateReducer,
   customerId: getCustomerIdReducer,
   productBySubcategory: productBySubcatReducer,
+  searchQuery: SearchQueryReducer,
+  addCheckout: addCheckoutReducer
 });
 
 export const persistConfig = {
