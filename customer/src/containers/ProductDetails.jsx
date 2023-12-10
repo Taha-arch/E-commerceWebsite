@@ -16,18 +16,23 @@ import { useParams } from "react-router-dom";
 import { clearProductDetails } from "../Redux/slicers/Product/productDetailsSlice";
 import { addCard, removeCard } from "../Redux/slicers/CardSlice";
 import shortid from "shortid";
+import { addFavorite, removeFavorite } from "../Redux/slicers/FavoriteSlice";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const card = useSelector((state) => state.Card.cards);
+  const favorite = useSelector((state) => state.Favorite.favorites);
   const products = useSelector((state) => state.product.product);
   
 
   const isInCard = () => {
     return (card?.find(({ _id }) => _id === id)) ? true : false;
   }
-  console.log(isInCard)
+  const isInFavorite = () => {
+    return (favorite?.find(({ _id }) => _id === id)) ? true : false;
+  }
     const [isAddedToCart, setIsAddedToCart] = useState(isInCard());
+    const [isAddedToFavorite, setIsAddedToFavorite] = useState(isInFavorite());
   const [TotalPrice, setTotalPrice] = useState("");
   const thumbnailsRef = useRef(null);
 
@@ -36,9 +41,7 @@ export default function ProductDetails() {
   );
   const product = useSelector((state) => state.productDetails);
   const UnitPrice = productDetails ? productDetails.price : 0;
-  const [quantity, setQuantity] = useState(
-    productDetails ? productDetails.quantity : null
-  );
+  const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -91,12 +94,11 @@ export default function ProductDetails() {
     if (productDetails && productDetails.productImage && productDetails.productImage.length > 0) {
       setMainImage(productDetails.productImage[0]);
       setSelectedImage(productDetails.productImage[0]);
-      if (productDetails.quantity) {
-        setQuantity(productDetails.quantity);
-        setTotalPrice((productDetails.quantity * UnitPrice).toFixed(2));
+      if (productDetails.quantity !== 0) {   
+        setTotalPrice((quantity * UnitPrice).toFixed(2));
       }
     }
-  }, [productDetails, UnitPrice]);
+  }, [productDetails, UnitPrice, quantity]);
 
   const increment = () => {
     setQuantity((prevQuantity) => {
@@ -123,9 +125,9 @@ export default function ProductDetails() {
       margin: "0 auto",
     },
   };
-
+    //CARD 
   const handleCardClick = () => {
-    setIsAddedToCart((prevIsAdded) => !prevIsAdded); // Toggle the state when the button is clicked
+    setIsAddedToCart((prevIsAdded) => !prevIsAdded); 
     if (!isAddedToCart) {
       addToCart();
     } else {
@@ -135,7 +137,7 @@ export default function ProductDetails() {
 
   const addToCart = () => {
     const id = shortid.generate();
-    const productWithId = { ...productDetails, id };
+    const productWithId = { ...productDetails, id: id , orderedQuantity: quantity ,totalPrice : TotalPrice};
     dispatch(addCard(productWithId));
     notify(productDetails.productName); // Notify upon adding to cart
     setIsAddedToCart(true); // Update state to indicate product is added
@@ -143,6 +145,27 @@ export default function ProductDetails() {
 
   const removeFromCart = () => {
     dispatch(removeCard(id)); // Assuming dispatching to Redux action
+  };
+
+  //fAVORITE
+  const handleFavoriteClick = () => {
+    setIsAddedToFavorite((prevIsAdded) => !prevIsAdded); 
+    if (!isAddedToFavorite) {
+      addToFavorite();
+    } else {
+      removeFromFavorite();
+    }
+  };
+
+  const addToFavorite = () => {
+    const id = shortid.generate();
+    const productWithId = { ...productDetails, id: id};
+    dispatch(addFavorite(productWithId));
+    setIsAddedToFavorite(true); 
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFavorite(id)); 
   };
   return (
     <div>
@@ -160,7 +183,7 @@ export default function ProductDetails() {
                         selectedImage === `${image[index]}` && "selected"
                       }`}
                       onClick={() => changeMainImage(`${image}`)}
-                      key={index} // Add a unique key for each element in the array
+                      key={index} 
                     >
                       <img src={image} alt="" />
                     </div>
@@ -315,15 +338,21 @@ export default function ProductDetails() {
                 <div>
                   <div>
                     <button
-                      className={`bg-truegreen text-gray-300 font-oswald hover:bg-truegreentint text-xl pb-1 px-3 h-10 w-40 mr-5 ${
-                        isAddedToCart ? "bg-gray-400 text-white hover:bg-gray-600" : ""
+                      className={`  font-oswald text-xl pb-1 px-3 h-10 w-40 mr-5 ${
+                        isAddedToCart ? "bg-gray-400 text-white hover:bg-gray-600" : "bg-truegreen text-gray-300  hover:bg-truegreentint"
                       }`}
                       onClick={handleCardClick}
                     >
                       {isAddedToCart ? "Remove from Cart" : "Add To Cart"}
                     </button>
-                    <button className="bg-white border-2 text-gray-300 font-oswald hover:bg-gray-300  hover:text-white border-gray-300  text-xl pb-1 px-3 h-10 w-40 mr-5 ">
-                      Add To Favorite
+                    <button
+                     className={`font-oswald text-xl pb-1 px-3 h-fit w-40 mr-5 ${
+                      isAddedToFavorite ? "bg-gray-300 text-white  hover:bg-gray-500": " bg-white border-2 text-gray-300 font-oswald hover:bg-gray-300  hover:text-white border-gray-300"
+                     }
+                     `} 
+                     onClick={handleFavoriteClick}
+                     >
+                      {isAddedToFavorite ? "Remove from Favorite" : "Add To Favorite"}
                     </button>
                   </div>
                 </div>

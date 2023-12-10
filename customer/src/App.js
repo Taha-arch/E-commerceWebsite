@@ -16,6 +16,7 @@ import SignInForm from './containers/SignIn';
 import RegisterForm from './containers/Register';
 import Checkout from './containers/Checkout';
 import Favorites from './containers/Favorites';
+import Orders from './containers/Orders';
 import Products from "./containers/Products";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='/Cart' element={<Cart/>}></Route>
           <Route path='/Favorites' element={<Favorites/>}></Route>
+          <Route path='/orders' element={<Orders/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
