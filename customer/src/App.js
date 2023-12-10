@@ -18,24 +18,26 @@ import Checkout from './containers/Checkout';
 import Favorites from './containers/Favorites';
 import Orders from './containers/Orders';
 import Products from "./containers/Products";
+import PreLoader from './components/PreLoader/PreLoader';
 
 function App() {
   
   return (
     <Router>
       <Routes>
-        <Route path='/login' element={<SignInForm />}></Route>
+        <Route path='/loader' element={<PreLoader />}></Route>
         <Route path='/register' element={<RegisterForm />}></Route>
+        <Route path='/login' element={<SignInForm />}></Route>
         <Route path='/' element={<Layout />}>
+          <Route path='/' element={<LandingPage/>}></Route>
+          <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path='/Cart' element={<Cart/>}></Route>
           <Route path='/Favorites' element={<Favorites/>}></Route>
           <Route path='/orders' element={<Orders/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
-          <Route path='/' element={<LandingPage/>}></Route>
           <Route path="/:category/:subcategory" element={<Products/>} />
-          <Route path='/Home' element={<LandingPage/>}></Route>
           <Route path="/profile/:id" element={<Profile/>} />
         </Route>
         

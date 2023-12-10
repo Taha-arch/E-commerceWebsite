@@ -3,13 +3,32 @@ import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
+import { useLocation } from 'react-router-dom'
+import NavbarDefault from "../components/Navbar";
+import Footer from "../components/Footer";
+import PreLoader from "../components/PreLoader/PreLoader";
 
 export default function LandingPage() {
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
   useEffect(() => {
     AOS.init({ duration: 2000 });
   }, []);
 
+  useEffect(() => {
+    setLoading(true)
+   const timer = setTimeout(() => {
+     setLoading(false);
+     
+   }, 3000);
+
+   return () => clearTimeout(timer);
+ }, [location.pathname]);
+
   return (
+    <>
+    {loading && <PreLoader/>}
+    {!loading && 
     <div className="bg-primary h-fit flex flex-col items-center">
       <div
         className="slide flex flex-row justify-between w-full  "
@@ -394,5 +413,7 @@ export default function LandingPage() {
         </div>
       </div>
     </div>
+      }
+    </>
   );
 }

@@ -208,8 +208,9 @@ const addCustomer = async (req, res) => {
               message:"customer updated successfully"
             })
             } catch (error) {
-              res.status(404).json("Customer not found");
-              console.log(error);
+            //   res.status(404).json("Customer not found");
+            res.status(500).json(error.message)
+              console.log(error.message);
             }
         
     };

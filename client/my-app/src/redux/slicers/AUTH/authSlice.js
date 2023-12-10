@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, logout } from './authServices';
+import { updateUserDetails } from '../USER/useServices';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -24,6 +25,11 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.role = null;
+      })
+      .addCase(updateUserDetails.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.role = action.payload.role;
+        state.error = null;
       });
   },
 });

@@ -27,6 +27,7 @@ const updateCustomerSlice = createSlice({
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.loading = false;
+        state.customer = action.payload
         state.customerUpdate  = action.payload;
         state.error = null;
       })

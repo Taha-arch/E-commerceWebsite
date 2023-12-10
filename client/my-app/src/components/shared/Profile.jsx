@@ -5,15 +5,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/HoverBlur.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDetails } from "../../redux/slicers/USER/useServices";
+import { fetchUserDetails, updateUserDetails } from "../../redux/slicers/USER/useServices";
 import md5 from "md5";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState();
   const [showOldPassword, setShowOldPassword] = useState(false);
+  const { id } = useParams();
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  console.log(user);
 
   useEffect(() => {
     if (user) {
@@ -45,8 +47,8 @@ export default function Profile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedFields = { ...userInfo, Id: user._id }; // Include the 'Id' field
-    // console.log(updatedFields);
+    const updatedFields = { ...userInfo, Id: user._id }; 
+    console.log(userInfo.Id);
     dispatch(updateUserDetails(updatedFields));
     notify();
   };

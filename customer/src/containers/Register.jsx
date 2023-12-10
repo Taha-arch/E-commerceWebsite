@@ -1,31 +1,56 @@
 import '../styles/main.css'; 
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from "react-router-dom";
 import image from '../assets/images/sans.png';
+import * as Yup from 'yup';
+import { registerUser } from '../Redux/slicers/REGISTER/registerservice';
 
 
 
 function RegisterForm ()  {
 
-    const [first_name,setFirstname]= useState('')
-    const [last_name,setLastname]= useState('')
-    const [email,setEmail]= useState('')
-    const [password,setPassword]= useState('')
-    const [confirm_password,setConPassword]= useState('')
-    
+  const [first_name, setFirstname] = useState('');
+  const [last_name, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm_password, setConPassword] = useState('');
+  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    async function submit(e){
-        e.preventDefault();
+  const validationSchema = Yup.object().shape({
+      first_name: Yup.string().required('First name is required'),
+      last_name: Yup.string().required('Last name is required'),
+      email: Yup.string().email('Invalid email').required('Email is required'),
+      password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+      confirm_password: Yup.string()
+          .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          .required('Confirm password is required'),
+  });
 
-          const response =  await axios.post("http://localhost:3001/customers", {first_name, last_name, email, password,confirm_password})
-            .then(res => console.log("its works " + response.data))
-            .catch(e=> console.log(e))
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      const userData = { first_name, last_name, email, password, confirm_password };
 
-    }
-    const backgroundImageUrl = '../assets/sans.png';
+      try {
+          await validationSchema.validate(userData, { abortEarly: false });
+          await dispatch(registerUser(userData));
+          navigate('/login');
+      } catch (error) {
+          if (error instanceof Yup.ValidationError) {
+              const fieldErrors = {};
+              error.inner.forEach(err => {
+                  fieldErrors[err.path] = err.message;
+              });
+              setErrors(fieldErrors);
+          } else {
+              console.error('Registration failed:', error);
+          }
+      }
+  };
+
     return (
-      // <div className="bg-blur backdrop-blur-5 bg-cover bg-center h-screen " style={{ backgroundImage: url({image}) }}>
         
         <div className='flex '>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6  pb-12 lg:px-8">
@@ -38,7 +63,7 @@ function RegisterForm ()  {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
 
             <div className='flex '>
@@ -53,6 +78,7 @@ function RegisterForm ()  {
                   className="block w-full rounded-md px-2 border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setFirstname(e.target.value) }}
                 />
+                {errors.first_name && <p className="text-red-500">{errors.first_name}</p>}
               </div>
 
 
@@ -67,6 +93,7 @@ function RegisterForm ()  {
                   className="block w-full px-2 rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setLastname(e.target.value) }}
                 />
+                {errors.last_name && <p className="text-red-500">{errors.last_name}</p>}
               </div>
               </div>
 
@@ -82,6 +109,7 @@ function RegisterForm ()  {
                   className="block w-full rounded-md px-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setEmail(e.target.value) }}
                 />
+                 {errors.email && <p className="text-red-500">{errors.email}</p>}
               </div>
 
               
@@ -96,6 +124,7 @@ function RegisterForm ()  {
                   className="block w-full rounded-md px-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setPassword(e.target.value) }}
                 />
+                {errors.password && <p className="text-red-500">{errors.password}</p>}
               </div>
 
 
@@ -110,6 +139,7 @@ function RegisterForm ()  {
                   className="block w-full rounded-md px-2 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setConPassword(e.target.value) }}
                 />
+                {errors.confirm_password && <p className="text-red-500">{errors.confirm_password}</p>}
               </div>
 
             </div>
@@ -118,7 +148,7 @@ function RegisterForm ()  {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-truegreen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
-                onClick={submit}
+                
               >
                 Register in
               </button>

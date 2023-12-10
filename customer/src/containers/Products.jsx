@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from 'react-router-dom'
 import Sort from "../components/Sort";
 import styled from "styled-components";
 import { CiSearch } from "react-icons/ci";
+import PreLoader from "../components/PreLoader/PreLoader";
 
 function Collections() {
   const [search, setSearch] = useState(false);
+  const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation()
   const productsBySubCategory = useSelector(
     (state) => state.productBySubcategory.productsBySubcategory
   );
@@ -35,7 +39,21 @@ function Collections() {
 
   console.log("sorted products" + sortedProducts);
 
+
+
+  useEffect(() => {
+    setLoading(true)
+   const timer = setTimeout(() => {
+     setLoading(false);
+     
+   }, 3000);
+   return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   return (
+    <>
+    {loading && <PreLoader/>}
+    <div className={loading? 'hidden': ''} data-aos={loading ? 'fade-out' : 'fade-in'}>
     <div className="flex flex-col px-20 ">
       {/* <h1 className="font-medium">
           Products{productsBySubCategory && productsBySubCategory.categoryName}
@@ -113,6 +131,8 @@ function Collections() {
         Discover more <FaArrowRight />
       </div>
     </div>
+    </div>
+    </>
   );
 }
 // {productsBySubCategory &&

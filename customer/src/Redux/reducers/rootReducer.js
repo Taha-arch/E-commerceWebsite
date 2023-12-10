@@ -13,6 +13,7 @@ import custmerUpdateReducer from '../slicers/Customer/customerUpdate'
 import getCustomerIdReducer from '../slicers/Customer/customerById'
 import productBySubcatReducer from '../slicers/productBySubcat';
 import favoriteReducer from '../slicers/FavoriteSlice'
+import registerReducer from '../slicers/REGISTER/registerSlice'
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   Card: CardReducer,
   Favorite: favoriteReducer,
   auth: authReducer,
+  Register: registerReducer,
   order: orderReducer,
   productsFound: productFoundReducer,
   categories: categoriesReducer,

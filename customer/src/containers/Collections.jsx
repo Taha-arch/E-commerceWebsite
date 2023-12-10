@@ -3,10 +3,12 @@ import ProductCard from '../components/ProductCard'
 import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import  { fetchProduct } from '../../src/Redux/slicers/Product/productServices';
+import { useLocation } from 'react-router-dom'
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaArrowLeft } from "react-icons/fa";
 import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
+import PreLoader from "../components/PreLoader/PreLoader";
 
 
 // function Collections() {
@@ -69,7 +71,9 @@ import { BsFillGridFill, BsList } from "react-icons/bs";
 // export default Collections;
 
 function Collections() {
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
+  const location = useLocation()
   const product = useSelector((state) => state.product.product);
   const productsFound = useSelector((state) => state.productsFound.productFound);
   const categories = useSelector((state) => state.categories.categories); 
@@ -78,8 +82,22 @@ function Collections() {
   useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
-  
+
+  useEffect(() => {
+    setLoading(true)
+   const timer = setTimeout(() => {
+     setLoading(false);
+     
+   }, 3000);
+   return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+
+
   return (
+    <>
+    {loading && <PreLoader/>}
+    <div className={loading? 'hidden': ''} data-aos={loading ? 'fade-out' : 'fade-in'}>
     <div className='flex flex-col gap-3 m-8 px-20'>
       <h1 className='font-medium'>COLLECTIONS</h1>
       {categories && product && categories.map((category)=> (
@@ -108,6 +126,8 @@ function Collections() {
         </div>
       ))}
     </div>
+    </div>
+    </>
   );
 }
 

@@ -8,7 +8,7 @@ export const updateCustomer = createAsyncThunk(
         console.log(id);
         console.log("inside update "+ updatedInfo);
         const response = await axios.put(`http://localhost:3001/customers/${id}`, updatedInfo);
-        return response.data.data; 
+        return response.data.doc; 
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
       }

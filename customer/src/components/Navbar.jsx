@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { NavLink, useNavigate, Link, useLocation } from "react-router-dom";
 import { Transition, Menu } from "@headlessui/react";
 import "../styles/main.css";
 import { CiSearch } from "react-icons/ci";
@@ -37,16 +37,22 @@ function NavbarDefault() {
     (state) => state.subcategories.subcategories
   );
   const navigate = useNavigate();
+  const location = useLocation();
   const [productsBySubCategory, setProductsRelated] = useState([]);
   const customer = useSelector((state) => state.auth.customer);
   const favorites = useSelector((state) => state.Favorite.favorites)
   const cards = useSelector((state) => state.Card.cards)
   const [searchBySubCategory, setSubCategory] = useState("");
 
+  const currentPath = location.pathname;
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearCards());
     dispatch(clearFavorites());
+
+    if (currentPath.startsWith('/profile')) {
+      navigate('/'); 
+    }
   };
 
   //Fetch products with category and subCategory
@@ -260,7 +266,7 @@ function NavbarDefault() {
                                   "text-sm text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2"
                                 )}
                                 onClick={() =>
-                                  navigate(`/profile/${customer._id}}`)
+                                  navigate(`/profile/${customer && customer._id}}`)
                                 }
                               >
                                 Your Profile

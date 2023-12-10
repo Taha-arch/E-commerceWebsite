@@ -7,7 +7,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { addCard, removeCard } from "../Redux/slicers/CardSlice";
 
 const FavoriteItems = () => {
-  const [isButtonActive, setButtonActive] = useState(false);
   const favoriteProducts = useSelector((state) => state.Favorite.favorites);
   const CardProducts = useSelector((state) => state.Card.cards);
   console.log(favoriteProducts);
@@ -15,7 +14,8 @@ const FavoriteItems = () => {
   const dispatch = useDispatch();
 
   const addToCard = (product) => {
-    dispatch(addCard(product));
+    const productWithId = { ...product, id: product._id ,totalPrice : product.price};
+    dispatch(addCard(productWithId));
   };
 
   const removeFromCard = (product) => {
@@ -42,7 +42,7 @@ const FavoriteItems = () => {
           <div className="bg-primary w-full">
             <div className="w-full gap-2 rounded-md bg-white mt-3 hover:bg-gray-300 flex flex-row cursor-pointer"
             key={product._id}
-            onClick={() => navigate(`/product/${product._id}`)}
+            onClick={() => navigate(`/product/${product && product._id}`)}
             >
               <div className="w-1/6 rounded-md p-3">
                 <img src={product && product.productImage[0]} alt="" />

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, logout, purgePersistedState } from './authServices';
+import { updateCustomer } from '../Customer/customerServices';
 
 
 const authSlice = createSlice({
@@ -19,10 +20,18 @@ const authSlice = createSlice({
         state.token = action.payload.access_token;
         state.error = false;
       })
+      .addCase(login.rejected, (state, action) => {
+        state.customer = null;
+        state.status = 'failed';
+        state.token = null
+        state.error = action.payload;
+      })
       .addCase(logout.fulfilled, (state) => {
         state.customer = null;
         state.token = null;
-        
+      })
+      .addCase(updateCustomer.fulfilled, (state, action) => {
+        state.customer = action.payload;
       });
   },
 });

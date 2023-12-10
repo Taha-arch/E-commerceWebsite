@@ -2,13 +2,24 @@ import "../styles/main.css";
 import React, { useEffect, useState } from "react";
 import { Redirect, Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/images/sans.png";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import { login } from '../Redux/slicers/AUTH/authServices'
+import * as yup from 'yup';
+
+
+
+const schema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});
+
 
 function SignInForm() {
+  const [errors, setErrors] = useState({});
   const [isSignIn, setIsSignIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const error = useSelector((state) => state.auth.error)
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -16,25 +27,35 @@ function SignInForm() {
 
   const handleSignIn = async () => {
     try {
+      await schema.validate({ email, password }, { abortEarly: false });
       await dispatch(login({ email, password }));
       setIsSignIn(true);
-      
     } catch (error) {
-      setIsSignIn(false);
-      console.error("SignIn error:", error);
+      if (error.name === 'ValidationError') {
+        const validationErrors = {};
+        error.inner.forEach(err => {
+          validationErrors[err.path] = err.message;
+        });
+        setErrors(validationErrors);
+      } else {
+        console.error("SignIn error:", error);
+      }
     }
   };
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
-  if(isSignIn){
+  if(isSignIn && error === null){
       navigate(redirect)
+  }else if(error){
+    alert(error)
+
   }
  
 
   return (
     <div className="flex ">
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6  pb-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6  pb-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mt-4 pt-6 text-center font-bold text-4xl font-playfair">
             <span className="text-black">PREST</span>
@@ -46,7 +67,7 @@ function SignInForm() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6">
+          <form className="space-y-2 ">
             <div>
               <div className="mt-2">
                 <input
@@ -78,14 +99,17 @@ function SignInForm() {
                 />
               </div>
             </div>
-
+            <div className="text-sm ">
+            {errors.email && <p className="text-red-500">{errors.email}</p>}
+            {errors.password && <p className="text-red-500">{errors.password}</p>}
+            </div>
             <div>
               <button
                 type="button"
                 className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-truegreen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green"
                 onClick={handleSignIn}
               >
-                {isSignIn ? "Signing in..." : "Sign in"}
+                {isSignIn && error === null ? "Signing in..." : "Sign in"}
               </button>
             </div>
           </form>

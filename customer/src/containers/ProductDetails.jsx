@@ -1,11 +1,10 @@
 import { React, useState, useRef, useEffect } from "react";
+import { useLocation } from 'react-router-dom'
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { SlHandbag } from "react-icons/sl";
 import ProductCard from "../components/ProductCard";
 import "../styles/index.css";
 import Lightbox from "yet-another-react-lightbox";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "yet-another-react-lightbox/styles.css";
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -17,6 +16,7 @@ import { clearProductDetails } from "../Redux/slicers/Product/productDetailsSlic
 import { addCard, removeCard } from "../Redux/slicers/CardSlice";
 import shortid from "shortid";
 import { addFavorite, removeFavorite } from "../Redux/slicers/FavoriteSlice";
+import PreLoader from "../components/PreLoader/PreLoader";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -46,6 +46,7 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const location = useLocation();
   const [productsRelated, setProductsRelated] = useState([]);
   useEffect(() => {
     if(products && productDetails && productDetails.subcategoryName){
@@ -63,24 +64,8 @@ export default function ProductDetails() {
       }
   
   }, [dispatch, id, productDetails, products]);
-
-  const notify = (productName) => {
-    toast.success(`${productName} Added to cart Successfully!`, {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchProductDetails(id))
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
     return () => {
       dispatch(clearProductDetails());
     };
@@ -139,12 +124,11 @@ export default function ProductDetails() {
     const id = shortid.generate();
     const productWithId = { ...productDetails, id: id , orderedQuantity: quantity ,totalPrice : TotalPrice};
     dispatch(addCard(productWithId));
-    notify(productDetails.productName); // Notify upon adding to cart
-    setIsAddedToCart(true); // Update state to indicate product is added
+    setIsAddedToCart(true); 
   };
 
   const removeFromCart = () => {
-    dispatch(removeCard(id)); // Assuming dispatching to Redux action
+    dispatch(removeCard(id)); 
   };
 
   //fAVORITE
@@ -167,9 +151,20 @@ export default function ProductDetails() {
   const removeFromFavorite = () => {
     dispatch(removeFavorite(id)); 
   };
+
+  useEffect(() => {
+    setLoading(true)
+   const timer = setTimeout(() => {
+     setLoading(false);
+     
+   }, 3000);
+
+   return () => clearTimeout(timer);
+ }, [location.pathname]);
+
   return (
     <div>
-      {loading && <div>loading ...</div>}
+      {loading && <PreLoader/>}
       {!loading && product.error ? <div>Error: {product.error}</div> : null}
       {!loading && productDetails && Object.keys(productDetails).length > 0 ? (
         <div className=" box flex flex-col  gap-4">
@@ -301,7 +296,6 @@ export default function ProductDetails() {
               </div>
 
               <h1 className="font-Lora">
-                {/* Stellar Dainty Diamond Hoop E Stellar Dainty Diamond */}
                 {productDetails.productName}
               </h1>
               <div className="flex flex-row gap-5">
@@ -394,14 +388,6 @@ export default function ProductDetails() {
                 <h2 className="font-oswald mb-3 mt-5 underline">ADVANTAGES</h2>
                 <ul className="ml-6 leading-9 list-disc">
                   <li>{productDetails.longDescription}</li>
-                  {/* <li> Smocked body</li>
-                <li>Adjustable straps</li>
-                <li>Scoop neckline</li>
-                <li>Ruffled hems</li>
-                <li>Cropped length</li>
-                <li>Model is wearing a smal</li>
-                <li>100% rayon</li>
-                <li>Machine washable</li> */}
                 </ul>
               </div>
               <div className="descriptioncontainer2 ml-5 w-2/4">
@@ -425,7 +411,7 @@ export default function ProductDetails() {
 
             <div className="morecontainer w-100 flex flex-row over">
             {productsRelated && productsRelated.slice(0,4).map((product) => (
-                <div key={product._id}>
+              <div key={product._id}>
                 <ProductCard product={product}/>
                 </div>
               ))}
@@ -434,7 +420,6 @@ export default function ProductDetails() {
           </div>
         </div>
       ) : null}
-      <ToastContainer />
     </div>
   );
 }
