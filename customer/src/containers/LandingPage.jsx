@@ -4,8 +4,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
 import { useLocation } from 'react-router-dom'
-import NavbarDefault from "../components/Navbar";
-import Footer from "../components/Footer";
 import PreLoader from "../components/PreLoader/PreLoader";
 import ScrollToTop from "react-scroll-to-top";
 
