@@ -16,6 +16,8 @@ import * as animation from "../../assets/animations/Animation - 1699995980899.js
 import { defaultOptions } from '../Orders/Orders';
 import Lottie from 'react-lottie';
 
+
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
@@ -203,7 +205,7 @@ export default function Products() {
     <PopUp>
       <ProductDetails selectedProduct={selectedProduct} setOpenDetails={setOpenDetails} />
     </PopUp>}
-    
+
     </div>
     
   );

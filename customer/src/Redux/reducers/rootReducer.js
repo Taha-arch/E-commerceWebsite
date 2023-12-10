@@ -15,6 +15,7 @@ import productBySubcatReducer from '../slicers/productBySubcat';
 import SearchQueryReducer from '../slicers/SearchQuery';
 import addCheckoutReducer from '../slicers/Checkout/addCheckout';
 import favoriteReducer from '../slicers/FavoriteSlice'
+import sortProductsReducer from '../slicers/Product/sortProducts';
 
 const rootReducer = combineReducers({
   product: productReducer,
@@ -30,14 +31,15 @@ const rootReducer = combineReducers({
   customerId: getCustomerIdReducer,
   productBySubcategory: productBySubcatReducer,
   searchQuery: SearchQueryReducer,
-  addCheckout: addCheckoutReducer
+  addCheckout: addCheckoutReducer,
+  sortedProducts: sortProductsReducer,
 });
 
 export const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth','Card', 'Favorite', 'productBySubcategory', 'categories'],
+  whitelist: ['auth','Card', 'Favorite', 'productBySubcategory', 'categories', 'sortedProducts'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProductDetails } from './productServices'
-// Define the initial state
+
 const initialState = {
     productSubcategory: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
+
 const productSubcategorySlice = createSlice({
   name: 'productSubcategory',
   initialState,

@@ -305,7 +305,7 @@ const updateUser = async (req, res) => {
         width: 1000,
         crop: "scale",
       });
-      // console.log(newImage);
+      console.log(newImage);
       userUpdate.user_image = newImage.secure_url;
     }
 
@@ -318,7 +318,6 @@ const updateUser = async (req, res) => {
       message: "user updated successfully",
     });
   } catch (error) {
-    // res.status(404).json("User not found");
     console.log(error.message);
   }
 };
