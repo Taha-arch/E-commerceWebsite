@@ -23,12 +23,13 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.customer = null;
         state.status = 'failed';
-        state.token = null
+        state.error = false;
         state.error = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {
         state.customer = null;
         state.token = null;
+        state.error = false;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.customer = action.payload;

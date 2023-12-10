@@ -53,7 +53,7 @@ const OrderItems = () => {
                   <div className="w-4/6 pt-2">
                     <div className="flex justify-between">
                       <h4 className="font-Playfair w-fit">
-                        {item.productName}
+                        {item.product_name}
                       </h4>
                       <div className="w-14 font-thin">Qty: {item.quantity}</div>
                     </div>

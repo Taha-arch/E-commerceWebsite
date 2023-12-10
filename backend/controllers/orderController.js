@@ -193,7 +193,7 @@ const getCustomerOrders = async (req, res) => {
     let idCustomer = req.params.id;
     const orders = await Order.find({customer_id: idCustomer})
       .populate({ path: 'customer_id', select: 'first_name last_name' })
-      .populate({ path: 'order_items.product_id', model: 'Product', select: ' product_image' })
+      .populate({ path: 'order_items.product_id', model: 'Product', select: 'product_image' })
       .exec();
 
     if (orders.length === 0) {

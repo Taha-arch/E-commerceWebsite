@@ -25,7 +25,7 @@ function Products() {
 
   const {category, subcategory} = useParams();
 
-  const filteredProducts = sortedProducts.filter(
+  const filteredProducts = sortedProducts && sortedProducts.filter(
     (item) => item.categoryName === category && item.subcategoryName === subcategory);
 
   const onSortChange = (e) => {
@@ -41,10 +41,6 @@ function Products() {
       setSortedByPrice([]);
     }
   };
-
-
-
-
   useEffect(() => {
     setLoading(true)
    const timer = setTimeout(() => {

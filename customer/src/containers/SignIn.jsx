@@ -45,12 +45,12 @@ function SignInForm() {
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
-  if(isSignIn && error === null){
+  if(isSignIn && error === false){
       navigate(redirect)
   }else if(error){
     alert(error)
-
   }
+  console.log(error)
  
 
   return (
