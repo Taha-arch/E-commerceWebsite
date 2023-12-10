@@ -3,6 +3,7 @@ import CustomerSiderbar from '../components/CustomerSiderbar'
 import OrderSummary from '../components/OrderSummary'
 import FavoriteItems from '../components/FavoriteItems'
 import OrderItems from '../components/OrderItems'
+import ScrollToTop from "react-scroll-to-top";
 
 export default function Orders() {
     return (
@@ -31,6 +32,19 @@ export default function Orders() {
           </table>
           <div >
           </div>
+            <ScrollToTop smooth style={{
+                      position: 'fixed',
+                      bottom: '20px',
+                      right: '40px',
+                      cursor: 'pointer',
+                      background: '#2F5951',
+                      borderRadius: '10%',
+                      padding: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '50px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    }}/>
       </div>
     )
   }

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { placeOrder } from "../Redux/slicers/Order/orderServices";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { Card, Input, Button, Typography, Checkbox } from "@material-tailwind/react";
 import CartItems from "../components/CartItems";
 import * as Yup from "yup";
 import swal from 'sweetalert'
 import { clearCards } from "../Redux/slicers/CardSlice";
+import { addCheckout } from "../Redux/slicers/Checkout/checkoutServices";
+
 
 const addressSchema = Yup.object().shape({
   address: Yup.string().required("Address is required"),
   city: Yup.string().required("City is required"),
   postal_code: Yup.string().required("Postal code is required"),
+  payment_method: Yup.string().required("Payment method is required"),
 });
 
 function Checkout() {
@@ -20,16 +23,19 @@ function Checkout() {
     address: "",
     city: "",
     postal_code: "",
+    payment_method: "",
   });
   const token = useSelector((state) => state.auth.token);
   const { totalCartPrice, cards } = useSelector((state) => state.Card);
-  console.log(cards);
   const customer = useSelector((state) => state.auth.customer);
-  console.log(token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
- 
+  const location = useLocation();
+  let cart_total_price = totalCartPrice;
+  const [paymentMethod, setPaymentMethod] = useState({
+    cashOnDelivery: false,
+    creditDebitCards: false,
+  });
 
   useEffect(() => {
     if (!token) {
@@ -39,38 +45,66 @@ function Checkout() {
     }
   }, [token, navigate]);
 
+  const handlePaymentMethodChange = (method, checked) => {
+    setPaymentMethod({
+      ...paymentMethod,
+      [method]: checked,
+    });
+    
+  };
+
+
+
   const handlePlaceOrder = async () => {
+
     try {
       await addressSchema.validate(addressInfo, { abortEarly: false });
 
       const orderItems = cards.map((product) => ({
         product_id: product._id,
         quantity: product.orderedQuantity.toString(),
+        product_name: product.productName,
       }));
 
       const orderData = {
         customer_id: customer._id,
-        cart_total_price: totalCartPrice,
+        cart_total_price: cart_total_price,
         order_items: orderItems,
+        email: customer.email,
+        PaymentMethod: getSelectedPaymentMethod(),
         ...addressInfo,
       };
-      dispatch(placeOrder(orderData));
-      dispatch(clearCards());
       
-      swal({
-        title: 'Order placed successfully',
-        icon: 'success',
-        buttons: {
-          confirm: {
-            text: 'Go to Orders',
-            value: 'confirm',
-          },
-        },
-      }).then((value) => {
-        if (value === 'confirm') {
-          navigate('/orders');
+        dispatch(placeOrder(orderData));
+        dispatch(clearCards());
+      
+        if(paymentMethod.creditDebitCards){
+          
+          dispatch(
+            addCheckout({
+              cartItems: cards,
+              customerId: customer.Id,
+              navigate,
+              search: location.search,
+            })
+          );
+
+        }else{
+          swal({
+            title: 'Order placed successfully',
+            icon: 'success',
+            buttons: {
+              confirm: {
+                text: 'Go to Orders',
+                value: 'confirm',
+              },
+            },
+          }).then((value) => {
+            if (value === 'confirm') {
+              navigate('/orders');
+            }
+          });
         }
-      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const newErrors = {};
@@ -88,11 +122,20 @@ function Checkout() {
     });
   };
 
+  const getSelectedPaymentMethod = () => {
+    if (paymentMethod.cashOnDelivery) {
+      return 'Cash on Delivery';
+    } else if (paymentMethod.creditDebitCards) {
+      return 'Credit/Debit Cards';
+    }
+    return 'Cash on Delivery'; 
+  };
+
   return (
     <div className="box">
       <h1 className="m-10">Checkout</h1>
       <div className="flex justify-around ">
-        <div className="flex flex-col justify-start gap-20  ml-14">
+        <div className="flex flex-col justify-start gap-4 ml-14">
           <div>
             <Card color="transparent" shadow={false}>
               <Typography variant="h4" color="blue-gray">
@@ -161,7 +204,45 @@ function Checkout() {
               </form>
             </Card>
           </div>
-          <div className="flex flex-col justify-center ml-14">
+
+        <div className="flex flex-col gap-2 pb-4">
+          <Typography  variant="h4" color="blue-gray">
+          Payment Method 
+        </Typography>
+        {addressErrors.payment_method && (
+                      <span className="text-red-500">
+                        {addressErrors.payment_method}
+                      </span>
+          )}
+        <div className="flex flex-row">
+          <Checkbox
+            checked={paymentMethod.cashOnDelivery}
+            onChange={(e) => {handlePaymentMethodChange("cashOnDelivery", e.target.checked);
+            handleAddressChange(e, "payment_method")}}
+            label={
+              <Typography color="blue-gray" className="flex font-medium">
+                Cash on Delivery.
+              </Typography>
+            }
+          />
+          <Checkbox
+            checked={paymentMethod.creditDebitCards}
+            onChange={(e) => {handlePaymentMethodChange("creditDebitCards", e.target.checked);
+            handleAddressChange(e, "payment_method")}}
+            label={
+              <Typography color="blue-gray" className="flex font-medium">
+                Credit/Debit Cards.
+              </Typography>
+            }
+          />
+        </div>
+
+      </div>
+            {/* <div className="flex flex-col justify-start gap-20  ml-14">
+
+                <PayButton cards={cards} customerId={customer._id}/>
+            </div> */}
+          <div className="flex flex-col justify-center  ml-14">
             <h2>Your Cart</h2>
             <CartItems />
           </div>

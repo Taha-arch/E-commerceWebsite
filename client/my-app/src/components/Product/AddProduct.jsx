@@ -6,9 +6,9 @@ import swal from 'sweetalert'
 import PopUp from '../PopUp';
 import AddCategory from '../Category/AddCategory';
 import AddSubcategory from '../Subcatgory/AddSubcategory'
-import { FaArrowAltCircleDown } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
-import { FaArrowAltCircleUp } from "react-icons/fa";
 
 export default function AddProduct() {
 
@@ -215,7 +215,7 @@ return (
         </td>
         <td className="w-1/4">
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="productName"
             id="productName"
@@ -234,7 +234,7 @@ return (
         </td>
         <td className=" ">
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="sku"
             id="sku"
@@ -255,7 +255,7 @@ return (
         </td>
         <td>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="price"
             id="price"
@@ -273,7 +273,7 @@ return (
         </td>
         <td>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="discount_price"
             id="discount_price"
@@ -294,12 +294,14 @@ return (
         <td>
 
   <div className=''>
-        <span className="absolute mt-1 ml-2" id="category-value" >{category}</span>
+        <span className="absolute pt-2 ml-2 " id="category-value" >{category}</span>
           <div id="offButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={off}>
-          <FaArrowAltCircleUp className='mt-2 '/>
+          <IoIosArrowUp className='relative right-5 pt-1 text-2xl' />
+          
           </div>
-          <div id="showButton" className="border rounded-lg focus:border h-8 w-full  z-10" onClick={show}>
-          <FaArrowAltCircleDown className='mt-2 '/>
+          <div id="showButton" className="border rounded-lg border-gray-600 focus:border h-8 w-full  z-10" onClick={show}>
+          <IoIosArrowDown className='relative right-5 pt-1 text-2xl' />
+          
           </div>
         <ul className='category-items  overflow-y-auto' id="list">
         {categories && categories.map((item) => (
@@ -321,10 +323,12 @@ return (
         <div className=''>
         <span className="absolute mt-1 ml-2" id="category-value" >{subcategory}</span>
           <div id="offSubButton" className="border rounded-lg focus:border hidden h-8 w-4r" onClick={offSubCategory}>
-          <FaArrowAltCircleUp className='mt-2 ml-44'/>
+          <IoIosArrowUp className='relative left-44 pt-1 text-2xl' />
+          
           </div>
-          <div id="showSubButton" className="border rounded-lg focus:border h-8 w-full  " onClick={showSubCategory}>
-          <FaArrowAltCircleDown className='mt-2 ml-44'/>
+          <div id="showSubButton" className="border rounded-lg border-gray-600 focus:border h-8 w-full  " onClick={showSubCategory}>
+          <IoIosArrowDown className='relative left-44 pt-1 text-2xl' />
+        
           </div>
         <ul className='category-items overflow-y-auto' id="subList">
           
@@ -349,7 +353,7 @@ return (
         </td>
         <td>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="active"
             id="active"
@@ -366,7 +370,7 @@ return (
         </td>
         <td>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="option"
             id="option"
@@ -385,7 +389,7 @@ return (
         </td>
         <td>
           <textarea
-            className="w-full  px-3 py-2  border rounded-lg "
+            className="w-full  px-3 py-2 border-gray-600 border rounded-lg "
             type="textarea"
             name="short_description"
             id="short_description"
@@ -403,7 +407,7 @@ return (
         </td>
         <td>
           <input
-            className="w-full px-3 py-2 border rounded-lg focus:border"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:border"
             type="text"
             name="quantity"
             id="quantity"
@@ -423,7 +427,7 @@ return (
         </td>
         <td colSpan="3">
           <textarea
-            className="px-3 py-2 h-3/4 w-full border rounded-lg focus:border"
+            className="px-3 py-2 h-3/4 w-full border border-gray-600 rounded-lg focus:border"
             type="text"
             name="long_description"
             id="long_description"

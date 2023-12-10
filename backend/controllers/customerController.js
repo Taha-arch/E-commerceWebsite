@@ -49,32 +49,117 @@ const addCustomer = async (req, res) => {
             const link = "http://localhost:3001/customers/validate"
 
             let transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp.gmail.com",
+                service: "gmail",
+                port: 587,
+                secure: false,
                 auth: {
-                user: 'amineelbouzidi36@gmail.com',
-                pass: 'pyeo ktfq qefd qahk'
-                }
-            });
+                  user: process.env.user,
+                  pass: process.env.password,
+                },
+              });
 
-            var mailOptions = {
-                from: 'Prestigious',
+            
+              let mailOptions = {
+                from: `"PRESTIGIOUS" <${process.env.user}>`,
+                to: email,
                 to: email,
                 subject: 'Account Verification',
                 html: `
-                <div style="background-image: url('https://www.canva.com/design/DAFyMVbE2wY/view')"></div>
-                <p>Dear ${newCustomer.first_name},
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Thanks for your order!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    h1 {
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+    
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .email-content {
+      padding: 20px;
+      text-align: left;
+    }
+    
+    .verify-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2F5951;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .verify-button:hover {
+      background-color: #2A5951;
+    }
+    
+    .footer {
+      margin-top: 20px;
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <img src="https://res.cloudinary.com/dfin3vmgz/image/upload/product_images/undefined-1698783203837" alt="PRESTIGIOUS" />
+    <div class="email-content">
 
-                Thank you for registering with Prestigious. We're excited to have you join our community! To ensure the security and authenticity of our members, please click the link below to verify your email address.
-                <br>
-                <div style="text-align: center; background-color: light-green">
-                <button ><a href="${link}">Click here to verify</a></button>
-                </div>
-                <br>
-                If you have any issues or questions, don't hesitate to reach out to our support team.
-                
-                Warm regards,
-                
-                Prestigious Team</p> `
+      <p>Dear ${newCustomer.first_name},</p>
+      <p>Thank you for registering with Prestigious. We're excited to have you join our community! To ensure the security and authenticity of our members, please click the link below to verify your email address.</p>
+      <div style="text-align: center; margin-top: 20px;">
+        <a class="verify-button" href="${link}">Click here to verify</a>
+      </div>
+      <p>If you have any issues or questions, don't hesitate to reach out to our support team.</p>
+      <p class="footer">Warm regards,<br/><strong>Prestigious Team</strong></p>
+    </div>
+  </div>
+</body>
+</html>
+
+`
             };
 
             if(transporter.sendMail(mailOptions)){

@@ -53,7 +53,7 @@ function RegisterForm ()  {
     return (
         
         <div className='flex '>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6  pb-12 lg:px-8">
+        <div className="flex min-h-full flex-1 flex-col justify-center  px-6  pb-12 lg:px-8">
             
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="mt-4 pt-6 text-center font-bold text-4xl font-playfair"><span className='text-black'>PREST</span><span className='text-truegreen'>IGIOUS</span></div>

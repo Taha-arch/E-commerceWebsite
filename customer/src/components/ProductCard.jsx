@@ -11,6 +11,10 @@ export default function ProductCard(props) {
   const [isButtonActive, setButtonActive] = useState(false);
   const favoriteProducts = useSelector((state) => state.Favorite.favorites)
   const { product} = props; 
+
+  if (!product) {
+    return null; 
+  }
   const toggleButton = (event) => {
     event.stopPropagation();
     setButtonActive(!isButtonActive);

@@ -125,6 +125,7 @@ function NavbarDefault() {
                               setCategoryId(category._id);
                             }}
                             onMouseLeave={() => setCategoryId(null)}
+                            
                           >
                             <span className="category-link">
                               <div className="flex flex-row justify-between">

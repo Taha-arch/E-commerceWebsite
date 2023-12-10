@@ -3,41 +3,45 @@ import ProductCard from "../components/ProductCard";
 import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from 'react-router-dom'
-import Sort from "../components/Sort";
-import styled from "styled-components";
-import { CiSearch } from "react-icons/ci";
+import {useNavigate, useParams} from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
+import {sortProduct} from "../Redux/slicers/Product/productServices";
 import PreLoader from "../components/PreLoader/PreLoader";
 
-function Collections() {
+function Products() {
+  const navigate = useNavigate(); 
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
   const location = useLocation()
+  const sortedProducts = useSelector((state) => state.sortedProducts.sortProduct);
+  const [sortedByPrice, setSortedByPrice] = useState([]);
+
+
   const productsBySubCategory = useSelector(
     (state) => state.productBySubcategory.productsBySubcategory
   );
+
+  const {category, subcategory} = useParams();
+
+  const filteredProducts = sortedProducts.filter(
+    (item) => item.categoryName === category && item.subcategoryName === subcategory);
+
   const onSortChange = (e) => {
     const selectedSortOption = e.target.value;
-    handleSortChange(selectedSortOption);
-    console.log(selectedSortOption);
-  };
-
-  const [sortedProducts, setSortedProducts] = useState([]);
-  const handleSortChange = (selectedSortOption) => {
-    let sorted = [];
-    if (selectedSortOption === "lowest") {
-      sorted = [...productsBySubCategory].sort((a, b) => a.price - b.price);
-      console.log("lowest " + sorted);
-    } else if (selectedSortOption === "highest") {
-      sorted = [...productsBySubCategory].sort((a, b) => b.price - a.price);
-    } else {
-      sorted = [];
+    dispatch(sortProduct());
+     
+    if(selectedSortOption === "lowest"){
+      setSortedByPrice(filteredProducts);
+    }else if (selectedSortOption === "highest"){
+      const revesedArray = [...filteredProducts].reverse();
+      setSortedByPrice(revesedArray);
+    }else{
+      setSortedByPrice([]);
     }
-    setSortedProducts(sorted);
   };
 
-  console.log("sorted products" + sortedProducts);
 
 
 
@@ -55,41 +59,16 @@ function Collections() {
     {loading && <PreLoader/>}
     <div className={loading? 'hidden': ''} data-aos={loading ? 'fade-out' : 'fade-in'}>
     <div className="flex flex-col px-20 ">
-      {/* <h1 className="font-medium">
-          Products{productsBySubCategory && productsBySubCategory.categoryName}
-        </h1>
-        <h3>
-          {productsBySubCategory && productsBySubCategory.subcategoryName}
-        </h3> */}
+      <h1 className="font-medium">{subcategory}</h1>
+
       <div className="flex justify-between">
-        <span className="text-xl  font-karla">
+        <span className="text-xl font-fairly">
           {productsBySubCategory &&
-            productsBySubCategory[0] &&
-            productsBySubCategory[0].length}{" "}
-          ITEMS FOUND
+            productsBySubCategory.flat().length} ITEMS FOUND
         </span>
 
         <div className="flex flex-row gap-4">
-        <div className="cursor-pointer">
-            {!search && (
-              <CiSearch
-                className="secondary-bg  text-3xl  top-1"
-                onClick={() => setSearch(true)}
-              />
-            )}
-            {search && (
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search product"
-                  className="primary-bg w-40 h-10 pl-10  border-2  border-white rounded text-sm "
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <CiSearch className="secondary-bg absolute text-3xl left-1.5 top-1" />
-              </div>
-            )}
-          </div>
-          <div >
+          <div>
             <form action="#">
               <label htmlFor="sort"></label>
               <select
@@ -104,47 +83,71 @@ function Collections() {
               </select>
             </form>
           </div>
-
-          
         </div>
       </div>
-      <div className="flex flex-wrap justify-center  w-full">
-        {productsBySubCategory &&
+      {/* flex flex-wrap justify-center w-full */}
+      <div className="">
+        {(sortedByPrice.length === 0 || sortedByPrice === undefined) ? (
+          productsBySubCategory &&
           productsBySubCategory.map((productItem, rowIndex) => (
-            <div className="flex flex-wrap justify-center gap-2 w-full " key={rowIndex}>
-              {productItem &&
+            <div className="flex flex-wrap justify-center " >
+              <div className="flex flex-row flex-wrap  justify-center " key={rowIndex}>
+
+              {Array.isArray(productItem) && 
                 productItem.map((product) => (
-                  <div
-                    key={product._id}
-                    className="w-1/2 lg:w-fit   mt-5 "
-                  >
+                  <div key={product._id} className="w-1/2 lg:w-fit mt-5">
                     <ProductCard product={product} />
                   </div>
                 ))}
               <hr className="color-black" />
+                </div>
             </div>
-          ))}
+          ))
+        ) : (
+          sortedByPrice &&
+          sortedByPrice.map((productItem, rowIndex) => (
+            <div className="bg-blue-gray-600 flex flex-wrap " >
+              <div className="flex flex-row " key={rowIndex}>
+                  <div key={productItem._id} className="w-1/2 lg:w-fit mt-5">
+                    <ProductCard product={productItem} />
+                  </div>
+              </div>
+                
+              <hr className="color-black" />
+            </div>
+          ))
+        )}
       </div>
 
-      <div className="w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black">
-        {" "}
-        Discover more <FaArrowRight />
+      <div className="w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black"
+        onClick={() => {
+          navigate(`/collections`);
+        }}
+      >
+        COLLECTIONS <FaArrowRight />
       </div>
+
+      <ScrollToTop
+        smooth
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "40px",
+          cursor: "pointer",
+          background: "#2F5951",
+          borderRadius: "10%",
+          padding: "10px",
+          display: "flex",
+          alignItems: "center",
+          fontSize: "50px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      />
     </div>
     </div>
-    </>
+   </>
   );
 }
-// {productsBySubCategory &&
-//   productsBySubCategory.map((productItem, index) => (
-//     <div key={index} >
-//       {productItem &&
-//         productItem.map((product) => (
-//           <div key={product._id}>
-//             <ProductCard product={product} />
-//           </div>
-//         ))}
-//     </div>
-//   ))}
 
-export default Collections;
+
+export default Products;
