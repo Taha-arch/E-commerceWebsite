@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import  { fetchProduct } from '../../src/Redux/slicers/Product/productServices';
 import {fetchProductFound} from '../Redux/slicers/Product/productServices';
 import { NavLink, useNavigate, Link, Navigate } from "react-router-dom";
-
+import ScrollToTop from "react-scroll-to-top";
 
 function Collections() {
   const dispatch = useDispatch();
@@ -62,6 +62,19 @@ function Collections() {
           </div>
         </div>
       ))}
+      <ScrollToTop smooth style={{
+                      position: 'fixed',
+                      bottom: '20px',
+                      right: '40px',
+                      cursor: 'pointer',
+                      background: '#2F5951',
+                      borderRadius: '10%',
+                      padding: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '50px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          }}/>
     </div>
   );
 }

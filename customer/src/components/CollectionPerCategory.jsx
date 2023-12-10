@@ -70,7 +70,7 @@ function CollectionPerCategory() {
               navigate(-1)
             }}
           >
-            COLLECTIONS <FaArrowRight />
+            COLLECTIONS<FaArrowRight />
           </div>
         </>
       ) : (

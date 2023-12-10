@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Sort from "../components/Sort";
 import styled from "styled-components";
 import { CiSearch } from "react-icons/ci";
-
-function Collections() {
+import {useNavigate} from "react-router-dom";
+import ScrollToTop from "react-scroll-to-top";
+function Products() {
   const [search, setSearch] = useState(false);
   const [query, setQuery] = useState("");
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const productsBySubCategory = useSelector(
     (state) => state.productBySubcategory.productsBySubcategory
@@ -16,7 +18,7 @@ function Collections() {
   const onSortChange = (e) => {
     const selectedSortOption = e.target.value;
     handleSortChange(selectedSortOption);
-    console.log(selectedSortOption);
+    
   };
 
   const [sortedProducts, setSortedProducts] = useState([]);
@@ -72,6 +74,7 @@ function Collections() {
               </div>
             )}
           </div>
+          
           <div >
             <form action="#">
               <label htmlFor="sort"></label>
@@ -109,10 +112,27 @@ function Collections() {
           ))}
       </div>
 
-      <div className="w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black">
+      <div className="w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black"
+      onClick={()=>{
+        navigate(`/collections`)
+      }}
+      >
         {" "}
-        Discover more <FaArrowRight />
+        COLLECTIONS <FaArrowRight />
       </div>
+      <ScrollToTop smooth style={{
+                      position: 'fixed',
+                      bottom: '20px',
+                      right: '40px',
+                      cursor: 'pointer',
+                      background: '#2F5951',
+                      borderRadius: '10%',
+                      padding: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '50px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          }}/>
     </div>
   );
 }
@@ -128,4 +148,4 @@ function Collections() {
 //     </div>
 //   ))}
 
-export default Collections;
+export default Products;

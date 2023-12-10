@@ -37,7 +37,7 @@ export const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['auth','Card', 'Favorite'],
+  whitelist: ['auth','Card', 'Favorite', 'productBySubcategory', 'categories'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

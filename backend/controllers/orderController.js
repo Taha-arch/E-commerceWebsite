@@ -8,12 +8,6 @@ const addOrder = async (req, res) => {
     
     let {customer_id, order_items, order_date, address,city, postal_code, cart_total_price, status, email, PaymentMethod} = req.body;
 
-    // order_items = order_items.map(item => ({
-    //     product_id: item.product_id,
-    //     quantity: parseInt(item.quantity)
-    //   }));
-    // console.log(order_items.map((item) => item ) );
-
     try{
     const newOrder = await new Order({
         customer_id : customer_id,

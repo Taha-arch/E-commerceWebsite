@@ -46,7 +46,7 @@ useEffect(() => {
     setTimeout(() => {
     dispatch(fetchUsers());
     setLoading(false);
-  }, 1500);
+  }, 2500);
 }, [dispatch]);
 
 

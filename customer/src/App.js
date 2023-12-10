@@ -19,11 +19,13 @@ import Favorites from './containers/Favorites';
 import Orders from './containers/Orders';
 import Products from "./containers/Products";
 import CollectionPerCategory from "./components/CollectionPerCategory";
-import CheckoutSuccess from "./components/CheckoutSuccess" 
+import CheckoutSuccess from "./components/CheckoutSuccess" ;
+import ScrollToTop from './components/ScrollToTop';
 function App() {
   
   return (
     <Router>
+      <ScrollToTop>
       <Routes>
         <Route path='/login' element={<SignInForm />}></Route>
         <Route path='/register' element={<RegisterForm />}></Route>
@@ -42,6 +44,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile/>} />
         </Route>
       </Routes>
+      </ScrollToTop>
     </Router>
   );
 }

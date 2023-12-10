@@ -3,6 +3,7 @@ import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
+import ScrollToTop from "react-scroll-to-top";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -393,6 +394,19 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+      <ScrollToTop smooth style={{
+                      position: 'fixed',
+                      bottom: '20px',
+                      right: '40px',
+                      cursor: 'pointer',
+                      background: '#2F5951',
+                      borderRadius: '10%',
+                      padding: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '50px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          }}/>
     </div>
   );
 }
