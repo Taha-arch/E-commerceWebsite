@@ -80,12 +80,15 @@ function Collections() {
           </div>
         </div>
       ))}
+    </div>
+    </div>
       <ScrollToTop smooth style={{
+                      smooth: 'true',
                       position: 'fixed',
                       bottom: '20px',
                       right: '40px',
                       cursor: 'pointer',
-                      background: '#2F5951',
+                      background: '#F8F8F8',
                       borderRadius: '10%',
                       padding: '10px',
                       display: 'flex',
@@ -93,8 +96,6 @@ function Collections() {
                       fontSize: '50px',
                       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                           }}/>
-    </div>
-    </div>
     </>
   );
 }

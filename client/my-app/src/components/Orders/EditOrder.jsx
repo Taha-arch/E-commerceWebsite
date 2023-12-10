@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditOrder({ order }) {
     const initialStatus = order ? order.status : '';
@@ -10,13 +11,13 @@ export default function EditOrder({ order }) {
     const [items, setItems] = useState(initialItems);
 
   const { id } = useParams();
-  const token = 'YOUR_AUTH_TOKEN'; // Replace with your authentication token
+
+  const token = localStorage.getItem('accessToken'); 
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
 
   useEffect(() => {
-    // Fetch order data from the backend
     axios.get(`http://localhost:3001/orders/${id}`, config)
       .then((response) => {
         setItems(response.data.order.order_items);
@@ -52,7 +53,7 @@ export default function EditOrder({ order }) {
     // Use the 'put' method to update the order data.
     axios.put(`http://localhost:3001/orders/${id}`, updatedOrder, config)
       .then(() => {
-        notify(); // Notify success
+        notify(); 
       })
       .catch((error) => {
         console.error('Error updating order:', error);
@@ -84,6 +85,13 @@ export default function EditOrder({ order }) {
                 value={item.product_id}
                 onChange={(e) => handleItemChange(index, 'product_id', e.target.value)}
               />
+              <label className="block mb-1">Product Name</label>
+              <input
+                type="text"
+                className="w-full border-2 rounded-lg p-2"
+                value={item.product_name}
+                onChange={(e) => handleItemChange(index, 'product_name', e.target.value)}
+              />
               <label className="block mt-2 mb-1">Quantity</label>
               <input
                 type="number"
@@ -96,7 +104,7 @@ export default function EditOrder({ order }) {
           <button
             type="button"
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg"
-            onClick={() => setItems([...items, { product_id: '', quantity: 0 }])}
+            onClick={() => setItems([...items, { product_id: '',product_name: '', quantity: 0 }])}
           >
             Add Item
           </button>
@@ -110,6 +118,9 @@ export default function EditOrder({ order }) {
           >
             <option value="PLACED">PLACED</option>
             <option value="SHIPPED">SHIPPED</option>
+            <option value="PROCESSING">PROCESSING</option>
+            <option value="OUT_FOR_DELIVERY">OUT_FOR_DELIVERY</option>
+            <option value="CONFIRMED">CONFIRMED</option>
             <option value="DELIVERED">DELIVERED</option>
           </select>
         </div>
@@ -117,6 +128,7 @@ export default function EditOrder({ order }) {
           Submit
         </button>
       </form>
+      <ToastContainer/>
     </div>
   );
           }  

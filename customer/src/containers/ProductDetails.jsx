@@ -170,20 +170,19 @@ export default function ProductDetails() {
         <div className=" box flex flex-col  gap-4">
           <div className="container w-full justify-center  gap-5">
             <div className="imagescontainer">
-              <div className="images flex  flex-col justify-start gap-3 p-1 pt-0">
-                {productDetails &&
-                  productDetails.productImage.map((image, index) => (
-                    <div
-                      className={`image-thumbnail ${
-                        selectedImage === `${image[index]}` && "selected"
-                      }`}
-                      onClick={() => changeMainImage(`${image}`)}
-                      key={index} 
-                    >
-                      <img src={image} alt="" />
-                    </div>
-                  ))}{" "}
-              </div>
+            <div className="images flex flex-col justify-start gap-3 p-1 pt-0">
+  {productDetails &&
+    productDetails.productImage.map((image, index) => (
+      <div
+        className={`image-thumbnail ${selectedImage === image ? 'selected' : ''}`}
+        onClick={() => changeMainImage(image)}
+        key={index}
+      >
+        <img src={image} alt=""  />
+      </div>
+    ))}
+</div>
+
             </div>
 
             <div className="mainimagecontainer">

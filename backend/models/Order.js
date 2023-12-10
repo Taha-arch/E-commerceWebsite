@@ -23,7 +23,7 @@ const OrderSchema = new mongoose.Schema({
   postal_code: { type: Number },
   PaymentMethod: { type: String, default: "Cash On Delivery" },
   order_date: { type: Date, default: Date.now },
-  status: { type: String, default: "Open" },
+  status: { type: String, default: "PROCESSING" },
 })
 
 module.exports = mongoose.model("Order", OrderSchema);

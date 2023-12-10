@@ -56,7 +56,7 @@ export default function ProductCard({ product}) {
               <div className='mx-5 mb-3 flex flex-row justify-center '>
                 <span onClick={() => navigate(`/productDetails/${product._id}`)}>{product && product.productName}</span>
               </div>
-              <div className=' mx-5 flex flex-row justify-between'>
+              <div className=' mx-5 flex flex-row justify-between font-serif'>
                 <span className='font-bold text-lg'>{product && product.price}DH</span>
                 <span className='font-bold text-lg text-orange-500 line-through'>{product && product.discountPrice}DH</span>
               </div>
