@@ -22,7 +22,7 @@ const fetchOrderData = async () => {
   try {
     const response = await axios.get('http://localhost:3001/orders' , { 
       params: {
-      _limit: 4
+      _limit: 10
      }
     });
     return response.data.orders;
@@ -35,7 +35,7 @@ const fetchOrderData = async () => {
 useEffect(() => {
   const fetchData = async () => {
     const orderData = await fetchOrderData();
-    setOrders(orderData);
+    setOrders(orderData.slice(0, 6));
     setLoading(false)
   
   };
