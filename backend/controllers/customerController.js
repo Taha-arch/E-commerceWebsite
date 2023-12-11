@@ -23,7 +23,7 @@ const authCustomer = async (req, res) => {
         //     res.status(401).json('Account is not active');
         // }
     } else {
-        res.status(401).json('Invalid email or password');
+        res.status(401).json({message: "Invalid email or password"});
     }
 }
 
@@ -308,7 +308,6 @@ const addCustomer = async (req, res) => {
             if (!token) {
                 res.status(404).json("Not Autorized");
             }
-            //const tokenaccess = token.startsWith('Bearer ').slice(7) ;
             if (token.startsWith('Bearer ')) {
                 return token.slice(7);
               }
@@ -322,48 +321,6 @@ const addCustomer = async (req, res) => {
         }
         
 
-    //     const link = "http://localhost:3001/customers/validate"
-
-    //     let transporter = nodemailer.createTransport({
-    //         service: 'gmail',
-    //         auth: {
-    //         user: 'p27895102@gmail.com',
-    //         pass: 'medw imoh xvzw lmol'
-    //         }
-    //     });
-
-    //     var mailOptions = {
-    //         from: 'Prestigious',
-    //         to: req.body.email,
-    //         subject: 'Email Verification',
-    //         text: 'Hi you can verify your account by clicking the button bellow',
-    //         html: `<button><a href="${link}">Click here to verify</a></button>`
-    //     };
-    //     try {
-    //         const customer = await Customer.findOne({ _id: req.params.id });
-
-    //         if (!customer) {
-    //             return res.status(400).json("Customer not found");
-    //         }
-
-    //         if (customer.active) {
-    //             return res.status(400).json("Email Already verified");
-    //         }
-
-        
-    //         if(transporter.sendMail(mailOptions)){
-    //             await Customer.findOneAndUpdate({ email: req.body.email }, { active: true });
-
-    //             return res.status(200).json("Email successfully verified!");
-    //         }else {
-
-    //             res.status(400).json("Error sending verification");
-    //         }
-        
-    // } catch (error) {
-    //     console.error('Error validating customer email:', error);
-    //     return res.status(500).json("Internal Server Error");
-    // }
     };
 
 // const getCustomerProfile = async (req, res) => {

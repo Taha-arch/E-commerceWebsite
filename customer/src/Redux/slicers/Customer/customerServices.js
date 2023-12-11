@@ -5,7 +5,7 @@ export const updateCustomer = createAsyncThunk(
     'customerUpdate/updateCustomer',
     async ({id, updatedInfo }, thunkAPI) => {
       try {
-        const response = await axios.put(`http://localhost:3001/customers/${id}`, updatedInfo);
+        const response = await axios.put(`${process.env.REACT_APP_URL}/customers/${id}`, updatedInfo);
         return response.data.doc; 
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -17,7 +17,7 @@ export const updateCustomer = createAsyncThunk(
     'customerById/getCustomerById',
     async ({id }, thunkAPI) => {
       try {
-          const response = await axios.get(`http://localhost:3001/customers/${id}`);
+          const response = await axios.get(`${process.env.REACT_APP_URL}/customers/${id}`);
         return response.data; 
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
