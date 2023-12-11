@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  productsBySubcategory: [], // Initial state for products
+  productsBySubcategory: [],
   loading: false,
   error: null,
 };
@@ -19,7 +19,7 @@ const productsSubcategorySlice = createSlice({
       state.productsBySubcategory.push(action.payload); 
     },
     removeProducts: (state, action) => {
-      // Assuming action.payload is the ID of the card to remove
+
       state.productsBySubcategory = state.productsBySubcategory.filter((product) => product._id !== action.payload);
     },
   },

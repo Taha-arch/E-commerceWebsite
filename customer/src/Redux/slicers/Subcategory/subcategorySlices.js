@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchSubcategories } from './subcategoryServices';
-// Define the initial state
+
 const initialState = {
     subcategories: null,
     loading: false,

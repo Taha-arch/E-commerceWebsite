@@ -15,9 +15,7 @@ import Favorites from './containers/Favorites';
 import Orders from './containers/Orders';
 import Products from "./containers/Products";
 import PreLoader from './components/PreLoader/PreLoader';
-
 import CollectionPerCategory from "./components/CollectionPerCategory";
-import CheckoutSuccess from "./components/CheckoutSuccess" ;
 import ScrollToTop from './components/ScrollToTop';
 function App() {
   
@@ -38,7 +36,6 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails/>}> </Route>
           <Route path='/collections' element={<Collections/>}></Route>
           <Route path='/' element={<LandingPage/>}></Route>
-          <Route path='/checkout-success' element={<CheckoutSuccess/>}></Route>
           <Route path="/collections/:categoryURL" element={<CollectionPerCategory/>} />
           <Route path="/:category/:subcategory" element={<Products/>} />
           <Route path="/profile/:id" element={<Profile/>} />

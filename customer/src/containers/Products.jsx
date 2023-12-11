@@ -10,9 +10,7 @@ import PreLoader from "../components/PreLoader/PreLoader";
 
 function Products() {
   const navigate = useNavigate(); 
-  const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(true)
-  const [query, setQuery] = useState("");
   const dispatch = useDispatch();
   const location = useLocation()
   const sortedProducts = useSelector((state) => state.sortedProducts.sortProduct);
@@ -82,7 +80,7 @@ function Products() {
           </div>
         </div>
       </div>
-      {/* flex flex-wrap justify-center w-full */}
+
       <div className="">
         {(sortedByPrice.length === 0 || sortedByPrice === undefined) ? (
           productsBySubCategory &&

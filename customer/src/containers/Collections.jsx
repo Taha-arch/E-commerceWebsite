@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom'
 import  { fetchProduct } from '../../src/Redux/slicers/Product/productServices';
 import {fetchProductFound} from '../Redux/slicers/Product/productServices';
-import { NavLink, useNavigate, Link, Navigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 import PreLoader from "../components/PreLoader/PreLoader";
 
@@ -17,8 +17,7 @@ function Collections() {
   const productsFound = useSelector((state) => state.productsFound.productFound);
   const SearchQuery = useSelector((state) => state.searchQuery.SearchQuery);
   const categories = useSelector((state) => state.categories.categories); 
-  // const [maxProductsPerCategory, setProductsPerCategory] = useState(6)
-  let TotalProductsPerCategory;
+
   const navigate = useNavigate(); 
 
 
@@ -70,8 +69,6 @@ function Collections() {
             </div>
             <div className='w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl gap-2 hover:bg-black'
             onClick={()=>{
-              TotalProductsPerCategory = product.length; 
-              // setProductsPerCategory(TotalProductsPerCategory);
               navigate(`/collections/${category.category_name}`)
             }}
             >

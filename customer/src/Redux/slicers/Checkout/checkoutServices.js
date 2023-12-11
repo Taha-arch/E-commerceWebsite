@@ -8,9 +8,6 @@ export const addCheckout = createAsyncThunk(
     const redirect = redirectInUrl ? redirectInUrl : "/checkout";
 
     try {
-      console.log(customerId);
-      console.log("inside add checkout  " + cartItems);
-      
       const response = await axios.post("http://localhost:3001/stripe/create-checkout-session", {
         cartItems,
         customerId,

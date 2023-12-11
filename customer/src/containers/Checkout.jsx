@@ -64,6 +64,9 @@ function Checkout() {
         product_id: product._id,
         quantity: product.orderedQuantity.toString(),
         product_name: product.productName,
+        description: product.shortDescription,
+        price: product.price,
+        productImage: product.productImage[0],
       }));
 
       const orderData = {
@@ -82,7 +85,7 @@ function Checkout() {
           
           dispatch(
             addCheckout({
-              cartItems: cards,
+              cartItems: orderItems,
               customerId: customer.Id,
               navigate,
               search: location.search,
