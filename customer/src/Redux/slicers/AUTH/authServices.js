@@ -13,6 +13,7 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }) 
     localStorage.setItem('accessToken', access_token);
     localStorage.setItem('refreshToken', refreshtoken);
     
+    
     return response.data;
   } catch (error) {
       alert(error)
