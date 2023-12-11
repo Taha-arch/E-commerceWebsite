@@ -5,8 +5,10 @@ import App from './App';
 import  store  from './Redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
-// import reportWebVitals from './reportWebVitals';
 export const  persistor = persistStore(store)
+
+// import reportWebVitals from './reportWebVitals';
+
 
 const container = document.getElementById('root');
 const root = createRoot(container);

@@ -5,7 +5,7 @@ export const fetchCategories = createAsyncThunk(
     'categories/fetchCategories',
     async (thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/categories/`);
+        const response = await axios.get(`${process.env.REACT_APP_URL}/categories/`);
         console.log(response.data);
         return response.data.categories;
       } catch (error) {
@@ -18,7 +18,7 @@ export const fetchCategories = createAsyncThunk(
 //     'productFound/fetchProductFound',
 //     async (productName, thunkAPI) => {
 //       try {
-//         const response = await axios.get(`http://localhost:3001/products?product_name=${productName}`);
+//         const response = await axios.get(`${process.env.REACT_APP_URL}/products?product_name=${productName}`);
 //         console.log("product found" + response);
 //         return response.data.data;
 //       } catch (error) {

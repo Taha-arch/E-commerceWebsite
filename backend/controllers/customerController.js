@@ -23,7 +23,7 @@ const authCustomer = async (req, res) => {
         //     res.status(401).json('Account is not active');
         // }
     } else {
-        res.status(401).json('Invalid email or password');
+        res.status(401).json({message: "Invalid email or password"});
     }
 }
 
