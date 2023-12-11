@@ -46,7 +46,7 @@ const addCustomer = async (req, res) => {
         newCustomer.save()
         .then((newCustomer) => {
 
-            const link = "http://localhost:3001/customers/validate"
+            const link = "http://localhost:3000/login"
 
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
@@ -148,9 +148,9 @@ const addCustomer = async (req, res) => {
     <div class="email-content">
 
       <p>Dear ${newCustomer.first_name},</p>
-      <p>Thank you for registering with Prestigious. We're excited to have you join our community! To ensure the security and authenticity of our members, please click the link below to verify your email address.</p>
+      <p>Thank you for registering with Prestigious. We're excited to have you join our community! To ensure the security and authenticity of our members.</p>
       <div style="text-align: center; margin-top: 20px;">
-        <a class="verify-button" href="${link}">Click here to verify</a>
+        <a class="verify-button" href="${link}">Click here to go back</a>
       </div>
       <p>If you have any issues or questions, don't hesitate to reach out to our support team.</p>
       <p class="footer">Warm regards,<br/><strong>Prestigious Team</strong></p>
