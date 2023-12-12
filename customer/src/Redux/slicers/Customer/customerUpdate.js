@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateCustomer } from './customerServices';
 
-// Define the initial state
+
 const initialState = {
     customerUpdate: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
 const updateCustomerSlice = createSlice({
   name: 'customerUpdate',
   initialState,

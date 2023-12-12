@@ -46,13 +46,24 @@ function Checkout() {
   }, [token, navigate]);
 
   const handlePaymentMethodChange = (method, checked) => {
-    setPaymentMethod({
-      ...paymentMethod,
-      [method]: checked,
-    });
-    
+    if (checked) {
+      setPaymentMethod({
+        cashOnDelivery: method === 'cashOnDelivery' ? true : false,
+        creditDebitCards: method === 'creditDebitCards' ? true : false,
+      });
+      setAddressInfo({
+        ...addressInfo,
+        payment_method:
+          method === 'cashOnDelivery' ? 'Cash on Delivery' : 'Credit/Debit Cards',
+      });
+    } else {
+      setPaymentMethod({
+        ...paymentMethod,
+        [method]: checked,
+      });
+    }
   };
-
+  
 
 
   const handlePlaceOrder = async () => {
@@ -64,6 +75,9 @@ function Checkout() {
         product_id: product._id,
         quantity: product.orderedQuantity.toString(),
         product_name: product.productName,
+        description: product.shortDescription,
+        price: product.price,
+        productImage: product.productImage[0],
       }));
 
       const orderData = {
@@ -82,7 +96,7 @@ function Checkout() {
           
           dispatch(
             addCheckout({
-              cartItems: cards,
+              cartItems: orderItems,
               customerId: customer.Id,
               navigate,
               search: location.search,
@@ -238,10 +252,7 @@ function Checkout() {
         </div>
 
       </div>
-            {/* <div className="flex flex-col justify-start gap-20  ml-14">
-
-                <PayButton cards={cards} customerId={customer._id}/>
-            </div> */}
+  
           <div className="flex flex-col justify-center  ml-14">
             <h2>Your Cart</h2>
             <CartItems />

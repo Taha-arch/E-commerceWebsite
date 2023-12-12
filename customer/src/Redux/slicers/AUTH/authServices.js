@@ -29,8 +29,8 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }) 
 
   export const purgePersistedState = createAsyncThunk('auth/purgePersistedState', async () => {
     try {
-      await persistor.purge(); // Purge the persisted state
-      return true; // Optionally, return a value indicating successful purge
+      await persistor.purge(); 
+      return true; 
     } catch (error) {
       console.error("Error purging persisted state:", error);
       throw error;

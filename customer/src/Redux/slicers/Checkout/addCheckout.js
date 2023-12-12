@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addCheckout } from './checkoutServices';
 
-// Define the initial state
+
 const initialState = {
     checkout: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
+
 const addCheckoutSlice = createSlice({
   name: 'checkout',
   initialState,
