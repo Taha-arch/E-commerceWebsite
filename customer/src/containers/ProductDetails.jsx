@@ -156,7 +156,7 @@ export default function ProductDetails() {
    const timer = setTimeout(() => {
      setLoading(false);
      
-   }, 3000);
+   }, 1500);
 
    return () => clearTimeout(timer);
  }, [location.pathname]);

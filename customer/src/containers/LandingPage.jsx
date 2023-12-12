@@ -3,34 +3,19 @@ import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
-import { useLocation } from 'react-router-dom'
-import PreLoader from "../components/PreLoader/PreLoader";
 import ScrollToTop from "react-scroll-to-top";
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  const [loading, setLoading] = useState(true);
-  const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     AOS.init({ duration: 2000 });
   }, []);
 
-  useEffect(() => {
-    setLoading(true)
-   const timer = setTimeout(() => {
-     setLoading(false);
-     
-   }, 3000);
-
-   return () => clearTimeout(timer);
- }, [location.pathname]);
 
   return (
     <>
-    {loading && <PreLoader/>}
-    {!loading && 
     <div className="bg-primary h-fit flex flex-col items-center">
       <div
         className="slide flex flex-row justify-between w-full  "
@@ -477,7 +462,6 @@ export default function LandingPage() {
                       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                           }}/>
     </div>
-      }
     </>
   );
 }
