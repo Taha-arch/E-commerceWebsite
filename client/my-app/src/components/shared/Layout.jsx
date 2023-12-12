@@ -7,7 +7,7 @@ export default function Layout() {
   
 
   const user  = useSelector((state) => state.auth.user);
-    
+
   
   useEffect(() => {
     console.log("PROFILE:", user);

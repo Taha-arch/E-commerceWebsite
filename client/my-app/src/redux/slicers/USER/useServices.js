@@ -5,7 +5,7 @@ import axios from "axios"
 
 export const fetchUsers = createAsyncThunk('user/fetchUsers', () => {
     return axios
-    .get('http://localhost:3001/users')
+    .get(`${process.env.REACT_APP_BASEURL}/users`)
     .then((response) => response.data.data)
 })
 
@@ -18,7 +18,7 @@ export const updateUserDetails = createAsyncThunk(
     async (updatedUser, thunkAPI) => {
       try {
           console.log(updatedUser.Id)
-        const response = await axios.put(`http://localhost:3001/users/${updatedUser.Id}`, updatedUser);
+        const response = await axios.put(`${process.env.REACT_APP_BASEURL}/users/${updatedUser.Id}`, updatedUser);
         return response.data.doc;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -31,7 +31,7 @@ export const fetchUserDetails = createAsyncThunk(
     'userDetail/fetchUserDetails',
     async (userId, thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/${userId}`);
+        const response = await axios.get(`${process.env.REACT_APP_BASEURL}/users/${userId}`);
         return response.data.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -43,7 +43,7 @@ export const fetchUserDetails = createAsyncThunk(
     'userDelete/deleteUser',
     async (userId, { dispatch }) => {
       try {
-        await axios.delete(`http://localhost:3001/users/${userId}`);
+        await axios.delete(`${process.env.REACT_APP_BASEURL}/users/${userId}`);
         dispatch(fetchUsers()); // Refresh the user list after deletion
       } catch (error) {
         console.error('Error deleting user data:', error);

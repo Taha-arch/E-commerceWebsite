@@ -80,7 +80,7 @@ export default function ProductEdit() {
 
   const fetchSubCategoryData = async () => {  
     try{
-      const response = await axios.get('http://localhost:3001/subcategories/');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/subcategories/`);
       return response.data.subcategories;
     }catch(error){
       console.log("Error fetching subcategory data: ", error); 
@@ -108,7 +108,7 @@ export default function ProductEdit() {
 
   const fetchCategoryData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/categories/');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/categories/`);
       return response.data.categories;
     } catch (error) {
       console.error('Error fetching category data:', error);
@@ -139,7 +139,7 @@ export default function ProductEdit() {
       };
   
       try {
-        const response = await axios.get(`http://localhost:3001/products/${id}`, config);
+        const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products/${id}`, config);
         const productData = response.data.data;
         setProductInfo(productData);
         setCategory(productData.categoryName || '');
@@ -165,7 +165,7 @@ export default function ProductEdit() {
   const handleSubmitEditProduct = async () => {
   
     try {
-        const response = await axios.patch(`http://localhost:3001/products/${id}`,  {
+        const response = await axios.patch(`${process.env.REACT_APP_BASEURL}/products/${id}`,  {
           product_name : productInfo.productName,
           product_image : productInfo.productImage,
           sku: productInfo.sku,

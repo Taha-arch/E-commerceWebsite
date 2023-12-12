@@ -22,7 +22,7 @@ export default function Orders() {
   const fetchOrderData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3001/orders');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/orders`);
       return response.data.orders;
     } catch (error) {
       console.error('Error fetching order data:', error);

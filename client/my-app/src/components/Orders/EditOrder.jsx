@@ -18,7 +18,7 @@ export default function EditOrder({ order }) {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/orders/${id}`, config)
+    axios.get(`${process.env.REACT_APP_BASEURL}/orders/${id}`, config)
       .then((response) => {
         setItems(response.data.order.order_items);
         setStatus(response.data.order.status);
@@ -51,7 +51,7 @@ export default function EditOrder({ order }) {
     };
 
     // Use the 'put' method to update the order data.
-    axios.put(`http://localhost:3001/orders/${id}`, updatedOrder, config)
+    axios.put(`${process.env.REACT_APP_BASEURL}/orders/${id}`, updatedOrder, config)
       .then(() => {
         notify(); 
       })

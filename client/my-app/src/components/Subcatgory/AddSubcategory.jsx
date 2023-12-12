@@ -23,7 +23,7 @@ const notify = () => swal(
 
     const SearchCategory = async (categoryName) => {
       try {
-        const response = await axios.get(`http://localhost:3001/categories/search?category_name=${categoryName}`);
+        const response = await axios.get(`${process.env.REACT_APP_BASEURL}/categories/search?category_name=${categoryName}`);
         return response.data.categories;
       } catch (error) {
         console.log("Error searching category:", error);
@@ -40,7 +40,7 @@ const notify = () => swal(
         };
     
     
-        await axios.post(`http://localhost:3001/subcategories/`, {
+        await axios.post(`${process.env.REACT_APP_BASEURL}/subcategories/`, {
           subcategory_name: subcategoryInfo.subcategoryName,
           category_id: categoryId,
         }, config);

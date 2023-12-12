@@ -28,7 +28,7 @@ export default function Products() {
   const fetchProductData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3001/products');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products`);
       console.log(response.data);
       return response.data.data;
     } catch (error) {

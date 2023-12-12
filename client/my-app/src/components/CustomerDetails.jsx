@@ -18,7 +18,7 @@ export default function CustomerDetails(props) {
             const config = {
                 headers: { Authorization: `Bearer ${token}`}
               }
-            axios.get(`http://localhost:3001/customers/${customer_id}`, config)
+            axios.get(`${process.env.REACT_APP_BASEURL}/customers/${customer_id}`, config)
             .then((response) =>{setCustomer(response.data)})
         } catch (error) {
           console.log(error);
