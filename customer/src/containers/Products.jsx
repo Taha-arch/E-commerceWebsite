@@ -106,7 +106,7 @@ function Products() {
           <ProductCard product={productItem} />
         </div>
       </div>
-      <hr className="color-black" />
+
     </div>
   ))}
 </div>
