@@ -19,7 +19,7 @@ const setPayment =  async (req, res) => {
                 images: [item.productImage], 
                 description: item.description, 
               },
-              unit_amount: Math.round(item.price * 100)/10,
+              unit_amount: Math.round((item.price * 100)/10),
             },
             quantity: item.quantity,
           };

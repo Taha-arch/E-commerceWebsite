@@ -98,7 +98,7 @@ const addOrder = async (req, res) => {
                                           <h1 style="font-size: 32px; font-weight: bold; text-align: center; color: #2F5951;">Thanks for your order!</h1>
                                           <p style="font-size: 16px; line-height: 24px; margin: 16px 0;"> Your Order :</p>
                                           <ul style="list-style-type: none; padding-left: 0;">
-                                                            ${order_items.map(item => `<li style="font-size: 16px; line-height: 24px; margin: 8px 0;"><strong>Product: </strong> ${item.product_name} <br><strong>Quantity: </strong> ${item.quantity}</li>`).join('')}
+                                                            ${order_items.map(item => `<li style="font-size: 16px; line-height: 24px; margin: 8px 0;"><strong>Product: </strong> ${item.product_name} <br><strong>Quantity: </strong> ${item.quantity} <br> <strong>Cart total price: </strong>${cart_total_price} DH</li>`).join('')}
                                                         </ul>
                                           <p style="font-size: 16px; line-height: 24px; margin: 16px 0;">
                                             We appreciate your business! If you have any questions, please email <a href="mailto:p27895102@gmail.com">p27895102@gmail.com</a>.
