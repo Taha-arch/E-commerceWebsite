@@ -24,7 +24,7 @@ function PreLoader() {
       <div className=' relative w-screen h-screen flex justify-center items-start top-44'>
         <div className='loader-container'>
           <Lottie options={defaultOptions} height={220} width={220} />
-          <svg width='600' height='150'>
+          <svg width='600 ' height='150'>
             <text x='20%' y='57%' textAnchor='middle' className='text-draw first' fontSize='60'>
               PREST
             </text>

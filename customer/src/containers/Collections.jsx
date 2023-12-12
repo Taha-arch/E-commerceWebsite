@@ -53,11 +53,7 @@ function Collections() {
           <h1 >{category.category_name}</h1>
           <div className='flex flex-col justify-start items-center gap-4 '>
             <div className='flex justify-center flex-wrap gap-2'>
-            {(productsFound && productsFound.length > 0 ?
-                productsFound
-                  .filter((productItem) => productItem.categoryName === category.category_name)
-                  .slice(0, maxProductsPerCategory)
-                :
+            {( product &&
                 product
                   .filter((productItem) => productItem.categoryName === category.category_name)
                   .slice(0, maxProductsPerCategory)

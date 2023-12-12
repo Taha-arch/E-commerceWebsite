@@ -7,10 +7,12 @@ import { useLocation } from 'react-router-dom'
 import PreLoader from "../components/PreLoader/PreLoader";
 import ScrollToTop from "react-scroll-to-top";
 import { Link, NavLink } from 'react-router-dom';
+import {useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     AOS.init({ duration: 2000 });
   }, []);
@@ -136,7 +138,9 @@ export default function LandingPage() {
       <div className="section2 flex flex-row  gap-3 md:gap-5  w-4/5 h-fit py-20">
         <div className="w-1/3 md:w-2/5 gap-3 md:gap-5  flex flex-col md:flex-row">
           <div
-            className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center cursor-pointer"
+            className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center cursor-pointer" 
+            onClick={()=>navigate("/collections")}
+            
             data-aos="fade-right"
           >
             <div className="h-full pb-4 md:h-2/4 w-full flex flex-col items-center bg-coffe">
@@ -148,6 +152,7 @@ export default function LandingPage() {
             <div
               className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-down"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl">HATS</span>
               <img className="w-full h-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/hat.png" alt="" />
@@ -155,6 +160,7 @@ export default function LandingPage() {
             <div
               className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-up"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl mt-1">
                 JEWELRY
@@ -163,8 +169,8 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-2/3 md:w-1/3  justify-center">
-        <div className="women h-fit md:h-full flex flex-col justify-center cursor-pointer" data-aos="fade">
+        <div className="flex flex-col w-2/3 md:w-1/3  justify-center" onClick={()=>navigate("/collections")}>
+        <div className="women h-fit md:h-full flex flex-col justify-center cursor-pointer" data-aos="fade" >
           <div className="h-full w-full flex flex-col items-center bg-coffe">
             <span className="font-bold text-xs md:text-2xl mt-2">WOMEN</span>
             <img className="w-full h-full hover:animate-rotate-y" src="/women.png" alt="" />
@@ -177,6 +183,7 @@ export default function LandingPage() {
             <div
               className="h-fit md:h-2/5 w-full flex flex-col items-center md:overflow-hidden bg-coffe cursor-pointer"
               data-aos="fade-down"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl mt-2">MEN</span>
               <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/men.png" alt="" />
@@ -184,6 +191,7 @@ export default function LandingPage() {
             <div
               className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-up"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-xs md:text-2xl mt-1">
                 ACCESSORIES
@@ -194,6 +202,7 @@ export default function LandingPage() {
           <div
             className="w-full md:w-1/2 flex flex-col justify-center cursor-pointer"
             data-aos="fade-left"
+            onClick={()=>navigate("/collections")}
           >
             <div className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-2xl mt-1">SHOES</span>
@@ -319,8 +328,8 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="flex flex-row h-fit">
-        <h1 className="font-bold text-md md:text-4xl text-black">FOR YOU MISTER</h1>
+      <div className="flex flex-row w-full px-20 text-start h-fit">
+        <p className="font-bold text-md md:text-4xl text-black">FOR YOU MISTER</p>
       </div>
 
       <div className="section4 px-32 ">
