@@ -192,6 +192,7 @@ const getCustomerOrders = async (req, res) => {
  try {
     let idCustomer = req.params.id;
     const orders = await Order.find({customer_id: idCustomer})
+      .sort({order_date:-1})
       .populate({ path: 'customer_id', select: 'first_name last_name' })
       .populate({ path: 'order_items.product_id', model: 'Product', select: 'product_image' })
       .exec();
