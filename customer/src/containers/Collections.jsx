@@ -14,16 +14,10 @@ function Collections() {
   const dispatch = useDispatch();
   const location = useLocation()
   const product = useSelector((state) => state.product.product);
-  const productsFound = useSelector((state) => state.productsFound.productFound);
-  const SearchQuery = useSelector((state) => state.searchQuery.SearchQuery);
   const categories = useSelector((state) => state.categories.categories); 
 
   const navigate = useNavigate(); 
 
-
-  useEffect(() => {
-      dispatch(fetchProductFound(SearchQuery));
-}, [dispatch, SearchQuery]);
 
   const maxProductsPerCategory = 8;
 
@@ -53,12 +47,7 @@ function Collections() {
           <h1 >{category.category_name}</h1>
           <div className='flex flex-col justify-start items-center gap-4 '>
             <div className='flex justify-center flex-wrap gap-2'>
-            {(productsFound && productsFound.length > 0 ?
-                productsFound
-                  .filter((productItem) => productItem.categoryName === category.category_name)
-                  .slice(0, maxProductsPerCategory)
-                :
-                product
+            {(     product
                   .filter((productItem) => productItem.categoryName === category.category_name)
                   .slice(0, maxProductsPerCategory)
                   .map((productItem, index) => (
