@@ -42,7 +42,7 @@ export default function Profile(props) {
 
   const notify = () => {
     toast.success("Profile Updated Successfully!", {
-      position: "bottom-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

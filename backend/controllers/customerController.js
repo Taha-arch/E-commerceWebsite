@@ -26,6 +26,9 @@ const authCustomer = async (req, res) => {
 
 
 const addCustomer = async (req, res) => {
+  try {
+    
+ 
     let {first_name, last_name, email, password, confirm_password} = req.body;
     if (password === confirm_password){
 
@@ -168,9 +171,11 @@ const addCustomer = async (req, res) => {
             
         })
     }else{
-        res.status(400).json({ message: "Error passwords are not matching"});
-        
+        res.status(400).json({ message: "Error passwords are not matching"});  
     }
+  } catch (error) {
+    res.status(500).json('error', error)
+  }
 }
 
 

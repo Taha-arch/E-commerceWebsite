@@ -9,30 +9,33 @@ const authSlice = createSlice({
     customer: null,
     token: null,
     status: 'idle',
-    error: false,
+    error: null,
     isAuthenticated: false,
   },
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
         state.customer = action.payload.customer;
         state.status = 'succeeded';
         state.token = action.payload.access_token;
-        state.error = false;
+        state.error = null;
         state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.customer = null;
+        state.error = action.payload.error;
         state.status = 'failed';
-        state.error = false;
-        state.error = action.payload;
         state.isAuthenticated = false;
       })
       .addCase(logout.fulfilled, (state) => {
         state.customer = null;
         state.token = null;
-        state.error = false;
+        state.error = null;
         state.isAuthenticated = false;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
@@ -40,5 +43,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { clearError } = authSlice.actions;
 
 export default authSlice.reducer;

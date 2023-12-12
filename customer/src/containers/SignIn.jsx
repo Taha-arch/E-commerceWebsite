@@ -2,27 +2,26 @@ import "../styles/main.css";
 import React, { useEffect, useState } from "react";
 import { Redirect, Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/images/sans.png";
-import { useDispatch , useSelector} from "react-redux";
-import { login } from '../Redux/slicers/AUTH/authServices'
-import * as yup from 'yup';
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../Redux/slicers/AUTH/authServices";
+import * as yup from "yup";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
-  email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup.string().required('Password is required'),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup.string().required("Password is required"),
 });
-
 
 function SignInForm() {
   const [errors, setErrors] = useState({});
   const [isSignIn, setIsSignIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const error = useSelector((state) => state.auth.error)
-
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const { search } = useLocation();
 
   const handleSignIn = async () => {
@@ -31,9 +30,9 @@ function SignInForm() {
       await dispatch(login({ email, password }));
       setIsSignIn(true);
     } catch (error) {
-      if (error.name === 'ValidationError') {
+      if (error.name === "ValidationError") {
         const validationErrors = {};
-        error.inner.forEach(err => {
+        error.inner.forEach((err) => {
           validationErrors[err.path] = err.message;
         });
         setErrors(validationErrors);
@@ -42,16 +41,12 @@ function SignInForm() {
       }
     }
   };
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
 
-  if(isSignIn && error === false){
-      navigate(redirect)
-  }else if(error){
-    alert(error)
+  if (isSignIn && error === null) {
+    navigate(redirect);
   }
-  console.log(error)
- 
 
   return (
     <div className="flex ">
@@ -100,8 +95,10 @@ function SignInForm() {
               </div>
             </div>
             <div className="text-sm ">
-            {errors.email && <p className="text-red-500">{errors.email}</p>}
-            {errors.password && <p className="text-red-500">{errors.password}</p>}
+              {errors.email && <p className="text-red-500">{errors.email}</p>}
+              {errors.password && (
+                <p className="text-red-500">{errors.password}</p>
+              )}
             </div>
             <div>
               <button
@@ -156,6 +153,18 @@ function SignInForm() {
           />
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
