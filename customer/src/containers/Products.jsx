@@ -94,7 +94,6 @@ function Products() {
                     <ProductCard product={product} />
                   </div>
                 ))}
-              <hr className="color-black" />
                 </div>
             </div>
           ))

@@ -471,7 +471,7 @@ return (
                     multiple
                     onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files })}
                     required/>
-                 
+                    
                 </label>
                 <span></span>
             </div>

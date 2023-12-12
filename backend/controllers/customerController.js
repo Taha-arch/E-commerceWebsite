@@ -19,9 +19,6 @@ const authCustomer = async (req, res) => {
         let token = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '3d' });
         let refreshToken = jwt.sign({ _id: customerFound._id }, SECRET_KEY,{ expiresIn: '12d' });
         res.status(200).json({ "access_token": token , "refreshtoken" : refreshToken,"status" : 200, "customer": customerFound});
-        // if (!customerFound.active) {
-        //     res.status(401).json('Account is not active');
-        // }
     } else {
         res.status(401).json({message: "Invalid email or password"});
     }
