@@ -35,7 +35,7 @@ const fetchUserData = async (page) => {
       headers: { Authorization: `Bearer ${token}`}
     }
     setLoading(true);
-    const response = await axios.get(`http://localhost:3001/customers`, config);
+    const response = await axios.get(`${process.env.REACT_APP_BASEURL}/customers`, config);
     
     return response.data;
   } catch (error) {

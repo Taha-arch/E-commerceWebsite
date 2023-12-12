@@ -12,7 +12,7 @@ import "../styles/main.css";
 function Footer() {
   return (
     <footer>
-      <div className="footer w-full h-96 bg-black flex flex-col md:flex-row justify-evenly   text-white ">
+      <div className="footer w-full h-96 bg-black hidden md:flex flex-col md:flex-row justify-evenly   text-white ">
 
 
         <div className="flex flex-col justify-center  gap-2 ">

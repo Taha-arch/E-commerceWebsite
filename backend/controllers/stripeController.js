@@ -2,7 +2,8 @@ const express = require('express');
 const Stripe = require("stripe");
 const router = express.Router();
 require("dotenv").config();
-const stripe = require('stripe')(process.env.STRIPE_KEY)
+
+const stripe = require('stripe')('sk_test_51OLNEAJqU7h6Zk5YyYYAkYny8vxWpYm42chpA1QeQJsF2CtLI2J0ANUhw5ShNGTr2nqS3MCdAFMwTRJYsbC3Z1s500NptSX6ar')
 
 const setPayment =  async (req, res) => {
     let totalAmount = 0;
@@ -18,7 +19,7 @@ const setPayment =  async (req, res) => {
                 images: [item.productImage], 
                 description: item.description, 
               },
-              unit_amount: Math.round(item.price * 100),
+              unit_amount: Math.round(item.price * 100)/10,
             },
             quantity: item.quantity,
           };
@@ -30,8 +31,8 @@ const setPayment =  async (req, res) => {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `${process.env.CLIENT_URL}/orders`,
-        cancel_url: `${process.env.CLIENT_URL}/checkout`,
+        success_url: `http://localhost:3000/orders`,
+        cancel_url: `http://localhost:3000/checkout`,
     });
     res.send({ url: session.url });
 }

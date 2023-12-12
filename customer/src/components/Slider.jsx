@@ -33,16 +33,16 @@ function Slider() {
       data-aos="fade-down"
     >
       <div
-          className="flex flex-col justify-center px-24 w-fit     h-full p-10 text-black "
+          className="flex flex-col justify-start  md:justify-center md:px-24 w-fit     h-full p-5 md:p-10 text-black "
           data-aos="fade-right"
         >
           <div>
-            <h1 className="quote text-6xl w-80   text-black font-Dubiel">
+            <h1 className="quote w-2/3 md:w-full text-md md:text-6xl text-black font-Dubiel">
               Fashion is not dresses only.
             </h1>
           </div>
           <div className="mt-5  w-80 ">
-            <p className="text-lg font-Karla  text-black">
+            <p className="w-1/2 md:w-full text-lg font-Karla  text-black">
               Shop for Accessories For <span className="font-bold">Men</span> and{" "}
               <span className="font-bold">Women</span> online at best prices in
               Morocco.Choose from a wide range of{" "}
@@ -60,7 +60,7 @@ function Slider() {
               
             </div>
         </div>
-      <div className="w-2/3 flex flex-col justify-center py-10 ">
+      <div className="hidden  w-2/3 md:flex flex-col justify-center py-10 ">
         
         </div>
         
@@ -76,11 +76,11 @@ function Slider() {
       }}
       
     >
-      <div className="w-2/3 flex flex-col justify-center py-10 ">
+      <div className="hidden w-2/3 md:flex flex-col justify-center py-10 ">
         
         </div>
         <div
-            className="flex flex-col px-24 w-fit justify-center  h-full p-10"
+            className="flex flex-col pl-10 md:pl-0 md:px-24 w-fit justify-center  h-full p-10"
             data-aos="fade-right"
           >
             <div>

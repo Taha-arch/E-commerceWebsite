@@ -20,11 +20,9 @@ function RecentOrders() {
 
 const fetchOrderData = async () => {
   try {
-    const response = await axios.get('http://localhost:3001/orders' , { 
-      params: {
-      _limit: 10
-     }
-    });
+    const response = await axios.get(`${process.env.REACT_APP_BASEURL}/orders`);
+    console.log(process.env.REACT_APP_BASEURL)
+    console.log('hello')
     return response.data.orders;
   } catch (error) {
     console.error('Error fetching order data:', error);

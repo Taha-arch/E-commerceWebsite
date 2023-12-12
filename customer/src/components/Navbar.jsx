@@ -165,9 +165,9 @@ function NavbarDefault() {
                 
                   
 
-                <NavLink to="/about us" className="nav-link  " variant="text">
+                <Link to="/" className="nav-link  " variant="text">
                   ABOUT US
-                </NavLink>
+                </Link>
               </div>
   );
   const navright = (

@@ -53,7 +53,7 @@ function Products() {
     <>
     {loading && <PreLoader/>}
     <div className={loading? 'hidden': ''} data-aos={loading ? 'fade-out' : 'fade-in'}>
-    <div className="flex flex-col px-20 ">
+    <div className="flex flex-col  px-20 ">
       <h1 className="font-medium py-2">{subcategory}</h1>
 
       <div className="flex justify-between">
@@ -86,7 +86,7 @@ function Products() {
           productsBySubCategory &&
           productsBySubCategory.map((productItem, rowIndex) => (
             <div className="flex flex-wrap justify-center " >
-              <div className="flex flex-row flex-wrap  justify-center " key={rowIndex}>
+              <div className="flex flex-row flex-wrap justify-center " key={rowIndex}>
 
               {Array.isArray(productItem) && 
                 productItem.map((product) => (
@@ -113,13 +113,16 @@ function Products() {
         )}
       </div>
 
-      <div className="relative left-74 w-56 h-16 cursor-pointer green-bg text-white flex items-center justify-center rounded-sm text-xl my-4 gap-2 hover:bg-black"
+    <div className="flex flex-row justify-center">
+    <div className="relative left-74 w-56 h-16 cursor-pointer green-bg text-white flex flex-row items-center justify-center rounded-sm text-xl my-4 gap-2 hover:bg-black"
         onClick={() => {
           navigate(`/collections`);
         }}
       >
         COLLECTIONS <FaArrowRight />
       </div>
+    </div>
+      
 
       <ScrollToTop
         smooth
@@ -128,7 +131,7 @@ function Products() {
           bottom: "20px",
           right: "40px",
           cursor: "pointer",
-          background: "#2F5951",
+          background: '#F8F8F8',
           borderRadius: "10%",
           padding: "10px",
           display: "flex",

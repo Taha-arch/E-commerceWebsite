@@ -8,6 +8,7 @@
     display: flex;
     align-items: baseline;
     justify-content: center;
+
   }
   .first{
     stroke: black;
@@ -23,7 +24,7 @@
     stroke-width: 2;
     stroke-dasharray: 400;
     stroke-dashoffset: 400;
-    animation: draw 3s linear forwards;
+    animation: draw 2s linear forwards;
   }
   
   @keyframes draw {
@@ -31,5 +32,23 @@
       stroke-dashoffset: 0;
     }
   }
+  @media screen and (max-width: 768px) {
+  .loader-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    width: 340px;
+    height: 100px;
+  }
+  .text-draw {
+    font-size: 2rem;
+    fill: none;
+    /* stroke: white; */
+    
+    stroke-width: 2;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw 3s linear forwards;
+  }
   
-  
+}

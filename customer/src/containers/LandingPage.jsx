@@ -3,31 +3,19 @@ import "../styles/landing.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "../components/Slider";
-import { useLocation } from 'react-router-dom'
-import PreLoader from "../components/PreLoader/PreLoader";
 import ScrollToTop from "react-scroll-to-top";
+import { Link } from 'react-router-dom';
+import {useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  const [loading, setLoading] = useState(true);
-  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     AOS.init({ duration: 2000 });
   }, []);
 
-  useEffect(() => {
-    setLoading(true)
-   const timer = setTimeout(() => {
-     setLoading(false);
-     
-   }, 3000);
-
-   return () => clearTimeout(timer);
- }, [location.pathname]);
 
   return (
     <>
-    {loading && <PreLoader/>}
-    {!loading && 
     <div className="bg-primary h-fit flex flex-col items-center">
       <div
         className="slide flex flex-row justify-between w-full  "
@@ -62,9 +50,11 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-row justify-center mt-10">
-            <button className="bg-truegreen hover:bg-truegreentint text-white w-3/5 h-10">
+          <Link to="/collections" className="w-3/5">
+            <button className="bg-truegreen hover:bg-truegreentint text-white w-full h-10">
               Shop Now
             </button>
+            </Link>
           </div>
         </div>
         <div className="w-1/4 mt-20" data-aos="fade-left">
@@ -90,11 +80,11 @@ export default function LandingPage() {
           </div>
 
           <div className="w-1/2">
-            <h1 className="font-bold text-start text-4xl ml-5">
+            <p className="font-bold text-start text-md md:text-4xl ml-5">
               FIND YOUR{" "}
               <span className="text-truegreen line-through ">STYLE</span> <br />
               REFRESH YOUR LOOK
-            </h1>
+            </p>
           </div>
         </div>
 
@@ -103,7 +93,7 @@ export default function LandingPage() {
           data-aos="fade-down"
         >
           <div className="w-1/2">
-            <p className="font-bold text-justify text-4xl  mr-5">
+            <p className="font-bold text-justify text-md md:text-4xl  mr-5">
               Discover Your Style, Elevate Your Look with{" "}
               <p className="inline">PREST</p>
               <p className="secondary-bg inline">IGIOUS</p>.
@@ -118,80 +108,90 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="flex flex-row justify-center mt-10">
-          <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-20">
+          <button className="bg-truegreen hover:bg-truegreentint text-white w-2/5 h-10 md:h-20">
             Shop Now
           </button>
         </div>
       </div>
 
       <div className="flex flex-row justify-center  h-fit">
-        <h1 className="font-bold text-4xl text-truegreen">
+        <p className="font-bold text-md md:text-4xl text-truegreen">
           STYLE AND FASHION CATEGORY
-        </h1>
+        </p>
       </div>
 
-      <div className="section2 flex flex-row  gap-5 w-4/5 h-fit py-20">
-        <div className="w-1/3 md:w-2/5 gap-5 flex flex-col md:flex-row">
+      <div className="section2 flex flex-row  gap-3 md:gap-5  w-4/5 h-fit py-20">
+        <div className="w-1/3 md:w-2/5 gap-3 md:gap-5  flex flex-col md:flex-row">
           <div
-            className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center"
+            className="h-1/2 md:h-auto w-full md:w-1/2 flex flex-col justify-center cursor-pointer" 
+            onClick={()=>navigate("/collections")}
+            
             data-aos="fade-right"
           >
             <div className="h-full pb-4 md:h-2/4 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-3xl mt-2">BAGS</span>
-              <img className="w-full h-full" src="/sac.png" alt="" />
+              <img className="w-full h-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/sac.png" alt="" />
             </div>
           </div>
-          <div className="w-full md:w-1/2  gap-5 flex flex-col justify-center">
+          <div className="w-full md:w-1/2  gap-3 md:gap-5  flex flex-col justify-center ">
             <div
-              className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe"
+              className="h-full md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-down"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl">HATS</span>
-              <img className="w-full h-full" src="/hat.png" alt="" />
+              <img className="w-full h-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/hat.png" alt="" />
             </div>
             <div
-              className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe"
+              className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-up"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl mt-1">
                 JEWELRY
               </span>
-              <img className="w-full" src="/ring.png" alt="" />
+              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/ring.png" alt="" />
             </div>
           </div>
         </div>
-        <div className="women flex flex-col justify-center" data-aos="fade">
+        <div className="flex flex-col w-2/3 md:w-1/3  justify-center" onClick={()=>navigate("/collections")}>
+        <div className="women h-fit md:h-full flex flex-col justify-center cursor-pointer" data-aos="fade" >
           <div className="h-full w-full flex flex-col items-center bg-coffe">
-            <span className="font-bold text-lg md:text-2xl mt-2">WOMEN</span>
-            <img className="w-full h-full bottom-0" src="/women.png" alt="" />
+            <span className="font-bold text-xs md:text-2xl mt-2">WOMEN</span>
+            <img className="w-full h-full hover:animate-rotate-y" src="/women.png" alt="" />
           </div>
         </div>
-        <div className="w-1/3 md:w-2/5 gap-5 flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2  gap-5 flex flex-col justify-center">
+        </div>
+        
+        <div className="w-1/3 md:w-2/5 gap-3 md:gap-5  flex flex-col md:flex-row">
+          <div className="w-full md:w-1/2  gap-3 md:gap-5  flex flex-col justify-center">
             <div
-              className="h-fit md:h-2/5 w-full flex flex-col items-center md:overflow-hidden bg-coffe"
+              className="h-fit md:h-2/5 w-full flex flex-col items-center md:overflow-hidden bg-coffe cursor-pointer"
               data-aos="fade-down"
+              onClick={()=>navigate("/collections")}
             >
               <span className="font-bold text-lg md:text-2xl mt-2">MEN</span>
-              <img className="w-full " src="/men.png" alt="" />
+              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/men.png" alt="" />
             </div>
             <div
-              className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe"
+              className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe cursor-pointer"
               data-aos="fade-up"
+              onClick={()=>navigate("/collections")}
             >
-              <span className="font-bold text-lg md:text-2xl mt-1">
+              <span className="font-bold text-xs md:text-2xl mt-1">
                 ACCESSORIES
               </span>
-              <img className="w-full" src="/sunglasses.png" alt="" />
+              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110" src="/sunglasses.png" alt="" />
             </div>
           </div>
           <div
-            className="w-full md:w-1/2 flex flex-col justify-center"
+            className="w-full md:w-1/2 flex flex-col justify-center cursor-pointer"
             data-aos="fade-left"
+            onClick={()=>navigate("/collections")}
           >
             <div className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-2xl mt-1">SHOES</span>
-              <img className="w-full px-3 mt-2" src="/shoes.png" alt="" />
+              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110 px-3 mt-2" src="/shoes.png" alt="" />
             </div>
           </div>
         </div>
@@ -199,16 +199,16 @@ export default function LandingPage() {
       <div className="flex flex-col w-full" data-aos="fade">
         <div>
           <div className="font-Dubiel w-full text-center h-1/5 ">
-            <h1 className="text-4xl">Popular Products</h1>
+            <h1 className="text-md md:text-4xl">Popular Products</h1>
           </div>
         </div>
         <div className="flex flex-col items-center md:flex-row gap-5 md:gap-10 justify-center px-16 md:px-24 w-full md:h-56 my-10 ">
-          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+          <div className="flex flex-row justify-center w-full px-1/5 md:px-0 md:h-full gap-4 md:gap-10">
             <div className="flex flex-col  w-1/2 md:w-full  gap-3">
               <div className="popularimage1 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl font-Playfair">
                 <h2>NECKLACES</h2>
               </div>
             </div>
@@ -216,17 +216,17 @@ export default function LandingPage() {
               <div className="popularimage2 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl">
                 <h2>RINGS</h2>
               </div>
             </div>
           </div>
-          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+          <div className="flex flex-row justify-center w-full px-1/5 md:px-0 md:h-full gap-4 md:gap-10">
             <div className="flex flex-col  w-1/2 md:w-full  gap-3">
               <div className="popularimage3 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl">
                 <h2>BRACELETS</h2>
               </div>
             </div>
@@ -234,17 +234,17 @@ export default function LandingPage() {
               <div className="popularimage4 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl  ">
                 <h2>EARNINGS</h2>
               </div>
             </div>
           </div>
-          <div className="flex flex-row justify-center w-full px-32 md:px-0 md:h-full gap-10">
+          <div className="flex flex-row justify-center w-full px-1/5 md:px-0 md:h-full gap-4 md:gap-10">
             <div className="flex flex-col  w-1/2 md:w-full  gap-3">
               <div className="popularimage5 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl ">
                 <h2>DANGLES</h2>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function LandingPage() {
               <div className="popularimage6 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-xl font-Jost">
+              <div className="text-center text-sm md:text-xl  ">
                 <h2>GIFT IDEAS</h2>
               </div>
             </div>
@@ -260,17 +260,17 @@ export default function LandingPage() {
         </div>
       </div>
       <div className="flex flex-row justify-center mb-20 h-fit">
-        <h1 className="font-bold text-4xl text-truegreen">BEST SELLERS</h1>
+        <p className="font-bold text-md md:text-4xl text-truegreen">BEST SELLERS</p>
       </div>
 
       <div className="flex flex-row w-full px-20 text-start h-fit">
-        <h1 className="font-bold text-4xl text-black">FOR YOU LADY</h1>
+        <p className="font-bold text-md md:text-4xl text-black">FOR YOU LADY</p>
       </div>
 
       <div className="section3 px-32 ">
         <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
           <div
-            className=" h-full w-1/3 flex flex-col items-center gap-5"
+            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
             data-aos="fade-up"
           >
             <div className="image1 w-full h-96 "></div>
@@ -282,7 +282,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div
-            className="w-1/3 h-full flex flex-col items-center gap-5 mt-40"
+            className="w-1/3 md:w-full h-full flex flex-col items-center gap-5 mt-40"
             data-aos="fade-down"
           >
             <div className="image2 w-full h-96 "></div>
@@ -297,7 +297,7 @@ export default function LandingPage() {
           </div>
 
           <div
-            className="w-1/3 h-full flex flex-col items-center gap-5"
+            className="w-1/3 md:w-full h-full flex flex-col items-center gap-5"
             data-aos="fade-up"
           >
             <div className="image3 w-full h-96 "></div>
@@ -313,17 +313,17 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="flex flex-row h-fit">
-        <h1 className="font-bold text-4xl text-black">FOR YOU MISTER</h1>
+      <div className="flex flex-row w-full px-20 text-start h-fit">
+        <p className="font-bold text-md md:text-4xl text-black">FOR YOU MISTER</p>
       </div>
 
       <div className="section4 px-32 ">
-        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
-          <div
-            className="md:w-1/3 h-full flex flex-col items-center gap-5"
+        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mt-10">
+        <div
+            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
             data-aos="fade-down"
           >
-            <div className="image4 w-96 h-96 "></div>
+            <div className="image4 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
               <button className="font-bold text-xl underline text-truegreen">
@@ -333,14 +333,12 @@ export default function LandingPage() {
           </div>
 
           <div
-            className="md:w-1/3 h-full flex flex-col items-center gap-5 mb-40"
+            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5 mb-40"
             data-aos="fade-up"
           >
-            <div className="image5 w-96 h-96 "></div>
+            <div className="image5 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
-              <h1 className="font-bold text-2xl w-full text-black">
-                Moonlight Serenity
-              </h1>
+              <h1 className="font-bold text-2xl text-black">Moonlight Serenity</h1>
               <button className="font-bold text-xl underline text-truegreen">
                 SHOP NOW
               </button>
@@ -348,14 +346,12 @@ export default function LandingPage() {
           </div>
 
           <div
-            className="w-1/3 h-full flex flex-col items-center gap-5"
+            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
             data-aos="fade-down"
           >
-            <div className="image6 w-96 h-96 "></div>
+            <div className="image6 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
-              <h1 className="font-bold text-2xl text-black">
-                Rose Gold Elegance
-              </h1>
+              <h1 className="font-bold text-2xl text-black">Rose Gold Elegance</h1>
               <button className="font-bold text-xl underline text-truegreen">
                 SHOP NOW
               </button>
@@ -365,7 +361,7 @@ export default function LandingPage() {
       </div>
 
       <div className="flex flex-row justify-center h-fit">
-        <h1 className="font-bold text-4xl text-black">
+        <h1 className="font-bold text-md md:text-4xl text-black">
           SPECIAL OFFER ONLY FOR YOU COUPLES
         </h1>
       </div>
@@ -466,7 +462,6 @@ export default function LandingPage() {
                       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                           }}/>
     </div>
-      }
     </>
   );
 }

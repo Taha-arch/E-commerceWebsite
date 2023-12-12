@@ -43,7 +43,7 @@ function CollectionPerCategory() {
   }, [categoryURL, productFound]);
 
   return (
-    <div className=' flex-col items-center gap-3 m-8'>
+    <div className=' flex flex-col items-center gap-3 my-8 px-20'>
       <h1 className='font-medium'>COLLECTIONS </h1>
       {(!productsFound || productsFound.length === 0) ? (
         <>
@@ -53,7 +53,7 @@ function CollectionPerCategory() {
                 <h1 className='font-fairly'>{category.category_name}</h1>
                 <div className='flex flex-col justify-center gap-4 '>
                   <h1 className='font-fairly text-xl'>{products && products.length} ITEMS FOUND</h1>
-                  <div className='flex  flex-wrap'>
+                  <div className='flex  flex-wrap justify-center'>
                     {products.filter((productItem) => productItem.categoryName === category.category_name)
                       .map((productItem) => (
                         <div key={productItem._id}>
@@ -80,9 +80,9 @@ function CollectionPerCategory() {
               <div key={category._id}>
                 <h1 className='font-fairly'>{category.category_name}</h1>
                 <div className='flex flex-col  gap-4 '>
-                  <h1 className='font-fairly text-xl'>{productsFound && productsFound.length} ok ITEMS FOUND</h1>
+                  <h1 className='font-fairly text-xl'>{productsFound && productsFound.length} ITEMS FOUND</h1>
                   {SearchQuery && productFound && productFound.length > 0 ? (
-                    <div className='flex  flex-wrap'>
+                    <div className='flex  flex-wrap justify-center'>
                       {productsFound
                         .map((productItem) => (
                           <div key={productItem._id}>
