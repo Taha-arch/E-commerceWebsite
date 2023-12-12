@@ -10,6 +10,7 @@ const authSlice = createSlice({
     token: null,
     status: 'idle',
     error: false,
+    isAuthenticated: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -19,17 +20,20 @@ const authSlice = createSlice({
         state.status = 'succeeded';
         state.token = action.payload.access_token;
         state.error = false;
+        state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.customer = null;
         state.status = 'failed';
         state.error = false;
         state.error = action.payload;
+        state.isAuthenticated = false;
       })
       .addCase(logout.fulfilled, (state) => {
         state.customer = null;
         state.token = null;
         state.error = false;
+        state.isAuthenticated = false;
       })
       .addCase(updateCustomer.fulfilled, (state, action) => {
         state.customer = action.payload;

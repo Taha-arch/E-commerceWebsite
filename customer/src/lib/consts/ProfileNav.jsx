@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
+import { useSelector } from 'react-redux'
 
 
 export const PROFILE_SIDEBAR_LINKS = [
@@ -7,13 +8,15 @@ export const PROFILE_SIDEBAR_LINKS = [
     {
         key: 'profile',
         label: 'My Profile',
-        path: '/profile/:id' 
+        path: '/profile/:id',
+        protected: true
 
     },
     {
         key: 'orders',
         label: 'My Orders',
-        path: '/orders'
+        path: '/orders',
+        protected: true
     },
     {
         key: 'cart',
@@ -29,6 +32,7 @@ export const PROFILE_SIDEBAR_LINKS = [
 
 
 export function SidebarReducedLink({ item }) {
+  const { isAuthenticated } = useSelector((state) => state.auth)
     const { pathname } = useLocation();
   
     const linkClasses = classNames(
@@ -38,6 +42,14 @@ export function SidebarReducedLink({ item }) {
         'green-bg text-white': pathname === item.path // Active link
       }
     );
+
+    if (item.protected && !isAuthenticated) {
+      return (
+        <Link to="/login" className={linkClasses}>
+          {item.label}
+        </Link>
+      );
+    }
   
     return (
       <Link to={item.path} className={linkClasses}>
