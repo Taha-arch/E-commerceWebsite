@@ -5,7 +5,7 @@ export const fetchProduct = createAsyncThunk(
     'product/fetchProduct',
     async (thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/products/`);
+        const response = await axios.get(`${process.env.REACT_APP_URL}/products/`);
         return response.data.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -17,7 +17,7 @@ export const fetchProduct = createAsyncThunk(
     'productFound/fetchProductFound',
     async (productName, thunkAPI) => {
       try {
-          const response = await axios.get(`http://localhost:3001/products?product_name=${productName}`);
+          const response = await axios.get(`${process.env.REACT_APP_URL}/products?product_name=${productName}`);
           return response.data.data;
         
       } catch (error) {
@@ -29,7 +29,7 @@ export const fetchProductDetails = createAsyncThunk(
     'productDetails/fetchProductDetails',
     async (productId, thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/products/${productId}`);
+        const response = await axios.get(`${process.env.REACT_APP_URL}/products/${productId}`);
         return response.data.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -41,7 +41,7 @@ export const fetchProductDetails = createAsyncThunk(
     'sortProduct/sortProduct',
     async (thunkAPI) => {
       try {
-        const response = await axios.get(`http://localhost:3001/product`);
+        const response = await axios.get(`${process.env.REACT_APP_URL}/product`);
         return response.data.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);

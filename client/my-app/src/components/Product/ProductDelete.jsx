@@ -21,7 +21,7 @@ const handleDeleteProduct = async () => {
     if (selectedProduct) {
       try {
         const product_id = selectedProduct._id;
-        await axios.delete(`http://localhost:3001/products/${product_id}`);
+        await axios.delete(`${process.env.REACT_APP_BASEURL}/products/${product_id}`);
         
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product._id !== product_id)

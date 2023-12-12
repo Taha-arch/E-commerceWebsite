@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProduct } from './productServices'
-// Define the initial state
+
 const initialState = {
     product: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
+
 const productSlice = createSlice({
   name: 'product',
   initialState,

@@ -9,7 +9,6 @@ import { addCard, removeCard } from "../Redux/slicers/CardSlice";
 const FavoriteItems = () => {
   const favoriteProducts = useSelector((state) => state.Favorite.favorites);
   const CardProducts = useSelector((state) => state.Card.cards);
-  console.log(favoriteProducts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

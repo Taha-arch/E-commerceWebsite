@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCustomerById } from './customerServices';
 
-// Define the initial state
+
 const initialState = {
     customerById: null,
     loading: false,
     error: null,
 };
 
-// Create the userDetailSlice
+
 const getCustomerSlice = createSlice({
   name: 'customerById',
   initialState,

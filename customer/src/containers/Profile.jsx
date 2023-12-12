@@ -3,11 +3,11 @@ import { MdEmail } from "react-icons/md";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { updateCustomer } from "../../src/Redux/slicers/Customer/customerServices";
 import { getCustomerById } from "../../src/Redux/slicers/Customer/customerServices";
 
 export default function Profile(props) {
-  const { titre, customerId } = props;
   const [selectedImage, setSelectedImage] = useState("");
   const customer = useSelector((state) => state.auth.customer);
   const customerById = useSelector((state) => state.customerId.customerById);
@@ -210,8 +210,8 @@ export default function Profile(props) {
         </button>
         </div>
         
-        <ToastContainer />
       </div>
+        <ToastContainer />  
     </div>
   );
 }

@@ -25,7 +25,7 @@ const handleAddCategory = async () => {
         const config = {
             headers: { Authorization: `Bearer ${token}`}
           }
-          await axios.post(`http://localhost:3001/categories`,
+          await axios.post(`${process.env.REACT_APP_BASEURL}/categories`,
           {category_name : categoryInfo.categoryName},config);
           console.log(categoryInfo.categoryName)
           setCategory(categoryInfo.categoryName);

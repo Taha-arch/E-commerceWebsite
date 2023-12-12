@@ -36,7 +36,7 @@ export default function AddProduct() {
 
   const fetchSubCategoryData = async () => {  
     try{
-      const response = await axios.get('http://localhost:3001/subcategories/');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/subcategories/`);
       return response.data.subcategories;
     }catch(error){
       console.log("Error fetching subcategory data: ", error); 
@@ -65,7 +65,7 @@ export default function AddProduct() {
 
   const fetchCategoryData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/categories/');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/categories/`);
       return response.data.categories;
     } catch (error) {
       console.error('Error fetching category data:', error);
@@ -152,7 +152,7 @@ export default function AddProduct() {
       const config = {
         headers: { Authorization: `Bearer ${token}`}
       }
-      const response = await axios.post('http://localhost:3001/products', formData, config);
+      const response = await axios.post(`${process.env.REACT_APP_BASEURL}/products`, formData, config);
   
       console.log(response.data);
       notify();
@@ -471,7 +471,7 @@ return (
                     multiple
                     onChange={(e) => setProductInfo({ ...productInfo, productImage: e.target.files })}
                     required/>
-                 
+                    
                 </label>
                 <span></span>
             </div>

@@ -26,7 +26,7 @@ const { id } = useParams();
   useEffect(() => {
     
         
-    axios.get(`http://localhost:3001/customers/${id}`, config)
+    axios.get(`${process.env.REACT_APP_BASEURL}/customers/${id}`, config)
         .then((response) => {
         setCustomerInfo(response.data);
         
@@ -58,7 +58,7 @@ const handleSubmit = (e) => {
     e.preventDefault();
     
     // Use the 'put' method to update the user data.
-    axios.put(`http://localhost:3001/customers/${id}`, {
+    axios.put(`${process.env.REACT_APP_BASEURL}/customers/${id}`, {
         first_name: customerInfo.firstName,
         last_name: customerInfo.lastName,
         email: customerInfo.email,

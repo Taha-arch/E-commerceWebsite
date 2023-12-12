@@ -110,7 +110,7 @@ export default function ProductDetails() {
       margin: "0 auto",
     },
   };
-    //CARD 
+
   const handleCardClick = () => {
     setIsAddedToCart((prevIsAdded) => !prevIsAdded); 
     if (!isAddedToCart) {
@@ -131,7 +131,6 @@ export default function ProductDetails() {
     dispatch(removeCard(id)); 
   };
 
-  //fAVORITE
   const handleFavoriteClick = () => {
     setIsAddedToFavorite((prevIsAdded) => !prevIsAdded); 
     if (!isAddedToFavorite) {

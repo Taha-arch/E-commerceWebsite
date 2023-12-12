@@ -27,7 +27,7 @@ export default function AddUser(props) {
   
 try{
 
-   await axios.post('http://localhost:3001/user', {
+   await axios.post(`${process.env.REACT_APP_BASEURL}/user`, {
     first_name:  userInfo.firstName,
     last_name:  userInfo.lastName,
     email: userInfo.email,

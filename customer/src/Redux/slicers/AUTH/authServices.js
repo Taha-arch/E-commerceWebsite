@@ -7,12 +7,12 @@ import { persistor } from "../../..";
 
 export const login = createAsyncThunk('auth/login', async ({ email, password }) => {
   try {
-    const response = await axios.post('http://localhost:3001/customers/login', { email, password });
+    const response = await axios.post(`${process.env.REACT_APP_URL}/customers/login`, { email, password });
     const { access_token, refreshtoken } = response.data;
     
     localStorage.setItem('accessToken', access_token);
     localStorage.setItem('refreshToken', refreshtoken);
-    
+
     return response.data;
   } catch (error) {
       alert(error)
@@ -29,8 +29,8 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }) 
 
   export const purgePersistedState = createAsyncThunk('auth/purgePersistedState', async () => {
     try {
-      await persistor.purge(); // Purge the persisted state
-      return true; // Optionally, return a value indicating successful purge
+      await persistor.purge(); 
+      return true; 
     } catch (error) {
       console.error("Error purging persisted state:", error);
       throw error;

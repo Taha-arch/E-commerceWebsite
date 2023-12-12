@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchOrders, placeOrder } from './orderServices';
-// Define the initial state
+
 const initialState = {
     order: {},
     loading: false,
