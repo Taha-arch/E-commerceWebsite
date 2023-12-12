@@ -222,7 +222,7 @@ export default function LandingPage() {
               <div className="popularimage2 flex flex-col justify-evenly pt-24 items-center w-full h-full">
                 <div className=" flex flex-row justify-center text-center text-2xl  font-Lora text-black"></div>
               </div>
-              <div className="text-center text-sm md:text-xl  font-Jost">
+              <div className="text-center text-sm md:text-xl">
                 <h2>RINGS</h2>
               </div>
             </div>
@@ -324,12 +324,12 @@ export default function LandingPage() {
       </div>
 
       <div className="section4 px-32 ">
-        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mb-10">
+        <div className="flex flex-col items-center md:flex-row gap-5 justify-between w-full  mt-10">
         <div
             className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
-            data-aos="fade-up"
+            data-aos="fade-down"
           >
-            <div className="image1 w-full h-96 "></div>
+            <div className="image4 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
               <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
               <button className="font-bold text-xl underline text-truegreen">
@@ -339,12 +339,12 @@ export default function LandingPage() {
           </div>
 
           <div
-            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
+            className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5 mb-40"
             data-aos="fade-up"
           >
-            <div className="image1 w-full h-96 "></div>
+            <div className="image5 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
-              <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
+              <h1 className="font-bold text-2xl text-black">Moonlight Serenity</h1>
               <button className="font-bold text-xl underline text-truegreen">
                 SHOP NOW
               </button>
@@ -353,11 +353,11 @@ export default function LandingPage() {
 
           <div
             className=" h-full w-1/3 md:w-full flex flex-col items-center gap-5"
-            data-aos="fade-up"
+            data-aos="fade-down"
           >
-            <div className="image1 w-full h-96 "></div>
+            <div className="image6 w-full h-96 "></div>
             <div className="flex flex-col items-center gap-5">
-              <h1 className="font-bold text-2xl text-black">Sparkling stars</h1>
+              <h1 className="font-bold text-2xl text-black">Rose Gold Elegance</h1>
               <button className="font-bold text-xl underline text-truegreen">
                 SHOP NOW
               </button>
