@@ -250,7 +250,7 @@ function Checkout() {
         <div>
           <div className="sticky top-36 self-end  py-6 gap-2 flex flex-col items-center justify-around w-64 h-fit bg-white  rounded-lg">
             <div>Total Bill</div>
-            <div className="text-3xl font-bold">{totalCartPrice}$</div>
+            <div className="text-3xl font-bold">{totalCartPrice}DH</div>
             <div>Free Shipment</div>
             <Button
               className="text-sm mt-6 bg-truegreen w-4/5"

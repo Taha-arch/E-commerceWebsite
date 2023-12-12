@@ -21,7 +21,7 @@
     border-bottom-right-radius: 130px;
 }
 .women{
-    width: 30%;
+    width: 100%;
 }
 
 .image1{
@@ -316,8 +316,10 @@
 
 @media screen and (max-width: 768px) {
     .women{
-        width: 20%;
-        height: 100%;
+        width: 100%;
+        
     }
-    
+    .slide{
+        height: 540px;
+    }
 }

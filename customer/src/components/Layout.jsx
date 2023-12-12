@@ -10,7 +10,7 @@ function Layout() {
 
     <div className='primary-bg min-h-screen'>
       <NavbarDefault/>
-      <div className='pt-28'>
+      <div className='md:pt-28'>
         {<Outlet/>}
       </div>
      <div className='bottom-0'>
