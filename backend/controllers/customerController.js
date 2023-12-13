@@ -46,7 +46,7 @@ const addCustomer = async (req, res) => {
         newCustomer.save()
         .then((newCustomer) => {
 
-            const link = "http://localhost:3000/login"
+            const link = "https://prestigious-five.vercel.app/login"
 
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
