@@ -22,8 +22,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
   function App() {
     return (
       <Router>
+       <SpeedInsights>
          <ScrollToTop>
-          <SpeedInsights/>
       <Routes>
         <Route path='/Login' element={<AdminLogin />}></Route>
         <Route path="/" element={<Layout />}>
@@ -43,6 +43,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
         <Route path='/login' element={<div>this is the login page</div>} />
       </Routes>
        </ScrollToTop>
+       </SpeedInsights>
       </Router>
     );
   }
