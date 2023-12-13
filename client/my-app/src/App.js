@@ -15,14 +15,12 @@ import EditCustomer from './components/EditCustomer';
 import EditOrder from './components/Orders/EditOrder';
 import Profile from './components/shared/Profile';
 import ScrollToTop from './components/ScrollToTop';
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 
   function App() {
     return (
       <Router>
-       <SpeedInsights>
          <ScrollToTop>
       <Routes>
         <Route path='/Login' element={<AdminLogin />}></Route>
@@ -43,7 +41,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
         <Route path='/login' element={<div>this is the login page</div>} />
       </Routes>
        </ScrollToTop>
-       </SpeedInsights>
       </Router>
     );
   }
