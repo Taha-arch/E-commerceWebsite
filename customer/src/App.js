@@ -23,8 +23,8 @@ function App() {
   
   return (
     <Router>
+        <SpeedInsights>
       <ScrollToTop>
-        <SpeedInsights/>
       <Routes>
         <Route path='/loader' element={<PreLoader />}></Route>
         <Route path='/register' element={<RegisterForm />}></Route>
@@ -45,6 +45,7 @@ function App() {
         </Route>
       </Routes>
       </ScrollToTop>
+      </SpeedInsights>
     </Router>
   );
 }
