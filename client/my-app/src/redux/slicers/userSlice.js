@@ -39,7 +39,7 @@ export const fetchData = createAsyncThunk('user/fetchData', async (page) => {
         headers: { Authorization: `Bearer ${token}` },
       };
   
-      const response = await fetch(`http://localhost:3001/users?page=${page}`, config);
+      const response = await fetch(`${process.env.REACT_APP_BASEURL}/users?page=${page}`, config);
       
       if (!response.ok) {
         throw new Error('Failed to fetch data');

@@ -3,7 +3,7 @@ import axios from 'axios';
 const productModule = {
   async fetchProduct() {
     try {
-      const response = await axios.get('http://localhost:3001/products');
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products`);
       return response.data.data;
     } catch (error) {
       console.log(error);
@@ -13,7 +13,7 @@ const productModule = {
 
   async fetchProductDetails(productId) {
     try {
-      const response = await axios.get(`http://localhost:3001/products/${productId}`);
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products/${productId}`);
       if (response.status === 200) {
         return response.data;
       } else {

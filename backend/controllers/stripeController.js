@@ -31,8 +31,8 @@ const setPayment =  async (req, res) => {
         payment_method_types: ['card'],
         line_items,
         mode: 'payment',
-        success_url: `http://localhost:3000/orders`,
-        cancel_url: `http://localhost:3000/checkout`,
+        success_url: `https://prestigious-five.vercel.app/orders`,
+        cancel_url: `https://prestigious-five.vercel.app/checkout`,
     });
     res.send({ url: session.url });
 }
