@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { persistor } from "../../..";
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 
 
@@ -16,7 +16,6 @@ export const login = createAsyncThunk('auth/login', async ({ email, password }) 
 
     return response.data;
   } catch (error) {
-      // alert(error.response.data.message)
       toast.error(error.response.data.message);
     }
   });

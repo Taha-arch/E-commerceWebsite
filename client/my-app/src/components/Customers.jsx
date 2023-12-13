@@ -19,30 +19,30 @@ export const  defaultOptions =  {
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   }}
+  const token = localStorage.getItem('accessToken');
+ export const fetchUserData = async (page) => {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${token}`}
+      }
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/customers`, config);
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return [];
+    }
+  };
 
 
 export default function Customers() {
   
-const token = localStorage.getItem('accessToken');
 const [customers, setCostumers] = useState([]);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
 const [openDetail, setOpenDetail] = useState(false);
-const [loading, setLoading] = useState(false);
+const [loading, setLoading] = useState(true);
 
-const fetchUserData = async (page) => {
-  try {
-    const config = {
-      headers: { Authorization: `Bearer ${token}`}
-    }
-    setLoading(true);
-    const response = await axios.get(`${process.env.REACT_APP_BASEURL}/customers`, config);
-    
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    return [];
-  }
-};
+
 
 
 useEffect(() => {

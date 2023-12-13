@@ -175,11 +175,6 @@ const getOrder = async (req, res) => {
     } else {
       const processedOrder = { ...order.toObject() };
       
-      // Assuming order_items is an array of objects [{ product_id, quantity }]
-      processedOrder.order_items = processedOrder.order_items.map(item => ({
-        product_id: item.product_id,
-        quantity: item.quantity
-      }));
 
       res.json({ order: processedOrder });
     }

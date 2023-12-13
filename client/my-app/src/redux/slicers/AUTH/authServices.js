@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from 'react-toastify'
 
 export const login = createAsyncThunk('auth/login', async ({ user_name, password }) => {
     try {
@@ -11,7 +12,7 @@ export const login = createAsyncThunk('auth/login', async ({ user_name, password
       
       return response.data;
     } catch (error) {
-      throw error;
+      toast.error(error.response.data);
     }
   });
   
