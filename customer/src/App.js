@@ -17,12 +17,14 @@ import Products from "./containers/Products";
 import PreLoader from './components/PreLoader/PreLoader';
 import CollectionPerCategory from "./components/CollectionPerCategory";
 import ScrollToTop from './components/ScrollToTop';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
   
   return (
     <Router>
       <ScrollToTop>
+        <SpeedInsights/>
       <Routes>
         <Route path='/loader' element={<PreLoader />}></Route>
         <Route path='/register' element={<RegisterForm />}></Route>

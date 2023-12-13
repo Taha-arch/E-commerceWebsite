@@ -14,7 +14,8 @@
 import EditCustomer from './components/EditCustomer';
 import EditOrder from './components/Orders/EditOrder';
 import Profile from './components/shared/Profile';
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 
@@ -22,6 +23,7 @@ import ScrollToTop from './components/ScrollToTop'
     return (
       <Router>
          <ScrollToTop>
+          <SpeedInsights/>
       <Routes>
         <Route path='/Login' element={<AdminLogin />}></Route>
         <Route path="/" element={<Layout />}>
