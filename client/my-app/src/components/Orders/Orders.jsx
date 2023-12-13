@@ -14,21 +14,20 @@ import * as animation from "../../assets/animations/Animation - 1699995980899.js
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   }}
+  export const fetchOrderData = async () => {
+     try {
+       const response = await axios.get(`${process.env.REACT_APP_BASEURL}/orders`);
+       return response.data.orders;
+     } catch (error) {
+       console.error('Error fetching order data:', error);
+       return [];
+     }
+   };
 
 export default function Orders() {
   const [orders, setOrders] = useState([]); // Initialize as null
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const fetchOrderData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/orders`);
-      return response.data.orders;
-    } catch (error) {
-      console.error('Error fetching order data:', error);
-      return [];
-    }
-  };
   
   useEffect(() => {
     const fetchData = async () => {

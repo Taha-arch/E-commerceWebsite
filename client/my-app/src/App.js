@@ -14,6 +14,7 @@
 import EditCustomer from './components/EditCustomer';
 import EditOrder from './components/Orders/EditOrder';
 import Profile from './components/shared/Profile';
+import ScrollToTop from './components/ScrollToTop'
 
 
 
@@ -21,6 +22,7 @@ import Profile from './components/shared/Profile';
   function App() {
     return (
       <Router>
+         <ScrollToTop>
       <Routes>
         <Route path='/Login' element={<AdminLogin />}></Route>
         <Route path="/" element={<Layout />}>
@@ -39,6 +41,7 @@ import Profile from './components/shared/Profile';
         </Route>
         <Route path='/login' element={<div>this is the login page</div>} />
       </Routes>
+       </ScrollToTop>
       </Router>
     );
   }

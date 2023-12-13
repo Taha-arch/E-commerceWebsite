@@ -24,7 +24,7 @@
     stroke-width: 2;
     stroke-dasharray: 400;
     stroke-dashoffset: 400;
-    animation: draw 3s linear forwards;
+    animation: draw 2s linear forwards;
   }
   
   @keyframes draw {

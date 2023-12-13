@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { toast } from 'react-toastify'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 export const registerUser = createAsyncThunk(
     'register/registerUser',
-    async (userData, { rejectWithValue }) => {
+    async (userData) => {
       try {
         const response = await axios.post(`${process.env.REACT_APP_URL}/customers`, userData);
         return response.data; 
       } catch (error) {
-        return rejectWithValue(error.response.data); 
+        toast.error(error.response.data);
       }
     }
   );

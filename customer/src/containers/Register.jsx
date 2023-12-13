@@ -1,10 +1,12 @@
 import '../styles/main.css'; 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { useNavigate, Link } from "react-router-dom";
 import image from '../assets/images/sans.png';
 import * as Yup from 'yup';
 import { registerUser } from '../Redux/slicers/REGISTER/registerservice';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -18,6 +20,7 @@ function RegisterForm ()  {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const error  = useSelector((state) => state.Register.error)
 
   const validationSchema = Yup.object().shape({
       first_name: Yup.string().required('First name is required'),
@@ -36,7 +39,9 @@ function RegisterForm ()  {
       try {
           await validationSchema.validate(userData, { abortEarly: false });
           await dispatch(registerUser(userData));
-          navigate('/login');
+          console.log(error)
+          // if(error !== null){ 
+          // navigate('/login');}
       } catch (error) {
           if (error instanceof Yup.ValidationError) {
               const fieldErrors = {};
@@ -190,6 +195,18 @@ function RegisterForm ()  {
         <img src={image} className='h-screen w-full' alt="welcome to prestigious"/>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       </div>
      
     );

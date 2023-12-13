@@ -16,26 +16,25 @@ import * as animation from "../../assets/animations/Animation - 1699995980899.js
 import { defaultOptions } from '../Orders/Orders';
 import Lottie from 'react-lottie';
 
-
+export const fetchProductData = async () => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products`);
+    console.log(response.data);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching product data:', error);
+    return [];
+  }
+};
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [openDetails, setOpenDetails] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const fetchProductData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/products`);
-      console.log(response.data);
-      return response.data.data;
-    } catch (error) {
-      console.error('Error fetching product data:', error);
-      return [];
-    }
-  };
+ 
 
   useEffect(() => {
     const fetchData = async () => {

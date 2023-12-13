@@ -14,16 +14,10 @@ function Collections() {
   const dispatch = useDispatch();
   const location = useLocation()
   const product = useSelector((state) => state.product.product);
-  const productsFound = useSelector((state) => state.productsFound.productFound);
-  const SearchQuery = useSelector((state) => state.searchQuery.SearchQuery);
   const categories = useSelector((state) => state.categories.categories); 
 
   const navigate = useNavigate(); 
 
-
-  useEffect(() => {
-      dispatch(fetchProductFound(SearchQuery));
-}, [dispatch, SearchQuery]);
 
   const maxProductsPerCategory = 8;
 

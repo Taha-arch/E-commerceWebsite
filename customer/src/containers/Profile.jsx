@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { MdEmail } from "react-icons/md";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +13,10 @@ export default function Profile(props) {
   const customer = useSelector((state) => state.auth.customer);
   const customerById = useSelector((state) => state.customerId.customerById);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  if(customer === null){
+    navigate('/login');
+  }
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -37,7 +42,7 @@ export default function Profile(props) {
 
   const notify = () => {
     toast.success("Profile Updated Successfully!", {
-      position: "bottom-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

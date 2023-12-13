@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import swal from 'sweetalert'
 import { clearCards } from "../Redux/slicers/CardSlice";
 import { addCheckout } from "../Redux/slicers/Checkout/checkoutServices";
+import { clearFavorites } from "../Redux/slicers/FavoriteSlice";
 
 
 const addressSchema = Yup.object().shape({
@@ -27,6 +28,7 @@ function Checkout() {
   });
   const token = useSelector((state) => state.auth.token);
   const { totalCartPrice, cards } = useSelector((state) => state.Card);
+  console.log(totalCartPrice);
   const customer = useSelector((state) => state.auth.customer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -88,9 +90,12 @@ function Checkout() {
         PaymentMethod: getSelectedPaymentMethod(),
         ...addressInfo,
       };
-      
-        dispatch(placeOrder(orderData));
-        dispatch(clearCards());
+           
+      dispatch(placeOrder(orderData));
+      dispatch(clearCards());
+      dispatch(clearFavorites());
+
+        
       
         if(paymentMethod.creditDebitCards){
           
@@ -253,15 +258,15 @@ function Checkout() {
 
       </div>
   
-          <div className="flex flex-col justify-center  ml-14">
-            <h2>Your Cart</h2>
+          <div className="flex flex-col justify-center  ml-14 mb-4">
+          {cards.length > 0 && <h2>Your Cart</h2>} 
             <CartItems />
           </div>
         </div>
         <div>
           <div className="sticky top-36 self-end  py-6 gap-2 flex flex-col items-center justify-around w-64 h-fit bg-white  rounded-lg">
             <div>Total Bill</div>
-            <div className="text-3xl font-bold">{totalCartPrice}DH</div>
+            <div className="text-3xl font-bold">{totalCartPrice} MAD</div>
             <div>Free Shipment</div>
             <Button
               className="text-sm mt-6 bg-truegreen w-4/5"
