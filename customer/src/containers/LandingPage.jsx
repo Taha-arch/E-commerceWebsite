@@ -191,7 +191,7 @@ export default function LandingPage() {
           >
             <div className="h-full gap-2 md:h-2/5 w-full flex flex-col items-center bg-coffe">
               <span className="font-bold text-lg md:text-2xl mt-1">SHOES</span>
-              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110 px-3 mt-2" src="/Shoes.png" alt="" />
+              <img className="w-full transition ease-in-out delay-100  hover:-translate-x-0 hover:scale-110 px-3 mt-2" src="/shoes.png" alt="" />
             </div>
           </div>
         </div>
