@@ -21,6 +21,7 @@ const OrderItems = () => {
     <div className="mb-6">
       {Array.isArray(orders) &&
         orders.map((order, index) => (
+          order && ( 
           <div className="bg-primary w-98 " key={order._id}>
             <div className="flex flex-col h-fit bg-white rounded-md mt-3 p-4">
               <div className=" flex gap-2 font-bold text-lg mb-2 ">
@@ -42,18 +43,21 @@ const OrderItems = () => {
                 </div>
               </div>
               {order.order_items.map((item, index) => (
+                item && ( 
                 <div
                   key={index}
                   className="w-full gap-2 flex flex-row mt-3 bg-white hover:bg-gray-300 rounded-md cursor-pointer"
                   onClick={() => navigate(`/product/${item.product_id}`)}
                 >
+                  { item.productImage && ( 
                   <div className="w-1/6 rounded-lg p-3">
                     <img src={item.productImage[0]} alt="" />
                   </div>
+                  )}
                   <div className="w-4/6 pt-2">
                     <div className="flex justify-between">
                       <h4 className="font-Playfair w-fit">
-                        {item.product_name}
+                        {item && item.product_name}
                       </h4>
                       <div className="w-14 font-thin">Qty: {item.quantity}</div>
                     </div>
@@ -68,7 +72,7 @@ const OrderItems = () => {
                     <IoIosArrowForward />
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
             <div className="flex flex-row items-center justify-between mt-3 pb-3 px-5">
               <div className="flex flex-row">
@@ -79,7 +83,7 @@ const OrderItems = () => {
             </div>
             <hr />
           </div>
-        ))}
+       )))}
     </div>
   );
 };
