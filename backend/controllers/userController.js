@@ -14,7 +14,7 @@ const logUser = async (req, res) => {
     res.status(400);
     throw new Error("all Field are required");
   }
- 
+  
   const userFound = await User.findOne({ user_name , password });
   if (userFound && !userFound.active)
     res.status(401).json("your account is Desactivated !!!");
@@ -160,7 +160,7 @@ const addUser = (req, res) => {
                                         Your username: <b>${newUser.user_name}</b>
                                       </p>
                                       <p style="font-size:16px;line-height:24px;margin:16px 0;margin-top:-5px">
-                                        Your password: <b>${password}</b>
+                                        Your password: <b>${hash_password}</b>
                                       </p>
                                     </td>
                                   </tr>

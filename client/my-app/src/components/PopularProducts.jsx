@@ -5,44 +5,44 @@ import { Link } from 'react-router-dom'
 const popularProductsData = [
 	{
 		_id: '3432',
-		product_name: 'Macbook M1 Pro 14"',
-		product_thumbnail: 'https://source.unsplash.com/100x100?macbook',
-		product_price: '$1499.00',
+		product_name: 'Double Floating Stones Ring, Gold"',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701531189/product_images/1701531189387/cpuu8g2cnokxqnkwqm6a.jpg',
+		product_price: '1499.00MAD',
 		product_stock: 341
 	},
 	{
 		_id: '7633',
-		product_name: 'Samsung Galaxy Buds 2',
-		product_thumbnail: 'https://source.unsplash.com/100x100?earbuds',
-		product_price: '$399.00',
+		product_name: 'Double Floating Stones Ring, Silver',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701530967/product_images/1701530965842/dxehhbzx1zfx8kolrbu5.jpg',
+		product_price: '399.00MAD',
 		product_stock: 24
 	},
 	{
 		_id: '6534',
-		product_name: 'Asus Zenbook Pro',
-		product_thumbnail: 'https://source.unsplash.com/100x100?laptop',
-		product_price: '$899.00',
+		product_name: 'Nura Stacking Ring, Gold',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701460479/product_images/1701460478762/xbtejrguvyjfj2mocvqi.jpg',
+		product_price: '899.00MAD',
 		product_stock: 56
 	},
 	{
 		_id: '9234',
-		product_name: 'LG Flex Canvas',
-		product_thumbnail: 'https://source.unsplash.com/100x100?smartphone',
-		product_price: '$499.00',
+		product_name: '	Star Ring, Silver, Silver',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701445813/product_images/1701445811593/uf24plpjjtkprxpcafkj.png',
+		product_price: '499.00MAD',
 		product_stock: 98
 	},
 	{
 		_id: '4314',
-		product_name: 'Apple Magic Touchpad',
-		product_thumbnail: 'https://source.unsplash.com/100x100?touchpad',
-		product_price: '$699.00',
+		product_name: 'Coloured Stone Adjustable Ring, Pack of 3',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701534373/product_images/1701534374135/pout2zm3ks6vbvevbllr.jpg',
+		product_price: '699.00MAD',
 		product_stock: 0
 	},
 	{
 		_id: '4342',
-		product_name: 'Nothing Earbuds One',
-		product_thumbnail: 'https://source.unsplash.com/100x100?earphone',
-		product_price: '$399.00',
+		product_name: 'Crystal Leopard Ring, Gold',
+		product_thumbnail: 'https://res.cloudinary.com/dfin3vmgz/image/upload/v1701531190/product_images/1701531190796/yc5g9xixbhmvjmvrqhl4.jpg',
+		product_price: '399.00MAD',
 		product_stock: 453
 	}
 ]

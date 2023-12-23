@@ -13,13 +13,13 @@ const setPayment =  async (req, res) => {
         totalAmount += unitAmount * item.quantity;
         return {
             price_data: {
-              currency: 'usd',
+              currency: 'mad',
               product_data: {
                 name: item.product_name,
                 images: [item.productImage], 
                 description: item.description, 
               },
-              unit_amount: Math.round((item.price * 100)/10),
+              unit_amount: Math.round((item.price * 100)),
             },
             quantity: item.quantity,
           };

@@ -95,7 +95,7 @@ function RegisterForm ()  {
                   autoComplete="last_name"
                   placeholder="Enter your last name"
                   required
-                  className="block w-full px-2 rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
+                  className="block w-full px-2 rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:pl-2  focus:ring-2 focus:ring-inset focus:ring-green sm:text-sm sm:leading-6"
                   onChange={(e) => { setLastname(e.target.value) }}
                 />
                 {errors.last_name && <p className="text-red-500">{errors.last_name}</p>}
