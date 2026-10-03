@@ -3,7 +3,7 @@ const Stripe = require("stripe");
 const router = express.Router();
 require("dotenv").config();
 
-const stripe = require('stripe')('sk_test_51OLNEAJqU7h6Zk5YyYYAkYny8vxWpYm42chpA1QeQJsF2CtLI2J0ANUhw5ShNGTr2nqS3MCdAFMwTRJYsbC3Z1s500NptSX6ar')
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 const setPayment =  async (req, res) => {
     let totalAmount = 0;

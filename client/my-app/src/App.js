@@ -15,6 +15,9 @@ import EditCustomer from './components/EditCustomer';
 import EditOrder from './components/Orders/EditOrder';
 import Profile from './components/shared/Profile';
 import ScrollToTop from './components/ScrollToTop'
+import WebScraperDashboard from './components/WebScraper/WebScraperDashboard';
+import ScrapingHistory from './components/WebScraper/ScrapingHistory';
+import AIModelSettings from './components/WebScraper/AIModelSettings';
 
 
 
@@ -38,6 +41,10 @@ import ScrollToTop from './components/ScrollToTop'
         <Route path='/users' element={<Users />} />
         <Route path="/users/edit/:id" element={<EditUser />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/web-scraper" element={<WebScraperDashboard />} />
+        <Route path="/scraping-history" element={<ScrapingHistory />} />
+        <Route path="/ai-settings" element={<AIModelSettings />} />
         </Route>
         <Route path='/login' element={<div>this is the login page</div>} />
       </Routes>

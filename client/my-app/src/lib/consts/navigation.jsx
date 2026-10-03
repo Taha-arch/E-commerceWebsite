@@ -42,6 +42,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         label: 'Users',
         path: '/users',
         icon: <HiOutlineUsers />
+    },
+    {
+        key: 'ai recommendation',
+        label: 'AI Recommendation',
+        path: '/web-scraper',
+        icon: <HiOutlineUsers />
     }
     
 ]

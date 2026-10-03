@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {upload, uploadMultipleImages} = require('../middleware/upload');
-const {addProduct, getAllProducts, searchProducts, getProduct, updateProduct, deleteProduct, getAllProductAscPrice} = require('../controllers/productController.js');
+const {addProduct, getAllProducts, searchProducts, getProduct, updateProduct, deleteProduct, getAllProductAscPrice } = require('../controllers/productController.js');
 const {authorization, checkAdminOrManager, checkAdmin} = require('../middleware/authMiddleware');
 
 //, checkAdminOrManager
@@ -15,6 +15,8 @@ router.patch('/products/:id', updateProduct);
 router.get('/products/:id', getProduct);
 //, checkAdminOrManager
 router.delete('/products/:id', deleteProduct);
+
+
 
 
 module.exports = router;

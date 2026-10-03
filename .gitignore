@@ -1,0 +1,26 @@
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Build and test output
+build/
+coverage/
+
+# Generated scraper output
+python-service/data/*.json
+
+# Local tooling and OS files
+.DS_Store
+.vscode/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
